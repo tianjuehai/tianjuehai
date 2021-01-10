@@ -8,12 +8,12 @@
       <link href="2021/01/10/ge-ren-jian-li-hexo-bo-ke-matery-zhu-ti-de-guo-cheng-xin-de/"/>
       <url>2021/01/10/ge-ren-jian-li-hexo-bo-ke-matery-zhu-ti-de-guo-cheng-xin-de/</url>
       
-        <content type="html"><![CDATA[<h1 id="博客搭建过程分享"><a href="#博客搭建过程分享" class="headerlink" title="博客搭建过程分享"></a>博客搭建过程分享</h1>]]></content>
+        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><hr><h2 id="下载git和node"><a href="#下载git和node" class="headerlink" title="下载git和node"></a>下载git和node</h2><p>首先，搭建博客需要两个环境，一个是node.js，一个是git。</p><p>打开cmd控制台输入</p><pre class=" language-cmd"><code class="language-cmd">node -v               #查看node版本git --version      #查看git版本</code></pre><img src="F:\MyBlog\source\_posts\images\1.png" alt="具体操作" style="zoom:150%;"><p>npm -v    #查看npm版本<br>npm install -g cnpm –registry=<a href="http://registry.npm.taobao.org/">http://registry.npm.taobao.org</a>    #安装淘宝的cnpm 管理器<br>cnpm -v    #查看cnpm版本<br>cnpm install -g hexo-cli    #安装hexo框架<br>hexo -v    #查看hexo版本</p><p>mkdir blog    #创建blog目录<br>cd blog     #进入blog目录<br>sudo hexo init     #生成博客 初始化博客<br>hexo s    #启动本地博客服务<br><a href="http://localhost:4000/">http://localhost:4000/</a>    #本地访问地址<br>hexo n “我的第一篇文章” #创建新的文章<br>#返回blog目录<br>hexo clean #清理<br>hexo g #生成<br>#Github创建一个新的仓库 YourGithubName.github.io<br>cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件<br>#配置_config.yml<br>hexo d    #部署到Github仓库里<br><a href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a>  #访问这个地址可以查看博客</p><p> git clone <a href="https://github.com/litten/hexo-theme-yilia.git">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia  #下载yilia主题到本地</p><p>#修改hexo根目录下的 _config.yml 文件 ： theme: yilia</p><p>hexo c    #清理一下<br>hexo g    #生成<br>hexo d    #部署到远程Github仓库<br><a href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a>  #查看博客</p>]]></content>
       
       
       <categories>
           
-          <category> Markdown </category>
+          <category> 博客 </category>
           
       </categories>
       
