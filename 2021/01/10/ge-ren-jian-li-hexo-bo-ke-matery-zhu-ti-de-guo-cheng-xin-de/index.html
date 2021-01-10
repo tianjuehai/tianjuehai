@@ -486,14 +486,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    284
+                    3.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    15 分
                 </div>
                 
 
@@ -518,14 +518,415 @@
 <p>打开cmd控制台输入</p>
 <pre class=" language-cmd"><code class="language-cmd">node -v               #查看node版本
 git --version      #查看git版本</code></pre>
-<img src="F:\MyBlog\source\_posts\images\1.png" alt="具体操作" style="zoom:150%;">
+<img src="/2021/01/10/ge-ren-jian-li-hexo-bo-ke-matery-zhu-ti-de-guo-cheng-xin-de/1.jpg" class="">
 
-<p>npm -v    #查看npm版本<br>npm install -g cnpm –registry=<a target="_blank" rel="noopener" href="http://registry.npm.taobao.org/">http://registry.npm.taobao.org</a>    #安装淘宝的cnpm 管理器<br>cnpm -v    #查看cnpm版本<br>cnpm install -g hexo-cli    #安装hexo框架<br>hexo -v    #查看hexo版本</p>
-<p>mkdir blog    #创建blog目录<br>cd blog     #进入blog目录<br>sudo hexo init     #生成博客 初始化博客<br>hexo s    #启动本地博客服务<br><a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a>    #本地访问地址<br>hexo n “我的第一篇文章” #创建新的文章<br>#返回blog目录<br>hexo clean #清理<br>hexo g #生成<br>#Github创建一个新的仓库 YourGithubName.github.io<br>cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件<br>#配置_config.yml<br>hexo d    #部署到Github仓库里<br><a target="_blank" rel="noopener" href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a>  #访问这个地址可以查看博客</p>
-<p> git clone <a target="_blank" rel="noopener" href="https://github.com/litten/hexo-theme-yilia.git">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia  #下载yilia主题到本地</p>
-<p>#修改hexo根目录下的 _config.yml 文件 ： theme: yilia</p>
-<p>hexo c    #清理一下<br>hexo g    #生成<br>hexo d    #部署到远程Github仓库<br><a target="_blank" rel="noopener" href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a>  #查看博客</p>
+<p>如果没有显示版本号则需要配置环境变量：</p>
+<p>右键点击“我的电脑”→高级系统设置→环境变量</p>
+<p>给在系统变量给node新建变量：</p>
+<p>变量：NODE_PATH            值：node文件夹所在地址（如：F:\node）</p>
+<p>然后点击系统变量中Path的编辑，新建以下几个环境变量：</p>
+<pre class=" language-script"><code class="language-script">F:\node\
+F:\Git\Git\cmd
+F:\node\node_global\
+#具体情况需要看文件位置而定</code></pre>
+<p>然后再验证node和git的版本。</p>
+<hr>
+<h2 id="cnpm安装"><a href="#cnpm安装" class="headerlink" title="cnpm安装"></a>cnpm安装</h2><p>直接用npm速度会比较慢（源在国外），因此要利用npm安装cnpm.</p>
+<p>打开Git Bash输入以下命令：</p>
+<pre class=" language-cmd"><code class="language-cmd">npm install -g cnpm --registry=http://registry.npm.taobao.org
+#安装淘宝的cnpm 管理器</code></pre>
+<p>安装完成后，以后可以用cnpm直接代替npm.</p>
+<hr>
+<h2 id="hexo框架安装"><a href="#hexo框架安装" class="headerlink" title="hexo框架安装"></a>hexo框架安装</h2><pre class=" language-cmd"><code class="language-cmd">cnpm install -g hexo-cli    #安装hexo框架
+hexo -v        #查看hexo版本</code></pre>
+<hr>
+<h2 id="利用hexo搭建博客"><a href="#利用hexo搭建博客" class="headerlink" title="利用hexo搭建博客"></a>利用hexo搭建博客</h2><p>在一个地方创建空文件夹（命名blog），所有东西将在里面生成。</p>
+<p>打开文件夹，在此文件夹下运行git bash（右键单击空白处）</p>
+<pre class=" language-git"><code class="language-git">sudo hexo init     #生成博客 初始化博客</code></pre>
+<p>这时候系统会自动克隆文件到blog，并默认landscape主题。再输入命令：</p>
+<pre class=" language-git"><code class="language-git">hexo s    #启动本地博客服务</code></pre>
+<p>浏览器访问 <a target="_blank" rel="noopener" href="http://localhost:4000/%EF%BC%8C%E8%BF%99%E6%97%B6%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E7%B3%BB%E7%BB%9F%E9%BB%98%E8%AE%A4%E7%9A%84%E7%89%88%E6%9C%AC%E3%80%82">http://localhost:4000/，这时可以看到系统默认的版本。</a></p>
+<hr>
+<h2 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h2><pre class=" language-git"><code class="language-git">hexo n <span class="token string">"我的第一篇文章"</span> #创建新的文章 </code></pre>
+<p>可以看到在source文件夹下的_posts文件夹下创建了.md文件。</p>
+<p>打开文件就可以编辑内容，里面是基于markdown语法的。</p>
+<hr>
+<h2 id="部署到gitee"><a href="#部署到gitee" class="headerlink" title="部署到gitee"></a>部署到gitee</h2><p>输入命令：</p>
+<pre class=" language-git"><code class="language-git">hexo clean #清理
+hexo g #生成
+hexo s  #启动本地服务器</code></pre>
+<p>这时可以再本地 <a target="_blank" rel="noopener" href="http://localhost:4000/%E6%9F%A5%E7%9C%8B%E8%87%AA%E5%B7%B1%E6%9C%AA%E5%8F%91%E5%B8%83%E7%9A%84%E7%89%88%E6%9C%AC%E3%80%82">http://localhost:4000/查看自己未发布的版本。</a></p>
+<p>然后我们可以把它部署到网上了，部署的方案有很多种，可以把它部署到github，也可以部署到gitee，由于github访问速度较慢，且有的地区无法访问，因此我个人是部署到了gitee上。</p>
+<p>首先你必须有个gitee账号，创建一个公开仓库，注意命名和路径必须与你的用户名一致（不是昵称）。</p>
+<p>创建完仓库后，点击管理</p>
+<img src="/2021/01/10/ge-ren-jian-li-hexo-bo-ke-matery-zhu-ti-de-guo-cheng-xin-de/2.jpg" class="">
 
+<p>此处可以查看仓库的路径，复制这个路径，等下用到。</p>
+<hr>
+<p>打开位于Blog文件夹下的_config.yml文件，这个文件是用来配置你的博客的。滑到底端，改下面的三行代码并保存：</p>
+<pre class=" language-yml"><code class="language-yml">deploy:
+  type: git
+  repo: https://gitee.com/用户名/用户名.git    #你的仓库地址+.git
+  branch: master</code></pre>
+<p>然后安装git部署插件：</p>
+<pre class=" language-git"><code class="language-git">cnpm install --save hexo-deployer-git</code></pre>
+<p>然后在git bash上输入命令：</p>
+<pre class=" language-git"><code class="language-git">hexo d     # 部署到仓库</code></pre>
+<p>然后输入你gitee的用户名和密码，等部署完毕，点开仓库，可以发现里面有你部署进去的文件。</p>
+<img src="/2021/01/10/ge-ren-jian-li-hexo-bo-ke-matery-zhu-ti-de-guo-cheng-xin-de/3.jpg" class="">
+
+<p>此时点击服务里面的gitee Pages，对内容进行更新：</p>
+<img src="/2021/01/10/ge-ren-jian-li-hexo-bo-ke-matery-zhu-ti-de-guo-cheng-xin-de/4.jpg" class="">
+
+<p>更新完成后就可以登录https://你的用户名.gitee.io/对你的博客进行访问啦！</p>
+<hr>
+<h1 id="Matery主题的搭建和完善"><a href="#Matery主题的搭建和完善" class="headerlink" title="Matery主题的搭建和完善"></a>Matery主题的搭建和完善</h1><h2 id="主题下载和更改"><a href="#主题下载和更改" class="headerlink" title="主题下载和更改"></a>主题下载和更改</h2><pre class=" language-git"><code class="language-git"> git clone https://github.com/blinkfox/hexo-theme-matery  
+ #在themes文件夹下执行命令，下载matery主题到本地</code></pre>
+<p>打开blog文件夹下的_config.yml，对其中的内容进行更改：</p>
+<pre class=" language-yml"><code class="language-yml"># Site
+title: 微笑紫瞳星
+subtitle: '感谢各位的来访，请在留言板上留下你的足迹'
+description: '本站记录本人各种学习的旅途，用于巩固自我并启发后来人'
+keywords: [博客制作,个人经验分享,Unity,人工智能等]
+author: 微笑紫瞳星
+language: zh-CN
+timezone: ''</code></pre>
+<pre class=" language-yml"><code class="language-yml"># URL
+## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
+url: http://tianjuewudi.gitee.io/
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
+  trailing_html: true # Set to false to remove trailing '.html' from permalinks</code></pre>
+<p>主题修改找到关键词theme把内容替换成自己的主题：</p>
+<pre class=" language-yml"><code class="language-yml">theme: hexo-theme-matery</code></pre>
+<p>其他还有很多内容关于各种插件，我将一一讲述。</p>
+<hr>
+<h2 id="Matery主题配置"><a href="#Matery主题配置" class="headerlink" title="Matery主题配置"></a>Matery主题配置</h2><p>效果预览：</p>
+<p>｛% asset_img 5.jpg %｝</p>
+<p>打开themes文件夹下的Matery主题文件夹。首先打开media文件夹,对里面的文件进行一一说明:</p>
+<ol>
+<li>banner中存放的是在首页展示的图片，一天换一张，共7张，一个星期轮一次，可对其进行替换，图片名称须相同。</li>
+<li>fetureimages中的图片将被展示在相册中，且在没有给文章设置封面时，随机挑选一张作为封面，可替换。</li>
+<li>reward中存放着别人打赏你扫描的二维码，一张微信，一张支付宝，可替换。</li>
+<li>comment_bg.png是评论区上的图片。</li>
+<li>icp.png是备案标志。</li>
+<li>logo.png是你昵称旁的标志，可替换。</li>
+</ol>
+<p>打开matery文件夹下的_config.yml可对主题进行配置</p>
+<p>首页的轮播设置（页首语和文章推送）：</p>
+<pre class=" language-yml"><code class="language-yml">cover:
+  showPrevNext: true # 是否显示左右切换按钮. Whether to display the left and right toggle buttons.
+  showIndicators: true # 是否显示指示器. # Whether to display the indicators
+  autoLoop: true # 是否自动轮播. Whether it is automatically rotated.
+  duration: 120 # 切换延迟时间. Switching delay time.
+  intervalTime: 5000 # 自动切换下一张的间隔时间. Automatically switch the interval of the next one.
+  useConfig: false # 是否使用配置文件, 在 _data/covers.json 下配置推荐文章, false则使用主题在文章中的配置 cover coverImg
+  # useConfig 使用方式: 将主题 hexo-theme-matery/source/_data/covers.json 移动到 my-blog/source/_data/下修改配置即可</code></pre>
+<p>我的梦想模块：</p>
+<pre class=" language-yml"><code class="language-yml">dream:
+  enable: true
+  showTitle: true
+  title: 关于多巴胺的兴趣驱动
+  text: 了解自身的兴趣产生和作用机制是控制自我的重要一步，多巴胺是能让自身产生兴奋愉悦感的物质，对于任何事物的任何兴趣都是基于多巴胺驱动的，但奈何人体对于多巴胺具有耐受性，长期沉浸于高多巴胺分泌的环境下会使得人体对于快乐的感觉变得迟钝。因此，让自己沉浸于技术学习的最好办法是平时隔绝高多巴胺分泌的娱乐活动，但又把这种活动作为阶段性成就的奖赏，你便会得到数倍于平时的快乐。
+</code></pre>
+<img src="/2021/01/10/ge-ren-jian-li-hexo-bo-ke-matery-zhu-ti-de-guo-cheng-xin-de/6.jpg" class="">
+
+<p>其他以此类推，代码注释非常友好，可以轻易知道其功能。</p>
+<hr>
+<h2 id="看板娘模块的安装和使用"><a href="#看板娘模块的安装和使用" class="headerlink" title="看板娘模块的安装和使用"></a>看板娘模块的安装和使用</h2><p>模块安装：</p>
+<pre class=" language-git"><code class="language-git">cnpm install --save hexo-helper-live2d</code></pre>
+<p>下载完成后，可以在node_modules文件夹中找到自己安装的插件。</p>
+<p>然后下载你想要的看板娘模块（可以自己到网上找哪个合心意的），执行命令：</p>
+<pre class=" language-git"><code class="language-git">cnpm install {packagename}
+<span class="token comment" spellcheck="true"># 例如cnpm install live2d-widget-model-haru</span></code></pre>
+<p>下载完成后，回到blog根目录下配置_config.yml，添加以下代码（model要根据自己情况设置）：</p>
+<pre class=" language-yml"><code class="language-yml">live2d:
+  enable: true
+  scriptFrom: local
+  pluginRootPath: live2dw/
+  pluginJsPath: lib/
+  pluginModelPath: assets/
+  tagMode: false
+  debug: false
+  model:
+    use: live2d-widget-model-z16
+  display:
+    position: right
+    width: 200
+    height: 400
+  mobile:
+    show: false</code></pre>
+<p>这样在右下角有看板娘啦！</p>
+<hr>
+<h2 id="音乐播放器的使用"><a href="#音乐播放器的使用" class="headerlink" title="音乐播放器的使用"></a>音乐播放器的使用</h2><p>进入matery主题文件夹下的_config.yml，可以发现matery主题自带一个音乐播放器模块,对其进行修改：</p>
+<pre class=" language-yml"><code class="language-yml"># Whether to display the musics.
+# 是否在首页显示音乐.
+music:
+  enable: true
+  title: #非吸底模式有效
+    enable: true
+    show: 听听音乐
+  autoHide: true    # hide automaticaly
+  server: netease   #require    music platform: netease, tencent, kugou, xiami, baidu
+  type: playlist    #require song, playlist, album, search, artist
+  id: 5456680252     # require song id / playlist id / album id / search keyword
+  # 503838841
+  fixed: true       # 开启吸底模式
+  autoplay: true   # 是否自动播放
+  theme: '#42b983'
+  loop: 'all'       # 音频循环播放, 可选值: 'all', 'one', 'none'
+  order: 'random'   # 音频循环顺序, 可选值: 'list', 'random'
+  preload: 'auto'   # 预加载，可选值: 'none', 'metadata', 'auto'
+  volume: 0.7       # 默认音量，请注意播放器会记忆用户设置，用户手动设置音量后默认音量即失效
+  listFolded: true  # 列表默认折叠
+  hideLrc: true     # 隐藏歌词
+</code></pre>
+<p>这里最重要的是id号，这决定了我们播放的歌单，默认是播放网易云音乐（server: netease），腾讯，酷狗，虾米，百度音乐都可以，这里以网易云为例：</p>
+<p>首先在网易云上创建自己的歌单，然后用浏览器打开网易云音乐，打开你的歌单页面，看网址，网站后面的一串数字就是你歌单的id，把它填到配置中去。</p>
+<hr>
+<h2 id="Valine评论系统的使用"><a href="#Valine评论系统的使用" class="headerlink" title="Valine评论系统的使用"></a>Valine评论系统的使用</h2><p>可以看到在matery主题_config.yml有这么一段代码（enable改为true）：</p>
+<pre class=" language-yml"><code class="language-yml"># The configuration of the Valine comment module is not activated by default.
+# To use it, activate the configuration item and set appId and appKey.
+# Valine 评论模块的配置，默认为不激活，如要使用，就请激活该配置项，并设置 appId 和 appKey.
+valine:
+  enable: true
+  appId: 
+  appKey: 
+  notify: true
+  verify: false
+  visitor: true
+  avatar: 'mm' # Gravatar style : mm/identicon/monsterid/wavatar/retro/hide
+  pageSize: 10
+  placeholder: '请畅所欲言' # Comment Box placeholder
+  background: /medias/comment_bg.png
+</code></pre>
+<p>在这里，我们只需填写的内容只有appId和appKey。具体操作访问<a target="_blank" rel="noopener" href="https://valine.js.org/quickstart.html">https://valine.js.org/quickstart.html</a></p>
+<p>然后把你得到的appId和appKey填入其中，那么在留言板和每篇文章的最后都会出现这么一个评论区：</p>
+<img src="/2021/01/10/ge-ren-jian-li-hexo-bo-ke-matery-zhu-ti-de-guo-cheng-xin-de/7.jpg" class="">
+
+<p>这样利用leanCloud就可以无后端得开发出一个评论区啦，非常简单便捷。</p>
+<hr>
+<h2 id="文章图片无法显示问题"><a href="#文章图片无法显示问题" class="headerlink" title="文章图片无法显示问题"></a>文章图片无法显示问题</h2><p>hexo根目录下运行</p>
+<pre class=" language-script"><code class="language-script">cnpm install https://github.com/CodeFalling/hexo-asset-image --save
+</code></pre>
+<p>安装成功后这个插件的内容需要修改（可能有bug）</p>
+<p>打开/node_modules/hexo-asset-image/index.js，将内容更换为下面的代码</p>
+<pre class=" language-js"><code class="language-js"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> cheerio <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'cheerio'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// http://stackoverflow.com/questions/14480345/how-to-get-the-nth-occurrence-in-a-string</span>
+<span class="token keyword">function</span> <span class="token function">getPosition</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> m<span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span>m<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> version <span class="token operator">=</span> <span class="token function">String</span><span class="token punctuation">(</span>hexo<span class="token punctuation">.</span>version<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+hexo<span class="token punctuation">.</span>extend<span class="token punctuation">.</span>filter<span class="token punctuation">.</span><span class="token function">register</span><span class="token punctuation">(</span><span class="token string">'after_post_render'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">var</span> config <span class="token operator">=</span> hexo<span class="token punctuation">.</span>config<span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>config<span class="token punctuation">.</span>post_asset_folder<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">var</span> link <span class="token operator">=</span> data<span class="token punctuation">.</span>permalink<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>version<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> <span class="token function">Number</span><span class="token punctuation">(</span>version<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span>
+       <span class="token keyword">var</span> beginPos <span class="token operator">=</span> <span class="token function">getPosition</span><span class="token punctuation">(</span>link<span class="token punctuation">,</span> <span class="token string">'/'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+       <span class="token keyword">var</span> beginPos <span class="token operator">=</span> <span class="token function">getPosition</span><span class="token punctuation">(</span>link<span class="token punctuation">,</span> <span class="token string">'/'</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// In hexo 3.1.1, the permalink of "about" page is like ".../about/index.html".</span>
+    <span class="token keyword">var</span> endPos <span class="token operator">=</span> link<span class="token punctuation">.</span><span class="token function">lastIndexOf</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    link <span class="token operator">=</span> link<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span>beginPos<span class="token punctuation">,</span> endPos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">var</span> toprocess <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'excerpt'</span><span class="token punctuation">,</span> <span class="token string">'more'</span><span class="token punctuation">,</span> <span class="token string">'content'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> toprocess<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token keyword">var</span> key <span class="token operator">=</span> toprocess<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">var</span> $ <span class="token operator">=</span> cheerio<span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span>data<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        ignoreWhitespace<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        xmlMode<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        lowerCaseTags<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        decodeEntities<span class="token punctuation">:</span> <span class="token boolean">false</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'img'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'src'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// For windows style path, we replace '\' to '/'.</span>
+            <span class="token keyword">var</span> src <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'src'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">'\\'</span><span class="token punctuation">,</span> <span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token regex">/http[s]*.*|\/\/.*/</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>src<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
+               <span class="token operator">!</span><span class="token regex">/^\s*\//</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>src<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              <span class="token comment" spellcheck="true">// For "about" page, the first part of "src" can't be removed.</span>
+              <span class="token comment" spellcheck="true">// In addition, to support multi-level local directory.</span>
+              <span class="token keyword">var</span> linkArray <span class="token operator">=</span> link<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>elem<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token keyword">return</span> elem <span class="token operator">!=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+              <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token keyword">var</span> srcArray <span class="token operator">=</span> src<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>elem<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token keyword">return</span> elem <span class="token operator">!=</span> <span class="token string">''</span> <span class="token operator">&amp;&amp;</span> elem <span class="token operator">!=</span> <span class="token string">'.'</span><span class="token punctuation">;</span>
+              <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token keyword">if</span><span class="token punctuation">(</span>srcArray<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">)</span>
+                srcArray<span class="token punctuation">.</span><span class="token function">shift</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+              src <span class="token operator">=</span> srcArray<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'src'</span><span class="token punctuation">,</span> config<span class="token punctuation">.</span>root <span class="token operator">+</span> link <span class="token operator">+</span> src<span class="token punctuation">)</span><span class="token punctuation">;</span>
+              console<span class="token punctuation">.</span>info<span class="token operator">&amp;&amp;</span>console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"update link as:-->"</span><span class="token operator">+</span>config<span class="token punctuation">.</span>root <span class="token operator">+</span> link <span class="token operator">+</span> src<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+            console<span class="token punctuation">.</span>info<span class="token operator">&amp;&amp;</span>console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"no src attr, skipped..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            console<span class="token punctuation">.</span>info<span class="token operator">&amp;&amp;</span>console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      data<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> $<span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre>
+<p>然后打开_config.yml文件，修改下述内容</p>
+<pre class=" language-yml"><code class="language-yml">post_asset_folder: true</code></pre>
+<hr>
+<blockquote>
+<p>通过常规的 markdown 语法和相对路径来引用图片和其它资源可能会导致它们在存档页或者主页上显示不正确。在Hexo 2时代，社区创建了很多插件来解决这个问题。但是，随着Hexo 3 的发布，许多新的标签插件被加入到了核心代码中。这使得你可以更简单地在文章中引用你的资源。</p>
+</blockquote>
+<p>​        也就是说在存档页和主页不能使用和文章内容中的常规语法来引用图片。比如说：当你打开文章资源文件夹功能后，你把一个 <code>example.jpg</code> 图片放在了你的资源文件夹中，如果通过使用相对路径的常规 markdown 语法 <code>![](/example.jpg)</code> ，它将 <em>不会</em> 出现在首页上。（但是它会在文章中按你期待的方式工作）</p>
+<p>​        正确的引用图片方式是使用下列的标签插件而不是 markdown ：</p>
+<pre class=" language-script"><code class="language-script">{% asset_img example.jpg This is an example image %}</code></pre>
+<hr>
+<h2 id="如何消除首页的颜色变化蒙版效果"><a href="#如何消除首页的颜色变化蒙版效果" class="headerlink" title="如何消除首页的颜色变化蒙版效果"></a>如何消除首页的颜色变化蒙版效果</h2><p>打开themes文件夹→matery→source→css→matery.css，找到这么一大段代码，注释其中的代码。</p>
+<pre class=" language-yml"><code class="language-yml">@-webkit-keyframes rainbow {
+
+    /*注释内容*/
+}
+
+@keyframes rainbow {
+
+    /*注释内容*/
+}</code></pre>
+<p>完成之后，重新部署到网站上，ctrl+F5刷新网页。</p>
+<hr>
+<h2 id="多平台一键部署（未尝试）"><a href="#多平台一键部署（未尝试）" class="headerlink" title="多平台一键部署（未尝试）"></a>多平台一键部署（未尝试）</h2><p>修改 Hexo 根目录下的 <code>_config.yml</code> 文件中的如下内容:</p>
+<pre class=" language-yml"><code class="language-yml">deploy:
+  - type: git
+    repo: https://github.com/lxl80/blog.git
+    branch: gh-pages
+    ignore_hidden: false
+  - type: git
+    repo: https://gitee.com/lxl80/lxl80.git
+    branch: master
+    ignore_hidden: false</code></pre>
+<p>安装：</p>
+<pre class=" language-yml"><code class="language-yml">cnpm install hexo-deployer-cos-enhanced --save</code></pre>
+<p>_config.yml配置如下：</p>
+<pre class=" language-yml"><code class="language-yml">deploy:
+  - type: git
+    repo: https://github.com/lxl80/blog.git
+    branch: gh-pages
+    ignore_hidden: false
+  - type: cos
+    bucket: lxl80-130****
+    region: ap-beijing
+    secretId: AKIDh9****F8FvL
+    secretKey: Z3IGiur****QZR3PgjXmlVg
+    cdnConfig:
+      enable: true
+      cdnUrl: https://static.lixl.cn
+      bucket: static-130****
+      region: ap-beijing
+      folder: static
+      secretId: AKIDh9****F8FvL
+      secretKey: Z3IGiur****QZR3PgjXmlVg</code></pre>
+<p>用hexo c,hexo g ,hexo d三连可实现一键发布。</p>
+<hr>
+<h2 id="文章-Front-matter-介绍"><a href="#文章-Front-matter-介绍" class="headerlink" title="文章 Front-matter 介绍"></a>文章 Front-matter 介绍</h2><p><code>Front-matter</code> 选项中的所有内容均为<strong>非必填</strong>的。但仍然建议至少填写 <code>title</code> 和 <code>date</code> 的值。</p>
+<table>
+<thead>
+<tr>
+<th>配置选项</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>title</td>
+<td><code>Markdown</code> 的文件标题</td>
+<td>文章标题，强烈建议填写此选项</td>
+</tr>
+<tr>
+<td>date</td>
+<td>文件创建时的日期时间</td>
+<td>发布时间，强烈建议填写此选项，且最好保证全局唯一</td>
+</tr>
+<tr>
+<td>author</td>
+<td>根 <code>_config.yml</code> 中的 <code>author</code></td>
+<td>文章作者</td>
+</tr>
+<tr>
+<td>img</td>
+<td><code>featureImages</code> 中的某个值</td>
+<td>文章特征图</td>
+</tr>
+<tr>
+<td>top</td>
+<td><code>true</code></td>
+<td>推荐文章（文章是否置顶），如果 <code>top</code> 值为 <code>true</code>，则会作为首页推荐文章</td>
+</tr>
+<tr>
+<td>cover</td>
+<td><code>false</code></td>
+<td>表示该文章是否需要加入到首页轮播封面中</td>
+</tr>
+<tr>
+<td>coverImg</td>
+<td>无</td>
+<td>表示该文章在首页轮播封面需要显示的图片路径，如果没有，则默认使用文章的特色图片</td>
+</tr>
+<tr>
+<td>password</td>
+<td>无</td>
+<td>文章阅读密码，如果要对文章设置阅读验证密码的话，就可以设置 <code>password</code> 的值，该值必须是用 <code>SHA256</code> 加密后的密码，防止被他人识破。前提是在主题的 <code>config.yml</code> 中激活了 <code>verifyPassword</code> 选项</td>
+</tr>
+<tr>
+<td>toc</td>
+<td><code>true</code></td>
+<td>是否开启 TOC，可以针对某篇文章单独关闭 TOC 的功能。前提是在主题的 <code>config.yml</code> 中激活了 <code>toc</code> 选项</td>
+</tr>
+<tr>
+<td>mathjax</td>
+<td><code>false</code></td>
+<td>是否开启数学公式支持 ，本文章是否开启 <code>mathjax</code>，且需要在主题的 <code>_config.yml</code> 文件中也需要开启才行</td>
+</tr>
+<tr>
+<td>summary</td>
+<td>无</td>
+<td>文章摘要，自定义的文章摘要内容，如果这个属性有值，文章卡片摘要就显示这段文字，否则程序会自动截取文章的部分内容作为摘要</td>
+</tr>
+<tr>
+<td>categories</td>
+<td>无</td>
+<td>文章分类，本主题的分类表示宏观上大的分类，只建议一篇文章一个分类</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>无</td>
+<td>文章标签，一篇文章可以多个标签</td>
+</tr>
+</tbody></table>
+<p>实例：</p>
+<pre class=" language-markdown"><code class="language-markdown"><span class="token hr punctuation">---</span>
+title: 基于Hexo的matery主题搭建博客
+date: 2020-01-09 16:44:00
+author: 微笑紫瞳星
+img: /source/images/xxx.jpg
+top: true
+cover: true
+coverImg: /images/1.jpg
+password: 
+toc: false
+mathjax: false
+summary: 这是你自定义的文章摘要内容，如果这个属性有值，文章卡片摘要就显示这段文字，否则程序会自动截取文章的部分内容作为摘要
+categories: 工具
+tags:
+  <span class="token list punctuation">-</span> blog
+  - <span class="token title important">hexo
+<span class="token punctuation">---</span></span></code></pre>
+<hr>
+<h2 id="持续更新中。。。"><a href="#持续更新中。。。" class="headerlink" title="持续更新中。。。"></a>持续更新中。。。</h2>
                 
             </div>
             <hr/>
@@ -1343,7 +1744,7 @@ git --version      #查看git版本</code></pre>
 <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
 
     
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
@@ -1356,7 +1757,7 @@ git --version      #查看git版本</code></pre>
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">367</span>&nbsp;字
+                class="white-color">3.8k</span>&nbsp;字
             
             
             
@@ -1375,6 +1776,50 @@ git --version      #查看git版本</code></pre>
             </span>
             
             <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2021# 年份";
+                    var startMonth = "01# 月份";
+                    var startDate = "09# 日期";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
             
             <br>
             
