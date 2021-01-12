@@ -479,21 +479,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-01-11
+                    2021-01-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.8k
+                    3.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    15 分
+                    16 分
                 </div>
                 
 
@@ -550,6 +550,7 @@ hexo -v        #查看hexo版本</code></pre>
 <h2 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h2><pre class=" language-git"><code class="language-git">hexo n <span class="token string">"我的第一篇文章"</span> #创建新的文章 </code></pre>
 <p>可以看到在source文件夹下的_posts文件夹下创建了.md文件。</p>
 <p>打开文件就可以编辑内容，里面是基于markdown语法的。</p>
+<p>想了解Markdown语法如何使用，请看b站视频<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1hJ411X75X?from=search&amp;seid=9433284770037044167">15分钟快速上手Markdown教程</a></p>
 <hr>
 <h2 id="部署到gitee"><a href="#部署到gitee" class="headerlink" title="部署到gitee"></a>部署到gitee</h2><p>输入命令：</p>
 <pre class=" language-git"><code class="language-git">hexo clean #清理
@@ -640,7 +641,7 @@ pretty_urls:
 <pre class=" language-git"><code class="language-git">cnpm install --save hexo-helper-live2d</code></pre>
 <p>下载完成后，可以在node_modules文件夹中找到自己安装的插件。</p>
 <p>然后下载你想要的看板娘模块（可以自己到网上找哪个合心意的），执行命令：</p>
-<pre class=" language-git"><code class="language-git">cnpm install {packagename}
+<pre class=" language-git"><code class="language-git">cnpm install &amp;#123;packagename&amp;#125;
 <span class="token comment" spellcheck="true"># 例如cnpm install live2d-widget-model-haru</span></code></pre>
 <p>下载完成后，回到blog根目录下配置_config.yml，添加以下代码（model要根据自己情况设置）：</p>
 <pre class=" language-yml"><code class="language-yml">live2d:
@@ -718,16 +719,16 @@ valine:
 <span class="token keyword">var</span> cheerio <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'cheerio'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">// http://stackoverflow.com/questions/14480345/how-to-get-the-nth-occurrence-in-a-string</span>
-<span class="token keyword">function</span> <span class="token function">getPosition</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> m<span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">function</span> <span class="token function">getPosition</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> m<span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span>m<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">.</span>length<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
 <span class="token keyword">var</span> version <span class="token operator">=</span> <span class="token function">String</span><span class="token punctuation">(</span>hexo<span class="token punctuation">.</span>version<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-hexo<span class="token punctuation">.</span>extend<span class="token punctuation">.</span>filter<span class="token punctuation">.</span><span class="token function">register</span><span class="token punctuation">(</span><span class="token string">'after_post_render'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">{</span>
+hexo<span class="token punctuation">.</span>extend<span class="token punctuation">.</span>filter<span class="token punctuation">.</span><span class="token function">register</span><span class="token punctuation">(</span><span class="token string">'after_post_render'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
   <span class="token keyword">var</span> config <span class="token operator">=</span> hexo<span class="token punctuation">.</span>config<span class="token punctuation">;</span>
-  <span class="token keyword">if</span><span class="token punctuation">(</span>config<span class="token punctuation">.</span>post_asset_folder<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>config<span class="token punctuation">.</span>post_asset_folder<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         <span class="token keyword">var</span> link <span class="token operator">=</span> data<span class="token punctuation">.</span>permalink<span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>version<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> <span class="token function">Number</span><span class="token punctuation">(</span>version<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>version<span class="token punctuation">.</span>length <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> <span class="token function">Number</span><span class="token punctuation">(</span>version<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span>
        <span class="token keyword">var</span> beginPos <span class="token operator">=</span> <span class="token function">getPosition</span><span class="token punctuation">(</span>link<span class="token punctuation">,</span> <span class="token string">'/'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
     <span class="token keyword">else</span>
        <span class="token keyword">var</span> beginPos <span class="token operator">=</span> <span class="token function">getPosition</span><span class="token punctuation">(</span>link<span class="token punctuation">,</span> <span class="token string">'/'</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
@@ -736,45 +737,45 @@ hexo<span class="token punctuation">.</span>extend<span class="token punctuation
     link <span class="token operator">=</span> link<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span>beginPos<span class="token punctuation">,</span> endPos<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">var</span> toprocess <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'excerpt'</span><span class="token punctuation">,</span> <span class="token string">'more'</span><span class="token punctuation">,</span> <span class="token string">'content'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> toprocess<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> toprocess<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
       <span class="token keyword">var</span> key <span class="token operator">=</span> toprocess<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-      <span class="token keyword">var</span> $ <span class="token operator">=</span> cheerio<span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span>data<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      <span class="token keyword">var</span> $ <span class="token operator">=</span> cheerio<span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span>data<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         ignoreWhitespace<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
         xmlMode<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
         lowerCaseTags<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
         decodeEntities<span class="token punctuation">:</span> <span class="token boolean">false</span>
-      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-      <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'img'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'src'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'img'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'src'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
             <span class="token comment" spellcheck="true">// For windows style path, we replace '\' to '/'.</span>
             <span class="token keyword">var</span> src <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'src'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">'\\'</span><span class="token punctuation">,</span> <span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token regex">/http[s]*.*|\/\/.*/</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>src<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
-               <span class="token operator">!</span><span class="token regex">/^\s*\//</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>src<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+               <span class="token operator">!</span><span class="token regex">/^\s*\//</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>src<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
               <span class="token comment" spellcheck="true">// For "about" page, the first part of "src" can't be removed.</span>
               <span class="token comment" spellcheck="true">// In addition, to support multi-level local directory.</span>
-              <span class="token keyword">var</span> linkArray <span class="token operator">=</span> link<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>elem<span class="token punctuation">)</span><span class="token punctuation">{</span>
+              <span class="token keyword">var</span> linkArray <span class="token operator">=</span> link<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>elem<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
                 <span class="token keyword">return</span> elem <span class="token operator">!=</span> <span class="token string">''</span><span class="token punctuation">;</span>
-              <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-              <span class="token keyword">var</span> srcArray <span class="token operator">=</span> src<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>elem<span class="token punctuation">)</span><span class="token punctuation">{</span>
+              <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token keyword">var</span> srcArray <span class="token operator">=</span> src<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>elem<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
                 <span class="token keyword">return</span> elem <span class="token operator">!=</span> <span class="token string">''</span> <span class="token operator">&amp;&amp;</span> elem <span class="token operator">!=</span> <span class="token string">'.'</span><span class="token punctuation">;</span>
-              <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-              <span class="token keyword">if</span><span class="token punctuation">(</span>srcArray<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">)</span>
+              <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token keyword">if</span><span class="token punctuation">(</span>srcArray<span class="token punctuation">.</span>length <span class="token operator">&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span>
                 srcArray<span class="token punctuation">.</span><span class="token function">shift</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
               src <span class="token operator">=</span> srcArray<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
               <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'src'</span><span class="token punctuation">,</span> config<span class="token punctuation">.</span>root <span class="token operator">+</span> link <span class="token operator">+</span> src<span class="token punctuation">)</span><span class="token punctuation">;</span>
-              console<span class="token punctuation">.</span>info<span class="token operator">&amp;&amp;</span>console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"update link as:-->"</span><span class="token operator">+</span>config<span class="token punctuation">.</span>root <span class="token operator">+</span> link <span class="token operator">+</span> src<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+              console<span class="token punctuation">.</span>info<span class="token operator">&amp;&amp;</span>console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"update link as:--&gt;"</span><span class="token operator">+</span>config<span class="token punctuation">.</span>root <span class="token operator">+</span> link <span class="token operator">+</span> src<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token keyword">else</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
             console<span class="token punctuation">.</span>info<span class="token operator">&amp;&amp;</span>console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"no src attr, skipped..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             console<span class="token punctuation">.</span>info<span class="token operator">&amp;&amp;</span>console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       data<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> $<span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 </code></pre>
 <p>然后打开_config.yml文件，修改下述内容</p>
@@ -1478,6 +1479,10 @@ tags:
                         <span class="chip bg-color">研究方法</span>
                     </a>
                     
+                    <a href="/tags/%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/">
+                        <span class="chip bg-color">论文写作</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -1768,7 +1773,7 @@ tags:
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">9.7k</span>&nbsp;字
+                class="white-color">10.6k</span>&nbsp;字
             
             
             
