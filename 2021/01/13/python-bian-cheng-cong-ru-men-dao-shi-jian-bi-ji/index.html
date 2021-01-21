@@ -475,21 +475,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-01-20
+                    2021-01-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    12.5k
+                    16.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    52 分
+                    69 分
                 </div>
                 
 
@@ -1362,7 +1362,7 @@ urlpatterns <span class="token operator">=</span> <span class="token punctuation
 <p><strong>模板继承：</strong></p>
 <p>在创建网站时，有一些所有网页都包含的元素，可编写一个包含通用元素的模板，让所有网页继承这个模板。</p>
 <p>首先创建一个名为base.html的模板，储存在index.html所在的目录中，所有页面都包含顶端的标题，这个标题设置为到主页的链接：</p>
-<p><strong>base.html</strong>:</p>
+<p>base.html:</p>
 <pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:index<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>learning Log<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
@@ -1372,14 +1372,14 @@ urlpatterns <span class="token operator">=</span> <span class="token punctuation
 <pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>link_url<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>link text<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span></code></pre>
 <p>使用模板标签生成URL可让链接保持最新容易得多，修改项目中的URL只需修改urls.py的URL模式。</p>
 <p>第二部分插入了一对块标签，名为content，是一个占位符，其中的内容由子模板指定。在父模板中，可使用任意多的块来预留空间，而子模板可根据需要定义相应数量的块。</p>
-<p>重新编写<strong>index.html</strong>:</p>
+<p>重新编写index.html:</p>
 <pre class=" language-html"><code class="language-html">{% extends "learning_logs/base.html" %}
 
 {% block content %}
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Learning Log helps you keep track of your learning.for any topic you're learning about.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
 {% endblock content %}</code></pre>
 <p>与原来的代码相比，我们将标题替换为了从父模板继承的代码。在子模板中只需包含当前网页特有的内容，简化了模板，让网站修改容易得多。</p>
-<h4 id="显示所有主题的页面："><a href="#显示所有主题的页面：" class="headerlink" title="显示所有主题的页面："></a>显示所有主题的页面：</h4><p>首先定义显示所有主题页面的URL，我们将使用单词topics，因此<a target="_blank" rel="noopener" href="http://localhost:8000/topics/%E5%B0%86%E8%BF%94%E5%9B%9E%E8%BF%99%E4%B8%AA%E9%A1%B5%E9%9D%A2%EF%BC%8C**learning_logs/urls.py**%E4%BF%AE%E6%94%B9%E5%A6%82%E4%B8%8B%EF%BC%9A">http://localhost:8000/topics/将返回这个页面，**learning_logs/urls.py**修改如下：</a></p>
+<h4 id="显示所有主题的页面："><a href="#显示所有主题的页面：" class="headerlink" title="显示所有主题的页面："></a>显示所有主题的页面：</h4><p>首先定义显示所有主题页面的URL，我们将使用单词topics，因此<a target="_blank" rel="noopener" href="http://localhost:8000/topics/">http://localhost:8000/topics/</a>  将返回这个页面，<strong>learning_logs/urls.py</strong>修改如下：</p>
 <pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>urls <span class="token keyword">import</span> path
 <span class="token keyword">from</span> <span class="token punctuation">.</span> <span class="token keyword">import</span> views                <span class="token comment" spellcheck="true">#从此文件所在的目录中导入wiews</span>
 
@@ -1441,7 +1441,7 @@ urlpatterns <span class="token operator">=</span> <span class="token punctuation
     re_path<span class="token punctuation">(</span><span class="token string">'topics/(?P&lt;topic_id>\d+)/'</span><span class="token punctuation">,</span> views<span class="token punctuation">.</span>topic<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'topic'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>    <span class="token comment" spellcheck="true"># 特定主题的详细页面</span>
     <span class="token comment" spellcheck="true">#使用正则表达式要用re_path否则控制台报警告</span>
    <span class="token punctuation">]</span></code></pre>
-<p>这里采用了正则表达式?P<topic_id>\d+。这里捕获URL中的值?P<topic_id>将捕获到的值储存到topic_id中，\d+指与任何整数匹配，不管多少位。</topic_id></topic_id></p>
+<p>这里采用了正则表达式。这里捕获URL中的值?P和topic_id意思是将捕获到的值储存到topic_id中，\d+指与任何整数匹配，不管多少位。</p>
 <p>views.py:</p>
 <pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>shortcuts <span class="token keyword">import</span> render
 <span class="token keyword">from</span> <span class="token punctuation">.</span>models <span class="token keyword">import</span> Topic                  <span class="token comment" spellcheck="true">#导入所需数据相关的模型</span>
@@ -1678,7 +1678,6 @@ urlpatterns <span class="token operator">=</span> <span class="token punctuation
 {% endblock content %}</code></pre>
 <p>修改topic.html:</p>
 <pre class=" language-html"><code class="language-html">--snip--
-    {% for entry in entries %}
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>
             <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>{{ entry.date_added|date:'M d, Y H:i' }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
             <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>{{ entry.text|linebreaks }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
@@ -1690,7 +1689,456 @@ urlpatterns <span class="token operator">=</span> <span class="token punctuation
 
 <img src="/2021/01/13/python-bian-cheng-cong-ru-men-dao-shi-jian-bi-ji/19.png" class="">
 
-<h3 id="创建用户账户"><a href="#创建用户账户" class="headerlink" title="创建用户账户"></a>创建用户账户</h3><p>待更新。。。</p>
+<h3 id="创建用户账户"><a href="#创建用户账户" class="headerlink" title="创建用户账户"></a>创建用户账户</h3><p>下面将建立用户注册和身份验证系统，我们将创建一个新的应用程序，包含与处理用户账户相关的所有功能。</p>
+<p>首先使用命令创建名为users的应用程序，结构与learning_logs相同：</p>
+<pre class=" language-cmd"><code class="language-cmd">python manage.py startapp users</code></pre>
+<p>settings.py</p>
+<pre class=" language-python"><code class="language-python"><span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span>
+INSTALLED_APPS <span class="token operator">=</span> <span class="token punctuation">[</span>                              <span class="token comment" spellcheck="true">#安装在项目中的应用程序</span>
+    <span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span>
+    <span class="token comment" spellcheck="true">#我的应用程序</span>
+    <span class="token string">'learning_logs'</span><span class="token punctuation">,</span>
+    <span class="token string">'users'</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span></code></pre>
+<p>learning_log/urls.py:</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib <span class="token keyword">import</span> admin
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>urls <span class="token keyword">import</span> path<span class="token punctuation">,</span>include
+
+urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
+    path<span class="token punctuation">(</span><span class="token string">'admin/'</span><span class="token punctuation">,</span> admin<span class="token punctuation">.</span>site<span class="token punctuation">.</span>urls<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    path<span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> include<span class="token punctuation">(</span><span class="token string">'learning_logs.urls'</span><span class="token punctuation">,</span> namespace<span class="token operator">=</span><span class="token string">'learning_logs'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    path<span class="token punctuation">(</span><span class="token string">'users/'</span><span class="token punctuation">,</span> include<span class="token punctuation">(</span><span class="token string">'users.urls'</span><span class="token punctuation">,</span> namespace<span class="token operator">=</span><span class="token string">'users'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span></code></pre>
+<h4 id="登录页面："><a href="#登录页面：" class="headerlink" title="登录页面："></a><strong>登录页面：</strong></h4><p>在users文件夹中新建urls.py:</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>urls <span class="token keyword">import</span> path<span class="token punctuation">,</span>re_path
+<span class="token keyword">from</span> <span class="token punctuation">.</span> <span class="token keyword">import</span> views
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>views <span class="token keyword">import</span> LoginView         <span class="token comment" spellcheck="true">#导入默认视图LoginView</span>
+
+app_name<span class="token operator">=</span><span class="token string">'users'</span>
+<span class="token comment" spellcheck="true">#URL模式是一个对函数path的调用，第一个参数是正则表达式，第二个参数指定了调用的视图函数第三个参数指定名称</span>
+<span class="token comment" spellcheck="true">#当需要提供到这个主页的链接时，都将使用这个名称而不是编写URL</span>
+urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token comment" spellcheck="true">#鉴于没有编写视图函数而是使用默认的LoginView，后面的as_view告诉Django去哪里寻找模板</span>
+    path<span class="token punctuation">(</span><span class="token string">'login/'</span><span class="token punctuation">,</span> LoginView<span class="token punctuation">.</span>as_view<span class="token punctuation">(</span>template_name<span class="token operator">=</span><span class="token string">'users/login.html'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'login'</span><span class="token punctuation">)</span>
+   <span class="token punctuation">]</span></code></pre>
+<p>接下来在users中创建一个templates目录，在templates中创建一个users目录，又在这个users目录中创建login.html:</p>
+<pre class=" language-html"><code class="language-html">{% extends "learning_logs/base.html" %}
+
+{% block content %}
+  ｛% if form.errors %｝
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>>Your username and password didn't match.Please try again.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+   {% endif %}
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span> {% <span class="token punctuation">'</span>users:login<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+       {% csrf_token %}
+       {{ form.as_p }}
+       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>log in<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hidden<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>next<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:index<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+{% endblock content %}</code></pre>
+<p>首先如果表单的errors属性被设置，就显示错误信息，表示用户名密码不匹配。要让登录视图处理表单，因此将action设置为登录页面的URL，登录视图发送一个表单给模板，模板中显示这个表单并添加一个提交按钮。最后包含了一个隐藏表单元素next，其中的参数value告诉Django在用户登录成功后定位到主页。</p>
+<p>下面在base.html添加到登录页面的链接:</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:index<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>learning Log<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span> -
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:topics<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Topics<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span> -
+    {% if user.is_authenticated %}
+      Hello,{{ user.username }}.
+    {% else %}
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>users:login<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>log in<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+    {% endif %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+
+{% block content %}{% endblock content %}</code></pre>
+<p>在Django身份验证系统中，每个模板都可使用变量user，这个变量的is_authenticated属性在登录时为True，否则为False。</p>
+<p>此时在admin页面退出管理员账户，就可以在网页中看到log in按钮，点击它：</p>
+<img src="/2021/01/13/python-bian-cheng-cong-ru-men-dao-shi-jian-bi-ji/20.png" class="">
+
+<h4 id="注销："><a href="#注销：" class="headerlink" title="注销："></a><strong>注销：</strong></h4><p>让用户点击一个按钮就可注销并返回主页：</p>
+<p>users/urls.py:</p>
+<pre class=" language-python"><code class="language-python"><span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span>
+urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
+    path<span class="token punctuation">(</span><span class="token string">'login/'</span><span class="token punctuation">,</span> LoginView<span class="token punctuation">.</span>as_view<span class="token punctuation">(</span>template_name<span class="token operator">=</span><span class="token string">'users/login.html'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'login'</span><span class="token punctuation">)</span>
+    path<span class="token punctuation">(</span><span class="token string">'logout/'</span><span class="token punctuation">,</span> views<span class="token punctuation">.</span>logout_view<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'logout'</span><span class="token punctuation">)</span>
+   <span class="token punctuation">]</span></code></pre>
+<p>users/views.py（注意新版的包名有所变化）:</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>urls <span class="token keyword">import</span> reverse
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>auth <span class="token keyword">import</span> logout
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>http <span class="token keyword">import</span> HttpResponseRedirect
+
+<span class="token keyword">def</span> <span class="token function">logout_view</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    logout<span class="token punctuation">(</span>request<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> HttpResponseRedirect<span class="token punctuation">(</span>reverse<span class="token punctuation">(</span><span class="token string">'learning_logs:index'</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<p>建立链接，修改base.html，给登录后的用户名旁边加上log out按钮：</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:index<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>learning Log<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span> -
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:topics<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Topics<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span> -
+    {% if user.is_authenticated %}
+      Hello,{{ user.username }}.
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>users:logout<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>log out<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+    {% else %}
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>users:login<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>log in<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+    {% endif %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+{% block content %}{% endblock content %}</code></pre>
+<h4 id="注册页面："><a href="#注册页面：" class="headerlink" title="注册页面："></a>注册页面：</h4><p>users/urls.py:</p>
+<pre class=" language-python"><code class="language-python"><span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span>
+urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
+    path<span class="token punctuation">(</span><span class="token string">'login/'</span><span class="token punctuation">,</span> LoginView<span class="token punctuation">.</span>as_view<span class="token punctuation">(</span>template_name<span class="token operator">=</span><span class="token string">'users/login.html'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'login'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    path<span class="token punctuation">(</span><span class="token string">'logout/'</span><span class="token punctuation">,</span> views<span class="token punctuation">.</span>logout_view<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'logout'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    path<span class="token punctuation">(</span><span class="token string">'register/'</span><span class="token punctuation">,</span> views<span class="token punctuation">.</span>register<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'register'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+   <span class="token punctuation">]</span></code></pre>
+<p>users/views.py:</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>urls <span class="token keyword">import</span> reverse
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>auth <span class="token keyword">import</span> logout<span class="token punctuation">,</span>login<span class="token punctuation">,</span>authenticate
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>http <span class="token keyword">import</span> HttpResponseRedirect
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>shortcuts <span class="token keyword">import</span> render
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>forms <span class="token keyword">import</span> UserCreationForm
+
+<span class="token keyword">def</span> <span class="token function">logout_view</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    logout<span class="token punctuation">(</span>request<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> HttpResponseRedirect<span class="token punctuation">(</span>reverse<span class="token punctuation">(</span><span class="token string">'learning_logs:index'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">register</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> request<span class="token punctuation">.</span>method <span class="token operator">!=</span> <span class="token string">'POST'</span><span class="token punctuation">:</span>                 <span class="token comment" spellcheck="true">#点击注册，创建一个表单</span>
+        form <span class="token operator">=</span> UserCreationForm<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>                                        <span class="token comment" spellcheck="true">#点击提交，录入信息，切换登录状态，转到主页</span>
+        form <span class="token operator">=</span> UserCreationForm<span class="token punctuation">(</span>data<span class="token operator">=</span>request<span class="token punctuation">.</span>POST<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> form<span class="token punctuation">.</span>is_valid<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            new_user <span class="token operator">=</span> form<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            authenticated_user <span class="token operator">=</span> authenticate<span class="token punctuation">(</span>username<span class="token operator">=</span>new_user<span class="token punctuation">.</span>username<span class="token punctuation">,</span>password<span class="token operator">=</span>request<span class="token punctuation">.</span>POST<span class="token punctuation">[</span><span class="token string">'password1'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+            login<span class="token punctuation">(</span>request<span class="token punctuation">,</span>authenticated_user<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> HttpResponseRedirect<span class="token punctuation">(</span>reverse<span class="token punctuation">(</span><span class="token string">'learning_logs:index'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    context <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'form'</span><span class="token punctuation">:</span>form<span class="token punctuation">}</span>
+    <span class="token keyword">return</span> render<span class="token punctuation">(</span>request<span class="token punctuation">,</span><span class="token string">'users/register.html'</span><span class="token punctuation">,</span>context<span class="token punctuation">)</span></code></pre>
+<p>保存用户信息后，我们调用authenticate()，将实参用户名和密码传递给它，返回一个通过了 身份验证的用户对象，然后调用login登录。用户注册时被要求输入密码两次，输入两次相同表单才可能有效。</p>
+<p>在login.html目录下新建register.html:</p>
+<pre class=" language-html"><code class="language-html">{% extends "learning_logs/base.html" %}
+
+{% block content %}
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>users:register<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    {% csrf_token %}
+    {{ form.as_p}}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>register<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hidden<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>next<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:index<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+{% endblock content %}</code></pre>
+<p>在base.html添加用户在没有登录时显示到注册页面的链接：</p>
+<pre class=" language-html"><code class="language-html">--snip--
+    {% else %}
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>users:register<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>register<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span> -
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>users:login<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>log in<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+    {% endif %}
+--snip--</code></pre>
+<p>现在可以看到效果了：</p>
+<img src="/2021/01/13/python-bian-cheng-cong-ru-men-dao-shi-jian-bi-ji/21.png" class="">
+
+<h3 id="让用户拥有自己的数据"><a href="#让用户拥有自己的数据" class="headerlink" title="让用户拥有自己的数据"></a>让用户拥有自己的数据</h3><p>这里将创建一个系统，确定各项数据所属用户，再限制对页面的访问，让用户只能使用自己的数据。</p>
+<p>Django提供了修饰器@login_required，可以实现某些页面只允许已登录的用户访问。</p>
+<p>修改learning_logs/views.py:</p>
+<pre class=" language-python"><code class="language-python"><span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span>
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>decorators <span class="token keyword">import</span> login_required
+
+<span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span>
+@login_required
+<span class="token keyword">def</span> <span class="token function">topics</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>                      
+    <span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span>
+@login_required
+<span class="token keyword">def</span> <span class="token function">topic</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span>topic_id<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+@login_required
+<span class="token keyword">def</span> <span class="token function">new_topic</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span>
+@login_required
+<span class="token keyword">def</span> <span class="token function">new_entry</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span>topic_id<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span>
+@login_required
+<span class="token keyword">def</span> <span class="token function">edit_entry</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span>entry_id<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span></code></pre>
+<p>login_required()检查用户是否已登录，当用户已登录时，才运行topics的代码，否则重定向到登录页面。</p>
+<p>修改settings.py，让Django知道到哪里查找登录页面，在末尾添加：</p>
+<pre class=" language-python"><code class="language-python">LOGIN_URL <span class="token operator">=</span> <span class="token string">'/users/login/'</span></code></pre>
+<p>现在未登录状态下点击topics或输入编辑添加主题条目的链接，就会跳转到登录页面。</p>
+<p><strong>将数据关联到用户：</strong></p>
+<p>我们只需将最高层的数据关联到用户，这样更底层的数据自动管理到用户。下面修改模型Topic，添加一个关联到用户的外键，完成后必须对数据库进行迁移。最后必须对一些视图进行修改，使其只显示与当前登录的用户相关联的数据。</p>
+<p>models.py</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>db <span class="token keyword">import</span> models
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>models <span class="token keyword">import</span> User
+
+<span class="token keyword">class</span> <span class="token class-name">Topic</span><span class="token punctuation">(</span>models<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>          
+    text <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">200</span><span class="token punctuation">)</span> 
+    date_added <span class="token operator">=</span> models<span class="token punctuation">.</span>DateTimeField<span class="token punctuation">(</span>auto_now_add<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>  
+    owner <span class="token operator">=</span> models<span class="token punctuation">.</span>ForeignKey<span class="token punctuation">(</span>User<span class="token punctuation">,</span>on_delete<span class="token operator">=</span>models<span class="token punctuation">.</span>CASCADE<span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>             <span class="token comment" spellcheck="true">#显示模型的简单表示</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>text
+<span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span></code></pre>
+<p>确定当前数据库有哪些用户，输入命令启动Django shell会话：</p>
+<pre class=" language-cmd"><code class="language-cmd">$ python manage.py shell
+Python 3.9.1 (tags/v3.9.1:1e5d33e, Dec  7 2020, 17:08:21) [MSC v.1927 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from django.contrib.auth.models import User
+>>> User.objects.all()
+......................................
+>>> for user in User.objects.all():
+...     print(user.username,user.id)
+...
+tianjue 1
+testAccount 2
+>>></code></pre>
+<p>迁移数据库：</p>
+<pre class=" language-cmd"><code class="language-cmd">$ python manage.py makemigrations learning_logs
+You are trying to add a non-nullable field 'owner' to topic without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> 1
+Migrations for 'learning_logs':
+  learning_logs\migrations\0003_topic_owner.py
+    - Add field owner to topic</code></pre>
+<p>执行迁移：</p>
+<pre class=" language-cmd"><code class="language-cmd">$ python manage.py migrate</code></pre>
+<p>现在可以在shell中验证是否符合预期：</p>
+<pre class=" language-cmd"><code class="language-cmd">>>> from learning_logs.models import Topic
+>>> for topic in Topic.objects.all():
+...     print(topic,topic.owner)
+...
+Chess tianjue
+Rock Climbing tianjue
+Learning tianjue</code></pre>
+<p>可以看到每个主题都属于用户tianjue了。</p>
+<p><strong>只允许访问自己的主题：</strong></p>
+<p>learning_logs/views.py:</p>
+<pre class=" language-python"><code class="language-python"><span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span>
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>http <span class="token keyword">import</span> HttpResponseRedirect<span class="token punctuation">,</span>Http404
+<span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span>
+@login_required
+<span class="token keyword">def</span> <span class="token function">topics</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>                     
+    <span class="token comment" spellcheck="true"># 查询数据库，请求提供Topic对象，只让所有者访问，按属性date_added进行排序</span>
+    topics <span class="token operator">=</span> Topic<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>filter<span class="token punctuation">(</span>owner<span class="token operator">=</span>request<span class="token punctuation">.</span>user<span class="token punctuation">)</span><span class="token punctuation">.</span>order_by<span class="token punctuation">(</span><span class="token string">'date_added'</span><span class="token punctuation">)</span>  
+    context <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'topics'</span><span class="token punctuation">:</span>topics<span class="token punctuation">}</span>
+    <span class="token keyword">return</span> render<span class="token punctuation">(</span>request<span class="token punctuation">,</span><span class="token string">'learning_logs/topics.html'</span><span class="token punctuation">,</span>context<span class="token punctuation">)</span>
+
+@login_required
+<span class="token keyword">def</span> <span class="token function">topic</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span>topic_id<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    topic <span class="token operator">=</span> Topic<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>get<span class="token punctuation">(</span>id<span class="token operator">=</span>topic_id<span class="token punctuation">)</span>                
+    <span class="token keyword">if</span> topic<span class="token punctuation">.</span>owner <span class="token operator">!=</span> request<span class="token punctuation">.</span>user<span class="token punctuation">:</span>                               <span class="token comment" spellcheck="true">#如果主题不归用户所有，返回404响应</span>
+        <span class="token keyword">raise</span>  Http404
+    entries <span class="token operator">=</span> topic<span class="token punctuation">.</span>entry_set<span class="token punctuation">.</span>order_by<span class="token punctuation">(</span><span class="token string">'-date_added'</span><span class="token punctuation">)</span>     
+    context <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'topic'</span><span class="token punctuation">:</span>topic<span class="token punctuation">,</span><span class="token string">'entries'</span><span class="token punctuation">:</span>entries<span class="token punctuation">}</span>          
+    <span class="token keyword">return</span> render<span class="token punctuation">(</span>request<span class="token punctuation">,</span><span class="token string">'learning_logs/topic.html'</span><span class="token punctuation">,</span>context<span class="token punctuation">)</span>
+@login_required
+<span class="token keyword">def</span> <span class="token function">new_topic</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> request<span class="token punctuation">.</span>method <span class="token operator">!=</span> <span class="token string">'POST'</span><span class="token punctuation">:</span>           
+        form <span class="token operator">=</span> TopicForm<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>                                  
+        form <span class="token operator">=</span> TopicForm<span class="token punctuation">(</span>request<span class="token punctuation">.</span>POST<span class="token punctuation">)</span>     
+        <span class="token keyword">if</span> form<span class="token punctuation">.</span>is_valid<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>               
+            new_topic <span class="token operator">=</span> form<span class="token punctuation">.</span>save<span class="token punctuation">(</span>commit<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+            new_topic<span class="token punctuation">.</span>owner <span class="token operator">=</span> request<span class="token punctuation">.</span>user                         <span class="token comment" spellcheck="true">#把新建立的主题和用户关联上</span>
+            new_topic<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token punctuation">)</span>                    
+            <span class="token keyword">return</span> HttpResponseRedirect<span class="token punctuation">(</span>reverse<span class="token punctuation">(</span><span class="token string">'learning_logs:topics'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    context <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'form'</span><span class="token punctuation">:</span> form<span class="token punctuation">}</span>
+    <span class="token keyword">return</span> render<span class="token punctuation">(</span>request<span class="token punctuation">,</span><span class="token string">'learning_logs/new_topic.html'</span><span class="token punctuation">,</span>context<span class="token punctuation">)</span>
+@login_required
+<span class="token keyword">def</span> <span class="token function">new_entry</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span>topic_id<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    topic <span class="token operator">=</span> Topic<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>get<span class="token punctuation">(</span>id<span class="token operator">=</span>topic_id<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> topic<span class="token punctuation">.</span>owner <span class="token operator">!=</span> request<span class="token punctuation">.</span>user<span class="token punctuation">:</span>                              <span class="token comment" spellcheck="true">#如果主题不归用户所有，返回404响应</span>
+        <span class="token keyword">raise</span> Http404
+    <span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span>
+@login_required
+<span class="token keyword">def</span> <span class="token function">edit_entry</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span>entry_id<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    entry <span class="token operator">=</span> Entry<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>get<span class="token punctuation">(</span>id<span class="token operator">=</span>entry_id<span class="token punctuation">)</span>
+    topic <span class="token operator">=</span> entry<span class="token punctuation">.</span>topic
+    <span class="token keyword">if</span> topic<span class="token punctuation">.</span>owner <span class="token operator">!=</span> request<span class="token punctuation">.</span>user<span class="token punctuation">:</span>                               <span class="token comment" spellcheck="true">#如果主题不归用户所有，返回404响应</span>
+        <span class="token keyword">raise</span> Http404
+    <span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span></code></pre>
+<img src="/2021/01/13/python-bian-cheng-cong-ru-men-dao-shi-jian-bi-ji/22.png" class="">
+
+<img src="/2021/01/13/python-bian-cheng-cong-ru-men-dao-shi-jian-bi-ji/23.png" class="">
+
+<p>现在这个项目运行任何用户注册，每个用户可以随意添加主题和条目，并且只能访问自己的数据。</p>
+<hr>
+<h2 id="设置应用程序的样式并对其进行部署"><a href="#设置应用程序的样式并对其进行部署" class="headerlink" title="设置应用程序的样式并对其进行部署"></a>设置应用程序的样式并对其进行部署</h2><h3 id="设置项目的样式"><a href="#设置项目的样式" class="headerlink" title="设置项目的样式"></a>设置项目的样式</h3><p>当前，学习笔记的功能基本完成，但未设置样式。我们将使用Bootstrap库，这是一种工具，用于为Web应用程序设置样式，最后把这个项目部署到服务器端。</p>
+<p>执行命令，安装django-bootstrap3:</p>
+<pre class=" language-cmd"><code class="language-cmd">$ pip3 install django-bootstrap3</code></pre>
+<p>在settings.py中添加代码：</p>
+<pre class=" language-python"><code class="language-python"><span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span>
+INSTALLED_APPS <span class="token operator">=</span> <span class="token punctuation">[</span>                              
+    <span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span>
+    <span class="token comment" spellcheck="true">#第三方应用程序</span>
+    <span class="token string">'bootstrap3'</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">#我的应用程序</span>
+    <span class="token string">'learning_logs'</span><span class="token punctuation">,</span>
+    <span class="token string">'users'</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span>
+<span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span>
+BOOTSTRAP3 <span class="token operator">=</span><span class="token punctuation">{</span>
+    <span class="token string">'include_jquery'</span><span class="token punctuation">:</span> <span class="token boolean">True</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span></code></pre>
+<p>需要让django-bootstrap3包含jQuery，这是一个JavaScript库，能够让你使用Bootstrap模板的一些交互性元素，这样无需手工下载jQuery。</p>
+<p>Bootstarp是一个大型样式设置工具集，提供了大量的模板，具体可访问<a target="_blank" rel="noopener" href="https://getbootstrap.com/%E3%80%82">https://getbootstrap.com/。</a></p>
+<p>首先需要修改base.html,在这个文件定义HTML头部，添加一些在模板中使用Bootstrap所需的信息，删除base.html全部代码，改为：</p>
+<img src="/2021/01/13/python-bian-cheng-cong-ru-men-dao-shi-jian-bi-ji/28.png" class="">
+
+<img src="/2021/01/13/python-bian-cheng-cong-ru-men-dao-shi-jian-bi-ji/29.png" class="">
+
+<p>首先，HTML分为两个主要部分：头部(head)和主体(body)，头部不包含任何内容，只是将正确显示页面所需的信息告诉浏览器。</p>
+<p>主体包含用户在页面上看到的内容&lt;nav&gt;元素表示页面的导航链接部分，这个元素内的所有内容，都根据(selector)navbar、navbar-default、navbar-static-top定义的Bootstrap样式规则来设置样式，选择器决定了特定的样式规则应用于页面的哪些元素。</p>
+<p>在class=”navbar-header”的地方，定义了一个按钮&lt;button&gt;，将浏览器窗口太窄，无法水平显示的整个导航栏显示出来，如果用户点击这个按钮，会出现一个下拉列表，包含所有的导航元素，在用户缩小浏览器窗口或在屏幕较小的移动设备上显示网页，collapse会使导航栏折叠起来。 在class=”navbar-brand”的地方表示在导航栏的左边显示项目名，设置为主页链接。</p>
+<p>div id=”navbar” class=”navbar-collapse collapse”定义了一组让用户能够在网站中导航的链接，导航栏是一个以ul 开头的列表，其中的每个链接都是列表项 li，要添加更多的链接，可插入下述结构的行：</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:title<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Title<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span></code></pre>
+<p>后面的部分是一个容器，包含一个名为header的块和content块，header块决定页面包含哪些消息以及用户可在页面上执行哪些操作，其属性page-header将一系列的样式应用于这个块。</p>
+<p>现在打开浏览器可以看到网页发生了很大改变：</p>
+<img src="/2021/01/13/python-bian-cheng-cong-ru-men-dao-shi-jian-bi-ji/24.png" class="">
+
+<p><strong>设置登录页面的样式：</strong></p>
+<p>login.html:</p>
+<pre class=" language-html"><code class="language-html">{% extends "learning_logs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>Log in to your account.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+{% endblock header %}
+
+{% block content %}
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>users:login<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+       {% csrf_token %}
+       {% bootstrap_form form %}
+       {% buttons %}
+         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-primary<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>log in<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+       {% endbuttons %}
+       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hidden<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>next<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:index<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+{% endblock content %}</code></pre>
+<p>首先是加载bootstrap3模板，然后定义header块，原来的if form.error代码块删除了，因为bootstrap3会自动管理表单错误。</p>
+<p>后面用bootstrap_form form显示表单，替换了原来的form.as_p。后面的按钮用了bootstrap3模板标签。</p>
+<p>现在 访问login页面，样式已经改变：</p>
+<img src="/2021/01/13/python-bian-cheng-cong-ru-men-dao-shi-jian-bi-ji/25.png" class="">
+
+<p><strong>设置new_topic页面的样式：</strong></p>
+<p>修改new_topic.html:</p>
+<pre class=" language-html"><code class="language-html">{% extends "learning_logs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>Add a new topic:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+{% endblock header %}
+
+{% block content %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:new_topic<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-primary<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>add topic<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+    {% endbuttons %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+{% endblock content %}</code></pre>
+<p>可以看到效果：</p>
+<img src="/2021/01/13/python-bian-cheng-cong-ru-men-dao-shi-jian-bi-ji/26.png" class="">
+
+<p><strong>设置topics页面的样式：</strong></p>
+<p>topics.html:</p>
+<pre class=" language-html"><code class="language-html">{% extends "learning_logs/base.html" %}
+
+{% block header %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>Add a new topic:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+{% endblock header %}
+
+{% block content %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+    {% for topic in topics %}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:topic<span class="token punctuation">'</span> topic.id %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>{{ topic }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    {% empty %}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>No topics have been added yet.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    {% endfor %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:new_topic<span class="token punctuation">'</span> %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Add a new topic:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
+{% endblock content %}</code></pre>
+<p>这里没有使用bootstrap3自定义标签，只是加了header块，改了字体大小。</p>
+<p><strong>设置topic页面中的条目样式：</strong></p>
+<p>topic.html:</p>
+<pre class=" language-html"><code class="language-html">{% extends "learning_logs/base.html" %}
+
+{% block header %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>{{ topic }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+{% endblock header %}
+
+{% block content %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:new_entry<span class="token punctuation">'</span> topic.id %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>add new entry<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+
+{% for entry in entries %}
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>panel panel-default<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>panel-heading<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span>
+              {{ entry.date_added|date:'M d, Y H:i' }}
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>small</span><span class="token punctuation">></span></span>
+                  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:edit_entry<span class="token punctuation">'</span> entry.id %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>edit entry<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>small</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>panel-body<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          {{ entry.text|linebreaks }}
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span class="token comment" spellcheck="true">&lt;!-- panel --></span>
+{% empty %}
+    There are no entries for this topic yet.
+{% endfor %}
+{% endblock content %}</code></pre>
+<p>删除了以前使用的无序列表结构，创建了面板式div元素，而不是将每一个条目作为一个列表项，其中有两个嵌套div：面板标题(panel-heading)div和面板主体(panel-body)div。面板标题div包含条目的创建日期以及用于编辑条目的链接，还使用了标签small使其比时间戳小一些。面板主体包含实际文本。</p>
+<p>效果如下：</p>
+<img src="/2021/01/13/python-bian-cheng-cong-ru-men-dao-shi-jian-bi-ji/27.png" class="">
+
+<p>同样，给其他页面设置：</p>
+<p>new_entry.html:</p>
+<pre class=" language-html"><code class="language-html">{% extends "learning_logs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:topic<span class="token punctuation">'</span> topic.id %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>{{ topic }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span>Add a new entry:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
+{% endblock header %}
+
+{% block content %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:new_entry<span class="token punctuation">'</span> topic.id %}<span class="token punctuation">"</span></span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-primary<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>add entry<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+    {% endbuttons %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+{% endblock content %}</code></pre>
+<p>edit_entry.html:</p>
+<pre class=" language-html"><code class="language-html">{% extends "learning_logs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:topic<span class="token punctuation">'</span> topic.id %}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>{{ topic }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span>Edit entry:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
+{% endblock header %}
+
+{% block content %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{% url <span class="token punctuation">'</span>learning_logs:edit_entry<span class="token punctuation">'</span> entry.id %}<span class="token punctuation">"</span></span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-primary<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>save changes<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+    {% endbuttons %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+{% endblock content %}</code></pre>
+<h3 id="部署学习笔记"><a href="#部署学习笔记" class="headerlink" title="部署学习笔记"></a>部署学习笔记</h3><p>由于在墙内是注册不了书本上要求的网站的，没办法还原书本的操作。我们需要按自己的方法部署。这部分需要话费的精力较多，还需要购买云服务器，需要一定的时间成本和金钱成本，具体可参考视频<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18t411Y7of?from=search&amp;seid=15366684656551352770">python3 django项目部署方案</a>和<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1rx411272x?from=search&amp;seid=15366684656551352770">Nginx + uWsgi 部署 Django + Mezzanine 生产服务器</a>。等我以后有需求时会写一篇新博文来完善此处内容。</p>
+<hr>
+<h2 id="最后的话"><a href="#最后的话" class="headerlink" title="最后的话"></a>最后的话</h2><p>至此，pyhon的基本知识学习完毕了，我们掌握了python的基本语法，能够自己下载和处理一些数据了，还能用Django搭建自己的网站，现在已经具备了开发各种项目所需的python基本技能。在学习的过程中，肯定会遇到自己不能解决的问题，这时候，查阅资料的能力尤为关键，其中给我最大帮助的是CSDN，遇到的大多数问题都能在其中找到答案，最后郑重提醒：每学完一项技术时，一定要写博客，写博客，写博客，很重要！这对知识的巩固有至关重要的作用，博客的搭建可以参考我的另一篇博文《个人建立hexo博客Matery主题的过程心得》。</p>
+<p>祝贺你在学习Python的道路上走出了坚实的一步，愿你在以后的学习中好运相伴！</p>
 
                 
             </div>
@@ -2517,7 +2965,7 @@ urlpatterns <span class="token operator">=</span> <span class="token punctuation
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">24.7k</span>&nbsp;字
+                class="white-color">28.5k</span>&nbsp;字
             
             
             
