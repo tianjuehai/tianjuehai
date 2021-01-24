@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Python爬虫学习笔记（一）, 博客制作,个人经验分享,Unity,人工智能等">
+    <meta name="keywords" content="机器学习笔记（一）, 博客制作,个人经验分享,Unity,人工智能等">
     <meta name="description" content="本站记录本人各种学习的旅途，用于巩固自我并启发后来人">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Python爬虫学习笔记（一） | 微笑紫瞳星</title>
+    <title>机器学习笔记（一） | 微笑紫瞳星</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -322,12 +322,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhttp.wangliansoft.com%2Fueditor%2Fphp%2Fupload%2Fimage%2F20191111%2F1573444272101030.jpg&refer=http%3A%2F%2Fhttp.wangliansoft.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1613009095&t=c7b454b1de5017809081513df9519f88')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Python爬虫学习笔记（一）</h1>
+                    <h1 class="description center-align post-title">机器学习笔记（一）</h1>
                 </div>
             </div>
         </div>
@@ -443,12 +443,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/python/">
-                                <span class="chip bg-color">python</span>
-                            </a>
-                        
-                            <a href="/tags/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/">
-                                <span class="chip bg-color">网络爬虫</span>
+                            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">机器学习</span>
                             </a>
                         
                     </div>
@@ -459,8 +455,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Python%E7%88%AC%E8%99%AB/" class="post-category">
-                                Python爬虫
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                机器学习
                             </a>
                         
                     </div>
@@ -472,28 +468,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-01-12
+                    2021-01-21
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-01-13
+                    2021-01-24
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    154
+                    832
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -510,32 +506,21 @@
         
 
         
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h2><p>下载anaconda3.5以上版本，用spyder开发。</p>
+                <h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><h2 id="什么是机器学习"><a href="#什么是机器学习" class="headerlink" title="什么是机器学习"></a>什么是机器学习</h2><p>机器学习，就是让计算机拥有想人一样的学习能力的技术，从堆积如山的数据中寻找有用知识的数据挖掘技术，如从视频库中寻找自己喜欢的视频资料，根据用户的购买记录向用户推荐其他相关商品。</p>
+<p>根据处理数据种类的不同，可以分为监督学习，无监督学习，强化学习几种类型。监督学习是指既给数据，又给答案，对这种规律进行概括，从而对没学习过的数据也能做出正确解答，让计算机获得这种泛化能力是监督学习的目标。非监督学习是指没有明确答案，只有数据，学习目标不必十分明确，计算机自己提取其中规律的过程。这一类机器学习的典型任务有聚类、异常检测等。强化学习与监督学习类似，不设置答案，自己对预测的结果进行评估，往往认为是人类主要的学习方式之一，在机器人自动控制，游戏中的人工智能，市场战略的最优化等方面有广泛运用，强化学习中经常用到回归，分类，聚类，降维等机器学习算法。</p>
+<h2 id="机器学习任务的例子"><a href="#机器学习任务的例子" class="headerlink" title="机器学习任务的例子"></a>机器学习任务的例子</h2><p><strong>回归</strong>是指把实函数在样本点附近加以近似的有监督的函数近似问题，作为训练集的输入输出样本是已知的，需要获得一个函数y = f（x）使得无论什么问题输出的答案于真实的函数f对应，获得这个函数是监督学习的最终目标。<strong>分类</strong>是指对于特定模式进行识别的有监督的模式识别问题，对d维实向量x为输入样本，所有的输出样本，可以划分为c个类别的问题进行说明。<strong>异常检测</strong>是指寻找输入样本中包含的异常数据的问题。<strong>聚类</strong>属于无监督学习的一种，只给出输入样本，判断各个样本分别属于哪个簇，相同簇之间具有相同性质，如何判断样品直接相似度是很重要的课题。降维是指从高纬度的数据中提取关键信息，转换为易于计算的低纬度问题进而求解的方法。</p>
+<p>在已知模式<strong>x</strong>的时候如果能求得使分类类别y的条件概率p（y|x）达到最大值的类别y的话，就可以进行模式识别了。</p>
 <hr>
-<h2 id="环境设置"><a href="#环境设置" class="headerlink" title="环境设置"></a>环境设置</h2><img src="/2021/01/12/python-pa-chong-xue-xi-bi-ji-yi/1.png" class="">
-
-<p>使用Ctrl + “+”放大字体，Ctrl + “Enter”选中代码执行。</p>
- <img src="/2021/01/12/python-pa-chong-xue-xi-bi-ji-yi/2.png" class="">
-
-<p>选中代码执行后，右边会出现变量数据以及运行结果。</p>
-<hr>
-<h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><pre class=" language-python"><code class="language-python">x <span class="token operator">=</span> <span class="token number">3</span>                        <span class="token comment" spellcheck="true">#整形</span>
-y <span class="token operator">=</span> <span class="token string">'男厕所'</span>                <span class="token comment" spellcheck="true">#字符串</span>
-a <span class="token operator">=</span> <span class="token boolean">True</span>                   <span class="token comment" spellcheck="true">#Bool型</span>
-b <span class="token operator">=</span> <span class="token number">1.1111</span>                 <span class="token comment" spellcheck="true">#浮点型</span>
-c <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'男厕所'</span><span class="token punctuation">,</span><span class="token string">'女厕所'</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span>       <span class="token comment" spellcheck="true">#列表</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>c<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'今天是：'</span> <span class="token operator">+</span> str<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>        <span class="token comment" spellcheck="true"># 强制转换</span>
-
-msg <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"phone"</span><span class="token punctuation">:</span><span class="token number">10086</span><span class="token punctuation">,</span><span class="token string">'内容'</span><span class="token punctuation">:</span><span class="token string">'查询话费'</span><span class="token punctuation">,</span><span class="token string">'发送日期'</span><span class="token punctuation">:</span><span class="token string">'20180630'</span><span class="token punctuation">}</span>  <span class="token comment" spellcheck="true"># 字典</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>msg<span class="token punctuation">[</span><span class="token string">'phone'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-xuezhiqian <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span><span class="token string">'薛之谦'</span><span class="token punctuation">,</span><span class="token string">'songs'</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'丑八怪'</span><span class="token punctuation">,</span><span class="token string">'演员'</span><span class="token punctuation">,</span><span class="token string">'认真的雪'</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token comment" spellcheck="true">#字典的值是列表</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>xuezhiqian<span class="token punctuation">[</span><span class="token string">'songs'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-</code></pre>
-<hr>
+<h1 id="学习模型"><a href="#学习模型" class="headerlink" title="学习模型"></a>学习模型</h1><h2 id="线性模型"><a href="#线性模型" class="headerlink" title="线性模型"></a>线性模型</h2><p>在对函数f进行近似时，最简单的模型就是线性模型θ×x。θ表示模型的参数，通过对这个参数进行学习完成函数的近似计算，这个模型只能表现线性的输入输出函数，没有太多实用价值，对上述的线性模型进行相应的扩展，可以使线性模型用于表示非线性的输入输出。<br>$$<br>f_θ(x) = \sum_{j=1}^b\theta_j\phi_j(x)=\theta^T\phi(x)<br>$$</p>
+<p>其中θ<sub>j</sub> (x)基函数向量的第j个因子，b是基函数的个数。</p>
 
                 
             </div>
@@ -562,7 +547,7 @@ xuezhiqian <span class="token operator">=</span> <span class="token punctuation"
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://tianjuewudi.gitee.io/2021/01/12/python-pa-chong-xue-xi-bi-ji-yi/">http://tianjuewudi.gitee.io/2021/01/12/python-pa-chong-xue-xi-bi-ji-yi/</a>
+                    <a href="https://tianjuewudi.gitee.io/2021/01/21/ji-qi-xue-xi-bi-ji-yi/">https://tianjuewudi.gitee.io/2021/01/21/ji-qi-xue-xi-bi-ji-yi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -600,12 +585,8 @@ xuezhiqian <span class="token operator">=</span> <span class="token punctuation"
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/python/">
-                                    <span class="chip bg-color">python</span>
-                                </a>
-                            
-                                <a href="/tags/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/">
-                                    <span class="chip bg-color">网络爬虫</span>
+                                <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">机器学习</span>
                                 </a>
                             
                         </div>
@@ -1042,31 +1023,31 @@ xuezhiqian <span class="token operator">=</span> <span class="token punctuation"
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/01/12/pycharm-pei-zhi-he-shi-yong-jiao-cheng/">
+                <a href="/2021/01/23/markdown-shu-xue-gong-shi-biao-shi-fa/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Pycharm配置和使用教程">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Markdown数学公式表示法">
                         
-                        <span class="card-title">Pycharm配置和使用教程</span>
+                        <span class="card-title">Markdown数学公式表示法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Python编程必备工具
+                            在Markdown文本中如何使用数学公式
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-01-12
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-01-23
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Pycharm/" class="post-category">
-                                    Pycharm
+                            <a href="/categories/Markdown/" class="post-category">
+                                    Markdown
                                 </a>
                             
                             
@@ -1076,8 +1057,8 @@ xuezhiqian <span class="token operator">=</span> <span class="token punctuation"
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Pycharm%E9%85%8D%E7%BD%AE%E5%92%8C%E4%BD%BF%E7%94%A8/">
-                        <span class="chip bg-color">Pycharm配置和使用</span>
+                    <a href="/tags/Markdown/">
+                        <span class="chip bg-color">Markdown</span>
                     </a>
                     
                 </div>
@@ -1091,31 +1072,31 @@ xuezhiqian <span class="token operator">=</span> <span class="token punctuation"
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/01/12/pycharm-an-zhuang-ji-po-jie-fang-fa/">
+                <a href="/2021/01/13/chao-ji-hao-yong-de-wang-zhan-he-shou-ji-app/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Pycharm安装及破解方法">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="超级好用的网站和手机app">
                         
-                        <span class="card-title">Pycharm安装及破解方法</span>
+                        <span class="card-title">超级好用的网站和手机app</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Python编程必备工具
+                            超级实用，帮你节省大量时间
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-13
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Pycharm/" class="post-category">
-                                    Pycharm
+                            <a href="/categories/%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90/" class="post-category">
+                                    工具推荐
                                 </a>
                             
                             
@@ -1125,8 +1106,12 @@ xuezhiqian <span class="token operator">=</span> <span class="token punctuation"
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Pycharm%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3/">
-                        <span class="chip bg-color">Pycharm安装破解</span>
+                    <a href="/tags/app/">
+                        <span class="chip bg-color">app</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BD%91%E7%AB%99/">
+                        <span class="chip bg-color">网站</span>
                     </a>
                     
                 </div>
@@ -1295,6 +1280,13 @@ xuezhiqian <span class="token operator">=</span> <span class="token punctuation"
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1366,7 +1358,7 @@ xuezhiqian <span class="token operator">=</span> <span class="token punctuation"
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">28.5k</span>&nbsp;字
+                class="white-color">30.6k</span>&nbsp;字
             
             
             
