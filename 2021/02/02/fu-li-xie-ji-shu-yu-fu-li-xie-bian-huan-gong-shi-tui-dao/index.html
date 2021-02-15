@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Markdown数学公式表示法, 博客制作,个人经验分享,Unity,人工智能等">
+    <meta name="keywords" content="傅里叶级数与傅里叶变换公式推导, 博客制作,个人经验分享,Unity,人工智能等">
     <meta name="description" content="本站记录本人各种学习的旅途，用于巩固自我并启发后来人">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Markdown数学公式表示法 | 微笑紫瞳星</title>
+    <title>傅里叶级数与傅里叶变换公式推导 | 微笑紫瞳星</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -322,12 +322,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Markdown数学公式表示法</h1>
+                    <h1 class="description center-align post-title">傅里叶级数与傅里叶变换公式推导</h1>
                 </div>
             </div>
         </div>
@@ -443,8 +443,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Markdown/">
-                                <span class="chip bg-color">Markdown</span>
+                            <a href="/tags/%E6%95%B0%E5%AD%A6/">
+                                <span class="chip bg-color">数学</span>
                             </a>
                         
                     </div>
@@ -455,8 +455,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Markdown/" class="post-category">
-                                Markdown
+                            <a href="/categories/%E6%95%B0%E5%AD%A6/" class="post-category">
+                                数学
                             </a>
                         
                     </div>
@@ -468,7 +468,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-01-23
+                    2021-02-02
                 </div>
                 
 
@@ -482,14 +482,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    196
+                    1.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    6 分
                 </div>
                 
 
@@ -514,258 +514,48 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="希腊字母"><a href="#希腊字母" class="headerlink" title="希腊字母"></a>希腊字母</h3><table>
-<thead>
-<tr>
-<th align="center">显示</th>
-<th align="center">命令</th>
-<th align="center">显示</th>
-<th align="center">命令</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">α</td>
-<td align="center">\alpha</td>
-<td align="center">β</td>
-<td align="center">\beta</td>
-</tr>
-<tr>
-<td align="center">γ</td>
-<td align="center">\gamma</td>
-<td align="center">δ</td>
-<td align="center">\delta</td>
-</tr>
-<tr>
-<td align="center">ε</td>
-<td align="center">\epsilon</td>
-<td align="center">ζ</td>
-<td align="center">\zeta</td>
-</tr>
-<tr>
-<td align="center">η</td>
-<td align="center">\eta</td>
-<td align="center">θ</td>
-<td align="center">\theta</td>
-</tr>
-<tr>
-<td align="center">ι</td>
-<td align="center">\iota</td>
-<td align="center">κ</td>
-<td align="center">\kappa</td>
-</tr>
-<tr>
-<td align="center">λ</td>
-<td align="center">\lambda</td>
-<td align="center">μ</td>
-<td align="center">\mu</td>
-</tr>
-<tr>
-<td align="center">ν</td>
-<td align="center">\nu</td>
-<td align="center">ξ</td>
-<td align="center">\xi</td>
-</tr>
-<tr>
-<td align="center">π</td>
-<td align="center">\pi</td>
-<td align="center">ρ</td>
-<td align="center">\rho</td>
-</tr>
-<tr>
-<td align="center">σ</td>
-<td align="center">\sigma</td>
-<td align="center">τ</td>
-<td align="center">\tau</td>
-</tr>
-<tr>
-<td align="center">υ</td>
-<td align="center">\upsilon</td>
-<td align="center">φ</td>
-<td align="center">\phi</td>
-</tr>
-<tr>
-<td align="center">χ</td>
-<td align="center">\chi</td>
-<td align="center">ψ</td>
-<td align="center">\psi</td>
-</tr>
-<tr>
-<td align="center">ω</td>
-<td align="center">\omega</td>
-<td align="center">Δ</td>
-<td align="center">\Delta</td>
-</tr>
-</tbody></table>
-<p>特殊符号：</p>
-<table>
-<thead>
-<tr>
-<th align="center">显示</th>
-<th align="center">命令</th>
-<th align="center">显示</th>
-<th align="center">命令</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">∞</td>
-<td align="center">\infty</td>
-<td align="center">∑</td>
-<td align="center">\sum</td>
-</tr>
-<tr>
-<td align="center">∪</td>
-<td align="center">\cup</td>
-<td align="center">∏</td>
-<td align="center">\prod</td>
-</tr>
-<tr>
-<td align="center">∩</td>
-<td align="center">\cap</td>
-<td align="center">±</td>
-<td align="center">\pm</td>
-</tr>
-<tr>
-<td align="center">⊂</td>
-<td align="center">\subset</td>
-<td align="center">×</td>
-<td align="center">\times</td>
-</tr>
-<tr>
-<td align="center">⊃</td>
-<td align="center">\supset</td>
-<td align="center">÷</td>
-<td align="center">\div</td>
-</tr>
-<tr>
-<td align="center">⊆</td>
-<td align="center">\subseteq</td>
-<td align="center">∣</td>
-<td align="center">\mid</td>
-</tr>
-<tr>
-<td align="center">∈</td>
-<td align="center">\in</td>
-<td align="center">≠</td>
-<td align="center">\neq</td>
-</tr>
-<tr>
-<td align="center">∠</td>
-<td align="center">\angle</td>
-<td align="center">≤</td>
-<td align="center">\leq</td>
-</tr>
-<tr>
-<td align="center">∵</td>
-<td align="center">\because</td>
-<td align="center">≥</td>
-<td align="center">\geq</td>
-</tr>
-<tr>
-<td align="center">∴</td>
-<td align="center">\therefore</td>
-<td align="center">∅</td>
-<td align="center">\emptyset</td>
-</tr>
-<tr>
-<td align="center">∇</td>
-<td align="center">\nabla</td>
-<td align="center">⋁</td>
-<td align="center">\bigvee</td>
-</tr>
-<tr>
-<td align="center">⊥</td>
-<td align="center">\bot</td>
-<td align="center">⋀</td>
-<td align="center">\bigwedge</td>
-</tr>
-<tr>
-<td align="center">⊇</td>
-<td align="center">\supseteq</td>
-<td align="center">⨄</td>
-<td align="center">\biguplus</td>
-</tr>
-<tr>
-<td align="center">∀</td>
-<td align="center">\forall</td>
-<td align="center">⨆</td>
-<td align="center">\bigsqcup</td>
-</tr>
-<tr>
-<td align="center">∃</td>
-<td align="center">\exists</td>
-<td align="center">∫</td>
-<td align="center">\int</td>
-</tr>
-<tr>
-<td align="center">≠</td>
-<td align="center">\not=</td>
-<td align="center">∬</td>
-<td align="center">\iint</td>
-</tr>
-<tr>
-<td align="center">⊄</td>
-<td align="center">\not\subset</td>
-<td align="center">∭</td>
-<td align="center">\iiint</td>
-</tr>
-<tr>
-<td align="center">↑</td>
-<td align="center">\uparrow</td>
-<td align="center">∮</td>
-<td align="center">\oint</td>
-</tr>
-<tr>
-<td align="center">↓</td>
-<td align="center">\downarrow</td>
-<td align="center">y^</td>
-<td align="center">\hat{y}</td>
-</tr>
-<tr>
-<td align="center">→</td>
-<td align="center">\rightarrow</td>
-<td align="center">⨀</td>
-<td align="center">\bigodot</td>
-</tr>
-<tr>
-<td align="center">←</td>
-<td align="center">\leftarrow</td>
-<td align="center">⨂</td>
-<td align="center">\bigotimes</td>
-</tr>
-<tr>
-<td align="center">≈</td>
-<td align="center">\approx</td>
-<td align="center">⨁</td>
-<td align="center">\bigoplus</td>
-</tr>
-<tr>
-<td align="center">≡</td>
-<td align="center">\equiv</td>
-<td align="center">⇒</td>
-<td align="center">\leftarrow</td>
-</tr>
-<tr>
-<td align="center">∐</td>
-<td align="center">\coprod</td>
-<td align="center">⇐</td>
-<td align="center">\Leftarrow</td>
-</tr>
-</tbody></table>
-<ul>
-<li><p>上标：^   下标： _             例子：C_n^2</p>
-</li>
-<li><p>矢量：\vec a ，\overrightarrow{xy}</p>
-</li>
-<li><p>分式：\frac{公式1}{公式2}</p>
-</li>
-<li><p>根式：\sqrt{x}{y}</p>
-</li>
-<li><p>特殊函数：\sin x，\ln x，\max(A,B,C)，\log</p>
-</li>
-<li><p>极限：\lim_{x \to 0}</p>
-</li>
-</ul>
-<p>注意：数学公式用$内容$表示的话不会换行，用$$内容$$表示会换行。</p>
+                <p> 首先，傅里叶分析是指把一个周期或非周期函数展开成一个个三角函数的叠加，如果是对其还没有基本概念的，可以看看<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/19763358">傅里叶分析之掐死教程</a>，这篇文章不依赖数学公式却又十分透彻地讲述了傅里叶分析的基本概念，十分值得一读。但如果先深入探讨其中的数学由来，接下来会讲述详细的数学推导。</p>
+<h2 id="傅里叶级数"><a href="#傅里叶级数" class="headerlink" title="傅里叶级数"></a>傅里叶级数</h2><h4 id="三角函数系的正交性"><a href="#三角函数系的正交性" class="headerlink" title="三角函数系的正交性"></a>三角函数系的正交性</h4><p>三角函数系：{1,sinx,cosx,sin2x,cos2x,…,sinnx,cosnx,…}，它由无数个sinnx和cosnx组成，其中n=0,1,2,…….。</p>
+<p>正交性：<br>$$<br>\int^\pi_{-\pi}\sin nx \cos mx dx = 0，n\neq m<br>$$</p>
+<p>$$<br>\int^\pi_{-\pi}\cos nx \cos mx dx = 0，n\neq m<br>$$</p>
+<p>$$<br>\int^\pi_{-\pi}\sin nx \sin mx dx = 0，n\neq m<br>$$</p>
+<p>当向量点乘等于0：<br>$$<br>\vec a \cdot \vec b = 0<br>$$<br>则两个<strong>向量正交</strong>。</p>
+<p>拓展到函数中，两个函数相乘，原本点乘的加和变成取积分，则：<br>$$<br>\int^{x_1}_{x_2}f(x) g(x) dx = 0<br>$$<br>称为两个<strong>函数正交</strong>。</p>
+<p>证明其正交性，可以用积化和差公式：<br>$$<br>\int^\pi_{-\pi}\cos nx \cos mx dx<br>= \frac{1}{2}\int^\pi_{-\pi}[cos(n-m)x+cos(n+m)x]dx =0<br>$$<br>其他情况同理。</p>
+<h4 id="周期为2π的函数展开"><a href="#周期为2π的函数展开" class="headerlink" title="周期为2π的函数展开"></a>周期为2π的函数展开</h4><p>因此当一个函数f(x)周期为2π时，可以展开成<br>$$<br>f(x) = \sum^\infty_{n=0}a_ncosnx + \sum^\infty_{n=0}b_nsinnx<br>= \frac 1 2 a_0 + \sum^\infty_{n=1}({a_ncosnx + b_nsinnx})<br>$$<br>对两边取积分，由于三角函数的正交性<br>$$<br>\int_{-\pi}^\pi f(x)dx = \frac1 2\int_{-\pi}^\pi a_0dx = \pi a_0<br>$$</p>
+<p>$$<br>a_0 = \frac 1 {\pi}\int_{-\pi}^\pi f(x)dx<br>$$</p>
+<p>原式乘以cos mx 再对两边取积分可得：<br>$$<br>\int^\pi_{-\pi}f(x) \cos mx dx  = \sum^\infty_{n=1}\int^\pi_{-\pi} a_ncosnx cosmx dx<br>= \int^\pi_{-\pi} a_ncos^2 nx  dx = a_n\pi<br>$$</p>
+<p>$$<br>a_n = \frac 1 \pi \int^\pi_{-\pi}f(x) \cos nx dx<br>$$</p>
+<p>同理，两边同乘sinmx再取积分可得：<br>$$<br>b_n = \frac 1 \pi \int^\pi_{-\pi}f(x) \sin nx dx<br>$$</p>
+<h4 id="周期为2L的函数展开"><a href="#周期为2L的函数展开" class="headerlink" title="周期为2L的函数展开"></a>周期为2L的函数展开</h4><p>利用换元的方法，令：$x = \frac \pi L t$ ，即$t = \frac L \pi x$，可得：<br>$$<br>f(t) = \frac {a_0} 2 + \sum^\infty_{n=1}({a_ncos \frac{n\pi}{L}t + b_nsin\frac{n\pi}{L}t})<br>$$</p>
+<p>$$<br>a_0 = \frac 1 {L}\int_{-L}^L f(t)dt<br>$$</p>
+<p>$$<br>a_n = \frac 1 L \int^L_{-L}f(x) \cos nx dx<br>$$</p>
+<p>$$<br>b_n = \frac 1 L \int^L_{-L}f(x) \sin nx dx<br>$$</p>
+<p>在工程中t总是从0开始，周期T=2L，ω = $\frac \pi L = \frac 2\pi T$，此时：<br>$$<br>f(t) = \frac {a_0} 2 + \sum^\infty_{n=1}({a_ncosωt + b_nsinωt})<br>$$</p>
+<p>$$<br>a_0 = \frac 2 {T}\int_{0}^T f(t)dt<br>$$</p>
+<p>$$<br>a_n = \frac 2 T \int^T_{0}f(x) \cos nx dx<br>$$</p>
+<p>$$<br>b_n = \frac 2 T \int^T_{0}f(x) \sin nx dx<br>$$</p>
+<h4 id="傅里叶级数的复数表达形式"><a href="#傅里叶级数的复数表达形式" class="headerlink" title="傅里叶级数的复数表达形式"></a>傅里叶级数的复数表达形式</h4><p>欧拉公式：$ e^{iθ} = cosθ + isinθ$ </p>
+<p>可得：<br>$$<br>cosθ = \frac 1 2 (e^{iθ}+e^{-iθ})<br>$$</p>
+<p>$$<br>sinθ = \frac 1 2 i(e^{iθ}-e^{-iθ})<br>$$</p>
+<p>把这两条式子代入f(t)的式子中可得：<br>$$<br>f(t) = \frac {a_0} 2 + \sum_{n=1}^\infty \frac {a_n-ib_n} 2 e^{in\omega t}+ \sum_{n=1}^\infty \frac {a_n+ib_n} 2 e^{-in\omega t}<br>= \sum_{n=0}^0 \frac {a_0} 2 e^{in\omega t} + \sum_{n=1}^\infty \frac {a_n-ib_n} 2 e^{in\omega t}+ \sum_{n=-1}^{-\infty} \frac {a_{-n}+ib_{-n}} 2 e^{in\omega t} = \sum_{-\infty}^\infty C_n e^{in\omega t}<br>$$<br>当n = 0时，<br>$$<br>C_n = \frac {a_0} 2 = \frac 1 {T}\int_{0}^T f(t)dt<br>$$<br>当n &gt; 0时，<br>$$<br>C_n = \frac {a_n-ib_n} 2 = \frac 1 2 (\frac 2 T \int_0^T f(t)cos{n\omega t} - i\frac 2 T \int_0^Tf(t)sin{n\omega t})<br>= \frac 1 T \int_0^T f(t)(cos{n\omega t} - isin{n\omega t}) dt = \frac 1 T \int_0^T f(t) e^{-in\omega t}dt<br>$$<br>当n &lt; 0时，<br>$$<br>C_n = \frac {a_{-n}+ib_{-n}} 2 = \frac 1 T \int_0^T f(t)(cos{n\omega t} - isin{n\omega t}) dt = \frac 1 T \int_0^T f(t) e^{-in\omega t}dt<br>$$</p>
+<p>因此得出结论，一个周期函数f(t)有f(t)=f(t+T)时：<br>$$<br>f(t) = \sum_{-\infty}^\infty C_n e^{in\omega t}<br>$$</p>
+<p>$$<br>C_n = \frac 1 T \int_0^T f(t) e^{-in\omega t}dt<br>$$</p>
+<h2 id="傅里叶变换"><a href="#傅里叶变换" class="headerlink" title="傅里叶变换"></a>傅里叶变换</h2><p>对于$C_n$来说，它的值是一个复数，而nω是一个离散的值，那么可以在代表nω的轴上一个个特定的点上设一个平面，这个平面是一个复平面，它的长度和方向代表$C_n$：</p>
+<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/1.png" class="">
+
+<p>在工程上，横坐标为时间的波形图称为时域表达，而这幅图显示的是在各种不同频率下的值，称为频域表达，也是波形图的频谱，这就是从不同的角度看时间，每一种波形都对应一种频谱。不过很多时候的频谱都不是这种复平面三维的，我们会把$C_n$的幅度即模单独拿出来，就可以表示这个函数在不同频率下的强度了。</p>
+<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/2.png" class="">
+
+<p>当T增大时，ω数值减小，nω之间就挨得越近。T趋于无穷时会形成一条连续的曲线：</p>
+<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/3.png" class="">
+
+<p>由：<br>$$<br>f(t) = \sum_{-\infty}^\infty C_n e^{in\omega t}<br>$$</p>
+<p>$$<br>C_n = \frac 1 T \int_0^T f(t) e^{-in\omega t}dt<br>$$</p>
+<p>得到：<br>$$<br>f_T(t) = \sum_{n=-\infty}^{\infty}\frac 1 T \int_{-\frac T 2}^{\frac T 2} f_T(t) e^{-in\omega_0 t}dt e^{inω_0t}<br>$$</p>
+<p>$$<br>f_T(t) = \sum_{n=-\infty}^{\infty}\frac {\Deltaω} {2\pi} \int_{-\frac T 2}^{\frac T 2} f_T(t) e^{-in\omega_0 t}dt e^{inω_0t}<br>$$</p>
+<p>当$T \rightarrow \infty$：<br>$$<br>f(t) = \frac {1} {2\pi}  \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(t) e^{-i\omega t}dt e^{inωt}d\omega<br>$$<br>因此我们把中间的公式称为**傅里叶变换(FT)**：<br>$$<br>F(ω) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t}dt<br>$$<br>通过这个函数可以表示在任何频率的情况下的三角函数的波形的振幅，这通常是一个复数a+bi，实际上用$\sqrt{a^2+b^2}$表示其振幅，其中实数部分代表cos，虚数部分代表sin。而负频率没有现实意义，其振幅为正频率的共轭，只是为了在数学上的计算便利。</p>
+<p>外面套的公式称为**傅里叶变换的逆变换(IFT)**：<br>$$<br>f(t) = \frac {1} {2\pi}  \int_{-\infty}^{\infty} F(ω) e^{iωt}d\omega<br>$$<br>傅里叶变换的所有内容讲解完毕了，傅里叶变换其实是一种特殊的拉普拉斯变换(s=iω)，遵循拉普拉斯变换的所有性质。</p>
 
                 
             </div>
@@ -792,7 +582,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://tianjuewudi.gitee.io/2021/01/23/markdown-shu-xue-gong-shi-biao-shi-fa/">https://tianjuewudi.gitee.io/2021/01/23/markdown-shu-xue-gong-shi-biao-shi-fa/</a>
+                    <a href="https://tianjuewudi.gitee.io/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/">https://tianjuewudi.gitee.io/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -830,8 +620,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Markdown/">
-                                    <span class="chip bg-color">Markdown</span>
+                                <a href="/tags/%E6%95%B0%E5%AD%A6/">
+                                    <span class="chip bg-color">数学</span>
                                 </a>
                             
                         </div>
@@ -1264,17 +1054,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/01/24/ji-qi-xue-xi-zhi-k-jin-lin-suan-fa/">
+                <a href="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="机器学习之k近邻算法">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="傅里叶级数与傅里叶变换公式推导">
                         
-                        <span class="card-title">机器学习之k近邻算法</span>
+                        <span class="card-title">傅里叶级数与傅里叶变换公式推导</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1284,26 +1075,27 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-01-24
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-02
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    机器学习
+                            <a href="/categories/%E6%95%B0%E5%AD%A6/" class="post-category">
+                                    数学
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">机器学习</span>
+                    <a href="/tags/%E6%95%B0%E5%AD%A6/">
+                        <span class="chip bg-color">数学</span>
                     </a>
                     
                 </div>
@@ -1317,31 +1109,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/01/21/ji-qi-xue-xi-bi-ji-yi/">
+                <a href="/2021/01/30/guan-yu-pycharm-zhong-di-san-fang-ku-an-zhuang-shi-bai-de-jie-jue-fang-fa/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="机器学习笔记（一）">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="关于pycharm中第三方库安装失败的解决方法">
                         
-                        <span class="card-title">机器学习笔记（一）</span>
+                        <span class="card-title">关于pycharm中第三方库安装失败的解决方法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            机器学习内容分享之一，简单介绍
+                            
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-30
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    机器学习
+                            <a href="/categories/Pycharm/" class="post-category">
+                                    Pycharm
                                 </a>
                             
                             
@@ -1351,8 +1143,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">机器学习</span>
+                    <a href="/tags/Pycharm/">
+                        <span class="chip bg-color">Pycharm</span>
                     </a>
                     
                 </div>
@@ -1520,6 +1312,13 @@
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
 
 
 
