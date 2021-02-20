@@ -489,10 +489,19 @@
                 </a>
                 
                 
-                <a href="/tags/%E6%95%B0%E5%AD%A6/" title="数学: 1">
+                <a href="/tags/%E6%95%B0%E5%AD%A6/" title="数学: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
                             data-tagname="数学" style="background-color: #D7BDE2;">数学
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E8%87%AA%E6%8E%A7/" title="自控: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="自控" style="background-color: #FFF;">自控
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -521,7 +530,7 @@
 <script type="text/javascript">
     
 
-    $('#tag-wordcloud').jQCloud([{"text":"博客搭建","weight":1,"link":"/tags/博客搭建/"},{"text":"Markdown","weight":2,"link":"/tags/Markdown/"},{"text":"研究方法","weight":1,"link":"/tags/研究方法/"},{"text":"论文写作","weight":1,"link":"/tags/论文写作/"},{"text":"Pycharm安装破解","weight":1,"link":"/tags/Pycharm安装破解/"},{"text":"Pycharm配置和使用","weight":1,"link":"/tags/Pycharm配置和使用/"},{"text":"Python","weight":1,"link":"/tags/Python/"},{"text":"油猴脚本","weight":1,"link":"/tags/油猴脚本/"},{"text":"app","weight":1,"link":"/tags/app/"},{"text":"网站","weight":1,"link":"/tags/网站/"},{"text":"机器学习","weight":2,"link":"/tags/机器学习/"},{"text":"Pycharm","weight":1,"link":"/tags/Pycharm/"},{"text":"数学","weight":1,"link":"/tags/数学/"}], {
+    $('#tag-wordcloud').jQCloud([{"text":"博客搭建","weight":1,"link":"/tags/博客搭建/"},{"text":"Markdown","weight":2,"link":"/tags/Markdown/"},{"text":"研究方法","weight":1,"link":"/tags/研究方法/"},{"text":"论文写作","weight":1,"link":"/tags/论文写作/"},{"text":"Pycharm安装破解","weight":1,"link":"/tags/Pycharm安装破解/"},{"text":"Pycharm配置和使用","weight":1,"link":"/tags/Pycharm配置和使用/"},{"text":"Python","weight":1,"link":"/tags/Python/"},{"text":"油猴脚本","weight":1,"link":"/tags/油猴脚本/"},{"text":"app","weight":1,"link":"/tags/app/"},{"text":"网站","weight":1,"link":"/tags/网站/"},{"text":"机器学习","weight":2,"link":"/tags/机器学习/"},{"text":"Pycharm","weight":1,"link":"/tags/Pycharm/"},{"text":"数学","weight":2,"link":"/tags/数学/"},{"text":"自控","weight":1,"link":"/tags/自控/"}], {
         autoResize: true
     });
 </script>
@@ -587,20 +596,20 @@
 <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
 
     
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021# 年份-2021</span>
+                <span id="year">2021</span>
             
-            <span id="year">2021# 年份</span>
+            <span id="year">2021</span>
             <a href="/about" target="_blank">微笑紫瞳星</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">36.6k</span>&nbsp;字
+                class="white-color">38.8k</span>&nbsp;字
             
             
             
@@ -619,6 +628,50 @@
             </span>
             
             <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2021";
+                    var startMonth = "1";
+                    var startDate = "9";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "11";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
             
             <br>
             

@@ -475,21 +475,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-02-15
+                    2021-02-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    8 分
                 </div>
                 
 
@@ -515,13 +515,15 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p> 首先，傅里叶分析是指把一个周期或非周期函数展开成一个个三角函数的叠加，如果是对其还没有基本概念的，可以看看<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/19763358">傅里叶分析之掐死教程</a>，这篇文章不依赖数学公式却又十分透彻地讲述了傅里叶分析的基本概念，十分值得一读。但如果先深入探讨其中的数学由来，接下来会讲述详细的数学推导。</p>
+<p>参考视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1qi4y1t7JY">傅里叶变换的直观解释</a></p>
+<p>傅里叶变换的基为三角函数，为什么要选三角函数作为傅里叶变换的基，因为三角函数的一大特点是，经过线性时不变系统的操作（加减，倍乘，倍除，积分，求导）后，不改变波形，仅改变相角和幅值。这就给我们提供了一个巨大的好处，那就是在分析线性时不变系统时，仅通过信号的相角和幅值指标就能还原信号，可以忽略基函数波形本身。</p>
 <h2 id="傅里叶级数"><a href="#傅里叶级数" class="headerlink" title="傅里叶级数"></a>傅里叶级数</h2><h4 id="三角函数系的正交性"><a href="#三角函数系的正交性" class="headerlink" title="三角函数系的正交性"></a>三角函数系的正交性</h4><p>三角函数系：{1,sinx,cosx,sin2x,cos2x,…,sinnx,cosnx,…}，它由无数个sinnx和cosnx组成，其中n=0,1,2,…….。</p>
 <p>正交性：<br>$$<br>\int^\pi_{-\pi}\sin nx \cos mx dx = 0，n\neq m<br>$$</p>
 <p>$$<br>\int^\pi_{-\pi}\cos nx \cos mx dx = 0，n\neq m<br>$$</p>
 <p>$$<br>\int^\pi_{-\pi}\sin nx \sin mx dx = 0，n\neq m<br>$$</p>
 <p>当向量点乘等于0：<br>$$<br>\vec a \cdot \vec b = 0<br>$$<br>则两个<strong>向量正交</strong>。</p>
 <p>拓展到函数中，两个函数相乘，原本点乘的加和变成取积分，则：<br>$$<br>\int^{x_1}_{x_2}f(x) g(x) dx = 0<br>$$<br>称为两个<strong>函数正交</strong>。</p>
-<p>证明其正交性，可以用积化和差公式：<br>$$<br>\int^\pi_{-\pi}\cos nx \cos mx dx<br>= \frac{1}{2}\int^\pi_{-\pi}[cos(n-m)x+cos(n+m)x]dx =0<br>$$<br>其他情况同理。</p>
+<p>证明其正交性，可以用积化和差公式：<br>$$<br>\int^\pi_{-\pi}\cos nx \cos mx dx<br>= \frac{1}{2}\int^\pi_{-\pi}[cos(n-m)x+cos(n+m)x]dx =0<br>$$<br>其中n,m为大于0的整数，只有n=m时，积分结果才不等于0，其他情况同理。<br>$$<br>\int^\pi_{-\pi}\sin nx \sin mx dx<br>= \frac{1}{2}\int^\pi_{-\pi}[cos(n-m)x-cos(n+m)x]dx<br>$$</p>
 <h4 id="周期为2π的函数展开"><a href="#周期为2π的函数展开" class="headerlink" title="周期为2π的函数展开"></a>周期为2π的函数展开</h4><p>因此当一个函数f(x)周期为2π时，可以展开成<br>$$<br>f(x) = \sum^\infty_{n=0}a_ncosnx + \sum^\infty_{n=0}b_nsinnx<br>= \frac 1 2 a_0 + \sum^\infty_{n=1}({a_ncosnx + b_nsinnx})<br>$$<br>对两边取积分，由于三角函数的正交性<br>$$<br>\int_{-\pi}^\pi f(x)dx = \frac1 2\int_{-\pi}^\pi a_0dx = \pi a_0<br>$$</p>
 <p>$$<br>a_0 = \frac 1 {\pi}\int_{-\pi}^\pi f(x)dx<br>$$</p>
 <p>原式乘以cos mx 再对两边取积分可得：<br>$$<br>\int^\pi_{-\pi}f(x) \cos mx dx  = \sum^\infty_{n=1}\int^\pi_{-\pi} a_ncosnx cosmx dx<br>= \int^\pi_{-\pi} a_ncos^2 nx  dx = a_n\pi<br>$$</p>
@@ -542,20 +544,30 @@
 <p>因此得出结论，一个周期函数f(t)有f(t)=f(t+T)时：<br>$$<br>f(t) = \sum_{-\infty}^\infty C_n e^{in\omega t}<br>$$</p>
 <p>$$<br>C_n = \frac 1 T \int_0^T f(t) e^{-in\omega t}dt<br>$$</p>
 <h2 id="傅里叶变换"><a href="#傅里叶变换" class="headerlink" title="傅里叶变换"></a>傅里叶变换</h2><p>对于$C_n$来说，它的值是一个复数，而nω是一个离散的值，那么可以在代表nω的轴上一个个特定的点上设一个平面，这个平面是一个复平面，它的长度和方向代表$C_n$：</p>
-<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/1.png" class="">
+<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/1.png" class>
 
 <p>在工程上，横坐标为时间的波形图称为时域表达，而这幅图显示的是在各种不同频率下的值，称为频域表达，也是波形图的频谱，这就是从不同的角度看时间，每一种波形都对应一种频谱。不过很多时候的频谱都不是这种复平面三维的，我们会把$C_n$的幅度即模单独拿出来，就可以表示这个函数在不同频率下的强度了。</p>
-<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/2.png" class="">
+<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/2.png" class>
 
 <p>当T增大时，ω数值减小，nω之间就挨得越近。T趋于无穷时会形成一条连续的曲线：</p>
-<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/3.png" class="">
+<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/3.png" class>
 
 <p>由：<br>$$<br>f(t) = \sum_{-\infty}^\infty C_n e^{in\omega t}<br>$$</p>
 <p>$$<br>C_n = \frac 1 T \int_0^T f(t) e^{-in\omega t}dt<br>$$</p>
 <p>得到：<br>$$<br>f_T(t) = \sum_{n=-\infty}^{\infty}\frac 1 T \int_{-\frac T 2}^{\frac T 2} f_T(t) e^{-in\omega_0 t}dt e^{inω_0t}<br>$$</p>
 <p>$$<br>f_T(t) = \sum_{n=-\infty}^{\infty}\frac {\Deltaω} {2\pi} \int_{-\frac T 2}^{\frac T 2} f_T(t) e^{-in\omega_0 t}dt e^{inω_0t}<br>$$</p>
-<p>当$T \rightarrow \infty$：<br>$$<br>f(t) = \frac {1} {2\pi}  \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(t) e^{-i\omega t}dt e^{inωt}d\omega<br>$$<br>因此我们把中间的公式称为**傅里叶变换(FT)**：<br>$$<br>F(ω) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t}dt<br>$$<br>通过这个函数可以表示在任何频率的情况下的三角函数的波形的振幅，这通常是一个复数a+bi，实际上用$\sqrt{a^2+b^2}$表示其振幅，其中实数部分代表cos，虚数部分代表sin。而负频率没有现实意义，其振幅为正频率的共轭，只是为了在数学上的计算便利。</p>
+<p>当$T \rightarrow \infty$：<br>$$<br>f(t) = \frac {1} {2\pi}  \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(t) e^{-i\omega t}dt e^{inωt}d\omega<br>$$<br>因此我们把中间的公式称为**傅里叶变换(FT)**：<br>$$<br>F(ω) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t}dt<br>$$<br>$$<br>F(ω) = \int_{-\infty}^{\infty}f(t)cos(ωt)dt-i\int_{-\infty}^{\infty}f(t)sin(ωt)dt<br>$$</p>
+<p>通过这个函数可以表示在任何频率的情况下的三角函数的波形的振幅，这通常是一个复数a+bi，实际上用$\sqrt{a^2+b^2}$表示其振幅（实际振幅为2倍），即幅值图，同理还有相角图。其中实数部分代表cos，虚数部分代表-sin。而负频率没有现实意义，其振幅为正频率的共轭a-bi，只是为了在数学上的计算便利。</p>
+<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/4.png" class>
+
+<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/5.png" class>
+
+
+
 <p>外面套的公式称为**傅里叶变换的逆变换(IFT)**：<br>$$<br>f(t) = \frac {1} {2\pi}  \int_{-\infty}^{\infty} F(ω) e^{iωt}d\omega<br>$$<br>傅里叶变换的所有内容讲解完毕了，傅里叶变换其实是一种特殊的拉普拉斯变换(s=iω)，遵循拉普拉斯变换的所有性质。</p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>1、<strong>傅里叶变换得到的是频率密度函数，它的纵坐标是幅值密度。而傅里叶级数的纵坐标是真实的幅值。</strong></p>
+<p>2、连续周期函数的<strong>傅立叶变换</strong>是冲激函数组成的，可以用三角函数正交性证明。</p>
+<p>3、在一个以2T为周期内f(X)连续或只有有限个第一类间断点，附f（x）单调或可划分成有限个单调区间，则F（x）以2T为周期的傅里叶级数收敛，和函数S（x）也是以2T为周期的周期函数，且在这些间断点上，函数是有限值；在一个周期内具有有限个极值点；绝对可积。</p>
 
                 
             </div>
@@ -1054,18 +1066,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/">
+                <a href="/2021/02/15/la-pu-la-si-bian-huan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="傅里叶级数与傅里叶变换公式推导">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="拉普拉斯变换">
                         
-                        <span class="card-title">傅里叶级数与傅里叶变换公式推导</span>
+                        <span class="card-title">拉普拉斯变换</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1075,9 +1086,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-02
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-02-15
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1090,7 +1101,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1378,20 +1388,20 @@
 <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
 
     
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021# 年份-2021</span>
+                <span id="year">2021</span>
             
-            <span id="year">2021# 年份</span>
+            <span id="year">2021</span>
             <a href="/about" target="_blank">微笑紫瞳星</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">36.6k</span>&nbsp;字
+                class="white-color">38.8k</span>&nbsp;字
             
             
             
@@ -1410,6 +1420,50 @@
             </span>
             
             <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2021";
+                    var startMonth = "1";
+                    var startDate = "9";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "11";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
             
             <br>
             
