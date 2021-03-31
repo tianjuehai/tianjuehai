@@ -475,14 +475,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-02-19
+                    2021-03-25
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.9k
+                    2k
                 </div>
                 
 
@@ -543,6 +543,7 @@
 <p>把这两条式子代入f(t)的式子中可得：<br>$$<br>f(t) = \frac {a_0} 2 + \sum_{n=1}^\infty \frac {a_n-ib_n} 2 e^{in\omega t}+ \sum_{n=1}^\infty \frac {a_n+ib_n} 2 e^{-in\omega t}<br>= \sum_{n=0}^0 \frac {a_0} 2 e^{in\omega t} + \sum_{n=1}^\infty \frac {a_n-ib_n} 2 e^{in\omega t}+ \sum_{n=-1}^{-\infty} \frac {a_{-n}+ib_{-n}} 2 e^{in\omega t} = \sum_{-\infty}^\infty C_n e^{in\omega t}<br>$$<br>当n = 0时，<br>$$<br>C_n = \frac {a_0} 2 = \frac 1 {T}\int_{0}^T f(t)dt<br>$$<br>当n &gt; 0时，<br>$$<br>C_n = \frac {a_n-ib_n} 2 = \frac 1 2 (\frac 2 T \int_0^T f(t)cos{n\omega t} - i\frac 2 T \int_0^Tf(t)sin{n\omega t})<br>= \frac 1 T \int_0^T f(t)(cos{n\omega t} - isin{n\omega t}) dt = \frac 1 T \int_0^T f(t) e^{-in\omega t}dt<br>$$<br>当n &lt; 0时，<br>$$<br>C_n = \frac {a_{-n}+ib_{-n}} 2 = \frac 1 T \int_0^T f(t)(cos{n\omega t} - isin{n\omega t}) dt = \frac 1 T \int_0^T f(t) e^{-in\omega t}dt<br>$$</p>
 <p>因此得出结论，一个周期函数f(t)有f(t)=f(t+T)时：<br>$$<br>f(t) = \sum_{-\infty}^\infty C_n e^{in\omega t}<br>$$</p>
 <p>$$<br>C_n = \frac 1 T \int_0^T f(t) e^{-in\omega t}dt<br>$$</p>
+<p>可以得出，互为相反数的n都可以表示同一个频率，它们幅值相等，相角互为相反数，即共轭，可表示为a+bi和a-bi。它们进行叠加后表示实际的频谱，其幅值为单个的2倍，相角与负频率时计算的频谱的相角相等。</p>
 <h2 id="傅里叶变换"><a href="#傅里叶变换" class="headerlink" title="傅里叶变换"></a>傅里叶变换</h2><p>对于$C_n$来说，它的值是一个复数，而nω是一个离散的值，那么可以在代表nω的轴上一个个特定的点上设一个平面，这个平面是一个复平面，它的长度和方向代表$C_n$：</p>
 <img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/1.png" class>
 
@@ -1377,7 +1378,7 @@
                    loop='all'
                    order='random'
                    preload='auto'
-                   volume='0.7'
+                   volume='0.35'
                    list-folded='true'
         >
         </meting-js>
@@ -1401,7 +1402,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">38.8k</span>&nbsp;字
+                class="white-color">55.8k</span>&nbsp;字
             
             
             
