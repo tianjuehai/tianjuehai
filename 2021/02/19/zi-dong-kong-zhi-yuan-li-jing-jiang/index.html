@@ -475,7 +475,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-03-31
+                    2021-04-09
                 </div>
                 
 
@@ -1346,7 +1346,7 @@
 <p>当采样开关不是对误差的采样，采样开关无法前移，这种情况下一般求不出$G(z)$，只能求出$C(z)$，可以把输入信号当成一个环节，输入单位脉冲进行激励。</p>
 <p>每一个对两个信号求差或求和的东西后面有开关都能等效到之前的几条线路。</p>
 <hr>
-<h3 id="离散系统的稳定性分析"><a href="#离散系统的稳定性分析" class="headerlink" title="离散系统的稳定性分析"></a>离散系统的稳定性分析</h3><p>z变换其实就是拉普拉斯变换把$e^{(Ts)}$换成z的结果，而$s= \sigma +j\omega$，有：<br>$$<br>z = e^{\sigma T}e^{j\omega T}<br>$$<br>所以z的幅值和s的实部有关，z的相角和s的虚部有关，s的虚轴相当于z域中半径为1的圆。同理s=-1的轴相当于z域中半径为$e^{-T}$的圆，s越往左，在z域中圆的半径越小。因此<strong>s的稳定域映射到z域中代表的是单位圆</strong>。当s域中的一点在实轴上从0到负无穷相当于在z域上从1到0，从0到正无穷相当于z域从1到正无穷。当频率达到二分之一的采样角频率时，映射到z域是180°角的线上。也就是说<strong>s域中每一个宽度为$\omega_s$的带都代表了一个z域</strong>。在实轴附近的那个带称为主带。在<strong>香农采样定理满足的条件（$\frac{\omega_n}{2}&gt;omega_h$）下，我们系统的开环零极点在s域上都落在主带上</strong>。</p>
+<h3 id="离散系统的稳定性分析"><a href="#离散系统的稳定性分析" class="headerlink" title="离散系统的稳定性分析"></a>离散系统的稳定性分析</h3><p>z变换其实就是拉普拉斯变换把$e^{(Ts)}$换成z的结果，而$s= \sigma +j\omega$，有：<br>$$<br>z = e^{\sigma T}e^{j\omega T}<br>$$<br>所以z的幅值和s的实部有关，z的相角和s的虚部有关，s的虚轴相当于z域中半径为1的圆。同理s=-1的轴相当于z域中半径为$e^{-T}$的圆，s越往左，在z域中圆的半径越小。因此<strong>s的稳定域映射到z域中代表的是单位圆</strong>。当s域中的一点在实轴上从0到负无穷相当于在z域上从1到0，从0到正无穷相当于z域从1到正无穷。当频率达到二分之一的采样角频率时，映射到z域是180°角的线上。也就是说<strong>s域中每一个宽度为$\omega_s$的带都代表了一个z域</strong>。在实轴附近的那个带称为主带。在<strong>香农采样定理满足的条件（$\frac{\omega_n}{2}&gt;\omega_h$）下，我们系统的开环零极点在s域上都落在主带上</strong>。</p>
 <img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/228.png" class="">
 
 <p>因为z域单位圆越往内数据密度越大，所以为了不造成太大失真，与离散系统有关的数字要用双字节长度。</p>
@@ -2377,7 +2377,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">55.8k</span>&nbsp;字
+                class="white-color">57.7k</span>&nbsp;字
             
             
             

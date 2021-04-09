@@ -475,7 +475,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-03-25
+                    2021-04-04
                 </div>
                 
 
@@ -518,7 +518,7 @@
 <p>参考视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1qi4y1t7JY">傅里叶变换的直观解释</a></p>
 <p>傅里叶变换的基为三角函数，为什么要选三角函数作为傅里叶变换的基，因为三角函数的一大特点是，经过线性时不变系统的操作（加减，倍乘，倍除，积分，求导）后，不改变波形，仅改变相角和幅值。这就给我们提供了一个巨大的好处，那就是在分析线性时不变系统时，仅通过信号的相角和幅值指标就能还原信号，可以忽略基函数波形本身。</p>
 <h2 id="傅里叶级数"><a href="#傅里叶级数" class="headerlink" title="傅里叶级数"></a>傅里叶级数</h2><h4 id="三角函数系的正交性"><a href="#三角函数系的正交性" class="headerlink" title="三角函数系的正交性"></a>三角函数系的正交性</h4><p>三角函数系：{1,sinx,cosx,sin2x,cos2x,…,sinnx,cosnx,…}，它由无数个sinnx和cosnx组成，其中n=0,1,2,…….。</p>
-<p>正交性：<br>$$<br>\int^\pi_{-\pi}\sin nx \cos mx dx = 0，n\neq m<br>$$</p>
+<p>正交性：<br>$$<br>\int^\pi_{-\pi}\sin nx \cos mx dx = 0<br>$$</p>
 <p>$$<br>\int^\pi_{-\pi}\cos nx \cos mx dx = 0，n\neq m<br>$$</p>
 <p>$$<br>\int^\pi_{-\pi}\sin nx \sin mx dx = 0，n\neq m<br>$$</p>
 <p>当向量点乘等于0：<br>$$<br>\vec a \cdot \vec b = 0<br>$$<br>则两个<strong>向量正交</strong>。</p>
@@ -545,13 +545,13 @@
 <p>$$<br>C_n = \frac 1 T \int_0^T f(t) e^{-in\omega t}dt<br>$$</p>
 <p>可以得出，互为相反数的n都可以表示同一个频率，它们幅值相等，相角互为相反数，即共轭，可表示为a+bi和a-bi。它们进行叠加后表示实际的频谱，其幅值为单个的2倍，相角与负频率时计算的频谱的相角相等。</p>
 <h2 id="傅里叶变换"><a href="#傅里叶变换" class="headerlink" title="傅里叶变换"></a>傅里叶变换</h2><p>对于$C_n$来说，它的值是一个复数，而nω是一个离散的值，那么可以在代表nω的轴上一个个特定的点上设一个平面，这个平面是一个复平面，它的长度和方向代表$C_n$：</p>
-<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/1.png" class>
+<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/1.png" class="">
 
 <p>在工程上，横坐标为时间的波形图称为时域表达，而这幅图显示的是在各种不同频率下的值，称为频域表达，也是波形图的频谱，这就是从不同的角度看时间，每一种波形都对应一种频谱。不过很多时候的频谱都不是这种复平面三维的，我们会把$C_n$的幅度即模单独拿出来，就可以表示这个函数在不同频率下的强度了。</p>
-<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/2.png" class>
+<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/2.png" class="">
 
 <p>当T增大时，ω数值减小，nω之间就挨得越近。T趋于无穷时会形成一条连续的曲线：</p>
-<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/3.png" class>
+<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/3.png" class="">
 
 <p>由：<br>$$<br>f(t) = \sum_{-\infty}^\infty C_n e^{in\omega t}<br>$$</p>
 <p>$$<br>C_n = \frac 1 T \int_0^T f(t) e^{-in\omega t}dt<br>$$</p>
@@ -559,9 +559,9 @@
 <p>$$<br>f_T(t) = \sum_{n=-\infty}^{\infty}\frac {\Deltaω} {2\pi} \int_{-\frac T 2}^{\frac T 2} f_T(t) e^{-in\omega_0 t}dt e^{inω_0t}<br>$$</p>
 <p>当$T \rightarrow \infty$：<br>$$<br>f(t) = \frac {1} {2\pi}  \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(t) e^{-i\omega t}dt e^{inωt}d\omega<br>$$<br>因此我们把中间的公式称为**傅里叶变换(FT)**：<br>$$<br>F(ω) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t}dt<br>$$<br>$$<br>F(ω) = \int_{-\infty}^{\infty}f(t)cos(ωt)dt-i\int_{-\infty}^{\infty}f(t)sin(ωt)dt<br>$$</p>
 <p>通过这个函数可以表示在任何频率的情况下的三角函数的波形的振幅，这通常是一个复数a+bi，实际上用$\sqrt{a^2+b^2}$表示其振幅（实际振幅为2倍），即幅值图，同理还有相角图。其中实数部分代表cos，虚数部分代表-sin。而负频率没有现实意义，其振幅为正频率的共轭a-bi，只是为了在数学上的计算便利。</p>
-<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/4.png" class>
+<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/4.png" class="">
 
-<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/5.png" class>
+<img src="/2021/02/02/fu-li-xie-ji-shu-yu-fu-li-xie-bian-huan-gong-shi-tui-dao/5.png" class="">
 
 
 
@@ -1402,7 +1402,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">55.8k</span>&nbsp;字
+                class="white-color">57.7k</span>&nbsp;字
             
             
             
