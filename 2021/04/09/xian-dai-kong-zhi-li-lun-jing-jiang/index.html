@@ -475,21 +475,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-04-09
+                    2021-04-17
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    2.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    8 分
                 </div>
                 
 
@@ -514,7 +514,143 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p> 参考视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fx41137dA">Advanced控制理论</a></p>
+<h2 id="状态-空间表达（State-Space-Representation）"><a href="#状态-空间表达（State-Space-Representation）" class="headerlink" title="状态-空间表达（State-Space Representation）"></a>状态-空间表达（State-Space Representation）</h2><p>在现代控制理论中我们会选择另外一种和经典控制理论不同的分析方法分析系统，即状态空间，其包含系统的输入、输出和状态变量，然后把它们用一阶微分方程的方式表达出来。如果原来在经典控制理论中有二阶及以上的项，那么要选择合适的状态变量把高阶项消除。</p>
+<img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/1.png" class>
+
+<img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/2.png" class>
+<p>$$<br>\dot{z} = Az+Bu<br>$$</p>
+<p>$$<br>y = Cz+ Du<br>$$</p>
+<p>这就是系统状态-空间方程的表达方式。</p>
+<img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/3.png" class>
+
+<p>最终得到传递函数：<br>$$<br>G(s) = \frac{Y(s)}{u(s)} = C(sI-A)^{-1}B+D<br>$$<br>用这条式子可以在已知状态空间方程情况下求传递函数：</p>
+<img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/4.png" class>
+
+<p>可以看到这个方程和原来拉普拉斯变换算出来的传递函数是一致的。</p>
+<p>其中传递函数的分母部分和|sI-A|是息息相关的。根据线性代数的知识，当|sI-A|=0时，算出来的s就是A矩阵的特征值。当传递函数的分母及特征方程为0时，|sI-A|=0，这时候算出的s就是极点。<strong>结论：A矩阵的特征值可以决定系统的稳定性。</strong></p>
+<h2 id="相图-相轨迹-Phase-Portrait"><a href="#相图-相轨迹-Phase-Portrait" class="headerlink" title="相图/相轨迹(Phase Portrait)"></a>相图/相轨迹(Phase Portrait)</h2><p>这部分内容可以参考《自动控制原理精讲》的非线性系统的相平面法。</p>
+<img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/5.png" class>
+
+<p>对于状态空间来说:</p>
+<img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/6.png" class>
+
+<p>当b=c=0时，可以看到a和d大于0或小于0对应了几种不同的变换，当a&lt;0,d&lt;0时系统稳定。</p>
+<p>如果$b\neq 0 $且$c\neq 0$时，可以令x=Py，对A进行对角化，可以参考《特征值和特征向量》。</p>
+<img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/7.png" class>
+
+<p>进行对角化以后，观察对角矩阵中的两个特征值就能得到其稳定性的判断了，两个小于0则稳定。其中$P=[v_1,v_2]$包含两个特征向量，x=Py相当于y的坐标轴在x平面的表示就在$v_1$和$v_2$上。可以看到x和y平面的性质都是相同的，<strong>结论：可以通过判断A的特征值$\lambda$来判断系统的稳定性。</strong>其原因是|sI-A|=0时求得的s是系统的极点，系统的极点决定系统的稳定性。极点在虚轴左边系统稳定，所以，特征值小于0系统稳定。</p>
+<p>对于特征值为虚数的情况：</p>
+  <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/8.png" class>
+
+<p>解出来的$x_1$和$x_2$是三角函数，取虚部为0，那么$x_1$和$x_2$的相图可以表示为一个椭圆。可以判断这个椭圆是顺时针走的，我们把这样一个平衡点称为中心点(Center)，椭圆的大小和初始位置有关，并且$x_1$,$x_2$是循环往复变化的。</p>
+<p>对于特征值为复数的情况有：</p>
+  <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/9.png" class>
+
+<p>特征值实部大于0时为螺旋向外振荡，同时可以推出当实部小于0时向内螺旋，最后稳定在原点。</p>
+<p>强烈推荐实例：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ex411g7t3/?spm_id_from=333.788.recommend_more_video.-1">爱情中的数学_Phase Portrait 动态系统分析</a></p>
+<h2 id="系统的可控性"><a href="#系统的可控性" class="headerlink" title="系统的可控性"></a>系统的可控性</h2>  <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/10.png" class>
+
+<p>可控性的定义：存在输入u使得从原来$x_0$的状态变成$x_1$的状态。</p>
+<p>对于离散系统：</p>
+  <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/11.png" class>
+
+<p>如果想要u矩阵有解，要求Co矩阵的秩等于n，连续系统也一样。注意这个可控是点对点的可控，轨迹不一定可控，并且只是理论可行，现实系统有物理约束，不一定百分百可控。注意：在连续系统中如果对标离散系统公式Co不和离散系统完全一致，但是可以分解成离散系统的Co再乘以一个满秩方阵，其秩和离散系统的Co是一样的。因此可以直接用离散系统的方法判断连续系统Co的秩。</p>
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/12.png" class>
+
+<p>下面是用一个输入控制两个输出的例子：</p>
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/13.png" class>
+
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/14.png" class>
+
+<p>因此只要用一个小车上施加的力就可以控制两个小车的位置和速度。</p>
+<h2 id="稳定性——李雅普诺夫"><a href="#稳定性——李雅普诺夫" class="headerlink" title="稳定性——李雅普诺夫"></a>稳定性——李雅普诺夫</h2>   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/15.png" class>
+
+<p>意思是点一直稳定在一个圆内称为李雅普诺夫稳定，而渐进稳定意思是随着时间的推移，系统最终会回到原点。</p>
+<p>在相图/相轨迹的章节中，推断出当A特征值的实部大于0，系统不稳定，当实部不大于0，符合李雅普诺夫稳定，当实部小于0，符合渐进稳定。</p>
+<p>而当一个非线性系统无法用特征值的方法判断稳定时，就需要用到李雅普诺夫稳定了：</p>
+<p>这里用到的是李雅普诺夫的直接方法，第一方法是求解微分方程的方法，第二方法是不需要求解微分方程就能判断系统的稳定性。</p>
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/16.png" class>
+
+<p>这里V是自己选定的李雅普诺夫函数，具体怎么选定有规则，非线性系统的公式V由经验决定。只要找到一个V符合条件就能证明稳定，但是很难通过证明V不存在来说明系统不稳定。</p>
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/17.png" class>
+
+
+
+<h2 id="线性控制器设计-Linear-controller-Design"><a href="#线性控制器设计-Linear-controller-Design" class="headerlink" title="线性控制器设计(Linear controller Design)"></a>线性控制器设计(Linear controller Design)</h2>   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/18.png" class>
+
+<p>当u是x的函数时，就把系统从开环变为闭环，通过配置u的参数，可以把闭环状态空间矩阵的特征值在一个我们希望的位置上。</p>
+<p>例子：</p>
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/19.png" class>
+
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/20.png" class>
+
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/21.png" class>
+
+<p>倒立摆分析：</p>
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/22.png" class>
+
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/23.png" class>
+
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/24.png" class>
+
+
+
+<h2 id="LQR-Linear-Quadratic-Regulater-控制器"><a href="#LQR-Linear-Quadratic-Regulater-控制器" class="headerlink" title="LQR(Linear Quadratic Regulater)控制器"></a>LQR(Linear Quadratic Regulater)控制器</h2><p>从上面的内容可以知道，通过选择输入u和输出x的关系可以改变系统Acl的特征值，从而控制系统的表现，这里讨论如何确定特征值，什么样的特征值是最好的？</p>
+<p>引入目标函数/能量函数(Cost Function)<br>$$<br>J = \int_0^{\infty}(X^TQX + U^T RU) dt<br>$$<br>其中Q内的值都为正。这个代表一个惩罚(Penalty)，当$x\neq 0$时，这个值根据Q里面数值的大小有不同反应。后面的部分代表输入对Cost Function的影响。LQR的意思是在满足系统稳定的同时，我们要去寻找J的最小值。</p>
+<p>运用上面的倒立摆系统进行分析，设g=10,L=1。</p>
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/25.png" class>
+
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/26.png" class>
+
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/27.png" class>
+
+<p>用matlab自带的模块输入参数进行计算，可以直接给出对应的k值，然后把k值输入原来的系统中。系统响应很nice.</p>
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/28.png" class>
+
+<p>但是，如果我们更关心用最小的输入就能达到目的，对角度的收敛速度的要求较低，那么修改新的Q和R：</p>
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/29.png" class>
+
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/30.png" class>
+
+<p>在第二种情况下，我们更关心系统的能耗问题，虽然角度的收敛速度比第一个系统要低，但是大大降低了输入要求，减小了能耗。</p>
+<p><strong>思考：如果让角度始终保存一个非零角度，那么小球会以匀加速前进，此时系统怎么建立？</strong></p>
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/31.png" class>
+
+<p>令$e = x_d - x_1$，代入方程后建立的状态空间方程是由e和$x_2$组成的。</p>
+   <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/32.png" class>
+
+<p>但是通过计算，稳定点的e不是0，那么我们就要通过设计控制器u把其调整为0，只需要消去后面的常数项即可。</p>
+<p>​    <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/33.png" class></p>
+<p>​    <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/34.png" class></p>
+<p>​    <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/35.png" class></p>
+<p>通过改变输入的角度的值可以改变其稳定的角度，从而达到加速前进后退的效果。</p>
+<h2 id="状态观测器的设计"><a href="#状态观测器的设计" class="headerlink" title="状态观测器的设计"></a>状态观测器的设计</h2><p>上面的控制方法的前提是：x的状态可测。</p>
+<p>如果x不可测怎么办？这就要引入观测器(Observer)根据系统的输入和输入估计系统的状态。</p>
+<p><strong>Luenberger Observer</strong></p>
+<p>​    <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/36.png" class></p>
+<p>​    <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/37.png" class></p>
+<p>可以计算出估计值和实际值的误差公式，我们的目标是让误差趋近于0.。<strong>建立观测器实际上是建立新的反馈系统使得误差趋近于0</strong>。</p>
+<p>以弹簧阻尼系统为例：</p>
+<p>​    <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/38.png" class></p>
+<p>​    <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/39.png" class></p>
+<p>可以设两个特征值都为-1，求出$L_1$,$L_2$之后，然后可以通过观测器得出估计值：</p>
+<p>​    <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/40.png" class></p>
+<p>Matlab仿真：</p>
+<p>​    <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/41.png" class></p>
+<p>​    <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/42.png" class></p>
+<p>可以看到无论给$\dot{z}$估计值设计一个什么初始，最终都会和实际的$\dot{z}$重合。</p>
+<p>上面是实际系统，知道该实际系统的状态空间表达式，但是选的这些个“状态变量”，它可能没有实际的物理意义、或者是只存在于数学上的某种抽象的表达之类，不容易或者没办法直接测量。测不了还必须要得到它，才能有后面的“控制”的事。所以，有了状态观测器这个东西，也就是下面那个系统。这个系统就干一件事：通过上面那个实际系统的输入、输出（实际系统的输入、输出一般是容易获得的），去推测、估计那些个“状态变量”。实际系统不好测，或者测量成本过高为节约成本就用状态观测器了，比如无位置传感器永磁电磁电机控制。</p>
+<h2 id="可观测性和分离原理"><a href="#可观测性和分离原理" class="headerlink" title="可观测性和分离原理"></a>可观测性和分离原理</h2><p>和可控性类似，如果一个系统可观测，则：</p>
+<p>​    <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/43.png" class></p>
+<p>接下来把可控性和可观性结合，当一个系统可控可观测，但是x不可测量，那么第一步是设计适当的观测器，有了观测出来的结果后，可以设计反馈系统，</p>
+<p>​    <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/44.png" class></p>
+<p>这样原来的系统变为新的状态空间方程系统，其中因为要让估计值趋近状态值，系统稳定，所以e和x都要趋近于0。这样M矩阵特征值的实部要小于0。</p>
+<p>​    <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/45.png" class></p>
+<p>​    <img src="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/46.png" class></p>
+<p>这样控制器的特征值和观测器的特征值分离开了，这就是分离原理。</p>
+<p>设计观测器和控制器合并的系统时，观测器的收敛速度要比控制器快，因为需要准确的观测值指导系统的输入。</p>
+
                 
             </div>
             <hr/>
@@ -1012,18 +1148,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/04/09/xian-dai-kong-zhi-li-lun-jing-jiang/">
+                <a href="/2021/04/17/fei-xian-xing-kong-zhi-li-lun-jing-jiang/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="现代控制理论精讲">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="非线性控制理论精讲">
                         
-                        <span class="card-title">现代控制理论精讲</span>
+                        <span class="card-title">非线性控制理论精讲</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1033,9 +1168,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-09
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-17
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1048,7 +1183,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1353,7 +1487,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">57.7k</span>&nbsp;字
+                class="white-color">60.1k</span>&nbsp;字
             
             
             
