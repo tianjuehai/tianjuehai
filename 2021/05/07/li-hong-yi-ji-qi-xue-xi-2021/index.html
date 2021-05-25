@@ -475,21 +475,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-05-09
+                    2021-05-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    6 分
                 </div>
                 
 
@@ -553,7 +553,7 @@
 <p>同样最优化的过程和线性拟合的方法一样，采用梯度下降法，不断更新参数，最终得到一个最优解。</p>
 <img src="/2021/05/07/li-hong-yi-ji-qi-xue-xi-2021/10.png" class="">
 
-<p>但是在实际操作时，可以对所有的数据进行分组，每次操作一组数据。每次用一组数据算loss进行参数的更新，称为一个update。当所有的数据都进行过一次更新时，称为一个epoch。</p>
+<p>但是在实际操作时，可以对所有的数据进行分组，每次操作一组数据。每次用一组数据算loss进行参数的更新，称为一个update。当所有的数据都进行过一次更新时，称为一个epoch。此处运用的是随机梯度下降的算法。</p>
 <img src="/2021/05/07/li-hong-yi-ji-qi-xue-xi-2021/11.png" class="">
 
 <hr>
@@ -566,7 +566,15 @@
 <img src="/2021/05/07/li-hong-yi-ji-qi-xue-xi-2021/13.png" class="">
 
 <p>这一套基于神经网络的技术，我们称为<strong>深度学习</strong>。</p>
-<h3 id="反向传播（Backpropagation）"><a href="#反向传播（Backpropagation）" class="headerlink" title="反向传播（Backpropagation）"></a>反向传播（Backpropagation）</h3>
+<h3 id="反向传播（Backpropagation）"><a href="#反向传播（Backpropagation）" class="headerlink" title="反向传播（Backpropagation）"></a>反向传播（Backpropagation）</h3><p>参考视频：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ibJpTrp5mcE&amp;ab_channel=Hung-yiLee">https://www.youtube.com/watch?v=ibJpTrp5mcE&amp;ab_channel=Hung-yiLee</a></p>
+<p>可参考另一篇文章《Python神经网络编程》</p>
+<p>误差反向传播的方法是使用<strong>梯度下降法</strong>，即需要求总误差对一个权值的导数。当所在权值在输出层之前，那么：<br>$$<br>\frac{dE}{dw_{jk}} = - (t_k - o_k) * sigmoid(\sum_j w_{jk}o_j)(1-sigmoid(\sum_j w_{jk}o_j)) * o_j<br>$$<br>其中$t_k$为该权重对应输出节点的真实值，$o_k$为现在该输出节点预测值，$o_j$是隐藏层的输出值。更新权重为<br>$$<br>\Delta w_{jk} = \alpha * \frac{dE}{dw_{jk}}<br>$$<br>如果是更加前面层级的权重，更新方法为：先通过后面的层级一直往前推算，算出该权重后的一个节点的隐藏层误差，而这个误差的计算可以直接忽略激活函数，直接按照后面的权值的比例进行计算即可。然后再运用上面的公式。当然也可以运用链式法则不断的向前递推来算梯度，计算量会大一些。</p>
+<p><strong>随机梯度下降</strong></p>
+<p>损失函数不计算全部样本的，而是每次随机找一个样本计算。这个方法在更新的过程中有可能跨过鞍点到达全集最优，因此在神经网络中证明非常有效。但是由于每次只能计算一个样本，因此时间复杂度太高。因此我们在实际运用中取随机梯度下降的算法的时候，我们将两者结合，把样本分成一个个batch，分批进行训练。</p>
+<h2 id="Google-Colab"><a href="#Google-Colab" class="headerlink" title="Google Colab"></a>Google Colab</h2><p>请参考我的另一篇文章《Google-Colab及其使用》。</p>
+<h2 id="Pytorch教学"><a href="#Pytorch教学" class="headerlink" title="Pytorch教学"></a>Pytorch教学</h2><p>请参考我的另一篇文章《Pytorch教学及示例》。</p>
+<h2 id="作业一"><a href="#作业一" class="headerlink" title="作业一"></a>作业一</h2><p>请查看我的另一篇文章《用神经网络预测新冠确诊率》。</p>
+
                 
             </div>
             <hr/>
@@ -1403,7 +1411,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">78.9k</span>&nbsp;字
+                class="white-color">99.4k</span>&nbsp;字
             
             
             

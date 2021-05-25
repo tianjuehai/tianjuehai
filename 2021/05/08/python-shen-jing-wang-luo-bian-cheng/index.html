@@ -479,14 +479,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-05-09
+                    2021-05-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    1.8k
                 </div>
                 
 
@@ -597,6 +597,7 @@ n<span class="token punctuation">.</span>query<span class="token punctuation">(<
 <p>$$<br>E = \sum_n (t_n - o_n)^2<br>$$</p>
 <p>其中α代表学习率，决定了训练的速度。后面的求导代表$w_{jk}$在误差中的梯度，通过这个式子可以使得输出的值和真实值相比误差不断减小。算得<br>$$<br>\frac{dE}{dw_{jk}} = - 2(t_k - o_k) * sigmoid(\sum_j w_{jk}o_j)(1-sigmoid(\sum_j w_{jk}o_j)) * o_j<br>$$<br>其中$t_k$为该权重对应输出节点的真实值，$o_k$为现在该输出节点预测值，$o_j$是隐藏层的输出值。可以写成：<br>$$<br>\frac{dE}{dw_{jk}} = - e_k * sigmoid(\sum_j w_{jk}o_j)(1-sigmoid(\sum_j w_{jk}o_j)) * o_j<br>$$</p>
 <p>$$<br>\Delta w_{jk} = \alpha * \frac{dE}{dw_{jk}}<br>$$</p>
+<p>可以看到更新的权重矩阵的梯度是一个一维的列向量乘以一维行向量。</p>
 <h2 id="识别手写数字"><a href="#识别手写数字" class="headerlink" title="识别手写数字"></a>识别手写数字</h2><p>代码及相关资源来源：<a target="_blank" rel="noopener" href="https://www.epubit.com/bookDetails?id=N34292&amp;typeName=%E6%90%9C%E7%B4%A2">https://www.epubit.com/bookDetails?id=N34292&amp;typeName=%E6%90%9C%E7%B4%A2</a></p>
 <p><a href="https://link.zhihu.com/?target=http://www.pjreddie.com/media/files/mnist_train.csv">https://link.zhihu.com/?target=http%3A//www.pjreddie.com/media/files/mnist_train.csv</a></p>
 <p><a href="https://link.zhihu.com/?target=http://www.pjreddie.com/media/files/mnist_test.csv">https://link.zhihu.com/?target=http%3A//www.pjreddie.com/media/files/mnist_test.csv</a></p>
@@ -1209,30 +1210,29 @@ img_data = (img_data / 255.0 * 0.99) + 0.01</code></pre>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/08/python-shen-jing-wang-luo-bian-cheng/">
+                <a href="/2021/05/10/google-colab-ji-qi-shi-yong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Python神经网络编程">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Google Colab及其使用">
                         
-                        <span class="card-title">Python神经网络编程</span>
+                        <span class="card-title">Google Colab及其使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Python神经网络的编程实现和简单应用
+                            
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-08
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-10
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1245,13 +1245,8 @@ img_data = (img_data / 255.0 * 0.99) + 0.01</code></pre>
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
-                    
-                    <a href="/tags/Python/">
-                        <span class="chip bg-color">Python</span>
-                    </a>
                     
                     <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
                         <span class="chip bg-color">机器学习</span>
@@ -1550,7 +1545,7 @@ img_data = (img_data / 255.0 * 0.99) + 0.01</code></pre>
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">78.9k</span>&nbsp;字
+                class="white-color">99.4k</span>&nbsp;字
             
             
             

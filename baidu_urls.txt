@@ -1,3 +1,8 @@
+https://tianjuewudi.gitee.io/2021/05/19/shen-du-xue-xi-zhong-de-you-hua-suan-fa-chuan-jiang/
+https://tianjuewudi.gitee.io/2021/05/17/shen-du-xue-xi-shi-yong-gpu-jia-su-de-zhu-yi-shi-xiang/
+https://tianjuewudi.gitee.io/2021/05/13/pytorch-jiao-xue-ji-shi-li/
+https://tianjuewudi.gitee.io/2021/05/11/li-yong-shen-jing-wang-luo-yu-ce-xin-guan-que-zhen-lu/
+https://tianjuewudi.gitee.io/2021/05/10/google-colab-ji-qi-shi-yong/
 https://tianjuewudi.gitee.io/2021/05/08/python-shen-jing-wang-luo-bian-cheng/
 https://tianjuewudi.gitee.io/2021/05/07/li-hong-yi-ji-qi-xue-xi-2021/
 https://tianjuewudi.gitee.io/2021/04/29/qia-er-man-lu-bo-qi/
