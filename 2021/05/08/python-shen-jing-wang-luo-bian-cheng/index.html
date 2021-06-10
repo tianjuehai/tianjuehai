@@ -479,21 +479,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-05-19
+                    2021-05-26
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    2.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    10 分
                 </div>
                 
 
@@ -603,7 +603,7 @@ n<span class="token punctuation">.</span>query<span class="token punctuation">(<
 <p><a href="https://link.zhihu.com/?target=http://www.pjreddie.com/media/files/mnist_test.csv">https://link.zhihu.com/?target=http%3A//www.pjreddie.com/media/files/mnist_test.csv</a></p>
 <p>数据用CSV文件存放，数字是28*28像素，每行第一个值是标签，后面的都是灰度值。训练集有100条，测试集10条。</p>
 <p>样式展示：</p>
-<img src="/2021/05/08/python-shen-jing-wang-luo-bian-cheng/1.png" class="">
+<img src="/2021/05/08/python-shen-jing-wang-luo-bian-cheng/1.png" class>
 
 <p>代码：</p>
 <pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> numpy
@@ -707,7 +707,40 @@ img_array = scipy.misc.imread(image_file_name,flatten = True)
 img_data = 255.0 - img_array.reshape(784)
 img_data = (img_data / 255.0 * 0.99) + 0.01</code></pre>
 <p>其中imread函数从图像文件中读取数据，”flatten=True”把图像变成简单的浮点数数组。如果图像是彩色的，颜色值会自动转换为灰度值。这样就可以把这些数据运用到我们的模型中了。</p>
-<h2 id="旋转图像可以创建新的训练数据"><a href="#旋转图像可以创建新的训练数据" class="headerlink" title="旋转图像可以创建新的训练数据"></a>旋转图像可以创建新的训练数据</h2><p>收集更多的手写样本固然可以提高模型的准确率，但是工作量太大了。一个很好的做法是通过顺时针或逆时针旋转它们，可以创建新的样本，通过这些新的样本进行训练，同样可以很好地提高模型的准确率。但要注意旋转的角度不能过大，否则会降低神经网络的性能，因为这意味创建了不能代表数字的图像，建议旋转10°，这个角度比较理想。</p>
+<h2 id="旋转图像可以创建新的训练数据"><a href="#旋转图像可以创建新的训练数据" class="headerlink" title="旋转图像可以创建新的训练数据"></a>旋转图像可以创建新的训练数据</h2><p>收集更多的手写样本固然可以提高模型的准确率，但是工作量太大了。一个很好的做法是通过顺时针或逆时针旋转它们，可以创建新的样本，通过这些新的样本进行训练，同样可以很好地提高模型的准确率。但要注意旋转的角度不能过大，否则会降低神经网络的性能，因为这意味创建了不能代表数字的图像，建议旋转10°，这个角度比较理想。同样的，我们在识别其他有关物体的图片时也可以进行左右翻转或者放大的操作来创造更多地样本。</p>
+<p>​    ndimage.interpolation.rotate()可以将数组转过一个角度：</p>
+<pre class=" language-python"><code class="language-python">inputs_plus10_img <span class="token operator">=</span> scipy<span class="token punctuation">.</span>ndimage<span class="token punctuation">.</span>interpolation<span class="token punctuation">.</span>rotate<span class="token punctuation">(</span>scaled_input<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token number">28</span><span class="token punctuation">,</span><span class="token number">28</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span>cval<span class="token operator">=</span><span class="token number">0.0</span><span class="token punctuation">,</span>reshape<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span></code></pre>
+<p>原来的numpy数字被重新转换成28*28的数组后，逆时针旋转10度，reshape=false可以防止将图像压扁。cval= 0意思是用零来填补旋转后多出的空白部分。把在源代码上加几行就行了。</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">for</span> e <span class="token keyword">in</span> range<span class="token punctuation">(</span>epochs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># go through all records in the training data set</span>
+    <span class="token keyword">for</span> record <span class="token keyword">in</span> training_data_list<span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># split the record by the ',' commas</span>
+        all_values <span class="token operator">=</span> record<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">','</span><span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># scale and shift the inputs</span>
+        inputs <span class="token operator">=</span> <span class="token punctuation">(</span>numpy<span class="token punctuation">.</span>asfarray<span class="token punctuation">(</span>all_values<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">255.0</span> <span class="token operator">*</span> <span class="token number">0.99</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">0.01</span>
+        <span class="token comment" spellcheck="true"># create the target output values (all 0.01, except the desired label which is 0.99)</span>
+        targets <span class="token operator">=</span> numpy<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>output_nodes<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">0.01</span>
+        <span class="token comment" spellcheck="true"># all_values[0] is the target label for this record</span>
+        targets<span class="token punctuation">[</span>int<span class="token punctuation">(</span>all_values<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0.99</span>
+        n<span class="token punctuation">.</span>train<span class="token punctuation">(</span>inputs<span class="token punctuation">,</span> targets<span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true">## create rotated variations</span>
+        <span class="token comment" spellcheck="true"># rotated anticlockwise by x degrees</span>
+        inputs_plusx_img <span class="token operator">=</span> scipy<span class="token punctuation">.</span>ndimage<span class="token punctuation">.</span>interpolation<span class="token punctuation">.</span>rotate<span class="token punctuation">(</span>inputs<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token number">28</span><span class="token punctuation">,</span><span class="token number">28</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> cval<span class="token operator">=</span><span class="token number">0.01</span><span class="token punctuation">,</span> order<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> reshape<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+        n<span class="token punctuation">.</span>train<span class="token punctuation">(</span>inputs_plusx_img<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token number">784</span><span class="token punctuation">)</span><span class="token punctuation">,</span> targets<span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># rotated clockwise by x degrees</span>
+        inputs_minusx_img <span class="token operator">=</span> scipy<span class="token punctuation">.</span>ndimage<span class="token punctuation">.</span>interpolation<span class="token punctuation">.</span>rotate<span class="token punctuation">(</span>inputs<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token number">28</span><span class="token punctuation">,</span><span class="token number">28</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">,</span> cval<span class="token operator">=</span><span class="token number">0.01</span><span class="token punctuation">,</span> order<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> reshape<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+        n<span class="token punctuation">.</span>train<span class="token punctuation">(</span>inputs_minusx_img<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token number">784</span><span class="token punctuation">)</span><span class="token punctuation">,</span> targets<span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true"># rotated anticlockwise by 10 degrees</span>
+        <span class="token comment" spellcheck="true">#inputs_plus10_img = scipy.ndimage.interpolation.rotate(inputs.reshape(28,28), 10, cval=0.01, order=1, reshape=False)</span>
+        <span class="token comment" spellcheck="true">#n.train(inputs_plus10_img.reshape(784), targets)</span>
+        <span class="token comment" spellcheck="true"># rotated clockwise by 10 degrees</span>
+        <span class="token comment" spellcheck="true">#inputs_minus10_img = scipy.ndimage.interpolation.rotate(inputs.reshape(28,28), -10, cval=0.01, order=1, reshape=False)</span>
+        <span class="token comment" spellcheck="true">#n.train(inputs_minus10_img.reshape(784), targets)</span>
+
+        <span class="token keyword">pass</span>
+    <span class="token keyword">pass</span></code></pre>
 
                 
             </div>
@@ -1545,7 +1578,7 @@ img_data = (img_data / 255.0 * 0.99) + 0.01</code></pre>
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">99.4k</span>&nbsp;字
+                class="white-color">107.9k</span>&nbsp;字
             
             
             

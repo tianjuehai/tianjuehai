@@ -479,21 +479,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-05-12
+                    2021-05-26
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    2.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    10 分
                 </div>
                 
 
@@ -519,6 +519,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p> 本文的数据以及程序均来源于李宏毅老师2021机器学习课程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Wv411h7kN?p=7">https://www.bilibili.com/video/BV1Wv411h7kN?p=7</a></p>
+<p>如果看不懂代码，可以先查看我另一篇文章《Pytorch教学及示例》。<a href="https://tianjuewudi.gitee.io/">https://tianjuewudi.gitee.io/</a></p>
 <p>首先看一下给出的数据，一个训练集covid.train.csv，一个测试集covid.test.csv。</p>
 <img src="/2021/05/11/li-yong-shen-jing-wang-luo-yu-ce-xin-guan-que-zhen-lu/1.png" class>
 
@@ -548,10 +549,12 @@ torch<span class="token punctuation">.</span>manual_seed<span class="token punct
     torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>manual_seed_all<span class="token punctuation">(</span>myseed<span class="token punctuation">)</span></code></pre>
 <p>为什么使用相同的网络结构，跑出来的效果完全不同，用的学习率，迭代次数，batch size 都是一样？固定随机数种子是非常重要的。但是如果你使用的是PyTorch等框架，还要看一下框架的种子是否固定了。还有，如果你用了cuda，别忘了cuda的随机数种子。这里还需要用到torch.backends.cudnn.deterministic.</p>
 <p>torch.backends.cudnn.deterministic这个 flag 置为<code>True</code>的话，每次返回的卷积算法将是确定的，即默认算法。如果配合上设置 Torch 的随机种子为固定值的话，应该可以保证每次运行网络的时候相同输入的输出是固定的，因此才有了最后的几行。</p>
-<h2 id="一些不用更改的函数："><a href="#一些不用更改的函数：" class="headerlink" title="一些不用更改的函数："></a><strong>一些不用更改的函数：</strong></h2><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">get_device</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+<h2 id="一些不用更改的函数："><a href="#一些不用更改的函数：" class="headerlink" title="一些不用更改的函数："></a><strong>一些不用更改的函数：</strong></h2><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#在有GPU的时候使用GPU</span>
+<span class="token keyword">def</span> <span class="token function">get_device</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token triple-quoted-string string">''' Get device (if GPU is available, use GPU) '''</span>
     <span class="token keyword">return</span> <span class="token string">'cuda'</span> <span class="token keyword">if</span> torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>is_available<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">else</span> <span class="token string">'cpu'</span>
 
+<span class="token comment" spellcheck="true">#输入的是一个包含训练集Loss列表和开发集的Loss列表</span>
 <span class="token keyword">def</span> <span class="token function">plot_learning_curve</span><span class="token punctuation">(</span>loss_record<span class="token punctuation">,</span> title<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token triple-quoted-string string">''' Plot learning curve of your DNN (train &amp; dev loss) '''</span>
     total_steps <span class="token operator">=</span> len<span class="token punctuation">(</span>loss_record<span class="token punctuation">[</span><span class="token string">'train'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
@@ -563,11 +566,11 @@ torch<span class="token punctuation">.</span>manual_seed<span class="token punct
     plt<span class="token punctuation">.</span>ylim<span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
     plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'Training steps'</span><span class="token punctuation">)</span>
     plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'MSE loss'</span><span class="token punctuation">)</span>
-    plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'Learning curve of {}'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>title<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'Learning curve of &amp;#123;&amp;#125;'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>title<span class="token punctuation">)</span><span class="token punctuation">)</span>
     plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">)</span>
     plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-
+<span class="token comment" spellcheck="true">#绘制一个表示预测值与真实值插件的散点图，其中斜率为1的直线代表无误差</span>
 <span class="token keyword">def</span> <span class="token function">plot_pred</span><span class="token punctuation">(</span>dv_set<span class="token punctuation">,</span> model<span class="token punctuation">,</span> device<span class="token punctuation">,</span> lim<span class="token operator">=</span><span class="token number">35</span><span class="token punctuation">.</span><span class="token punctuation">,</span> preds<span class="token operator">=</span>None<span class="token punctuation">,</span> targets<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token triple-quoted-string string">''' Plot prediction of your DNN '''</span>
     <span class="token keyword">if</span> preds <span class="token keyword">is</span> None <span class="token operator">or</span> targets <span class="token keyword">is</span> None<span class="token punctuation">:</span>
@@ -591,7 +594,6 @@ torch<span class="token punctuation">.</span>manual_seed<span class="token punct
     plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'predicted value'</span><span class="token punctuation">)</span>
     plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'Ground Truth v.s. Prediction'</span><span class="token punctuation">)</span>
     plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<p>首先第一个函数是在有GPU的时候使用GPU，第二个函数是绘制一个随着学习步骤的推进的Loss函数的曲线。第三个函数是绘制一个表示预测值与真实值插件的散点图，其中斜率为1的直线代表无误差。</p>
 <h2 id="处理数据："><a href="#处理数据：" class="headerlink" title="处理数据："></a>处理数据：</h2><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">COVID19Dataset</span><span class="token punctuation">(</span>Dataset<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token triple-quoted-string string">''' Dataset for loading and preprocessing the COVID19 dataset '''</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>
@@ -639,7 +641,7 @@ torch<span class="token punctuation">.</span>manual_seed<span class="token punct
 
         self<span class="token punctuation">.</span>dim <span class="token operator">=</span> self<span class="token punctuation">.</span>data<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
 
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Finished reading the {} set of COVID19 Dataset ({} samples found, each dim = {})'</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Finished reading the &amp;#123;&amp;#125; set of COVID19 Dataset (&amp;#123;&amp;#125; samples found, each dim = &amp;#123;&amp;#125;)'</span>
               <span class="token punctuation">.</span>format<span class="token punctuation">(</span>mode<span class="token punctuation">,</span> len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>dim<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
     <span class="token keyword">def</span> <span class="token function">__getitem__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> index<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -654,7 +656,139 @@ torch<span class="token punctuation">.</span>manual_seed<span class="token punct
     <span class="token keyword">def</span> <span class="token function">__len__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token comment" spellcheck="true"># Returns the size of the dataset</span>
         <span class="token keyword">return</span> len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>data<span class="token punctuation">)</span></code></pre>
-<p>这个类继承于dataset类，因此需要重新三个函数。第一个函数是初始化函数，</p>
+<p>这个类继承于dataset类，因此需要重新三个函数。第一个函数是初始化函数init，用来处理数据，把数据集分成训练的数据和标签两部分。然后再getitem中指定索引来确定数据的顺序的样本的标签的对应关系。len函数中返回整个样本集的个数。</p>
+<h2 id="模型构建"><a href="#模型构建" class="headerlink" title="模型构建"></a>模型构建</h2><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">NeuralNet</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">''' A simple fully-connected deep neural network '''</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> input_dim<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        super<span class="token punctuation">(</span>NeuralNet<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># Define your neural network here</span>
+        <span class="token comment" spellcheck="true"># TODO: How to modify this model to achieve better performance?</span>
+        <span class="token comment" spellcheck="true">#Sequential一个有序的容器，神经网络模块将按照在传入构造器的顺序依次被添加到计算图中执行</span>
+        <span class="token comment" spellcheck="true">#同时以神经网络模块为元素的有序字典也可以作为传入参数。</span>
+        self<span class="token punctuation">.</span>net <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+            nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>input_dim<span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># Mean squared error loss</span>
+        self<span class="token punctuation">.</span>criterion <span class="token operator">=</span> nn<span class="token punctuation">.</span>MSELoss<span class="token punctuation">(</span>reduction<span class="token operator">=</span><span class="token string">'mean'</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true">#计算输出结果</span>
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">''' Given input of size (batch_size x input_dim), compute output of the network '''</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>net<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">.</span>squeeze<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true">#计算Loss</span>
+    <span class="token keyword">def</span> <span class="token function">cal_loss</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> pred<span class="token punctuation">,</span> target<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">''' Calculate loss '''</span>
+        <span class="token comment" spellcheck="true"># TODO: you may implement L2 regularization here</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>criterion<span class="token punctuation">(</span>pred<span class="token punctuation">,</span> target<span class="token punctuation">)</span></code></pre>
+<h2 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h2><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">train</span><span class="token punctuation">(</span>tr_set<span class="token punctuation">,</span> dv_set<span class="token punctuation">,</span> model<span class="token punctuation">,</span> config<span class="token punctuation">,</span> device<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">''' DNN training '''</span>
+
+    n_epochs <span class="token operator">=</span> config<span class="token punctuation">[</span><span class="token string">'n_epochs'</span><span class="token punctuation">]</span>  <span class="token comment" spellcheck="true"># Maximum number of epochs</span>
+
+    <span class="token comment" spellcheck="true"># Setup optimizer</span>
+    optimizer <span class="token operator">=</span> getattr<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>optim<span class="token punctuation">,</span> config<span class="token punctuation">[</span><span class="token string">'optimizer'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">(</span>
+        model<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">**</span>config<span class="token punctuation">[</span><span class="token string">'optim_hparas'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+    min_mse <span class="token operator">=</span> <span class="token number">1000</span><span class="token punctuation">.</span>
+    loss_record <span class="token operator">=</span> <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;'train': [], 'dev': []&amp;#125;      # for recording training loss</span>
+    early_stop_cnt <span class="token operator">=</span> <span class="token number">0</span>
+    epoch <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">while</span> epoch <span class="token operator">&lt;</span> n_epochs<span class="token punctuation">:</span>
+        model<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>                           <span class="token comment" spellcheck="true"># set model to training mode</span>
+        <span class="token keyword">for</span> x<span class="token punctuation">,</span> y <span class="token keyword">in</span> tr_set<span class="token punctuation">:</span>                     <span class="token comment" spellcheck="true"># iterate through the dataloader</span>
+            optimizer<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>               <span class="token comment" spellcheck="true"># set gradient to zero</span>
+            x<span class="token punctuation">,</span> y <span class="token operator">=</span> x<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span><span class="token punctuation">,</span> y<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>   <span class="token comment" spellcheck="true"># move data to device (cpu/cuda)</span>
+            pred <span class="token operator">=</span> model<span class="token punctuation">(</span>x<span class="token punctuation">)</span>                     <span class="token comment" spellcheck="true"># forward pass (compute output)</span>
+            mse_loss <span class="token operator">=</span> model<span class="token punctuation">.</span>cal_loss<span class="token punctuation">(</span>pred<span class="token punctuation">,</span> y<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># compute loss</span>
+            mse_loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>                 <span class="token comment" spellcheck="true"># compute gradient (backpropagation)</span>
+            optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>                    <span class="token comment" spellcheck="true"># update model with optimizer</span>
+            loss_record<span class="token punctuation">[</span><span class="token string">'train'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>append<span class="token punctuation">(</span>mse_loss<span class="token punctuation">.</span>detach<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true"># After each epoch, test your model on the validation (development) set.</span>
+        dev_mse <span class="token operator">=</span> dev<span class="token punctuation">(</span>dv_set<span class="token punctuation">,</span> model<span class="token punctuation">,</span> device<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> dev_mse <span class="token operator">&lt;</span> min_mse<span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true"># Save model if your model improved</span>
+            min_mse <span class="token operator">=</span> dev_mse
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Saving model (epoch = &amp;#123;:4d&amp;#125;, loss = &amp;#123;:.4f&amp;#125;)'</span>
+                <span class="token punctuation">.</span>format<span class="token punctuation">(</span>epoch <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> min_mse<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token comment" spellcheck="true">#注意保存模型</span>
+            torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>model<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> config<span class="token punctuation">[</span><span class="token string">'save_path'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># Save model to specified path</span>
+            early_stop_cnt <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            early_stop_cnt <span class="token operator">+=</span> <span class="token number">1</span>
+
+        epoch <span class="token operator">+=</span> <span class="token number">1</span>
+        loss_record<span class="token punctuation">[</span><span class="token string">'dev'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>append<span class="token punctuation">(</span>dev_mse<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> early_stop_cnt <span class="token operator">&gt;</span> config<span class="token punctuation">[</span><span class="token string">'early_stop'</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true"># Stop training if your model stops improving for "config['early_stop']" epochs.</span>
+            <span class="token keyword">break</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Finished training after &amp;#123;&amp;#125; epochs'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>epoch<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> min_mse<span class="token punctuation">,</span> loss_record</code></pre>
+<h2 id="验证集计算Loss"><a href="#验证集计算Loss" class="headerlink" title="验证集计算Loss"></a>验证集计算Loss</h2><p>验证集从训练集中分离而出，这是事先验证用多少个epoch进行训练才不会过拟合，然后再把所有的数据扔进去训练。</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">dev</span><span class="token punctuation">(</span>dv_set<span class="token punctuation">,</span> model<span class="token punctuation">,</span> device<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    model<span class="token punctuation">.</span>eval<span class="token punctuation">(</span><span class="token punctuation">)</span>                                <span class="token comment" spellcheck="true"># set model to evalutation mode</span>
+    total_loss <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">for</span> x<span class="token punctuation">,</span> y <span class="token keyword">in</span> dv_set<span class="token punctuation">:</span>                         <span class="token comment" spellcheck="true"># iterate through the dataloader</span>
+        x<span class="token punctuation">,</span> y <span class="token operator">=</span> x<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span><span class="token punctuation">,</span> y<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>       <span class="token comment" spellcheck="true"># move data to device (cpu/cuda)</span>
+        <span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>                   <span class="token comment" spellcheck="true"># disable gradient calculation</span>
+            pred <span class="token operator">=</span> model<span class="token punctuation">(</span>x<span class="token punctuation">)</span>                     <span class="token comment" spellcheck="true"># forward pass (compute output)</span>
+            mse_loss <span class="token operator">=</span> model<span class="token punctuation">.</span>cal_loss<span class="token punctuation">(</span>pred<span class="token punctuation">,</span> y<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># compute loss</span>
+        total_loss <span class="token operator">+=</span> mse_loss<span class="token punctuation">.</span>detach<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> len<span class="token punctuation">(</span>x<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># accumulate loss</span>
+    total_loss <span class="token operator">=</span> total_loss <span class="token operator">/</span> len<span class="token punctuation">(</span>dv_set<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span>              <span class="token comment" spellcheck="true"># compute averaged loss</span>
+
+    <span class="token keyword">return</span> total_loss</code></pre>
+<h2 id="测试集预测"><a href="#测试集预测" class="headerlink" title="测试集预测"></a>测试集预测</h2><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">test</span><span class="token punctuation">(</span>tt_set<span class="token punctuation">,</span> model<span class="token punctuation">,</span> device<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    model<span class="token punctuation">.</span>eval<span class="token punctuation">(</span><span class="token punctuation">)</span>                                <span class="token comment" spellcheck="true"># set model to evalutation mode</span>
+    preds <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> x <span class="token keyword">in</span> tt_set<span class="token punctuation">:</span>                            <span class="token comment" spellcheck="true"># iterate through the dataloader</span>
+        x <span class="token operator">=</span> x<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>                        <span class="token comment" spellcheck="true"># move data to device (cpu/cuda)</span>
+        <span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>                   <span class="token comment" spellcheck="true"># disable gradient calculation</span>
+            pred <span class="token operator">=</span> model<span class="token punctuation">(</span>x<span class="token punctuation">)</span>                     <span class="token comment" spellcheck="true"># forward pass (compute output)</span>
+            preds<span class="token punctuation">.</span>append<span class="token punctuation">(</span>pred<span class="token punctuation">.</span>detach<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>   <span class="token comment" spellcheck="true"># collect prediction</span>
+    preds <span class="token operator">=</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span>preds<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span>     <span class="token comment" spellcheck="true"># concatenate all predictions and convert to a numpy array</span>
+    <span class="token keyword">return</span> preds</code></pre>
+<h2 id="设置超参数"><a href="#设置超参数" class="headerlink" title="设置超参数"></a>设置超参数</h2><pre class=" language-python"><code class="language-python">device <span class="token operator">=</span> get_device<span class="token punctuation">(</span><span class="token punctuation">)</span>                 <span class="token comment" spellcheck="true"># get the current available device ('cpu' or 'cuda')</span>
+os<span class="token punctuation">.</span>makedirs<span class="token punctuation">(</span><span class="token string">'models'</span><span class="token punctuation">,</span> exist_ok<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># The trained model will be saved to ./models/</span>
+target_only <span class="token operator">=</span> <span class="token boolean">False</span>                   <span class="token comment" spellcheck="true"># TODO: Using 40 states &amp; 2 tested_positive features</span>
+
+<span class="token comment" spellcheck="true"># TODO: How to tune these hyper-parameters to improve your model's performance?</span>
+config <span class="token operator">=</span> <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;</span>
+    <span class="token string">'n_epochs'</span><span class="token punctuation">:</span> <span class="token number">3000</span><span class="token punctuation">,</span>                <span class="token comment" spellcheck="true"># maximum number of epochs</span>
+    <span class="token string">'batch_size'</span><span class="token punctuation">:</span> <span class="token number">270</span><span class="token punctuation">,</span>               <span class="token comment" spellcheck="true"># mini-batch size for dataloader</span>
+    <span class="token string">'optimizer'</span><span class="token punctuation">:</span> <span class="token string">'SGD'</span><span class="token punctuation">,</span>              <span class="token comment" spellcheck="true"># optimization algorithm (optimizer in torch.optim)</span>
+    <span class="token string">'optim_hparas'</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;                # hyper-parameters for the optimizer (depends on which optimizer you are using)</span>
+        <span class="token string">'lr'</span><span class="token punctuation">:</span> <span class="token number">0.001</span><span class="token punctuation">,</span>                 <span class="token comment" spellcheck="true"># learning rate of SGD</span>
+        <span class="token string">'momentum'</span><span class="token punctuation">:</span> <span class="token number">0.9</span>              <span class="token comment" spellcheck="true"># momentum for SGD</span>
+    <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;,</span>
+    <span class="token string">'early_stop'</span><span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>               <span class="token comment" spellcheck="true"># early stopping epochs (the number epochs since your model's last improvement)</span>
+    <span class="token string">'save_path'</span><span class="token punctuation">:</span> <span class="token string">'models/model.pth'</span>  <span class="token comment" spellcheck="true"># your model will be saved here</span>
+<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;</span></code></pre>
+<h2 id="正式训练前价值数据"><a href="#正式训练前价值数据" class="headerlink" title="正式训练前价值数据"></a>正式训练前价值数据</h2><pre class=" language-python"><code class="language-python">tr_set <span class="token operator">=</span> prep_dataloader<span class="token punctuation">(</span>tr_path<span class="token punctuation">,</span> <span class="token string">'train'</span><span class="token punctuation">,</span> config<span class="token punctuation">[</span><span class="token string">'batch_size'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> target_only<span class="token operator">=</span>target_only<span class="token punctuation">)</span>
+dv_set <span class="token operator">=</span> prep_dataloader<span class="token punctuation">(</span>tr_path<span class="token punctuation">,</span> <span class="token string">'dev'</span><span class="token punctuation">,</span> config<span class="token punctuation">[</span><span class="token string">'batch_size'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> target_only<span class="token operator">=</span>target_only<span class="token punctuation">)</span>
+tt_set <span class="token operator">=</span> prep_dataloader<span class="token punctuation">(</span>tt_path<span class="token punctuation">,</span> <span class="token string">'test'</span><span class="token punctuation">,</span> config<span class="token punctuation">[</span><span class="token string">'batch_size'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> target_only<span class="token operator">=</span>target_only<span class="token punctuation">)</span></code></pre>
+<h2 id="正式训练"><a href="#正式训练" class="headerlink" title="正式训练"></a>正式训练</h2><pre class=" language-python"><code class="language-python">model <span class="token operator">=</span> NeuralNet<span class="token punctuation">(</span>tr_set<span class="token punctuation">.</span>dataset<span class="token punctuation">.</span>dim<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span> 
+model_loss<span class="token punctuation">,</span> model_loss_record <span class="token operator">=</span> train<span class="token punctuation">(</span>tr_set<span class="token punctuation">,</span> dv_set<span class="token punctuation">,</span> model<span class="token punctuation">,</span> config<span class="token punctuation">,</span> device<span class="token punctuation">)</span></code></pre>
+<h2 id="绘制两个数据集的Loss图"><a href="#绘制两个数据集的Loss图" class="headerlink" title="绘制两个数据集的Loss图"></a>绘制两个数据集的Loss图</h2><pre class=" language-python"><code class="language-python">plot_learning_curve<span class="token punctuation">(</span>model_loss_record<span class="token punctuation">,</span> title<span class="token operator">=</span><span class="token string">'deep model'</span><span class="token punctuation">)</span></code></pre>
+<h2 id="根据预测值绘制散点图"><a href="#根据预测值绘制散点图" class="headerlink" title="根据预测值绘制散点图"></a>根据预测值绘制散点图</h2><pre class=" language-python"><code class="language-python"><span class="token keyword">del</span> model
+model <span class="token operator">=</span> NeuralNet<span class="token punctuation">(</span>tr_set<span class="token punctuation">.</span>dataset<span class="token punctuation">.</span>dim<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+ckpt <span class="token operator">=</span> torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span>config<span class="token punctuation">[</span><span class="token string">'save_path'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> map_location<span class="token operator">=</span><span class="token string">'cpu'</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># Load your best model</span>
+model<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>ckpt<span class="token punctuation">)</span>
+plot_pred<span class="token punctuation">(</span>dv_set<span class="token punctuation">,</span> model<span class="token punctuation">,</span> device<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># Show prediction on the validation set</span></code></pre>
+<h2 id="保存预测数据"><a href="#保存预测数据" class="headerlink" title="保存预测数据"></a>保存预测数据</h2><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">save_pred</span><span class="token punctuation">(</span>preds<span class="token punctuation">,</span> file<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">''' Save predictions to specified file '''</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Saving results to &amp;#123;&amp;#125;'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>file<span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> fp<span class="token punctuation">:</span>
+        writer <span class="token operator">=</span> csv<span class="token punctuation">.</span>writer<span class="token punctuation">(</span>fp<span class="token punctuation">)</span>
+        writer<span class="token punctuation">.</span>writerow<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'id'</span><span class="token punctuation">,</span> <span class="token string">'tested_positive'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> i<span class="token punctuation">,</span> p <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>preds<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            writer<span class="token punctuation">.</span>writerow<span class="token punctuation">(</span><span class="token punctuation">[</span>i<span class="token punctuation">,</span> p<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+preds <span class="token operator">=</span> test<span class="token punctuation">(</span>tt_set<span class="token punctuation">,</span> model<span class="token punctuation">,</span> device<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># predict COVID-19 cases with your model</span>
+save_pred<span class="token punctuation">(</span>preds<span class="token punctuation">,</span> <span class="token string">'pred.csv'</span><span class="token punctuation">)</span>         <span class="token comment" spellcheck="true"># save prediction file to pred.csv</span></code></pre>
 
                 
             </div>
@@ -1485,7 +1619,7 @@ torch<span class="token punctuation">.</span>manual_seed<span class="token punct
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">99.4k</span>&nbsp;字
+                class="white-color">107.9k</span>&nbsp;字
             
             
             

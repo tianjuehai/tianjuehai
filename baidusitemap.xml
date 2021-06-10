@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tianjuewudi.gitee.io/2021/05/07/li-hong-yi-ji-qi-xue-xi-2021/</loc>
+    <lastmod>2021-06-10</lastmod>
+  </url>
+  <url>
     <loc>https://tianjuewudi.gitee.io/2021/05/13/pytorch-jiao-xue-ji-shi-li/</loc>
-    <lastmod>2021-05-25</lastmod>
+    <lastmod>2021-05-28</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/05/08/python-shen-jing-wang-luo-bian-cheng/</loc>
+    <lastmod>2021-05-26</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/05/11/li-yong-shen-jing-wang-luo-yu-ce-xin-guan-que-zhen-lu/</loc>
+    <lastmod>2021-05-26</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/05/19/shen-du-xue-xi-zhong-de-you-hua-suan-fa-chuan-jiang/</loc>
@@ -13,20 +25,8 @@
     <lastmod>2021-05-20</lastmod>
   </url>
   <url>
-    <loc>https://tianjuewudi.gitee.io/2021/05/08/python-shen-jing-wang-luo-bian-cheng/</loc>
-    <lastmod>2021-05-19</lastmod>
-  </url>
-  <url>
     <loc>https://tianjuewudi.gitee.io/2021/05/17/shen-du-xue-xi-shi-yong-gpu-jia-su-de-zhu-yi-shi-xiang/</loc>
     <lastmod>2021-05-17</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/05/07/li-hong-yi-ji-qi-xue-xi-2021/</loc>
-    <lastmod>2021-05-13</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/05/11/li-yong-shen-jing-wang-luo-yu-ce-xin-guan-que-zhen-lu/</loc>
-    <lastmod>2021-05-11</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/05/10/google-colab-ji-qi-shi-yong/</loc>
