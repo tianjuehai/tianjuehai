@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tianjuewudi.gitee.io/2021/07/15/yuan-xue-xi-meta-learning/</loc>
+    <lastmod>2021-07-15</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/07/14/shen-jing-wang-luo-ya-suo/</loc>
+    <lastmod>2021-07-15</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/05/13/pytorch-jiao-xue-ji-shi-li/</loc>
+    <lastmod>2021-07-15</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/07/14/ji-qi-zhong-shen-xue-xi-yu-zai-nan-xing-yi-wang/</loc>
+    <lastmod>2021-07-14</lastmod>
+  </url>
+  <url>
     <loc>https://tianjuewudi.gitee.io/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/</loc>
     <lastmod>2021-07-14</lastmod>
   </url>
@@ -27,10 +43,6 @@
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/06/10/sheng-cheng-shi-dui-kang-wang-luo-gan/</loc>
     <lastmod>2021-06-30</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/05/13/pytorch-jiao-xue-ji-shi-li/</loc>
-    <lastmod>2021-05-28</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/05/08/python-shen-jing-wang-luo-bian-cheng/</loc>
