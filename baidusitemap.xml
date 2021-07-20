@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/</loc>
+    <lastmod>2021-07-20</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/05/17/shen-du-xue-xi-shi-yong-gpu-jia-su-de-zhu-yi-shi-xiang/</loc>
+    <lastmod>2021-07-17</lastmod>
+  </url>
+  <url>
     <loc>https://tianjuewudi.gitee.io/2021/07/15/yuan-xue-xi-meta-learning/</loc>
     <lastmod>2021-07-15</lastmod>
   </url>
@@ -59,10 +67,6 @@
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/01/23/markdown-shu-xue-gong-shi-biao-shi-fa/</loc>
     <lastmod>2021-05-20</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/05/17/shen-du-xue-xi-shi-yong-gpu-jia-su-de-zhu-yi-shi-xiang/</loc>
-    <lastmod>2021-05-17</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/05/10/google-colab-ji-qi-shi-yong/</loc>

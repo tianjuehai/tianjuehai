@@ -479,14 +479,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-05-17
+                    2021-07-18
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    586
+                    720
                 </div>
                 
 
@@ -542,6 +542,16 @@ model<span class="token punctuation">.</span>to<span class="token punctuation">(
 <span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span>
 inputs<span class="token punctuation">,</span>target <span class="token operator">=</span> inputs<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span><span class="token punctuation">,</span>target<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
 <span class="token operator">-</span><span class="token operator">-</span>snip<span class="token operator">-</span><span class="token operator">-</span></code></pre>
+<h2 id="切换CUDA版本"><a href="#切换CUDA版本" class="headerlink" title="切换CUDA版本"></a>切换CUDA版本</h2><p>通常许多项目用的CUDA版本都互不相同，因此我们时常需要切换CUDA版本来运行程序。切换CUDA版本的步骤如下：</p>
+<ol>
+<li><p>先安装好多个版本的CUDA。</p>
+</li>
+<li><p>打开环境变量。把CUDA_PATH这个系统变量的路径设定到我们需要的版本，例如这里假设我需要使用11.1的版本。</p>
+<img src="/2021/05/17/shen-du-xue-xi-shi-yong-gpu-jia-su-de-zhu-yi-shi-xiang/3.png" class="">
+</li>
+<li><p>双击系统变量的PATH，弹出一个窗口，我们要把11.1版本的内容置于其他版本上方。</p>
+</li>
+</ol>
 
                 
             </div>
@@ -1329,23 +1339,14 @@ inputs<span class="token punctuation">,</span>target <span class="token operator
     }
 
     
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
 </style>
 <div class="">
     
     <div class="row">
         <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
+                   server="tencent"
                    type="playlist"
-                   id="5456680252"
+                   id="8075110837"
                    fixed='true'
                    autoplay='true'
                    theme='#42b983'
@@ -1353,7 +1354,7 @@ inputs<span class="token punctuation">,</span>target <span class="token operator
                    order='random'
                    preload='auto'
                    volume='0.35'
-                   list-folded='true'
+                   list-folded='false'
         >
         </meting-js>
     </div>
@@ -1376,7 +1377,7 @@ inputs<span class="token punctuation">,</span>target <span class="token operator
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">123.2k</span>&nbsp;字
+                class="white-color">134.4k</span>&nbsp;字
             
             
             
