@@ -1,0 +1,1842 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="强化学习纲要（周博磊课程）, 博客制作,个人经验分享,Unity,人工智能等">
+    <meta name="description" content="本站记录本人各种学习的旅途，用于巩固自我并启发后来人">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>强化学习纲要（周博磊课程） | 微笑紫瞳星</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">微笑紫瞳星</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">微笑紫瞳星</div>
+        <div class="logo-desc">
+            
+            本站记录本人各种学习的旅途，用于巩固自我并启发后来人
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">强化学习纲要（周博磊课程）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">强化学习</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                强化学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-07-21
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2021-08-26
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    19 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p> 提示：阅读本文需要一定的深度学习基础。 </p>
+<p>课程链接：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LE411G7Xj">https://www.bilibili.com/video/BV1LE411G7Xj</a></p>
+<p>我以前的强化学习笔记，相同的内容在下面就不再赘述：</p>
+<p>1、<a href="https://tianjuewudi.gitee.io/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/">强化学习概述</a></p>
+<p>2、<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/">强化学习实践教学</a></p>
+<h1 id="Foundation"><a href="#Foundation" class="headerlink" title="Foundation"></a>Foundation</h1><h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>这部分内容可以参考我《强化学习概述》的序章。</p>
+<p>强化学习的特征可以概括为以下几点：</p>
+<ol>
+<li>需要通过在环境中探索来获取对环境的理解。</li>
+<li>Agent在环境中获得的奖励是延迟的，在获取奖励的过程中，由于没有反馈，你不知道自己每一步是对是错，优化这个过程是我们需要做的。</li>
+<li>时间关联性，获取的数据都是有时间关联的，会使训练非常不稳定。</li>
+<li>Agent的行为会影响随后的到的数据。</li>
+<li>Agent的任务是让奖励最大化。</li>
+</ol>
+<p>强化学习包含以下几个组成部分：</p>
+<ol>
+<li>行为策略：也就是决定自己行为的函数，通常可以由神经网络来担任。</li>
+<li>价值函数：对自己现在所处的状态进行价值的评估。可以对后面的收益带来多大的影响。</li>
+<li>模型：决定了这个世界的运行方式。通过agent当前的状态的行为决定下一个状态，以及可以得到多大的奖励。</li>
+</ol>
+<p>当有了行为策略，价值函数和世界模型之后，这三个成分就形成了一个马尔科夫决策过程（MDPs）。这个过程可视化了状态转移和我们采取的行为。</p>
+<p>基于agent学习方式不同，我们可以分成两类：</p>
+<ol>
+<li>基于价值（Value-based）：依靠价值函数进行学习和决策。</li>
+<li>基于策略（Policy-based）：无需构建价值函数，输入状态就可以直接得到下一步动作的概率分布。</li>
+<li>Actor-Critic：这是上面两者的结合。既有策略函数（Actor），也有价值函数（Critic）。Actor的任务是对外输出动作并且根据Critic的打分来调整自己的参数来获得更好的输出，使得Critic打分更高。Critic的任务是对Actor的输出做评估（预测），并且通过reward不断调整自己的预测能可能地接近reward。这也就是一个Q网络。</li>
+</ol>
+<p>基于agent有没有学习环境的模型进行分类：</p>
+<ol>
+<li>基于模型（Model-based）：知道环境的模型，通过学习状态转移采取措施。</li>
+<li>无模型（Model-free）：没有环境的模型，通过学习Value Function和Policy Function进行决策。</li>
+</ol>
+<img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/1.png" class="">
+
+<p>在model-free领域又有三种分类：</p>
+<img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/15.png" class="">
+
+
+
+<p><strong>强化学习的Exploration和Exploitation</strong>：</p>
+<p>这是两个很核心的问题，其中Exploration探讨怎么探索环境，尝试不同的行为，期望得到一个最佳的策略。Exploitation探讨不去尝试新的东西，用已知的内容做最好的决策。</p>
+<h2 id="Markov-Decision-Process（MDP）"><a href="#Markov-Decision-Process（MDP）" class="headerlink" title="Markov Decision Process（MDP）"></a>Markov Decision Process（MDP）</h2><img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/2.png" class="">
+
+<p>马尔科夫决策过程是强化学习的基本框架。而Agent和Environment的交互过程，是可以用马尔科夫决策过程表示。其中，环境是全部可以观测的，部分观测问题也可以转换为MDP问题。</p>
+<p>一个状态转移符合马尔科夫，意思是<strong>下一个状态取决于当前状态</strong>，和之前的状态没有关系。</p>
+<p>描述状态转移概率，我们可以用状态转移矩阵表示：</p>
+<img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/3.png" class="">
+
+<h3 id="马尔科夫链-Markov-Chain-Markov-Process（MP）"><a href="#马尔科夫链-Markov-Chain-Markov-Process（MP）" class="headerlink" title="马尔科夫链 Markov Chain / Markov Process（MP）"></a>马尔科夫链 Markov Chain / Markov Process（MP）</h3><p>马尔科夫链可以表示所有的状态转移概率：</p>
+<img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/4.png" class="">
+
+<p>通过对马尔科夫链进行采样，我们可以得到很多从一个起始点开始的一串的轨迹。</p>
+<h3 id="马尔科夫奖励过程-Markov-Reward-Process（MRP）"><a href="#马尔科夫奖励过程-Markov-Reward-Process（MRP）" class="headerlink" title="马尔科夫奖励过程  Markov Reward Process（MRP）"></a>马尔科夫奖励过程  Markov Reward Process（MRP）</h3><p>马尔科夫奖励过程是一个马尔科夫链加上奖励函数。在马尔科夫链中加入奖励函数，奖励函数是一个期望，表示到达某一个状态时可以获得多大的奖励。</p>
+<img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/5.png" class="">
+
+<h3 id="Return-and-Value-Funciton"><a href="#Return-and-Value-Funciton" class="headerlink" title="Return and Value Funciton"></a>Return and Value Funciton</h3><h4 id="Horizon"><a href="#Horizon" class="headerlink" title="Horizon"></a>Horizon</h4><p>轨迹的长度是由有限个步数决定的。</p>
+<h4 id="Return"><a href="#Return" class="headerlink" title="Return"></a>Return</h4><p>我们把奖励reward按照一定折扣相加得到。<br>$$<br>G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+2} + \gamma^3 R_{t+3} + … +  \gamma^{T-t-1} R_{T}<br>$$</p>
+<h4 id="State-Value-Function-for-a-MRP"><a href="#State-Value-Function-for-a-MRP" class="headerlink" title="State Value Function for a MRP"></a>State Value Function for a MRP</h4><p>$$<br>V_t(s) = E[G_t|s_t = s] = E[R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+2} + \gamma^3 R_{t+3} + \gamma^{T-t-1} R_{T} | s_t = s]<br>$$</p>
+<p>也就是说，一个状态的价值由后面的状态可以得到的reward按一定系数叠加得到，越往后的reward，对当前状态的价值影响越小。</p>
+<p>MRP价值函数满足以下<strong>贝尔曼等式（Bellman equation）</strong>：<br>$$<br>V(s) = R(s) + \gamma \sum_{s’ \in S} P(s’|s) V(s’)<br>$$<br>也就是说现在状态的价值V（s）和现在的奖励以及下一个所有可能到达的状态的价值V（s’）相关。用矩阵表示：</p>
+<img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/6.png" class="">
+
+<p>在状态转移矩阵较小的情况下，我们可以通过直接求逆矩阵就可以得出每一个状态的价值。</p>
+<h3 id="MRP价值的解法"><a href="#MRP价值的解法" class="headerlink" title="MRP价值的解法"></a>MRP价值的解法</h3><ol>
+<li>第一种解法是动态规划（Dynamic Programming）</li>
+<li>第二种解法是蒙泰卡罗评估（Monte-Carlo evaluation）</li>
+<li>第三种解法是时序差分（Temporal-Difference Learning）</li>
+</ol>
+<h4 id="Monte-Carlo-Algorithm"><a href="#Monte-Carlo-Algorithm" class="headerlink" title="Monte Carlo Algorithm"></a>Monte Carlo Algorithm</h4><img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/7.png" class="">
+
+<p>蒙泰卡罗算法的做法是直接在某状态开始直接收集多条轨迹的数据，得到多个价值，然后把所有的价值平均起来得到该状态的价值$V_t(s)$，可以说随机的数量足够多，那么$V_t(s)$就会接近真实的价值。</p>
+<h4 id="Iterative-Algorithm"><a href="#Iterative-Algorithm" class="headerlink" title="Iterative Algorithm"></a>Iterative Algorithm</h4><img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/8.png" class="">
+
+<p>动态规划的办法是一直迭代Bellman Equation。当迭代到价值稳定时（变化小于某一个值），我们就可以直接输出V（s）。但是我们需要知道状态转移概率。这是一个model-based的方法。</p>
+<h4 id="Temporal-Difference-Learning"><a href="#Temporal-Difference-Learning" class="headerlink" title="Temporal-Difference Learning"></a>Temporal-Difference Learning</h4><p>这是前两者的结合。在后面会提到。</p>
+<h3 id="马尔科夫决策过程（Markov-Decision-Process）-MDP"><a href="#马尔科夫决策过程（Markov-Decision-Process）-MDP" class="headerlink" title="马尔科夫决策过程（Markov Decision Process）(MDP)"></a>马尔科夫决策过程（Markov Decision Process）(MDP)</h3><p>马尔科夫决策过程比马尔科夫奖励过程多了一个行为（action）。</p>
+<ol>
+<li><p><strong>未来的状态不仅取决于现在的状态，也取决于你所采取的行动。</strong></p>
+</li>
+<li><p><strong>奖励函数的设置不仅和当前状态有关，和行为也有关。</strong></p>
+</li>
+</ol>
+<h4 id="Policy-in-MDP"><a href="#Policy-in-MDP" class="headerlink" title="Policy in MDP"></a>Policy in MDP</h4><img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/9.png" class="">
+
+<p>Policy函数决定了在某一个状态中采取的行为，可以输出一个行为的概率（离散控制），也可以是一个连续值（确定动作的连续控制）。而且假设Policy是静态的，也就是说具有时间独立性，不同时间的策略函数不变。</p>
+<p>当我们知道MDP和policy π的时候，我们可以把MDP转换为MRP。<br>$$<br>P^π(s’|s) = \sum_{a\in A} π(a|s) P(s’|s,a)<br>$$<br>也就是说，一个状态转移到另一个状态的概率的计算方式是：<strong>Policy可控的决策过程的采取该动作概率</strong> 乘上 <strong>不可控的该动作下环境选择下一个状态的概率</strong>，然后把每个行动的可能性都相加。</p>
+<p>奖励函数的计算方式也是分行动的，因为每个行动的reward都不相同：<br>$$<br>R^π(s) = \sum_{a \in A} π(a|s) R(s,a)<br>$$</p>
+<h4 id="Value-Function-for-MDP"><a href="#Value-Function-for-MDP" class="headerlink" title="Value Function for MDP"></a>Value Function for MDP</h4><p>MDP的价值函数分为<strong>状态价值</strong>（state-value）和<strong>行为价值</strong>（action-value）。状态价值由当前的状态决定，而行为价值由当前状态和行动共同决定。有多少行为就有多少行为价值。</p>
+<p>状态价值$v^{π}(s)$和行为价值$q^{π}(s)$的关系是：<br>$$<br>v^{π}(s) = \sum_{a \in A} π(a|s) q^{π}(s,a)<br>$$<br><strong>也就是说状态价值由行为价值按照一定的比例构成。</strong></p>
+<p>因此贝尔曼等式有两条，也称Bellman Expection Equation：<br>$$<br>v^π (s) = E_{π} [R_{t+1} + \gamma v^{π} (s_{t+1}) | s_t = s]<br>$$</p>
+<p>$$<br>q^π (s,a) = E_{π} [R_{t+1} + \gamma q^{π} (s_{t+1},A_{t+1}) | s_t = s ,A_t = a]<br>$$</p>
+<p><strong>这两个公式将是写代码更新参数的重点！！！尤其是行为价值公式！</strong></p>
+<p>容易得出行为价值公式有：<br>$$<br>q^π (s,a) = R_{s}^a + \gamma \sum_{s’ \in S} P(s’|s ,a)v^π(s’)<br>$$<br>联立<br>$$<br>v^{π}(s) = \sum_{a \in A} π(a|s) q^{π}(s,a)<br>$$<br>可以得出：<br>$$<br>v^{π}(s) = \sum_{a \in A} π(a|s) ( R_{s}^a + \gamma \sum_{s’ \in S} P(s’|s ,a)v^π(s’))<br>$$</p>
+<p>$$<br>q^π (s,a) = R_{s}^a + \gamma \sum_{s’ \in S} P(s’|s ,a) \sum_{a \in A} π(a’|s’) q^{π}(s’,a’)<br>$$</p>
+<p>这就是上一个节点与下一个相同属性节点价值之间的关系，使用于知道环境模型的情况下。也就是model-based。</p>
+<h4 id="Policy-Evaluation"><a href="#Policy-Evaluation" class="headerlink" title="Policy Evaluation"></a>Policy Evaluation</h4><p>简单的说是计算$v^π(s)$，也叫做价值预测。用这个预测来指导我们的动作选择。</p>
+<h4 id="Prediction-and-Control"><a href="#Prediction-and-Control" class="headerlink" title="Prediction and Control"></a>Prediction and Control</h4><p>预测和控制是MDP的核心问题。</p>
+<p>预测：给定MDP&lt;S,A,P,R,γ&gt;和policy π，或者给定MRP$&lt;S,P^π,R^π,γ&gt;$，我们可以对状态价值V进行计算。</p>
+<p>控制：给定MDP，寻找最佳的价值函数V和最佳策略π。最佳指的是找π使得V最大。</p>
+<h4 id="Dynamic-Programming"><a href="#Dynamic-Programming" class="headerlink" title="Dynamic Programming"></a>Dynamic Programming</h4><p>这两个问题都可以通过动态规划（Dynamic Programming）解决。只要我们可以把问题分解成一个个最优子结构，把子结构解出来，就可以组成一个最优解。我们可以把问题分解成递归的结构，因为状态相连，子状态得到一个值，未来状态也能推算出来，价值函数也就能储存和重用最优解。</p>
+<img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/10.png" class="">
+
+<p>或者用MRP公式也能迭代：<br>$$<br>v_{t+1} (s) = R^{π}(s) + \gamma  P^π (s’|s ,a)v_t(s’)<br>$$</p>
+<h4 id="Find-Optimal-Policy（重中之重，反复查看）"><a href="#Find-Optimal-Policy（重中之重，反复查看）" class="headerlink" title="Find Optimal Policy（重中之重，反复查看）"></a>Find Optimal Policy（重中之重，反复查看）</h4><p>当我们采取的策略π可以使得行为价值q最大化，那么这个策略就是最佳策略。寻找最佳策略的过程也叫MDP Control。</p>
+<p>这里有两种解最佳策略的方法，一种是Policy iteration，一种是value iteration。这两个方法都是model-based的。</p>
+<p><strong>policy iteration:</strong></p>
+<img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/11.png" class="">
+
+<ol>
+<li>随机选择一个策略作为初始值。</li>
+<li>Policy Evaluation：通过现有的策略π计算状态价值v。</li>
+<li>Policy Improvement：计算当前最好的Action，更新策略$π(s) = argmac_a \sum_{s’,r}(r+\gamma V(s’))$。</li>
+<li>不断循环第二和第三步。</li>
+</ol>
+<img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/13.png" class="">
+
+<p>策略评估会评估从上次策略改进中获得的贪心策略的价值函数 V。另一方面，策略改进通过使每个状态的 V 值最大化的动作来更新策略。更新方程以贝尔曼方程为基础。它不断迭代直到收敛。</p>
+<p>优化过后，<strong>贝尔曼最优等式（Bellman Optimality Equation）</strong>满足：<br>$$<br>v^{π}(s) = \max_{a \in A} q^π (s,a)<br>$$<br>之前的两条公式变为：<br>$$<br>v^*(s) = \max_aR(s,a) + \gamma \sum_{s’ \in S} P(s’|s ,a)v^*(s’)<br>$$</p>
+<p>$$<br>q^* (s,a) = R(s,a) + \gamma \sum_{s’ \in S} P(s’|s ,a) \max_{a’}  q^*(s’,a’)<br>$$</p>
+<p>Q-learning就是基于贝尔曼最优等式实现的。</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">policy_iteration</span><span class="token punctuation">(</span>env<span class="token punctuation">,</span> gamma <span class="token operator">=</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">""" Policy-Iteration algorithm """</span>
+    policy <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>choice<span class="token punctuation">(</span>env<span class="token punctuation">.</span>env<span class="token punctuation">.</span>nA<span class="token punctuation">,</span> size<span class="token operator">=</span><span class="token punctuation">(</span>env<span class="token punctuation">.</span>env<span class="token punctuation">.</span>nS<span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># initialize a random policy</span>
+    max_iterations <span class="token operator">=</span> <span class="token number">200000</span>
+    gamma <span class="token operator">=</span> <span class="token number">1.0</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>max_iterations<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        old_policy_v <span class="token operator">=</span> compute_policy_v<span class="token punctuation">(</span>env<span class="token punctuation">,</span> policy<span class="token punctuation">,</span> gamma<span class="token punctuation">)</span>
+        new_policy <span class="token operator">=</span> extract_policy<span class="token punctuation">(</span>old_policy_v<span class="token punctuation">,</span> gamma<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>np<span class="token punctuation">.</span>all<span class="token punctuation">(</span>policy <span class="token operator">==</span> new_policy<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span> <span class="token punctuation">(</span><span class="token string">'Policy-Iteration converged at step %d.'</span> <span class="token operator">%</span><span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">break</span>
+        policy <span class="token operator">=</span> new_policy
+    <span class="token keyword">return</span> policy</code></pre>
+<p><strong>Value Iteration</strong>:</p>
+<ul>
+<li><p>在Policy Iteration中</p>
+</li>
+<li><ul>
+<li>第一步 Policy Evaluation：一直迭代至收敛，获得准确的V(s)</li>
+<li>第二步 Policy Improvement：根据准确的V(s)，求解最好的Action</li>
+</ul>
+</li>
+<li><p>对比之下，在Value Iteration中</p>
+</li>
+<li><ul>
+<li>第一步 “Policy Eval”：迭代只做一步，获得不太准确的V(s)</li>
+<li>第二步 “Policy Improvement”：根据不太准确的V(s)，求解最好的Action</li>
+</ul>
+</li>
+</ul>
+<img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/14.png" class="">
+
+<p>Value Iteration的迭代出optimal value function后只做一次policy update，即：循环（对于当前状态每个可能的action，都做一次value evaluation，然后取最大的value，作为当前状态的价值），直到收敛。最后，按照最优价值的转移方向更新一次策略。</p>
+<p>这里把贝尔曼最优等式拿进来，寻找最佳的Value-Funciton，没有Policy Function在里面。<br>$$<br>v^*(s) \leftarrow \max_{a \in A}(R(s,a) + \gamma \sum_{s’ \in S} P(s’|s ,a)v^*(s’))<br>$$</p>
+<img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/12.png" class="">
+
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">value_iteration</span><span class="token punctuation">(</span>env<span class="token punctuation">,</span> gamma <span class="token operator">=</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">""" Value-iteration algorithm """</span>
+    v <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>env<span class="token punctuation">.</span>env<span class="token punctuation">.</span>nS<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># initialize value-function</span>
+    max_iterations <span class="token operator">=</span> <span class="token number">100000</span>
+    eps <span class="token operator">=</span> <span class="token number">1e</span><span class="token operator">-</span><span class="token number">20</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>max_iterations<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        prev_v <span class="token operator">=</span> np<span class="token punctuation">.</span>copy<span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> s <span class="token keyword">in</span> range<span class="token punctuation">(</span>env<span class="token punctuation">.</span>env<span class="token punctuation">.</span>nS<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            q_sa <span class="token operator">=</span> <span class="token punctuation">[</span>sum<span class="token punctuation">(</span><span class="token punctuation">[</span>p<span class="token operator">*</span><span class="token punctuation">(</span>r <span class="token operator">+</span> gamma <span class="token operator">*</span> prev_v<span class="token punctuation">[</span>s_<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">for</span> p<span class="token punctuation">,</span> s_<span class="token punctuation">,</span> r<span class="token punctuation">,</span> _ <span class="token keyword">in</span> env<span class="token punctuation">.</span>env<span class="token punctuation">.</span>P<span class="token punctuation">[</span>s<span class="token punctuation">]</span><span class="token punctuation">[</span>a<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">for</span> a <span class="token keyword">in</span> range<span class="token punctuation">(</span>env<span class="token punctuation">.</span>env<span class="token punctuation">.</span>nA<span class="token punctuation">)</span><span class="token punctuation">]</span> 
+            v<span class="token punctuation">[</span>s<span class="token punctuation">]</span> <span class="token operator">=</span> max<span class="token punctuation">(</span>q_sa<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>np<span class="token punctuation">.</span>sum<span class="token punctuation">(</span>np<span class="token punctuation">.</span>fabs<span class="token punctuation">(</span>prev_v <span class="token operator">-</span> v<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;=</span> eps<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span> <span class="token punctuation">(</span><span class="token string">'Value-iteration converged at iteration# %d.'</span> <span class="token operator">%</span><span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">break</span>
+    <span class="token keyword">return</span> v</code></pre>
+<h2 id="Model-free-Prediction-and-Control"><a href="#Model-free-Prediction-and-Control" class="headerlink" title="Model-free Prediction and Control"></a>Model-free Prediction and Control</h2><h3 id="Model-free下的价值估计"><a href="#Model-free下的价值估计" class="headerlink" title="Model-free下的价值估计"></a>Model-free下的价值估计</h3><p>Model-free相对于model-based的不同在于是否知道MDP。而现实中大部分MDP都没有现成的模型可以用，所以我们只能采用Model-free的方法。</p>
+<p>MDP已知：奖励函数R和转移矩阵P都可以为agent所知。所有agent才能通过Policy Iteration和Policy Iteration来寻找最佳策略。</p>
+<p>在Model-free RL中，我们并没有直接获取转移状态和奖励函数，我们让agent跟环境进行交互，采集很多轨迹数据，agent需要从这些轨迹中获取信息，改进策略，以获得更多奖励。</p>
+<p>当我们给定策略的时候，在没有给MDP转移模型的情况如何估计一个状态的价值？有两种常见的方法。一种是蒙泰卡罗（Monte Carlo policy evalution），一种是时序差分学习（Temporal Difference）</p>
+<h4 id="Monte-Carlo-Policy-Evaluation"><a href="#Monte-Carlo-Policy-Evaluation" class="headerlink" title="Monte-Carlo Policy Evaluation"></a>Monte-Carlo Policy Evaluation</h4><p>蒙泰卡罗算法的做法是直接在某状态开始直接收集多条轨迹的数据，得到多个价值，然后把所有的价值平均起来得到该状态的价值$V_t(s)$，可以说随机的数量足够多，那么$V_t(s)$就会接近真实的价值。但这个算法的限制是只能用在有终止的马尔科夫决策过程。相对于动态规划（DP）来说，这是一个model-free的算法，而且只更新轨迹上的数据，速度较快。特点是需要跑完一个episode才能更新一次。<br>$$<br>v(S_t) \leftarrow v(S_t) + \alpha(G_{i,t} - v(S_t))<br>$$</p>
+<h4 id="Temporal-Difference（TD）Learning"><a href="#Temporal-Difference（TD）Learning" class="headerlink" title="Temporal-Difference（TD）Learning"></a>Temporal-Difference（TD）Learning</h4><p>这是一个介于MC和DP之间的方法。这既可以用于Model-free，也能在一个episode不完整的情况下实现更新，一个step就能更新一次，每次只更新一点。<br>$$<br>v(S_t) \leftarrow v(S_t) + \alpha(R_{t+1} + \gamma v(S_{t+1}) - v(S_t))<br>$$<br>这个算法可以拓展到2-step TD，3-step TD等等，每两个或三个step或更多step更新一次。当这个步数为无穷时，TD算法就可以转变为MC算法，这就是它们的联系。</p>
+<h4 id="各种算法直接的区别"><a href="#各种算法直接的区别" class="headerlink" title="各种算法直接的区别"></a>各种算法直接的区别</h4><p>对于动态规划，需要考虑到所有支路的情况，取一个期望。</p>
+<img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/16.png" class="">
+
+<p>对于MC，我们每次只取一条路径来进行更新，期望通过多条路径的更新达到和期望一样的效果。</p>
+<img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/17.png" class="">
+
+<p>对于TD，每次还是走一条路径，一个step就更新一次。</p>
+<img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/18.png" class="">
+
+
+
+<h3 id="model-free下的策略更新"><a href="#model-free下的策略更新" class="headerlink" title="model-free下的策略更新"></a>model-free下的策略更新</h3><p>通常我们希望每个状态都能得到充分的更新，因此我们需要尽可能采样到比较多的状态。通过MC采样的方法我们需要采样尽可能多的轨迹，然后<strong>更新一个Q表格</strong>。同样我们用TD可以保证每个step进行更新，不用等episode结束。</p>
+<p>我们需要保证算法有足够多的探索，因此我们在刚开始迭代的时候让算法有较大的概率随机采取action，而不是按照greedy也就是动作价值最大的策略，在后面再把这个概率降下来。</p>
+<h4 id="Sarsa"><a href="#Sarsa" class="headerlink" title="Sarsa"></a>Sarsa</h4><p>更新公式<br>$$<br>Q(S_t,A_t) \leftarrow Q(S_t,A_t) + \alpha [R_{t+1} + \gamma Q(S_{t+1},A_{t+1}) - Q(S_{t},A_t)]<br>$$<br>其中α是学习率，我们每一个step需要更新Q表格中的一个值，更新完后使用greedy的策略进行探索，也有一定的概率随机探索，这是基于离散或有限状态的方法，是表格型的方法，没有用到神经网络。</p>
+<pre class=" language-python"><code class="language-python">    <span class="token comment" spellcheck="true"># 学习方法，也就是更新Q-table的方法，采用Sarsa算法来更新Q表格</span>
+    <span class="token keyword">def</span> <span class="token function">learn</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obs<span class="token punctuation">,</span> action<span class="token punctuation">,</span> reward<span class="token punctuation">,</span> next_obs<span class="token punctuation">,</span> next_action<span class="token punctuation">,</span> done<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">""" on-policy
+            obs: 交互前的obs, s_t
+            action: 本次交互选择的action, a_t
+            reward: 本次动作获得的奖励r
+            next_obs: 本次交互后的obs, s_t+1
+            next_action: 根据当前Q表格, 针对next_obs会选择的动作, a_t+1
+            done: episode是否结束
+        """</span>
+        predict_Q <span class="token operator">=</span> self<span class="token punctuation">.</span>Q<span class="token punctuation">[</span>obs<span class="token punctuation">,</span> action<span class="token punctuation">]</span>
+        <span class="token keyword">if</span> done<span class="token punctuation">:</span>
+            target_Q <span class="token operator">=</span> reward  <span class="token comment" spellcheck="true"># 没有下一个状态了</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            target_Q <span class="token operator">=</span> reward <span class="token operator">+</span> self<span class="token punctuation">.</span>gamma <span class="token operator">*</span> self<span class="token punctuation">.</span>Q<span class="token punctuation">[</span>next_obs<span class="token punctuation">,</span>
+                                                    next_action<span class="token punctuation">]</span>  <span class="token comment" spellcheck="true"># Sarsa</span>
+        self<span class="token punctuation">.</span>Q<span class="token punctuation">[</span>obs<span class="token punctuation">,</span> action<span class="token punctuation">]</span> <span class="token operator">+=</span> self<span class="token punctuation">.</span>lr <span class="token operator">*</span> <span class="token punctuation">(</span>target_Q <span class="token operator">-</span> predict_Q<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 修正q</span></code></pre>
+<h4 id="on-policy和off-policy"><a href="#on-policy和off-policy" class="headerlink" title="on-policy和off-policy"></a>on-policy和off-policy</h4><p>上面的算法Sarsa是一种on-policy的算法，也就是说探索和决策都采用同一种策略，而off-policy的算法是探索和决策采用不同的策略，这样我们在探索的时候就能使用更为激进的手段收集更多的数据，然后交给策略进行学习，这样也能比较有效利用到之前采集的数据。下面就讲一下off-policy中的Q-learning。</p>
+<h4 id="Q-learning"><a href="#Q-learning" class="headerlink" title="Q-learning"></a>Q-learning</h4><p>更新公式：<br>$$<br>Q(S_t,A_t) \leftarrow Q(S_t,A_t) + \alpha [R_{t+1} + \gamma \max_a Q(S_{t+1},a) - Q(S_{t},A_t)]<br>$$<br>可以看到，和Sarsa不同的地方在于我们没有用到第二个action，也就是说，我们无需知道下一个状态之后agent需要采取的动作。我们只需要从下一个状态采取的所有动作中选取动作价值最大的action的值来进行更新。因此更新用的第二个action和探索用的第二个action无关，这就是off-policy。Q-Learning的另一个特点是一个动作价值不会被隔壁的动作价值所影响，只取决于隔壁最大的动作价值。除了价值更新方法的不同，探索的策略依旧和Sarsa相同，这样Q-learning采取的策略就会比Sarsa激进得多。往往Q-learning会学习到最佳的策略。</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">learn</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obs<span class="token punctuation">,</span> action<span class="token punctuation">,</span> reward<span class="token punctuation">,</span> next_obs<span class="token punctuation">,</span> done<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">""" off-policy
+            obs: 交互前的obs, s_t
+            action: 本次交互选择的action, a_t
+            reward: 本次动作获得的奖励r
+            next_obs: 本次交互后的obs, s_t+1
+            done: episode是否结束
+        """</span>
+        predict_Q <span class="token operator">=</span> self<span class="token punctuation">.</span>Q<span class="token punctuation">[</span>obs<span class="token punctuation">,</span> action<span class="token punctuation">]</span>
+        <span class="token keyword">if</span> done<span class="token punctuation">:</span>
+            target_Q <span class="token operator">=</span> reward  <span class="token comment" spellcheck="true"># 没有下一个状态了</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            target_Q <span class="token operator">=</span> reward <span class="token operator">+</span> self<span class="token punctuation">.</span>gamma <span class="token operator">*</span> np<span class="token punctuation">.</span>max<span class="token punctuation">(</span>
+                self<span class="token punctuation">.</span>Q<span class="token punctuation">[</span>next_obs<span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># Q-learning</span>
+        self<span class="token punctuation">.</span>Q<span class="token punctuation">[</span>obs<span class="token punctuation">,</span> action<span class="token punctuation">]</span> <span class="token operator">+=</span> self<span class="token punctuation">.</span>lr <span class="token operator">*</span> <span class="token punctuation">(</span>target_Q <span class="token operator">-</span> predict_Q<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 修正q</span></code></pre>
+<h2 id="Value-Function-Approximation"><a href="#Value-Function-Approximation" class="headerlink" title="Value Function Approximation"></a>Value Function Approximation</h2><p>这部分内容我以前有过记录：<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-19">强化学习实战</a>，请查看<strong>利用神经网络方法求解RL</strong>的章节。其中的DQN算法是一个经典算法。</p>
+<h3 id="Deep-Q-Networks"><a href="#Deep-Q-Networks" class="headerlink" title="Deep Q Networks"></a>Deep Q Networks</h3><p>Code of DQN in PyTorch：<a target="_blank" rel="noopener" href="https://github.com/cuhkrlcourse/DeepRL-Tutorials/blob/master/01.DQN.ipynb">https://github.com/cuhkrlcourse/DeepRL-Tutorials/blob/master/01.DQN.ipynb</a></p>
+<p>Code of Flappy Bird：<a target="_blank" rel="noopener" href="https://github.com/xmfbit/DQN-FlappyBird">https://github.com/xmfbit/DQN-FlappyBird</a></p>
+<h2 id="Policy-Optimization-State-of-the-Art"><a href="#Policy-Optimization-State-of-the-Art" class="headerlink" title="Policy Optimization:State of the Art"></a>Policy Optimization:State of the Art</h2><p>之前讲解的算法都是基于value-based的算法，利用各种方法来调整动作价值的更新，依靠这个价值来进行决策。下面来讲解policy-based的算法，这种算法无需构建价值函数，输入状态就可以直接由网络输出得到下一步动作的概率分布。此部分内容可以参考<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-19">强化学习实战</a>的<strong>基于策略梯度求解RL</strong>。</p>
+<p>如果客观函数是不可导的，我们没法计算导数，这时候我们可以使用Derivative-free的方法，这里简要介绍两种。</p>
+<h3 id="Cross-Entropy-Method（CEM）"><a href="#Cross-Entropy-Method（CEM）" class="headerlink" title="Cross Entropy Method（CEM）"></a>Cross Entropy Method（CEM）</h3><p>这种算法跟遗传算法类似，不断取前10%最优的参数对分布进行优化。</p>
+<img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/19.png" class="">
+
+<h3 id="Finite-Difference"><a href="#Finite-Difference" class="headerlink" title="Finite Difference"></a>Finite Difference</h3><p>我们可以加一个很小的扰动来观察J（θ）的变化来近似获取梯度。</p>
+<img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/20.png" class="">
+
+
+
+<h3 id="Actor-Critic"><a href="#Actor-Critic" class="headerlink" title="Actor-Critic"></a>Actor-Critic</h3><p>此部分内容可以参考<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-19">强化学习实战</a>的<strong>连续动作空间上求解RL</strong>。这里用了DDPG的算法。</p>
+<p>这里Actor-Critic也可以运用到上面的Policy Gradient中，Policy网络的更新方式中的Reward加权更新改变为 Reward - Critic 加权更新，也就是说当Reward 比Critic预测的程度高，我们趋向于采纳这种行为，反之摒弃这种行为。</p>
+<h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/21.png" class="">
+
+<img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/22.png" class="">
+
+<p>我会根据上面的两条主线讲解相关算法，这些内容我会一个算法开一篇文章进行讲解。</p>
+<h2 id="Model-based-RL"><a href="#Model-based-RL" class="headerlink" title="Model-based RL"></a>Model-based RL</h2><h1 id="Advanced-Topics"><a href="#Advanced-Topics" class="headerlink" title="Advanced Topics"></a>Advanced Topics</h1><h2 id="Case-Study-on-AlphaGo-series"><a href="#Case-Study-on-AlphaGo-series" class="headerlink" title="Case Study on AlphaGo series"></a>Case Study on AlphaGo series</h2><h2 id="Case-Study-on-AlphaStar-and-OpenAI-Five"><a href="#Case-Study-on-AlphaStar-and-OpenAI-Five" class="headerlink" title="Case Study on AlphaStar and OpenAI Five"></a>Case Study on AlphaStar and OpenAI Five</h2><h2 id="Distributed-computing-and-RL-system-design"><a href="#Distributed-computing-and-RL-system-design" class="headerlink" title="Distributed computing and RL system design"></a>Distributed computing and RL system design</h2><h2 id="Generative-Modeling"><a href="#Generative-Modeling" class="headerlink" title="Generative Modeling"></a>Generative Modeling</h2>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">微笑紫瞳星</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://tianjuewudi.gitee.io/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/">https://tianjuewudi.gitee.io/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">微笑紫瞳星</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">强化学习</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'bpzS5Q9Q9zMl4doyyDGqIqqq-gzGzoHsz',
+        appKey: 'M0IfLJW2G1dCMyLTb90tFxT8',
+        notify: 'true' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '请畅所欲言'
+    });
+</script>
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2021/08/29/qiang-hua-xue-xi-zhi-ddqn/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="强化学习之DDQN">
+                        
+                        <span class="card-title">强化学习之DDQN</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-08-29
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    强化学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">强化学习</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="强化学习实践教学">
+                        
+                        <span class="card-title">强化学习实践教学</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-16
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    强化学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">强化学习</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('50')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 微笑紫瞳星<br />'
+            + '文章作者: 微笑紫瞳星<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处，谢谢啦~';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="tencent"
+                   type="playlist"
+                   id="8075110837"
+                   fixed='true'
+                   autoplay='true'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.35'
+                   list-folded='false'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">微笑紫瞳星</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">140.2k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2021";
+                    var startMonth = "1";
+                    var startDate = "9";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "11";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1121452406" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1121452406" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false});</script></body>
+
+</html>

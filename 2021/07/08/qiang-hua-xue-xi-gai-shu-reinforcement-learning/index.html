@@ -475,7 +475,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-07-14
+                    2021-07-21
                 </div>
                 
 
@@ -515,30 +515,30 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p> 视频课程链接：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Wv411h7kN?p=73">https://www.bilibili.com/video/BV1Wv411h7kN?p=73</a></p>
-<p> 一般我们做监督式学习（supervised-learning），你不仅需要数据，还需要对应的标签，这样才能训练一个模型。这样我们在实际应用时，我们就能做正确率很高的分类。但是在强化学习领域（以下简称RL），给定一个输入，我们需要自己寻找一个最佳的输出，例如，给定一个围棋棋盘的局势作为输入，让你选择一个落子的位置作为输出。这种我们人类也不知道正确答案的时候，我们希望可以让模型自己在环境中进行学习，和环境做互动，不断地尝试去做有利于自己的事情，通过人类的理解得出一个评分，我们想办法让这个评分越高越好，这样模型就懂得如何寻找一个更优秀的输出，从而形成“进化”。RL的框架和深度学习是一样的。</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/1.png" class="">
+<h2 id="序章"><a href="#序章" class="headerlink" title="序章"></a>序章</h2><p>一般我们做监督式学习（supervised-learning），你不仅需要数据，还需要对应的标签，这样才能训练一个模型。这样我们在实际应用时，我们就能做正确率很高的分类。但是在强化学习领域（以下简称RL），给定一个输入，我们需要自己寻找一个最佳的输出，例如，给定一个围棋棋盘的局势作为输入，让你选择一个落子的位置作为输出。这种我们人类也不知道正确答案的时候，我们希望可以让模型自己在环境中进行学习，和环境做互动，不断地尝试去做有利于自己的事情，通过人类的理解得出一个评分，我们想办法让这个评分越高越好，这样模型就懂得如何寻找一个更优秀的输出，从而形成“进化”。RL的框架和深度学习是一样的。</p>
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/1.png" class>
 
 <p>这里举一个外星人大战游戏的例子：我们需要训练的model叫做Actor。它输入的是游戏中的实时状况，输出只有三种可能：左移右移和开火。游戏的画面每一秒都在变，它每一秒都会获得不同的输入，它要根据这个输入来决定输出，而最终目标是能够尽可能多得获取分数。这个分数就是Reward，这个分数决定了model的进化方向，例如Actor通过开火获得了比较高的分数，那么以后它就会更倾向于开火这个输出。这样通过游戏画面不断得到反馈，直到最后满足游戏终止的条件，当游戏终止时，我们期望model通过不断学习，获取到的reward越高越好。</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/2.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/2.png" class>
 
 <p>通常来说，model的输入并不是输入游戏画面，通常是一种人为定义的游戏状况，例如：敌人的位置，朝向，距离等等。这样训练神经网络会容易得多。而网络的输出是一个产生各个类别动作的几率，通过这个几率去做出选择。</p>
 <p>那么如何控制actor的动作呢，如果我们希望在某一个输入时规范一个行为，那么我们就可以直接把这个当做深度学习中的分类问题即可，通过能产生固定行为的输出label来训练并且改变model的参数使其符合我们的预期。通过收集一堆这种对应的数据就能规范各种行为，要做什么，不要做什么，不要做的事情给Loss加上符号即可。</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/3.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/3.png" class>
 
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/4.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/4.png" class>
 
 <p>不仅如此，我们也可以调整它的程度。例如我们非常期待模型去改变，则用大一点的值，反之用较小的值。</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/5.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/5.png" class>
 
 <hr>
 <h2 id="Cumulated-Reward"><a href="#Cumulated-Reward" class="headerlink" title="Cumulated-Reward"></a>Cumulated-Reward</h2><p>为了避免actor只重视短期利益忽视长期利益，我们将一个行为的分数评估改为cumulated-reward，也就是累积分。计算方式是执行了当前行为后（即model输出）所获得的所有reward的累加。这样即使是左移右移这种不杀死敌人没有获得任何reward的行为，也会被actor学习到。</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/6.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/6.png" class>
 
 <p>但这个办法有不妥之处，如果流程较长，那么后面的reward根本不能说都归功于第一个行为，因此我们需要加上一个系数，前面的行为对越后面的reward影响越小，也就是说能获得的cumulated-reward越小，这就是Discounted-Cumulated-Reward。事实上RL就是在不断地调整这个奖励机制，以达到各种学习目的。</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/7.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/7.png" class>
 
 <p>我们还需要对reward进行标准化处理，因为好坏是比较出来的，我们在所有reward都为正的时候，并不能认为所有的行为都是好的，我们必须发扬分数更高的那些行为。</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/8.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/8.png" class>
 
 
 
@@ -549,38 +549,38 @@
 <p>4、每更新一次参数就要重新收集资料，经过不断地参数更新，我们期待最终得到一个比较智能的AI模型。</p>
 <hr>
 <h2 id="off-policy"><a href="#off-policy" class="headerlink" title="off-policy"></a>off-policy</h2><p>这里有一种叫做off-policy的方法，相对于我们用的每收集一次资料就更新一次参数的on-policy，它的负责互动的actor和负责训练的actor是分开的，这样收集一次资料就能用来更新多次参数，训练速度大大加快，这里不细讲。有一个非常经典的off-policy方法叫做Proximal-Policy-optimization（PPO）。</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/9.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/9.png" class>
 
 <hr>
 <h2 id="Exploration"><a href="#Exploration" class="headerlink" title="Exploration"></a>Exploration</h2><p>这是一个很重要的概念，actor采取行为是要有随机性的，这个随机性十分关键，很多时候由于随机性不够而训练不出好结果。如果有一个行为对actor来说是更好的选择，但是actor从来都没有进行过这种行为，而且也没有到达这种行为的途径，这样训练就会卡死在一个局部最优点，为了model能从这个点跳出来，我们往往鼓励actor去尝试更多的选择，这样我们才能收集到比较丰富的资料。我们可以在actor参数上加noise，让它每一次行为不一样，这样可能就能随机到一些更好的行为。</p>
 <hr>
-<h2 id="Critic"><a href="#Critic" class="headerlink" title="Critic"></a>Critic</h2><img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/10.png" class="">
+<h2 id="Critic"><a href="#Critic" class="headerlink" title="Critic"></a>Critic</h2><img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/10.png" class>
 
 <p>Critic的任务是预测，在当前的actor下，现在的状况能够获得多少的Discounted-Cumulated-Reward。不同的actor在不同的状况下的预测值都有所不同，这里的预测值我们称为$V^θ$。它的训练方法是在游戏进行过程中收集资料，每一个游戏状况所对应的Discounted-Cumulated-Reward是多少，用这样的多笔训练资料来训练模型$V^θ$，这个叫做<strong>Monte-Carlo（MC）</strong>。</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/11.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/11.png" class>
 
 <p>还有一种做法是<strong>Temporal-difference（TD）</strong>,不用玩完整场游戏就可以得到训练资料，只需要得到一个游戏状况和对应输出、分数以及下一个游戏状况时，就能进行训练，预测值我们称为$V^π$，这种方法可以用来处理流程很长的游戏。通过式子计算可以得到：<br>$$<br>V^{\theta}(s_t) - \gamma V^{\theta}(s_{t+1})  =  r_t<br>$$<br>我们要尽可能使得等式两边相等，这样我们就能使得$V^θ$得到不断训练。</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/12.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/12.png" class>
 
 <p>这两种方法计算出来的reward的结果也会不同：</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/13.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/13.png" class>
 
 <p>在上面的画面中总共看到八次游戏画面$S_b$，总得分为6，所以平均为四分之三。但是对于$S_a$，如果用MC计算出来是0，但是用TD的算法，由于后面的分数也要按照一定比例加到$S_a$中，所以$S_a$也就继承了$S_b$的四分之三。这里$S_b$没有用0是因为我们看的是全局，它的期望值是四分之三，只是这里的随机出来的一个行为的得分是0而已。MC和TD没有孰优孰劣，只是角度不同。<br>$$<br>V^{\theta}(s_t)  =  r +  V^{\theta}(s_{t+1})<br>$$</p>
 <h3 id="Advantage-Actor-Critic"><a href="#Advantage-Actor-Critic" class="headerlink" title="Advantage Actor-Critic"></a>Advantage Actor-Critic</h3><p>回到我们实现Discounted-Cumulated-Reward的地方，我们需要对分数做normalization，因为在所有行为的得分为正的情况下不代表所有的行为都是正确的，我们必须有选择地学习更好的行为。因此我们会在Discounted-Cumulated-Reward基础上减去一个常数。这个数的计算方式就是Critic。这是因为我们对于输入的同一个状况，由于输出要具有一定随机性的存在，我们每次的输出都是有所不同的，输出的是一个distribution（分布）。那么其实这些所有可能所能获得的Reward的平均值就是$V^θ$，这就是Critic的含义。我们用来更新参数的$A_t$是用Discounted-Cumulated-Reward减去这个平均值，也就是<strong>如果对于一个状况的行为的得分比我们critic预测的要高，则采纳，反之舍弃</strong>。</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/14.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/14.png" class>
 
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/15.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/15.png" class>
 
 <p>上面的版本还有一个缺陷，就是用特殊减去平均，我们已经知道Critic是看到一个游戏状况后对以往的reward的期望。而我们新更新的model之后，这个游戏状况输入model之后的评分也应该是期望，而不是上面所说的一个某种情况的特殊值，因为上面的Discounted-Cumulated-Reward是固定游戏状况下，model输出分布中的一个特殊值而已，如果想要得到一个平均值，我们需要收集资料，多次运行同样的状况。这样我们用这个model更新后的reward的平均值减去model更新前reward的平均值，这样才能衡量我们更新的model是否优于之前的model。而这个更新后的平均值就是<br>$$<br>r_t + V^{\theta}(s_{t+1})<br>$$</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/16.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/16.png" class>
 
 <p>因此最后用来更新的公式为：<br>$$<br>A_t = r_t + V^{\theta}(s_{t+1}) - V^{\theta}(s_t)<br>$$<br>，<strong>这就是大名鼎鼎的常用方法，$Advantage Actor-Critic$。</strong>如果$A_t$为正，则表明使用$A_t$这个模型得到的reward比我们尚未使用这个模型时reward的期望值要高，我们应该采纳，反之亦然。</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/17.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/17.png" class>
 
 <p>实际上由于Critic和Actor的输入是相同的，因此它们可以共用前面几层的Network。</p>
 <hr>
 <h2 id="Deep-Q-Network（DQN）"><a href="#Deep-Q-Network（DQN）" class="headerlink" title="Deep Q Network（DQN）"></a>Deep Q Network（DQN）</h2><p>在RL中还有一种犀利的做法，就是直接用Critic就可以决定用什么样的Action。最知名的就是DQN，这里不细讲，感兴趣可以查看原论文，但是现在已经有了更新更好的方法，叫做A3C（Asynchronous Advantage Actor-Critic），我们学习也可以直接学最新的A3C的内容。</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/18.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/18.png" class>
 
 <hr>
 <h2 id="Reward-Shaping"><a href="#Reward-Shaping" class="headerlink" title="Reward Shaping"></a>Reward Shaping</h2><p>假设我们遇到的是一个Sparse-Reward的问题，也就是评分机制非常稀疏，例如一局游戏结束赢了才能得分，输了不得分，这样我们在训练过程中很难得到有效的反馈，从而导致network训练不起来。这种时候<strong>我们就需要提供额外的reward来引导模型进行学习，这件事情就叫做Reward-Shaping。</strong>我们要做Reward-Shaping，往往需要用到人类自己的理解，来加快机器的训练进程。</p>
@@ -591,20 +591,20 @@
 <h2 id="No-Reward-Learning-from-Demonstation"><a href="#No-Reward-Learning-from-Demonstation" class="headerlink" title="No Reward:Learning from Demonstation"></a>No Reward:Learning from Demonstation</h2><p>在游戏中，我们往往有一个计分板，很容易就能定义哪些事情是好的，哪些是不好的。但现实中，定义Reward有可能是非常困难的，并且人定的reward也有可能存在许多意想不到的缺陷。在没有reward的情况下，让AI跟环境互动的一个方法叫做<strong>Imitation-Learning</strong>。在没有reward的前提下，我们可以找人类进行示范，AI可以凭借这些示范以及跟环境的互动进行学习。</p>
 <p>这跟supervised-learning有类似之处，如果采用这种做法，我们叫做Behavior-Cloning，也就是复制人类的行为。首先，这样的问题就是没有办法对人类没有经历过的情况进行处理，例如人类驾驶车不会去撞墙，那么AI就无法学会即将撞墙时的情形以及处理办法。第二，机器无需对人类的所有行为进行模仿，否则人类某些不应该被学习的个人习惯也会被学习。</p>
 <h3 id="Inverse-Reinforcement-Learning"><a href="#Inverse-Reinforcement-Learning" class="headerlink" title="Inverse Reinforcement Learning"></a>Inverse Reinforcement Learning</h3><p>因此这里有一个算法叫Inverse Reinforcement Learning，这个算法并不是根据reward去学习，而是根据expert的Demonstration和Environment去反推reward长什么样子。也就是说，Reward Function是学出来的。Reward Funciton学出来后，就可以用一般的RL来训练模型了。</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/19.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/19.png" class>
 
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/20.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/20.png" class>
 
 <p>这个算法的假设前提是：<strong>老师的行为是最好的，也就是能得到最高的reward。</strong></p>
 <p>在定义Reward Function的时候，我们要让老师的reward始终大于训练的AI。而训练的AI要学会去根据这个Function去获得更高的reward（这里要用到RL的方法），而这个Function要不断调整，始终保持老师的reward是最高的。</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/21.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/21.png" class>
 
 <p>这和GAN有一定的相似之处，我们可以把Actor当成Generator，把Reward Funciton当成Discriminator。这有异曲同工之处。首先Reward Funciton的任务是给老师高分，给Actor低分。而Actor是想办法获得高分，这两者交替更新，形成对抗，从而使得既能训练出好的Reward Funciton，又能训练处优秀的Actor。</p>
 <p>如果你想要用写程序的方法操控机械手臂，虽然对人来说操控自己的手臂是很简单的事情，但是用代码实现机械臂的动作往往并不是那么容易。这时候你就可以用到RL的技术，直接把动作示范给机器看，看机器是否能借此学会这个动作。我们可以直接拖动机械手臂来让它达到某个效果，从而让其收集足够的数据进行学习模仿。</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/22.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/22.png" class>
 
 <p>这里有一个更新的做法，就是给机器直接看一个画面，它会想办法达到这个画面中的动作，从而完成学习，这里不细讲，可以查看原始论文：</p>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/23.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/23.png" class>
 
 
 
@@ -613,7 +613,7 @@
 
 
 <hr>
-<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/24.png" class="">
+<img src="/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/24.png" class>
 
 
 
@@ -1447,7 +1447,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">134.4k</span>&nbsp;字
+                class="white-color">140.2k</span>&nbsp;字
             
             
             
