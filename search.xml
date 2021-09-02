@@ -4,6 +4,75 @@
   
     
     <entry>
+      <title>强化学习之A2C和A3C</title>
+      <link href="2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/"/>
+      <url>2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/</url>
+      
+        <content type="html"><![CDATA[<p> 首先，A2C的全称是Advantage Actor Critic，而A3C是Asynchronous Advantage Actor Critic，A2C源自A3C。</p><h2 id="Actor-Critic"><a href="#Actor-Critic" class="headerlink" title="Actor Critic"></a>Actor Critic</h2><p>r.    </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 强化学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 强化学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>挖矿教程</title>
+      <link href="2021/09/01/wa-kuang-jiao-cheng/"/>
+      <url>2021/09/01/wa-kuang-jiao-cheng/</url>
+      
+        <content type="html"><![CDATA[<p>​       首先，根据我的使用情况，一张2080ti的显卡一天的挖矿收益约为32人民币，需要付出的只有电费而已，这样一来，只需几个月，就可以把买显卡的靠挖矿赚取回来，如此一个高利润，低成本的买卖，自然吸引了不少人入坑，造成高端显卡的供不应求。</p><p>​       要想挖矿，我们需要两个工具，一个是自己的比特币钱包，一个是挖矿的平台，现在靠自己单干能挖到矿的极少，因此都是集体挖矿，收益平分。比特币钱包有很多种类，具体可以自己查询，我自己使用的是electrum，可以到官网下载<a href="https://www.electrum.org/#home">https://www.electrum.org/#home</a></p><p>​      下载安装过后，我们直接创建一个新的钱包，这里要记住自己创建钱包时的秘钥！！这通常由一串单词构成，丢失秘钥几乎等于丢失钱包上的比特币！！！</p><p>​       创建钱包后，我们需要创建一个收款地址，我们需要在过期选项中选never，否则这个收款地址过一段时间就不能用了。这样，当我们要收获比特币时，我们填上这个收款地址，就能接收比特币。</p><img src="/2021/09/01/wa-kuang-jiao-cheng/1.png" class=""><p>​       第二个需要的东西就是挖矿平台啦，这里我用的是nicehash（<a href="https://www.nicehash.com/%EF%BC%89%EF%BC%88%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A820%E7%B3%BB%E5%92%8C30%E7%B3%BB%E7%9A%84%E6%98%BE%E5%8D%A1%EF%BC%89%E3%80%82%E5%85%88%E6%B3%A8%E5%86%8C%E4%B8%80%E4%B8%AA%E8%B4%A6%E5%8F%B7%EF%BC%8C%E7%84%B6%E5%90%8E%E7%82%B9%E5%87%BB%E6%8C%96%E7%9F%BF-%E6%B7%BB%E5%8A%A0%E7%9F%BF%E6%9C%BA-%E9%80%89%E6%8B%A9%E6%8C%96%E7%9F%BF%E9%80%89%E9%A1%B9%EF%BC%8C%E4%B8%80%E8%88%AC%E6%88%91%E4%BB%AC%E7%94%A8%E7%9A%84%E8%8B%B1%E4%BC%9F%E8%BE%BE%E6%98%BE%E5%8D%A1%E5%8F%AA%E9%9C%80%E8%A6%81%E9%80%89%E7%AC%AC%E4%B8%80%E9%A1%B9%E5%8D%B3%E5%8F%AF%EF%BC%8C%E7%84%B6%E5%90%8E%E5%B0%B1%E5%8F%AF%E4%BB%A5%E5%8E%BBgithub%E4%B8%8B%E8%BD%BD%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E6%8C%96%E7%9F%BF%E8%BD%AF%E4%BB%B6%E4%BA%86%E3%80%82">https://www.nicehash.com/）（建议使用20系和30系的显卡）。先注册一个账号，然后点击挖矿-添加矿机-选择挖矿选项，一般我们用的英伟达显卡只需要选第一项即可，然后就可以去github下载一个开源的挖矿软件了。</a></p><img src="/2021/09/01/wa-kuang-jiao-cheng/2.png" class=""><p>​      联网安装好后，我们打开软件，从nicehash中复制挖矿地址到软件上即可挖矿啦！注意：我们需要保证自己的驱动在461.33以上，否则挖不了矿，需要到网上去查找一个对应驱动进行安装。</p><img src="/2021/09/01/wa-kuang-jiao-cheng/3.png" class=""><p>可以看到我们的预计收益和矿机的运行状态，然后我们可以在矿机最右边的选择中选择Extreme，就可以让矿机以最大的速率挖矿啦！</p><img src="/2021/09/01/wa-kuang-jiao-cheng/4.png" class=""><p>关于比特币体现，我们可以用刚刚比特币钱包的那个收款地址来把比特币接收到钱包中，然后选择一个交易平台进行体现，大功告成！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 其他 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>强化学习之Dueling DQN</title>
+      <link href="2021/08/29/qiang-hua-xue-xi-zhi-dueling-dqn/"/>
+      <url>2021/08/29/qiang-hua-xue-xi-zhi-dueling-dqn/</url>
+      
+        <content type="html"><![CDATA[<p> 注：本文续于《强化学习之DDQN》</p><p>Dueling DQN的思想是把神经网络中Q价值的输出分成两部分，第一部分是状态价值V，这部分价值由状态直接决定和Action无关。第二部分就是动作价值和状态价值的差值A，每一个Action都存在一个差值。这两部分构成了倒数第二层的神经网络，节点数为Action数+1。然后最后一层的Q值就可以直接由V和A相加构成。</p><p>$$<br>Q = V + A<br>$$<br>Dueling DQN和DDQN唯一不同的地方是网络结构，因此修改程序时只需要修改Network类即可。这种计算结构使得学习性能得到提高。优点在于与DQN相比，无论动作a如何，都可以逐步学习与V(s)相关的网络连接参数，因此学习的轮数比DQN更少，随着动作选择的增加，优势更加明显。</p><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Network</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>n_in<span class="token punctuation">,</span>n_mid<span class="token punctuation">,</span>n_out<span class="token punctuation">)</span><span class="token punctuation">:</span>         super<span class="token punctuation">(</span>Network<span class="token punctuation">,</span>self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>         self<span class="token punctuation">.</span>fc1 <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>n_in<span class="token punctuation">,</span>n_mid<span class="token punctuation">)</span>        self<span class="token punctuation">.</span>fc2 <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>n_mid<span class="token punctuation">,</span>n_mid<span class="token punctuation">)</span>         self<span class="token punctuation">.</span>fc3_adv <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>n_mid<span class="token punctuation">,</span>n_out<span class="token punctuation">)</span>         self<span class="token punctuation">.</span>fc3_v <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>n_mid<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>     <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>         h1 <span class="token operator">=</span> F<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>self<span class="token punctuation">.</span>fc1<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>        h2 <span class="token operator">=</span> F<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>self<span class="token punctuation">.</span>fc2<span class="token punctuation">(</span>h1<span class="token punctuation">)</span><span class="token punctuation">)</span>        adv <span class="token operator">=</span> self<span class="token punctuation">.</span>fc3_adv<span class="token punctuation">(</span>h2<span class="token punctuation">)</span>        <span class="token comment" spellcheck="true"># expand函数作用是采用复制的方式扩展一个维度的长度，-1指不改变长度，这里把V复制成和A数量一样多</span>        val <span class="token operator">=</span> self<span class="token punctuation">.</span>fc3_v<span class="token punctuation">(</span>h2<span class="token punctuation">)</span><span class="token punctuation">.</span>expand<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>adv<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>        <span class="token comment" spellcheck="true"># V + A ,然后都减去A的平均值</span>        output <span class="token operator">=</span> val <span class="token operator">+</span> adv <span class="token operator">-</span> adv<span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>keepdim <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">.</span>expand<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1.</span>adv<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>        <span class="token keyword">return</span> output</code></pre><p>在实际操作中，我们通常需要减去一个平均值：</p><img src="/2021/08/29/qiang-hua-xue-xi-zhi-dueling-dqn/1.png" class=""><p>采用这种方法，虽然使得值函数V和优势函数A不再完美的表示值函数和优势函数(在语义上的表示)，但是这种操作提高了稳定性。而且，并没有改变值函数V和优势函数A的本质表示。如果只是简单相加，由于动作类型的不同，具有不同的偏置量，可能无法得到很好的学习，通过在一个节点内的输出加入另一个节点的信息，可以让神经网络在误差传递的过程中得到更加充分的学习。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 强化学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 强化学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>强化学习之DDQN</title>
       <link href="2021/08/29/qiang-hua-xue-xi-zhi-ddqn/"/>
       <url>2021/08/29/qiang-hua-xue-xi-zhi-ddqn/</url>
