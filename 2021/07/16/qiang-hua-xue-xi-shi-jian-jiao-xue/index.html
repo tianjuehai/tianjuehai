@@ -475,14 +475,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-07-27
+                    2021-09-02
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    11.3k
+                    11.4k
                 </div>
                 
 
@@ -1355,7 +1355,17 @@ GAMMA <span class="token operator">=</span> <span class="token number">0.99</spa
 <img src="/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/42.png" class>
 
 <h3 id="Policy-Gradient"><a href="#Policy-Gradient" class="headerlink" title="Policy Gradient"></a>Policy Gradient</h3><p>重点来了！！！我们使用的更新方式是Policy Gradient，也就是策略梯度，我们的loss依旧通过交叉熵方式获得，但还需要乘以一个$G_t$作为权重，也就是我们<strong>计算出来的总收益</strong>！总收益越高的说明我们的决策越好，$G_t$越大，我网络会用较大的梯度来进行更新，反之$G_t$较小则用小梯度更新。这样进行多次更新之后，我们网络算出来的决策就会越来越趋近于好的决策。</p>
-<p>对应代码：</p>
+<p>对于离散的动作，我们直接采用价值计算的原始公式，然后用梯度上升法即可，具体操作可以用蒙泰卡罗采样的方法代替：</p>
+<img src="/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/61.png" class>
+
+<p>对于连续动作（对于离散动作同样适用），例如代码中的例子：</p>
+<img src="/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/62.png" class>
+
+<p>总结：</p>
+<img src="/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/63.png" class>
+
+<p>其中对于每个动作价值Q的计算都是在完成一个episode之后，利用带折扣的Reward从后往前进行计算的。还有一种就是利用神经网络来近似价值函数的方法，称为Actor-Critic。</p>
+<h3 id="-1"><a href="#-1" class="headerlink" title></a></h3><p>对应代码：</p>
 <pre class=" language-python"><code class="language-python">    <span class="token keyword">def</span> <span class="token function">learn</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obs<span class="token punctuation">,</span> action<span class="token punctuation">,</span> reward<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token triple-quoted-string string">""" 用policy gradient 算法更新policy model
         """</span>
@@ -2886,7 +2896,7 @@ Any further steps are undefined behavior.
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">141.4k</span>&nbsp;字
+                class="white-color">143.3k</span>&nbsp;字
             
             
             
