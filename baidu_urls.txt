@@ -1,3 +1,6 @@
+https://tianjuewudi.gitee.io/2021/09/08/qiang-hua-xue-xi-zhi-ppo/
+https://tianjuewudi.gitee.io/2021/09/05/ge-ren-xue-xi-fang-xiang-ji-yan-jiu-fang-xiang/
+https://tianjuewudi.gitee.io/2021/09/03/qiang-hua-xue-xi-zhi-trpo/
 https://tianjuewudi.gitee.io/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/
 https://tianjuewudi.gitee.io/2021/09/01/wa-kuang-jiao-cheng/
 https://tianjuewudi.gitee.io/2021/08/29/qiang-hua-xue-xi-zhi-dueling-dqn/
