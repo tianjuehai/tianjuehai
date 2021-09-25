@@ -443,8 +443,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0b/">
-                                <span class="chip bg-color">强化学习b</span>
+                            <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">强化学习</span>
                             </a>
                         
                     </div>
@@ -475,7 +475,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-09-03
+                    2021-09-10
                 </div>
                 
 
@@ -534,13 +534,13 @@
 <p>在两个神经网络中，我们一般用$\pi (a|s;\theta)$表示策略网络actor，θ代表其中的参数，$q(s,a;w)$代表价值网络critic，w代表其中的参数。注意这里actor网络只需要输入状态，而critic网络则需要输入状态和动作，两个网络往往可以共用前一部分。</p>
 <p>actor网络的更新参数的目标是让critic网络的值越大越好。当确定状态s的情况下，如何选取动作action来使得critic的值最大就是actor网络需要优化的目标。而更新Critic的参数是为了让其的打分更精准，训练的依据就是环境给的reward。</p>
 <p>下面讲解如何更新Critic参数，依靠的是常用的TD算法：</p>
-<img src="/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/1.png" class="">
+<img src="/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/1.png" class>
 
 <p>下面是更新Actor参数的方法：</p>
-<img src="/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/3.png" class="">
+<img src="/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/3.png" class>
 
 <p>下面做一个总结：</p>
-<img src="/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/2.png" class="">
+<img src="/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/2.png" class>
 
 <p>由于实际操作中我们不可能得出期望值，因此直接做蒙泰卡罗近似，每个episode拿一次的采样值来更新一点点 ，使得采样到的action得到的动作价值尽可能增大即可，操作比critic要简单得多。</p>
 <h2 id="Advantage-Actor-Critic"><a href="#Advantage-Actor-Critic" class="headerlink" title="Advantage Actor Critic"></a>Advantage Actor Critic</h2><p>​     A2C的出现是为了解决AC的高方差问题。在所有行为的得分为正的情况下不代表所有的行为都是正确的，我们必须有选择地学习更好的行为。因此我们会在原有Reward基础上减去一个常数，这个数的计算方式就是Advantage。这是因为我们对于输入的同一个状况，由于输出要具有一定随机性的存在，那么其实这些所有可能所能获得的Reward的平均值就是VθVθ，这就是Critic的含义。我们用来更新参数的AtAt是用Reward减去这个平均值，也就是<strong>如果对于一个状况的行为的得分比我们critic预测的要高，则采纳，反之舍弃</strong>。</p>
@@ -557,9 +557,9 @@
 </ol>
 <p>前文讲到，神经网络训练时，需要的数据是独立同分布的，为了打破数据之间的相关性，DQN和DDPG的方法都采用了经验回放的技巧。然而经验回放需要大量的内存，打破数据的相关性，经验回放并非是唯一的方法。另外一种是<strong>异步的方法，所谓异步的方法是指数据并非同时产生</strong>，A3C的方法便是其中表现非常优异的异步强化学习算法。</p>
 <p>A3C模型如下图所示，每个Worker直接从Global Network中拿参数，自己与环境互动输出行为。利用每个Worker的梯度，对Global Network的参数进行更新。每一个Worker都是一个A2C。A3C主要有两个操作，一个是pull，一个是push：<br> pull：把主网络的参数直接赋予Worker中的网络<br> push：使用各Worker中的梯度，对主网络的参数进行更新</p>
-<img src="/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/4.png" class="">
+<img src="/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/4.png" class>
 
-<img src="/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/5.png" class="">
+<img src="/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/5.png" class>
 
 <p>这种异步更新的方法在多种算法中都适用。所有的异步agent执行完后再用累计的梯度信息更新网络参数。其中n-step的算法（后两个）需要每个异步agent复制一份子网络，每个anget执行n步后倒退算出每步的总回报和相关梯度，用累计梯度更新主网络参数。</p>
 <hr>
@@ -633,8 +633,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0b/">
-                                    <span class="chip bg-color">强化学习b</span>
+                                <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">强化学习</span>
                                 </a>
                             
                         </div>
@@ -1385,7 +1385,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">154.9k</span>&nbsp;字
+                class="white-color">161.5k</span>&nbsp;字
             
             
             
