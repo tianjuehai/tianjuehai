@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tianjuewudi.gitee.io/2021/09/25/qiang-hua-xue-xi-zhi-dqn-chao-ji-jin-hua-ban-rainbow/</loc>
+    <lastmod>2021-10-01</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/09/08/qiang-hua-xue-xi-zhi-ppo/</loc>
+    <lastmod>2021-09-26</lastmod>
+  </url>
+  <url>
     <loc>https://tianjuewudi.gitee.io/2021/09/13/qiang-hua-xue-xi-zhi-dqn-dai-ma-dai-jiang-jie/</loc>
     <lastmod>2021-09-25</lastmod>
   </url>
@@ -15,10 +23,6 @@
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/</loc>
     <lastmod>2021-09-10</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/09/08/qiang-hua-xue-xi-zhi-ppo/</loc>
-    <lastmod>2021-09-09</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/09/03/qiang-hua-xue-xi-zhi-trpo/</loc>

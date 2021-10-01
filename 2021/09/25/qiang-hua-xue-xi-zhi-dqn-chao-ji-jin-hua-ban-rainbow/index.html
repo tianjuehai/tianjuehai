@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="生成式对抗网络（GAN）, 博客制作,个人经验分享,Unity,人工智能等">
+    <meta name="keywords" content="强化学习之DQN超级进化版Rainbow, 博客制作,个人经验分享,Unity,人工智能等">
     <meta name="description" content="本站记录本人各种学习的旅途，用于巩固自我并启发后来人">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>生成式对抗网络（GAN） | 微笑紫瞳星</title>
+    <title>强化学习之DQN超级进化版Rainbow | 微笑紫瞳星</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -322,12 +322,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">生成式对抗网络（GAN）</h1>
+                    <h1 class="description center-align post-title">强化学习之DQN超级进化版Rainbow</h1>
                 </div>
             </div>
         </div>
@@ -443,12 +443,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
-                                <span class="chip bg-color">机器学习</span>
-                            </a>
-                        
-                            <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                                <span class="chip bg-color">深度学习</span>
+                            <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">强化学习</span>
                             </a>
                         
                     </div>
@@ -459,8 +455,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                机器学习
+                            <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                强化学习
                             </a>
                         
                     </div>
@@ -472,28 +468,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-06-10
+                    2021-09-25
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-06-30
+                    2021-10-01
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    772
+                    2.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    9 分
                 </div>
                 
 
@@ -518,42 +514,48 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p> 原始论文：arXiv:1406.2661v1 </p>
-<p>详细讲解请参考文章：<a target="_blank" rel="noopener" href="http://www.gwylab.com/note-gans.html%EF%BC%8C%E8%BF%99%E9%87%8C%E6%96%87%E7%AB%A0%E8%AE%B2%E8%A7%A3%E7%9A%84%E5%86%85%E5%AE%B9%E4%B8%8D%E5%86%8D%E9%87%8D%E5%A4%8D%E8%B5%98%E8%BF%B0%E3%80%82">http://www.gwylab.com/note-gans.html，这里文章讲解的内容不再重复赘述。</a></p>
-<img src="/2021/06/10/sheng-cheng-shi-dui-kang-wang-luo-gan/7.png" class>
+                <p> 阅读本文前可以先了解我前三篇文章《强化学习之DQN》《强化学习之DDQN》、《强化学习之 Dueling DQN》。</p>
+<p>Rainbow结合了DQN算法的6个扩展改进，将它们集成在同一个智能体上，其中包括DDQN，Dueling DQN，Prioritized Replay、Multi-step Learning、Distributional RL、Noisy Net。加上原版的DQN，凑齐七种因素，召唤Rainbow！</p>
+<p>参考知乎：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/261322143">https://zhuanlan.zhihu.com/p/261322143</a></p>
+<h2 id="DDQN"><a href="#DDQN" class="headerlink" title="DDQN"></a>DDQN</h2><p>传统DQN中，每次学习的时候都会使用当前策略认为的价值最高的动作，所以会出现对Q值的过高估计，而这个问题表现在神经网络上就是因为选择下一时刻的动作以及计算下一时刻Q值的时候都使用了目标网络。为了将动作选择和价值估计进行解耦，因此有了DDQN。在计算Q实际值是，动作选择由Q网络得到而不是TargetQ网络。价值估计还是由TargetQ网络得到。</p>
+<hr>
+<h2 id="Dueling-DQN"><a href="#Dueling-DQN" class="headerlink" title="Dueling DQN"></a>Dueling DQN</h2><p>这个方法改变的是神经网络的结构，把Q值函数分解为价值函数V和优势函数A的和，即Q= V+A。其中V代表了这种状态的好坏程度，有时函数表明在这个状态下某一个动作相对于其他动作的好坏程度，而Q表明了这个状态下确定的某个动作的价值。为了限制A和V的值使得其在一个合理的范围内，我们可以用一种方法将A的均值限制为0以达到我们的要求。因此Q的计算公式如下：<br>$$<br>Q(s,a;θ,α) = V(s;θ) + (A(s,a;θ,α) - \frac{1}{|A|}\sum_{a’}A(s,a’;θ,α))<br>$$</p>
+<hr>
+<h2 id="基于优先级的复用池（Prioritized-Reply）"><a href="#基于优先级的复用池（Prioritized-Reply）" class="headerlink" title="基于优先级的复用池（Prioritized Reply）"></a>基于优先级的复用池（Prioritized Reply）</h2><p>在传统DQN中，经验池中的数据采样都是随机的，但其实不同样本的价值是不同的，需要给样本一个优先级，并根据样本的优先级进行采样。</p>
+<p>这里需要用到一个指标——TD误差。设目标网络产生的Q值为Q现实值，TargetQ网络产生的Q值为Q估计值。那么TD误差就是Q现实值-Q估计值。用来衡量优先学习的程度，如果TD误差越大，就代表预测精度还有很多的上升空间，这个样本就越需要被学习，即优先级p越高。</p>
+<p>那么如何有效进行抽样？如果我们每次抽样都对p进行排序选取其中的最大值，会浪费大量的计算资源，从而使得训练时间变长。常用的解决方法是使用SumTree的树形结构来储存数据。这种树状结构本质上也是采用了概率式的选择方式，优先级p的大小跟选中的概率成正比，和线性的结构相比，这种方法不用逐一检查数据，大大提高了运行效率。</p>
+<img src="/2021/09/25/qiang-hua-xue-xi-zhi-dqn-chao-ji-jin-hua-ban-rainbow/1.png" class="">
 
-<p>GAN可以用来构造各种数据，包括图片声音等等，应用：</p>
-<img src="/2021/06/10/sheng-cheng-shi-dui-kang-wang-luo-gan/1.png" class>
-
-<img src="/2021/06/10/sheng-cheng-shi-dui-kang-wang-luo-gan/2.png" class>
-
-<img src="/2021/06/10/sheng-cheng-shi-dui-kang-wang-luo-gan/3.png" class>
-
-<img src="/2021/06/10/sheng-cheng-shi-dui-kang-wang-luo-gan/4.png" class>
-
-<img src="/2021/06/10/sheng-cheng-shi-dui-kang-wang-luo-gan/5.png" class>
-
-<h2 id="GAN的理解"><a href="#GAN的理解" class="headerlink" title="GAN的理解"></a>GAN的理解</h2><img src="/2021/06/10/sheng-cheng-shi-dui-kang-wang-luo-gan/6.png" class>
-
-<p>其中左边是一个生成器（Generator Network），负责生成假数据，它最终的目标是造出辨别器辨别不出来的假数据。右边是辨别器（Descriminator Network），负责辨别数据的真假，目标是把所有的假数据辨别出来。这就是对抗，在相互对抗的过程中，双方的辨别能力和造假能力都会不断升级，以达到更高的水准。</p>
-<p>首先生成器输入的是一个随机的向量，通过一个神经网络，得到一个假数据，再输入判别网络，同时把真实数据输入判别网络，判别网络复制判断这两个数据的真假。</p>
-<img src="/2021/06/10/sheng-cheng-shi-dui-kang-wang-luo-gan/8.png" class>
-
-<p>看上图，绿线是生成样本的概率分布，我们用随机噪声生成随机样本，黑色虚线是真实样本的概率分布，我们的目标是让生成样本的概率分布尽可能靠近真实样本的概率分布。中间的蓝色虚线是判决器，负责把两种样本分开。</p>
-<h2 id="GAN训练方案"><a href="#GAN训练方案" class="headerlink" title="GAN训练方案"></a>GAN训练方案</h2><img src="/2021/06/10/sheng-cheng-shi-dui-kang-wang-luo-gan/9.png" class>
-
-<p>首先把生成器固定住，训练辨别器，让生成器生成样本和真实数据混在一起，然后给辨别器判决，通过梯度下降法来训练辨别器。第二步是辨别器训练后固定住，训练生成器，目标是让判决器出错。</p>
-<p>先了解下纳什均衡，<strong>纳什均衡</strong>是指博弈中这样的局面，对于每个参与者来说，只要其他人不改变策略，他就无法改善自己的状况。对应的，对于GAN，情况就是生成模型 G 恢复了训练数据的分布（造出了和真实数据一模一样的样本），判别模型再也判别不出来结果，准确率为 50%，约等于乱猜。这是双方网路都得到利益最大化，不再改变自己的策略，也就是不再更新自己的权重。</p>
-<p>GAN模型的目标函数如下：</p>
-<p>$$<br>min_Gmax_D(D,G) = E_{x ~ p_{data}(x)}[logD(x)] + E_{z ~ p_{z}(x)}[log(1 - D(G(x)))]<br>$$<br>在这里，训练网络D使得最大概率地分对训练样本的标签（最大化log D(x)和log(1—D(G(z))))，训练网络G最小化log(1-D(G(z))），即最大化D的损失。而训练过程中固定一方，更新另一个网络的参数，交替迭代，使得对方的错误最大化，最终，G 能估测出样本数据的分布，也就是生成的样本更加的真实。</p>
-<p>这就是GAN的最基础的流程，由此延伸出来的算法成百上千，百花齐放，各种各样的应用不一而足。</p>
-<p>代码参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zandaoguang/article/details/102645230">https://blog.csdn.net/zandaoguang/article/details/102645230</a></p>
-<h2 id="GAN的诸多变种"><a href="#GAN的诸多变种" class="headerlink" title="GAN的诸多变种"></a>GAN的诸多变种</h2><h3 id="Cycle-GAN"><a href="#Cycle-GAN" class="headerlink" title="Cycle GAN"></a>Cycle GAN</h3><img src="/2021/06/10/sheng-cheng-shi-dui-kang-wang-luo-gan/10.png" class>
-
-
-
+<p>首先我们要对所有的数据建立一个树状结构，叶子节点储存每个样本的优先级p，每个树枝节点只有两个分叉，节点的值是两个分支的和。这样最上面的一层的一个节点是所有优先级p的和。</p>
+<p>在抽样的时候，我们会将p的和分成batch_size个区间，然后再每个区间中随机选择一个数。例如我们在[21,28]的区间中选择了24，就按照42往下搜索，从左往右对比，如果这个数比节点小就继续往下走，比节点大则用这个数减去节点的数字然后继续往右进行对比。这里24比13大，因此往右搜索，数字变成24-13=11，11比16小，因此往下走，11比12小，因此我们最终选取的是优先级为12的这组数据。</p>
+<hr>
+<h2 id="多步学习（multi-step-learning）"><a href="#多步学习（multi-step-learning）" class="headerlink" title="多步学习（multi-step learning）"></a>多步学习（multi-step learning）</h2><p>传统DQN使用当前的即时奖励和下一时刻的价值估计来判断目标的价值，然而这种方法在训练的前期网络参数偏差较大时会导致得到的目标价值也会偏大，进而导致目标价值的估计偏差较大，因此出现了多步学习来解决这个问题。在多步学习中，即时奖励会通过与环境交互确切得到，所以训练前期的目标价值可以得到更准确的估计，从而加快训练的速度。</p>
+<p>原DQN使用的是时序差分的更新策略即TD。loss公式为：<br>$$<br>(r_j + \gamma \max_a \hat{Q}(s_{j+1},a;\theta^-) - Q(s_j,a_j;\theta))^2<br>$$<br>以上是one-step的TD算法。</p>
+<p>在rainbow中我们采用multi-step方法，对于N步的情况，loss公式变为：<br>$$<br>(\sum_{k=0}^{N-1}{\gamma^k r_{t+k}} + \gamma^N \max_a \hat{Q}(s_{t+N},a;\theta^-) - Q(s_t,a_t;\theta))^2<br>$$</p>
+<hr>
+<h2 id="分布式RL（Distributional-DQN）"><a href="#分布式RL（Distributional-DQN）" class="headerlink" title="分布式RL（Distributional DQN）"></a>分布式RL（Distributional DQN）</h2><p>论文原文：<a target="_blank" rel="noopener" href="https://www.aminer.cn/pub/599c7b58601a182cd272b540/a-distributional-perspective-on-reinforcement-learning">https://www.aminer.cn/pub/599c7b58601a182cd272b540/a-distributional-perspective-on-reinforcement-learning</a></p>
+<p>这篇文章开创了一个新的方向，将我们的认知从“Q值”拓展到”Q分布”。</p>
+<p>在传统DQN中，网络输出的是动作价值Q的估计，但是其实还是忽略了很多信息。假如两个动作能够获得的价值期望相同都是20，第一个动作有90%的情况是10，10%的情况下是110，第二个动作的50%的情况下是25，50%的情况下是15，那么虽然期望一样，但是要想减少风险，就应该选择后一种动作，<strong>只输出期望值看不到背后隐含的风险</strong>。</p>
+<p>如果采用分布视角（deistributional perspective）来建模DRL的模型，可以的得到更好更稳定的结果。我们可以把价值限定在$[V_{min},V_{max}]$之间，选择N个等距的价值采样点，通过神经网络输出这N个采样点的概率，通过Q和TargetQ网络得到估计的<strong>价值分布</strong>和目标的价值分布，计算两个分布之间的差距。</p>
+<p>现在的问题是如何表示这个分布，首先抛弃高斯分布，因为是单峰的，Distributional DQN的论文作者提出了一个叫做<strong>C51</strong>的算法，用51个等间距的atoms来描述一个分布，类似直方图，选择点的范围和个数取决于你的应用。</p>
+<p>这时候网络的架构需要做一定的调整，原DQN输入的是状态s，输出的是一个包含各个动作价值的向量$(Q(s,a1),Q(s,a2),…,Q(s,a_m))$。在Distributional DQN中，输入不变，输出变成一个矩阵，每一行代表一个动作，而列则代表了直方图中的每一条柱子，这个分布的范围是人为确定的，例如atoms有51个，范围为$(0,50)$，则atoms是${0,1,2,…,49,50}$。而神经网络输出的每一个动作对应每一个atoms的概率，有N个atoms则有N个概率，相加为1，形式是${p_0^a,p_1^a,…,p_{N-1}^a}$，每个概率和对应的atoms的值相乘可以得到动作价值的期望，即原本的Q值。</p>
+<p>确定了分布的形式之后，接下来就是如何衡量两个分布的距离，以此来决定Loss函数。这里作者采用的是<strong>KL散度</strong>。</p>
+<p>KL散度，也称为相对熵，是衡量两个分布差距的计算公式。公式如下：<br>$$<br>D_{KL} (p||q) = \sum_{i=1}^N p(x_i) * (\log p(x_i) - \log q(x_i)) =  \sum_{i=1}^N p(x_i) * \log \frac{p(x_i)}{q(x_i)}<br>$$<br>可以证明这个值大于等于0。当两者分布接近时，这个值会趋近于0，这个值越大，分布差距越大。</p>
+<p>从式子中可以看出，KL散度计算的是数据的原分布与近似分布的概率的对数差的期望值。但要注意，散度不具有交换性，不能单纯理解为距离，更准确的说是一个分布相比另一个分布的信息损失。</p>
+<p>在原DQN中，动作价值的更新目标是</p>
+<p>$$<br>r + \gamma \max_a Q(s_{t+1},a)<br>$$<br>在分布式DQN中：<br>$$<br>Q(s_{t+1},a) = \sum_i z_i p_i(s_{t+1},a)<br>$$<br>其中z就是直方图的横坐标的各个值，p就是对应的各个概率。那么更新目标$Z(s,a)$有p0概率为$r + \gamma z_0$，有p1概率为$r + \gamma z_1$，以此类推。</p>
+<p>当分布更新后，对应直方图的横坐标会发生偏移，因此我们需要调整分布。把$r + \gamma z_i$的分布均摊到$z_i$上，例如$r + \gamma z_0$位于z0和z1之间，我们可以计算它到两个点距离的比值决定均摊概率的比值。</p>
+<img src="/2021/09/25/qiang-hua-xue-xi-zhi-dqn-chao-ji-jin-hua-ban-rainbow/2.png" class="">
 
 
+
+<h2 id="噪声网络（Nosiy-Net）"><a href="#噪声网络（Nosiy-Net）" class="headerlink" title="噪声网络（Nosiy Net）"></a>噪声网络（Nosiy Net）</h2><p>RL过程中总会想办法增加agent的探索能力，传统的DQN通常采用ε-greedy的策略，即以ε的概率采取随机策略，通过在训练初期采取较大的ε来增加系统的探索性，训练后期减小ε来实现系统的稳定。另外一种办法就是噪声网络，即通过对参数增加噪声来增加模型的探索能力。一般噪声会添加在全连接层，考虑全连接层的前项计算公式：<br>$$<br>y = wx +b<br>$$<br>假如两层神经元的个数分别是p和q，那么w是q*p维的，b是q维的，如果b和w满足均值为μ，方差为σ的正态分布，同时存在一定的随机噪声N。假设噪声满足标准正态分布，那么前项计算公式变为：<br>$$<br>y = (μ^w + \sigma^w \odot N^w)x + μ^b + \sigma^b \odot N^b<br>$$</p>
+<p>产生噪声的方法主要有两种一种是Independent Gaussian noise，一种是Factorised Gaussian noise。对于DQN这种很稠密的算法来说我们往往使用Factorised Gaussian noise。对应A3C这种并行更依赖采样的方法我们可以使用Independent Gaussian noise。</p>
+<p>independent Gaussian Noise是给每一个权重都添加一个独立的随机噪声，那么一共需要$p(q+1)$个随机噪声。</p>
+<p>Factorised Gaussian noise 相对节省计算量，它给每一个神经元一个噪声，图中只需要p + q个随机噪声，</p>
+<img src="/2021/09/25/qiang-hua-xue-xi-zhi-dqn-chao-ji-jin-hua-ban-rainbow/3.png" class="">
+
+<p>具体到每一个神经元上，$w_{ij}$的噪声为：<br>$$<br>N_{i,j}^w = f(N_i)f(N_j)<br>$$<br>$b_j$的噪声为:<br>$$<br>N_{j}^b = f(N_j)<br>$$<br>其中：<br>$$<br>f(x) = sgn(x) \sqrt{|x|}<br>$$</p>
 
                 
             </div>
@@ -580,7 +582,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://tianjuewudi.gitee.io/2021/06/10/sheng-cheng-shi-dui-kang-wang-luo-gan/">https://tianjuewudi.gitee.io/2021/06/10/sheng-cheng-shi-dui-kang-wang-luo-gan/</a>
+                    <a href="https://tianjuewudi.gitee.io/2021/09/25/qiang-hua-xue-xi-zhi-dqn-chao-ji-jin-hua-ban-rainbow/">https://tianjuewudi.gitee.io/2021/09/25/qiang-hua-xue-xi-zhi-dqn-chao-ji-jin-hua-ban-rainbow/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -618,12 +620,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
-                                    <span class="chip bg-color">机器学习</span>
-                                </a>
-                            
-                                <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                                    <span class="chip bg-color">深度学习</span>
+                                <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">强化学习</span>
                                 </a>
                             
                         </div>
@@ -1056,17 +1054,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/07/01/zi-jian-du-shi-xue-xi-self-supervised-learning/">
+                <a href="/2021/09/25/qiang-hua-xue-xi-zhi-dqn-chao-ji-jin-hua-ban-rainbow/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="自监督式学习（Self-supervised Learning）">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="强化学习之DQN超级进化版Rainbow">
                         
-                        <span class="card-title">自监督式学习（Self-supervised Learning）</span>
+                        <span class="card-title">强化学习之DQN超级进化版Rainbow</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1076,30 +1075,27 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-07-01
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    机器学习
+                            <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    强化学习
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">机器学习</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">深度学习</span>
+                    <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">强化学习</span>
                     </a>
                     
                 </div>
@@ -1113,13 +1109,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/05/19/shen-du-xue-xi-zhong-de-you-hua-suan-fa-chuan-jiang/">
+                <a href="/2021/09/19/jiao-yi-yu-fen-xi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="深度学习中的优化算法串讲">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="交易与分析">
                         
-                        <span class="card-title">深度学习中的优化算法串讲</span>
+                        <span class="card-title">交易与分析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1130,14 +1126,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-19
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-19
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    机器学习
+                            <a href="/categories/%E6%8A%95%E8%B5%84/" class="post-category">
+                                    投资
                                 </a>
                             
                             
@@ -1147,12 +1143,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">机器学习</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">深度学习</span>
+                    <a href="/tags/%E6%8A%95%E8%B5%84/">
+                        <span class="chip bg-color">投资</span>
                     </a>
                     
                 </div>
