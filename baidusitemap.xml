@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tianjuewudi.gitee.io/2021/09/25/qiang-hua-xue-xi-zhi-dqn-chao-ji-jin-hua-ban-rainbow/</loc>
-    <lastmod>2021-10-01</lastmod>
+    <loc>https://tianjuewudi.gitee.io/2021/10/06/qiang-hua-xue-xi-zhi-sac/</loc>
+    <lastmod>2021-10-07</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/10/06/qiang-hua-xue-xi-zhi-td3/</loc>
+    <lastmod>2021-10-06</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/</loc>
+    <lastmod>2021-10-06</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/</loc>
+    <lastmod>2021-10-05</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/09/08/qiang-hua-xue-xi-zhi-ppo/</loc>
-    <lastmod>2021-09-26</lastmod>
+    <lastmod>2021-10-05</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/09/25/qiang-hua-xue-xi-zhi-dqn-chao-ji-jin-hua-ban-rainbow/</loc>
+    <lastmod>2021-10-01</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/09/13/qiang-hua-xue-xi-zhi-dqn-dai-ma-dai-jiang-jie/</loc>
@@ -31,10 +47,6 @@
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/09/05/ge-ren-xue-xi-fang-xiang-ji-yan-jiu-fang-xiang/</loc>
     <lastmod>2021-09-05</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/</loc>
-    <lastmod>2021-09-02</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/09/01/wa-kuang-jiao-cheng/</loc>
