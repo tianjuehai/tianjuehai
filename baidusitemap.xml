@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tianjuewudi.gitee.io/2021/10/10/mo-fang-xue-xi-imitation-learning/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/</loc>
+    <lastmod>2021-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/</loc>
+    <lastmod>2021-10-09</lastmod>
+  </url>
+  <url>
     <loc>https://tianjuewudi.gitee.io/2021/10/06/qiang-hua-xue-xi-zhi-sac/</loc>
-    <lastmod>2021-10-07</lastmod>
+    <lastmod>2021-10-08</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/10/06/qiang-hua-xue-xi-zhi-td3/</loc>
@@ -11,10 +23,6 @@
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/</loc>
     <lastmod>2021-10-06</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/</loc>
-    <lastmod>2021-10-05</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/09/08/qiang-hua-xue-xi-zhi-ppo/</loc>
@@ -59,10 +67,6 @@
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/08/29/qiang-hua-xue-xi-zhi-ddqn/</loc>
     <lastmod>2021-08-29</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/</loc>
-    <lastmod>2021-08-26</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/</loc>

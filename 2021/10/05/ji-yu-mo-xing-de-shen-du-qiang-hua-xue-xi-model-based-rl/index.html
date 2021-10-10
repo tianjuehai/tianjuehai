@@ -475,21 +475,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-10-06
+                    2021-10-09
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    280
+                    1.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    5 分
                 </div>
                 
 
@@ -514,8 +514,95 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p> 之前介绍的算法例如DQN，DDPG，PPO都是<strong>model-free（无模型）</strong>的，这也是比较多人的研究领域，这些算法是智能体直接和环境互动获得数据，不需要拟合环境模型，智能体对环境的认知只能通过和环境不断大量的交互来实现。这样做的优点是通过无数次与环境的交互可以保证智能体得到最优解。</p>
-<p>接下来我介绍强化学习的另一个领域<strong>model-based（基于模型）</strong>，在这个领域中，智能体通过与环境进行交互获得数据，根据这些数据对环境进行建模拟合出一个模型，然后智能体根据模型来生成样本并利用RL算法优化自身。一旦模型拟合出来，智能体就可以根据该模型来生成样本，因此智能体和环境直接的交互次数会急剧减少，缺点是拟合的模型往往存在偏差，因此model-based的算法通常不保证能收敛到最优解。</p>
+                <p> 参考视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1hV411d7Sg?spm_id_from=333.999.0.0">周博磊强化学习纲要</a></p>
+<p> 阅读本文前需要对强化学习model-free领域有一定的了解，可以查看我之前的文章：《<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/">强化学习实践教学</a>》，《<a href="https://tianjuewudi.gitee.io/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/#toc-heading-39">强化学习纲要（周博磊课程）</a>》</p>
+<p> 之前介绍的算法例如DQN，DDPG，PPO都是<strong>model-free（无模型）</strong>的，这也是比较多人的研究领域，这些算法是智能体直接和环境互动获得数据，不需要拟合环境模型，智能体对环境的认知只能通过和环境不断大量的交互来实现。这样做的优点是通过无数次与环境的交互可以保证智能体得到最优解。往往在游戏这样的没有采样成本的环境中都可以用model-free。</p>
+<p>接下来我介绍强化学习的另一个领域<strong>model-based（基于模型）</strong>，在这个领域中，智能体通过与环境进行交互获得数据，根据这些数据对环境进行建模拟合出一个模型，然后智能体根据模型来生成样本并利用RL算法优化自身。一旦模型拟合出来，智能体就可以根据该模型来生成样本，因此智能体和环境直接的交互次数会急剧减少，缺点是拟合的模型往往存在偏差，因此model-based的算法通常不保证能收敛到最优解。但是在现实生活中是需要一定的采样成本的，因此采样效率至关重要，因此model-free是一个提升采样效率的重要方式。</p>
+<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/2.png" class>
+
+<p> model-based的强化学习算法分为两类，一类是值函数优化（value optimization），一类是策略优化（policy optinmization）。</p>
+<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/1.png" class>
+
+<p>在model-based RL中不仅仅有原来model-free中的结构，还多了一个model，因此原本在model-free中用来训练价值函数和策略函数的experience有了第二个用处，那就是model learning，拟合出一个适当的环境模型。</p>
+<h2 id="环境模型的构成"><a href="#环境模型的构成" class="headerlink" title="环境模型的构成"></a>环境模型的构成</h2><img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/3.png" class>
+
+<p>环境通常由两部分构成，第一就是状态转移矩阵，也就是说在知道现在的状态和采取的动作的情况下，转移到其他各个状态的概率。第二就是奖励函数，在知道现在的状态和采取的动作的情况下,我们可以得到的奖励是多少。</p>
+<p>例如在围棋中的规则是十分清楚的，因此状态之间的转移也是十分清楚的，因此能够打败人类的围棋AI AlphaGO也是用model-based强化学习算法得到的。还有一种是物理模型，现实中的物理模型往往有固定的计算公式，也可以轻松得到其状态转移。</p>
+<p>通常假定状态转移和奖励函数是相互独立的关系。</p>
+<h2 id="环境模型的训练"><a href="#环境模型的训练" class="headerlink" title="环境模型的训练"></a>环境模型的训练</h2><img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/4.png" class>
+
+<p>那么如何训练一个环境使其符合预期呢？</p>
+<p>这里我们只需要用监督学习的方法，收集真实环境中的数据${S_t,A_t \rightarrow R_{t+1},S_{t+1}}$，通过收集很多组这样的数据就能把这个当成样本，输入到环境的神经网络中进行学习。</p>
+<p>这里列举几个常用的模型：</p>
+<ol>
+<li>Table Lookup Model</li>
+<li>Linear Expectation Model</li>
+<li>Linear Gaussian Model</li>
+<li>Gaussian Process Model</li>
+<li>Deep Belief Network Model</li>
+</ol>
+<p>我们通常要对模型的准确率进行评估，如果准确率低，那么应当采用model-free的方法。</p>
+<h2 id="Dyna"><a href="#Dyna" class="headerlink" title="Dyna"></a>Dyna</h2><p>这是Richard Sutton在1991年提出的算法，在现阶段的强化学习算法中并不足够强，但是是我们理解model-based方法的例子。在通过真实的经验数据学习出来的环境模型中，我们刻意采集大量的虚拟数据，这样就能和填补真实数据采集不到的空白，一起去训练值函数模型和策略网络。</p>
+<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/5.png" class>
+
+<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/6.png" class>
+
+
+
+<h2 id="Model-based-的策略优化（Policy-Optimization）"><a href="#Model-based-的策略优化（Policy-Optimization）" class="headerlink" title="Model-based 的策略优化（Policy Optimization）"></a>Model-based 的策略优化（Policy Optimization）</h2><p>在model-free的policy gradient中，条件转移概率是不需要的。但是在model-based知道转移概率的情况下，就能改进我们的策略优化。</p>
+<p>基于环境模型的策略优化受控制论的影响是非常深远的。因为控制问题也是优化一个controller，而环境通常叫做system dynamics，可以定义成知道现在状态和采取的控制措施，得到的下一个状态。这也是最优控制（optimal controls）的内容，在满足动态转移条件的情况下去优化控制方法，降低cost函数。这和强化学习有很深远的联系。<br>$$<br>arg min_{a_1,…,a_T} \sum_{t=1}^T c(s_t,a_t)  \  \  \ \ subject \ to \ s_t = f(s_{t-1},a_{t-1})<br>$$<br>在环境模型未知的情况下，我们可以结合模型学习和轨迹优化两种方法。</p>
+<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/7.png" class>
+
+<p>第一种算法是用监督学习训练出环境模型之后，直接采用控制算法（如LQR）来计算最优路径。</p>
+<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/8.png" class>
+
+<p>第二种算法是为了防止训练数据采样不充分，在训练出环境模型之后，自己产生新的数据加入训练当中。</p>
+<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/9.png" class>
+
+<p>第三种算法是一种非常有名的算法<strong>MPC（Model Predictive Control）</strong>,是自动驾驶和控制中的常用算法。我们对整个轨迹进行优化，但是我们实际执行时只执行第一步，然后把这一步的数据加入到训练数据集中，个人理解是第一步的误差都是比较小的，数据都比较可靠。</p>
+<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/10.png" class>
+
+<hr>
+<p>最后第四种算法是把policy learning、model learning、optimal control结合起来。</p>
+<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/11.png" class>
+
+<ol>
+<li><p>初始化策略函数产生随机策略对真实环境的数据进行收集。</p>
+</li>
+<li><p>用收集的数据训练自己的环境模型。</p>
+</li>
+<li><p>通过环境模型产生的数据来对策略进行优化。</p>
+</li>
+<li><p>用优化后的策略去环境模型中产生新的轨迹，并将新的轨迹数据加入训练数据当中</p>
+</li>
+<li><p>返回第二条。</p>
+</li>
+</ol>
+<p>下面是两种模型的选择：</p>
+<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/12.png" class>
+
+<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/13.png" class>
+
+
+
+<h2 id="model-based-RL在机器人的应用"><a href="#model-based-RL在机器人的应用" class="headerlink" title="model-based RL在机器人的应用"></a>model-based RL在机器人的应用</h2><img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/14.png" class>
+
+<p>首先是摄像机捕捉画面得到一个3D坐标，我们需要把3D坐标转换成机械臂各个部位旋转的角度，我们可以把奖励函数设置成和Target坐标的距离来进行训练。这里用了Gaussin Process来做环境模型。像这种低成本的机械臂有很大的误差，需要对不确定性有很好的建模。</p>
+<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/15.png" class>
+
+<hr>
+<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/16.png" class>
+
+<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/17.png" class>
+
+
+
+
+
+
+
+
+
 
                 
             </div>
@@ -1340,7 +1427,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">166.6k</span>&nbsp;字
+                class="white-color">169.6k</span>&nbsp;字
             
             
             

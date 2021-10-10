@@ -475,21 +475,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-10-07
+                    2021-10-09
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    856
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    5 分
                 </div>
                 
 
@@ -514,10 +514,11 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p> 参考视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1EK41157fD/?spm_id_from=333.788.recommend_more_video.-1">https://www.bilibili.com/video/BV1EK41157fD/?spm_id_from=333.788.recommend_more_video.-1</a> </p>
+                <p> 参考视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1EK41157fD/?spm_id_from=333.788.recommend_more_video.-1">周博磊强化学习课程</a> </p>
 <p>价值函数优化学习主线：Q-learning→DQN→DDPG→TD3→SAC</p>
 <p>Q-Learning，DQN和DDPG请可以参考我之前的文章：<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-20">强化学习实践教学</a></p>
 <p>TD3可以参考我之前的博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/120626544">强化学习之TD3(pytorch实现)</a></p>
+<p>SAC可以参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38587510/article/details/104970837">https://blog.csdn.net/qq_38587510/article/details/104970837</a></p>
 <p>参考论文：</p>
 <ol>
 <li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1801.01290">Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor</a>，2018年8月发表。</li>
@@ -525,12 +526,64 @@
 </ol>
 <p>​       SAC全称Soft Actor-Critic，它整合了entropy regularization的思想。论文有以上两篇，第一篇采用模型包括一个actor网络，两个状态价值V网络，两个动作价值Q网络，第二篇的模型包括一个actor网络，四个动作价值Q网络。</p>
 <p>​       model-free深度强化学习算法面临两个主要挑战：<strong>高采样复杂度和脆弱的收敛性，因此严重依赖调参</strong>，这两个挑战限制了强化学习向现实应用的推广。SAC引入了<strong>最大熵（Maximum Entropy）强化学习</strong>，要求actor在同时最大化期望和策略分布的熵，也就是说，在保证任务成果的同时希望策略尽可能的随机。</p>
-<h3 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h3><p>这里说明一下信息熵的概念：当一件事情发生的概率越小，这件事情的信息量越大，对于一个分布而言，信息量的计算方式是：<br>$$<br>H(U) = E[-\log p_i] = - \sum_{i=1}^n p_i log p_i<br>$$<br>​       因此actor输出总概率相加为1的情况下，动作概率的分布越散，越不集中于一个action，这个熵的值越大。</p>
+<h3 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h3><p>这里说明一下信息熵的概念：当一件事情发生的概率越小，这件事情的信息量越大，对于一个分布而言，信息量的计算方式是：<br>$$<br>H(U) = E[-\log p_i] = - \sum_{i=1}^n p_i log p_i<br>$$<br>因此actor输出总概率相加为1的情况下，动作概率的分布越散，越不集中于一个action，这个熵的值越大。对于连续动作领域来说，就是随机噪声的采样值越偏离平均值，越出现在高斯分布边缘，这个值越大。</p>
 <h3 id="Maximum-Entropy"><a href="#Maximum-Entropy" class="headerlink" title="Maximum Entropy"></a>Maximum Entropy</h3><p>​       在标准强化学习中需要最大化累积期望reward：<br>$$<br>\sum_{t} E_{（s_t,a_t）～ p_{\pi}}[\gamma^t r(s_t,a_t)]<br>$$<br>​       在最大熵强化学习中需要优化的目标是：<br>$$<br>argmax_{\pi}\sum_{t} E_{\tau ～ \pi}[\gamma^t (R(s_t,a_r,s_{t+1})+ \alpha H(\pi(.|s_t)))]<br>$$<br>​       最大熵强化学习在标准的最大reward强化目标上增加了一个最大熵项，提高了探索能力和鲁棒性。既降低了采样复杂度，又提高了收敛稳定性。可以学到更多near-optimal的行为，也就是在一些状态下，可能存在多个动作都是最优的，那么使选择它们的概率相同，可以提高学习的速度。</p>
 <p>此时有：<br>$$<br> V^{\pi}(s) =  E_{\tau ～ \pi}[\sum_t \gamma^t (R(s_t,a_r,s_{t+1})+ \alpha H(\pi(.|s_t))) | s_0 = s]<br>$$</p>
 <p>$$<br>Q^{\pi}(s，a) =  E_{s’ ～ P,a’～ \pi }[R(s,a,s’)+ \gamma (Q^{\pi}(s’,a’)  + \alpha H(\pi(.|s_t))) ] \<br>=  E_{s’ ～ P,a’～ \pi }[R(s,a,s’)+ \gamma (Q^{\pi}(s’,a’)  - \alpha \log \pi(a’|s’)) ]<br>$$</p>
-<p>因此，采样更新公式应该是：<br>$$<br>Q^{\pi}(s，a) \approx   r + \gamma (Q^{\pi}(s’,\hat{ a’})  - \alpha \log \pi(\hat {a’}|s’)) ,\hat{a’} ～ \pi(.|s’)<br>$$<br>损失函数为：<br>$$<br>L（\phi_i,D） = E[(Q_{\phi}(s,a) - y(r,s’,d))^2]<br>$$<br>TD3类似，SAC也采用了两个Q网络的更新形式，然后使用较小的Q值进行更新。<br>$$<br>y(r,s’,d) =  r + \gamma (1-d)(\min_{j=1,2}Q_{\phi_{targ,j}}(s’,\hat{a’}) - \alpha \log \pi_{\theta}(\hat{a’}|s’)) ,\hat{a’} ～ \pi(.|s’)<br>$$<br>对于状态价值V有：<br>$$<br>V^{\pi}(s) = E_{a ～ \pi}[Q^{\pi}(s,a)] + \alpha H(\pi(.|s))  \<br> = E_{a ～ \pi}[Q^{\pi}(s,a)] + \alpha \log \pi(a|s))<br>$$</p>
-<h3 id="Reparameterization-Trick"><a href="#Reparameterization-Trick" class="headerlink" title="Reparameterization Trick"></a>Reparameterization Trick</h3><p>同时也在动作输出中加入了噪声。这就是Reparameterization Trick。让a从策略网络中进行采样转变成和其没有什么关系的采样。<br>$$<br>\hat{a_{\theta}}(s,\epsilon) = \tanh(μ<em>{\theta}(s) + \sigma</em>{\theta}(s) \odot \epsilon),\epsilon～N(0,1)<br>$$</p>
+<p>因此，采样更新公式应该是：<br>$$<br>Q^{\pi}(s，a) \approx   r + \gamma (Q^{\pi}(s’,\hat{ a’})  - \alpha \log \pi(\hat {a’}|s’)) ,\hat{a’} ～ \pi(.|s’)<br>$$<br>损失函数为：<br>$$<br>L（\phi_i,D） = E[(Q_{\phi}(s,a) - y(r,s’,d))^2]<br>$$<br>TD3类似，SAC也采用了两个Q网络的更新形式，然后使用较小的Q值进行更新。<br>$$<br>y(r,s’,d) =  r + \gamma (1-d)(\min_{j=1,2}Q_{\phi_{targ,j}}(s’,\hat{a’}) - \alpha \log \pi_{\theta}(\hat{a’}|s’)) ,\hat{a’} ～ \pi(.|s’)<br>$$<br>对于状态价值V有：<br>$$<br>V^{\pi}(s) = E_{a ～ \pi}[Q^{\pi}(s,a)] + \alpha H(\pi(.|s))  \<br> = E_{a ～ \pi}[Q^{\pi}(s,a)] - \alpha \log \pi(a|s))<br>$$</p>
+<h3 id="Reparameterization-Trick"><a href="#Reparameterization-Trick" class="headerlink" title="Reparameterization Trick"></a>Reparameterization Trick</h3><p>同时也在动作输出中加入了噪声。这就是Reparameterization Trick。让a从策略网络中进行采样转变成和其没有什么关系的采样。<br>$$<br>\hat{a_{\theta}}(s,\epsilon) = \tanh(μ<em>{\theta}(s) + \sigma</em>{\theta}(s) \odot \epsilon),\epsilon～N(0,1)<br>$$<br>其中μ和σ都是由神经网络学习得到的，因此在奖励最大化的同时鼓励探索的话，σ会尽可能增大以达到探索的目的，这样一个μ和σ都会变化的动作分布大大增加了动作策略的灵活性。</p>
+<h2 id="actor部分代码："><a href="#actor部分代码：" class="headerlink" title="actor部分代码："></a>actor部分代码：</h2><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">GaussianPolicy</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> num_inputs<span class="token punctuation">,</span> num_actions<span class="token punctuation">,</span> hidden_dim<span class="token punctuation">,</span> action_space<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        super<span class="token punctuation">(</span>GaussianPolicy<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        self<span class="token punctuation">.</span>linear1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>num_inputs<span class="token punctuation">,</span> hidden_dim<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>linear2 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>hidden_dim<span class="token punctuation">,</span> hidden_dim<span class="token punctuation">)</span>
+
+        self<span class="token punctuation">.</span>mean_linear <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>hidden_dim<span class="token punctuation">,</span> num_actions<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>log_std_linear <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>hidden_dim<span class="token punctuation">,</span> num_actions<span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># 使用对应函数初始化所有的全连接层参数</span>
+        self<span class="token punctuation">.</span>apply<span class="token punctuation">(</span>weights_init_<span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true"># action rescaling</span>
+        <span class="token keyword">if</span> action_space <span class="token keyword">is</span> None<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>action_scale <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>action_bias <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>action_scale <span class="token operator">=</span> torch<span class="token punctuation">.</span>FloatTensor<span class="token punctuation">(</span>
+                <span class="token punctuation">(</span>action_space<span class="token punctuation">.</span>high <span class="token operator">-</span> action_space<span class="token punctuation">.</span>low<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>action_bias <span class="token operator">=</span> torch<span class="token punctuation">.</span>FloatTensor<span class="token punctuation">(</span>
+                <span class="token punctuation">(</span>action_space<span class="token punctuation">.</span>high <span class="token operator">+</span> action_space<span class="token punctuation">.</span>low<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> state<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x <span class="token operator">=</span> F<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>self<span class="token punctuation">.</span>linear1<span class="token punctuation">(</span>state<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        x <span class="token operator">=</span> F<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>self<span class="token punctuation">.</span>linear2<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        mean <span class="token operator">=</span> self<span class="token punctuation">.</span>mean_linear<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        log_std <span class="token operator">=</span> self<span class="token punctuation">.</span>log_std_linear<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        log_std <span class="token operator">=</span> torch<span class="token punctuation">.</span>clamp<span class="token punctuation">(</span>log_std<span class="token punctuation">,</span> min<span class="token operator">=</span>LOG_SIG_MIN<span class="token punctuation">,</span> max<span class="token operator">=</span>LOG_SIG_MAX<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> mean<span class="token punctuation">,</span> log_std
+
+    <span class="token keyword">def</span> <span class="token function">sample</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> state<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        mean<span class="token punctuation">,</span> log_std <span class="token operator">=</span> self<span class="token punctuation">.</span>forward<span class="token punctuation">(</span>state<span class="token punctuation">)</span>
+        std <span class="token operator">=</span> log_std<span class="token punctuation">.</span>exp<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># 创建高斯分布</span>
+        normal <span class="token operator">=</span> Normal<span class="token punctuation">(</span>mean<span class="token punctuation">,</span> std<span class="token punctuation">)</span>
+        x_t <span class="token operator">=</span> normal<span class="token punctuation">.</span>rsample<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># for reparameterization trick (mean + std * N(0,1))</span>
+        y_t <span class="token operator">=</span> torch<span class="token punctuation">.</span>tanh<span class="token punctuation">(</span>x_t<span class="token punctuation">)</span>
+        action <span class="token operator">=</span> y_t <span class="token operator">*</span> self<span class="token punctuation">.</span>action_scale <span class="token operator">+</span> self<span class="token punctuation">.</span>action_bias
+        log_prob <span class="token operator">=</span> normal<span class="token punctuation">.</span>log_prob<span class="token punctuation">(</span>x_t<span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># Enforcing Action Bound</span>
+        <span class="token comment" spellcheck="true"># ---重点问题---</span>
+        log_prob <span class="token operator">-=</span> torch<span class="token punctuation">.</span>log<span class="token punctuation">(</span>self<span class="token punctuation">.</span>action_scale <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> y_t<span class="token punctuation">.</span>pow<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> epsilon<span class="token punctuation">)</span>
+        log_prob <span class="token operator">=</span> log_prob<span class="token punctuation">.</span>sum<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> keepdim<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+        mean <span class="token operator">=</span> torch<span class="token punctuation">.</span>tanh<span class="token punctuation">(</span>mean<span class="token punctuation">)</span> <span class="token operator">*</span> self<span class="token punctuation">.</span>action_scale <span class="token operator">+</span> self<span class="token punctuation">.</span>action_bias
+        <span class="token keyword">return</span> action<span class="token punctuation">,</span> log_prob<span class="token punctuation">,</span> mean
+
+    <span class="token keyword">def</span> <span class="token function">to</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> device<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>action_scale <span class="token operator">=</span> self<span class="token punctuation">.</span>action_scale<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>action_bias <span class="token operator">=</span> self<span class="token punctuation">.</span>action_bias<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> super<span class="token punctuation">(</span>GaussianPolicy<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+</code></pre>
 
                 
             </div>
@@ -1029,18 +1082,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/10/06/qiang-hua-xue-xi-zhi-sac/">
+                <a href="/2021/10/10/mo-fang-xue-xi-imitation-learning/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="强化学习之SAC">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="模仿学习（Imitation Learning）">
                         
-                        <span class="card-title">强化学习之SAC</span>
+                        <span class="card-title">模仿学习（Imitation Learning）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1050,9 +1102,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-06
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-10
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1065,7 +1117,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1357,7 +1408,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">166.6k</span>&nbsp;字
+                class="white-color">169.6k</span>&nbsp;字
             
             
             
