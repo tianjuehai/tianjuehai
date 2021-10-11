@@ -697,4 +697,1932 @@
 <p>下面是ζ不同时系统的表现：</p>
 <img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/35.png" class="">
 
-<p>极点所在的位置和原点、坐标轴构成的三角形有以下关
+<p>极点所在的位置和原点、坐标轴构成的三角形有以下关系：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/44.png" class="">
+
+<h4 id="二阶系统的指标特性（阻尼比0到1）"><a href="#二阶系统的指标特性（阻尼比0到1）" class="headerlink" title="二阶系统的指标特性（阻尼比0到1）"></a>二阶系统的指标特性（阻尼比0到1）</h4><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/36.png" class="">
+
+<p>$T_d$延迟时间(Delay time)，达到稳态值50%的时间。</p>
+<p>$T_r$上升时间(Rise time)，第一次达到稳态值的时间。$T_r=\frac{\pi-\phi}{\omega_d}=\frac{\pi-arctan\frac{\sqrt{1-\zeta^2}}{\zeta}}{\omega_n\sqrt{1-\zeta^2}}$</p>
+<p>$M_p$最大超调量(Max overshoot)，$t_p=\frac{\pi}{\omega_d}$，$M_p = e^\frac{-\zeta\pi}{\sqrt{1-\zeta^2}}*100$%。当ζ=0.5，超调量是16.3%，当$ζ=0.707=\frac{\sqrt{2}}{2}$，超调量是4.33%，可以看成5%。当$\zeta = \frac{\sqrt{3}}{2}$，超调量为0.43%。而超调量相同则表明极点落在原点发出的同一条射线上。</p>
+<p>$T_{ss}$调节时间(setting time)，系统进入到稳态误差范围内的时间，一般稳态误差取5%或2%。实际上为了方便取包络线进入误差带。取2%$T_{ss}=\frac{4.5}{\zeta\omega_n}$，取5%$T_{ss}=\frac{3.5}{\zeta\omega_n}$ ，ζ=0.707是最佳阻尼比调节时间最短可以看成$T_{ss}=\frac{2}{\zeta\omega_n}$。</p>
+<p>临界阻尼和过阻尼下的调节时间：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/51.png" class="">
+
+<h4 id="改善二阶系统动态性能的措施"><a href="#改善二阶系统动态性能的措施" class="headerlink" title="改善二阶系统动态性能的措施"></a>改善二阶系统动态性能的措施</h4><p>1、测速反馈：增加阻尼</p>
+<p>2、比例+微分：提前控制</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/52.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/54.png" class="">
+
+<p>可以看出测速反馈的无阻尼自然频率不变，但阻尼比增加，导致超调量减小，调节时间减小。比例+微分的极点和测速反馈是一样的，但多出来一个闭环零点，性能指标要采用另外一套零点极点法进行计算。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/53.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/55.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/56.png" class="">
+
+<p>可以看出，与原系统相比，比例+微分多出来的零点的影响是了多微分信号，这个信号减小了系统的上升时间，并使得超调量略微增加，但调节时间略微缩短。</p>
+<h4 id="二阶系统的频率响应"><a href="#二阶系统的频率响应" class="headerlink" title="二阶系统的频率响应"></a>二阶系统的频率响应</h4><p>振幅响应：<br>$$<br>\frac{M_o}{M_i}=|G(j\omega)|<br>$$<br>相角响应：<br>$$<br>\phi_o - \phi_i = ∠G(j\omega)<br>$$<br>因此：<br>$$<br>G(j\omega) = \frac{\omega_n^2}{-\omega^2+2\zeta\omega_n\omega j+\omega^2} = \frac{1}{-\frac{\omega^2}{\omega_n^2}+2\zeta\frac{\omega}{\omega_n}j+1}<br>$$</p>
+<p>$$<br>令  \Omega =  \frac{\omega}{\omega_n}<br>$$</p>
+<p>$$<br>G(j\omega) = \frac{1-\Omega^2}{(1-\Omega^2)^2+4\zeta^2\Omega^2} - \frac{2\zeta\Omega}{(1-\Omega^2)^2+4\zeta^2\Omega^2} j<br>$$</p>
+<p>$$<br>|G(j\omega)| = \sqrt{\frac{1}{(1-\Omega^2)^2+4\zeta^2\Omega^2}}<br>$$</p>
+<p>$$<br>∠G(j\omega) = -arctan\frac{2\zeta\Omega}{1-\Omega^2}<br>$$</p>
+<p>当$\omega = 0$时，$\Omega = 0$，$|G(j\omega)|=1$</p>
+<p>当$\omega = \infty$时，$\Omega = \infty$，$|G(j\omega)| =  0$</p>
+<p>当$\omega = \omega_n$时，$\Omega = 1$，$|G(j\omega)|=\frac{1}{2\zeta}$，此时当$\zeta&lt;0.5$时，$|G(j\omega)|&gt;1$；当$\zeta&gt;0.5$时，$|G(j\omega)|&lt;1$，因此一定存在一个极值点。</p>
+<p>通过对$|G(j\omega)|$分母部分进行求导，可以得出$\Omega= \frac{\omega}{\omega_n}= \sqrt{1-2\zeta^2}$时存在极值。<br>$$<br>\omega = \omega_n\sqrt{1-2\zeta^2}<br>$$<br>我们把这个频率称为<strong>系统的共振频率（谐振频率）</strong>。可以看出在$0\leqζ\leq\frac{\sqrt{2}}{2}$时才存在谐振峰值，才有谐振频率。</p>
+<p>把这个式子代回$|G(j\omega)|$的式子中，得：<br>$$<br>|G(j\omega)|_{\omega = \omega_n\sqrt{1-2\zeta^2}}= \frac 1 {2\zeta\sqrt{1-\zeta^2}}<br>$$<br>当ζ=1时，$\omega=\omega_n$，$|G(j\omega)|=0.5$。</p>
+<p>当ζ=0.5时，$\omega=\omega_n$，$|G(j\omega)|=1$，$\omega=\omega_n\sqrt{1-2\zeta^2}$时$|G(j\omega)|=1.16$。</p>
+<p>当ζ=0时，$\omega=\omega_n$，$|G(j\omega)|=\infty$，同时这也是它的谐振频率。</p>
+<p><strong>因此对阻尼比较小的系统来说，如果外力的频率在共振频率附近，系统就会表现出强烈的振幅响应，因为外力把系统本身的震动潜能激励起来了。</strong>不同的系统有不同的共振频率，对外界的响应也不相同。</p>
+<hr>
+<h2 id="高阶系统的阶跃响应和动态性能（一般了解）"><a href="#高阶系统的阶跃响应和动态性能（一般了解）" class="headerlink" title="高阶系统的阶跃响应和动态性能（一般了解）"></a>高阶系统的阶跃响应和动态性能（一般了解）</h2><p>首先画出高阶系统的零点和极点：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/57.png" class="">
+
+<p>1、挨得较近的零极点（模是相对距离的十倍以上）可以忽略不计。</p>
+<p>2、只留下主导极点，去掉非主导极点。</p>
+<p>3、查零点极点计算公式（各种数量的零点极点都有对应公式可查）。</p>
+<h2 id="伯德图"><a href="#伯德图" class="headerlink" title="伯德图"></a>伯德图</h2><p>为什么大多研究开环伯德图？<br>可以通过开环伯德图较方便地获取系统稳定性信息，通过回路整形（Loop shaping）调整开环伯德图的形状以达到期望的控制性能；<br>闭环伯德图直观展示整个系统输入输出响应特性，也能与时域响应紧密联系，适用于设计结果验证，不适合用于分析控制回路在整个系统中的作用；<br>某些系统开环频域响应数据更容易获取；开环伯德图更适用于控制器设计，因为开环回路就是控制器所需要调整和处理的回路。<br>结论：开环波特图因其直接体现出控制器对系统性能的影响而便于设计，闭环因其直接展现出最终结果而便于分析。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/37.png" class="">
+
+<p>以ω(对数标度即lgω)为横坐标，把振幅响应和相位响应用两个图表达出来，幅值响应的纵坐标进行了对数变换，取20log，以10为底，这两个图组合起来称为伯德图。</p>
+<p>功率或能量是振幅平方的函数。因此对dB的定义可以由能量的部分替换成振幅的部分，因此原本的系数10变成20。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/38.png" class="">
+
+<p>下面是示例：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/39.png" class="">
+
+<p>下面是$G(s) = \frac{a}{s+a}$的分析：<br>$$<br>|G(j\omega)|  = \sqrt\frac{1}{1+(\frac{\omega}{a})^2}<br>$$</p>
+<p>$$<br>∠G(j\omega) = -arctan\frac{\omega}{a}<br>$$</p>
+<p>当ω&lt;&lt;a时，$|G(j\omega)|=1$，$20log|G(j\omega)| = 0$，$∠G(j\omega) = 0$</p>
+<p>当ω=a时，$|G(j\omega)|=\frac{\sqrt 2}{2}$，$20log|G(j\omega)| = -20log\sqrt{2} = -3dB$，$∠G(j\omega) = -45°$，这里幅值达到原来的0.707倍，也被称为截止频率。</p>
+<p>当ω&gt;&gt;a时，$|G(j\omega)|=\frac{a}{\omega}$，$20log|G(j\omega)| = 20loga-20log{\omega}$，$∠G(j\omega) = -90°$</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/40.png" class="">
+
+<p>画幅频特性曲线时都是以截止频率为转折点画渐近线的。</p>
+<p><strong>伯德图性质$log_{10}AB=log_{10}A+log_{10}B$非常好，意味着可以把非常复杂的传递函数分解开来。</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/41.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/42.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/43.png" class="">
+
+<h3 id="实际画图规则："><a href="#实际画图规则：" class="headerlink" title="实际画图规则："></a><strong>实际画图规则：</strong></h3><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/99.png" class="">
+
+<p>惯性环节对数相频曲线是关于-45°那一点对称的。转折频率为$\frac{1}{T}$，转折后斜率是-20dB。而-45°的点刚刚好是在转折频率上的，可以推断，画典型环节的相频曲线时，确定其起始角度，终止角度，可以画出一条过转折频率，中间角度的曲线。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/100.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/101.png" class="">
+
+<p>振荡环节的转折频率为$\omega_n$。转折后的斜率是-40dB。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/102.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/103.png" class="">
+
+<p>乘-57.3是为了把弧度化成度。</p>
+<h3 id="题目（画图、反求函数、反求Nyquist图）"><a href="#题目（画图、反求函数、反求Nyquist图）" class="headerlink" title="题目（画图、反求函数、反求Nyquist图）"></a>题目（画图、反求函数、反求Nyquist图）</h3><p><strong>截止频率为$|G(jω)| = 1 $对应的频率。</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/104.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/105.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/106.png" class="">
+
+ <img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/108.png" class="">
+
+<p>这里的几种手法很重要。要注意中间的$\omega_0$的求法，其中当几何方法不好求时侧重用第二种。</p>
+ <img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/109.png" class="">
+
+<p>这里非相角系统（在右半s平面存在开环零极点或纯延时环节的系统，这种系统不能由幅频特性唯一确定G(s)）的零极点在s域左边还是右边要考虑清楚。开始时-270°却是一型系统，只能是有一个极点在右半s平面导致比初始比预期小180°。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>伯德图绘制：</p>
+<ol>
+<li><p>$G(s)$化为尾一标准型，列出转折频率（一阶环节如$\frac{1}{Ts+1}$为$\frac{1}{T}$，二阶环节为$\omega_n$）</p>
+</li>
+<li><p>确定基准线（起始线的延长线必过$\omega=1$,$dB=20lgK$，也必过$\omega^v = K$ ，$L(\omega)| = 0$（当20lgK不好确定时用这个）。再根据型别v确定初始斜率为-20v dB/dec）。</p>
+</li>
+<li><p>叠加：在转折频率处改变斜率，一阶为$\pm20dB$，二阶为$\pm20dB$。</p>
+</li>
+</ol>
+<p>根据伯德图画Nyquist图：</p>
+<p>当极点在原点上时，ω的变化视为从实轴右边无线小的距离开始，沿着无限小的圆弧到虚轴往上走，因此Nyquist图一律是从0°开始的。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/107.png" class="">
+
+
+
+
+
+
+
+<hr>
+<h2 id="幅相特性曲线——Nyquist图"><a href="#幅相特性曲线——Nyquist图" class="headerlink" title="幅相特性曲线——Nyquist图"></a>幅相特性曲线——Nyquist图</h2><p>这幅图相当于伯德图另一种表现形式。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/87.png" class="">
+
+<p>惯性环节的幅相特性是未半圆。把ωT约去后可以证明：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/88.png" class="">
+
+<p>其他环节的图：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/89.png" class="">
+
+<p><strong>振荡环节</strong>（可同时参考二阶系统的频率响应小节）</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/90.png" class="">
+
+<p>可以看出，振荡环节相当于一个实数除以两个由极点指向虚轴大于0的某一点的向量，当频率增大是，这一点向正无穷移动，两个向量幅值趋向无穷，相角趋向90度，造成整个振荡环节的幅值趋向0，相角趋向-180度。在$\omega_n$确定的情况下，ζ越小圈越大，越靠近共振频率幅值越大，ζ=0时是无穷大的圈沿着横坐标轴走。图上于虚轴相交的点刚好处于$\omega_n$的频率，幅值为$\frac{1}{2\zeta}$。</p>
+<p>谐振频率<br>$$<br>\omega = \omega_n\sqrt{1-2\zeta^2}<br>$$<br>谐振峰值<br>$$<br>|G(j\omega)|_{\omega = \omega_n\sqrt{1-2\zeta^2}}= \frac 1 {2\zeta\sqrt{1-\zeta^2}}<br>$$</p>
+<p>可以看出当$ζ&lt;\frac{\sqrt{2}}{2}$时，才有谐振峰值，即存在$|G(j\omega)|&gt;1$。ζ越小，谐振峰值越大。</p>
+<p>根据Nyquist图解出参数：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/91.png" class="">
+
+<p><strong>不稳定的振荡环节</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/92.png" class="">
+
+<p>可以看出，不稳定振荡环节的曲线与稳定环节曲线x轴对称，相角从-360变成-180。</p>
+<p><strong>二阶复合微分</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/93.png" class="">
+
+<p>阻尼比越小，曲线越瘦。当$ζ&lt;\frac{\sqrt{2}}{2}$时，$|G(jω)|$先减小再增大，存在比1小的极小值。</p>
+<p><strong>延时环节</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/94.png" class="">
+
+<h5 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h5><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/95.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/96.png" class="">
+
+<h5 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h5><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/97.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/98.png" class="">
+
+<hr>
+<h2 id="Nyquist稳定判据"><a href="#Nyquist稳定判据" class="headerlink" title="Nyquist稳定判据"></a>Nyquist稳定判据</h2><p>Routh判据（代数稳定判据）不能用于研究如何调整系统结构来改善系统稳定性的问题。</p>
+<p>Nyquist稳定判据（频域稳定判据）可以由开环频率特性直接判定闭环系统的稳定性，可以研究包含纯延时环节的系统的稳定性问题，并且可以研究如何调整系统的结构参数改善系统稳定性问题。<br>$$<br>Z=P-2N<br>$$<br>其中Z是在右半s平面闭环极点的个数，P是在右边s平面中开环极点的个数，N是开环幅相特性曲线包围$(-1,0)$这个点的圈数，顺时针方向为正，逆时针为负。</p>
+<h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/110.png" class="">
+
+<p>可以看出$1+G(s)H(s)$的极点和开环极点一致，零点和闭环极点一致。</p>
+<p><strong>柯西辐角原理</strong></p>
+<p>把一个复数q=a+bj，通过$F(s)$变成$F(q)= a’+b’j$的过程叫<strong>映射</strong>。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/111.png" class="">
+
+<p>可以看出映射之前的点同零点的连线和映射之后的点和原点的连线是一样的，即模值一样，角度一样。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/112.png" class="">
+
+<p>因此如果原来的图如果有一条闭合曲线不包围$F(s)$零点，那么，映射之后的曲线一定不包围原点。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/113.png" class="">
+
+<p>同理，容易如果$F(s)$存在极点，映射之前的点与映射之后的点模值互为倒数，角度互为相反数。</p>
+<p>因此，如果有顺时针包围极点的一条曲线，映射一定有逆时针包围原点的曲线。</p>
+<p>曲线同时包含一个零点和一个极点的情况下：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/114.png" class="">
+
+<p>容易推出映射后的点角度为$φ = φ_1-φ_2$，模值为$v = \frac{v_1}{v_2}$。映射后的角度永远无法满足360°都存在，曲线映射后一定不包围原点。</p>
+<p><strong>结论：A曲线顺时针包含一个$F(s)$的零点，映射后打的B曲线就绕$(0,0)$顺时针一圈。顺时针包含一个$F(s)$的极点，则B曲线绕$(0,0)$逆时针一圈。A曲线顺时针环绕的零点比极点多几个，那么B曲线就顺时针环绕几圈，少几个则逆时针围绕几圈，A逆时针同理。</strong></p>
+<p>理论准备完成，现在正式证明：</p>
+<p>首先可以定义一个顺时针包围整个右边平面的曲线A，只要曲线内没有闭环极点则为稳定：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/115.png" class="">
+
+<p>可以看出这里列出的公式P是右半平面包含的$1+G(s)H(s)$的极点也即是开环极点个数，Z是$1+G(s)H(s)$的零点也即是闭环极点的个数，N为映射到$1+G(s)H(s)$之后逆时针包围零点的圈数。这个等式显然是成立的。而把$F(s)$由$1+G(s)H(s)$变为$G(s)H(s)$相当于向左移动一个单位，映射后的曲线变为包围$(-1,0)$点。因此有了公式：<br>$$<br>Z = P-N<br>$$<br>Z是在右边平面闭环极点的个数，一定大于或等于0，用来判断稳定性，P是右半平面开环极点个数，N是逆时针绕$(-1,0)$的圈数，由于平时画的Nyquist图只有一半（与另一半x轴对称），所以N又可以表示为2N：<br>$$<br>Z = P-2N<br>$$<br>当系统稳定时Z=0，P=N，这个称为<strong>Nyquist稳定性判据</strong>。</p>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/116.png" class="">
+
+<p>当Nyquist路径碰到虚轴上的开环极点时，要从右边画一个无限小的圆弧绕过去。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/117.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/118.png" class="">
+
+<p>我们把Nyquist图逆时针穿过(-1,0)左边实轴称为正穿越，N为正数，顺时针称为负穿越，N为负数。当只给出开环传递函数的伯德图时，看对数幅频曲线在上半平面的曲线部分的频率，在这部分频率中对数相频曲线往下穿过-180°称为负穿越，反之正穿越。如果在这个区域没有穿过而是贴着-180°而起，算半次穿越（注意）。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/119.png" class="">
+
+<hr>
+<h2 id="稳定裕度"><a href="#稳定裕度" class="headerlink" title="稳定裕度"></a>稳定裕度</h2><p>稳定裕度是系统动态性能指标，指的是系统的稳定程度（注意这是对<strong>最小相角系统</strong>而言）</p>
+<p>对于<strong>最小相角系统</strong>来说，只要越过(-1,0)的左边就是不稳定，因此稳定程度可以确定为曲线与(-1,0)的距离，这就是稳定裕度，这是开环频率指标。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/120.png" class="">
+
+<p><strong>相角裕度</strong>确定了Nyquist曲线上$|G(j\omega)|=1$的点，到-180°的角度差。物理意义是系统在相角上距离临界稳定还具有的储备量，意思是最多可以加多少角度的纯延时环节。</p>
+<p><strong>幅值裕度</strong>确定了Nyquist曲线上与负实轴交界的点到(-1,0)点的距离的倒数，这个数越大，距离(-1,0)越远，系统越稳定。物理意义是系统在增益上距离临界稳定还具有的储备量。意思是最多还可以再乘上多少的增益。</p>
+<h3 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h3><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/121.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/122.png" class="">
+
+<p>求相角裕度要先求出$|G(j\omega_c)| = 1$对应的$\omega_c$的值（要试根），再代入相角式子中计算裕度。求幅值裕度解相角等于-180°的方程（或者令G(j\omega）虚部为0)，解方程时可能要使用$\arctan a +\arctan b = arctan\frac{a+b}{1-ab}$，然后把这个频率代入模值方程的倒数中，就可以得到幅值裕度h。</p>
+<p><strong>画伯德图算</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/123.png" class="">
+
+<p>伯德图算出来的相角裕度和幅值裕度比实际小一些，这在工程上时有好处的，也免去试根的麻烦，做题时画图后再做计算较方便。<strong>当求-180°对应的频率时，如果对数幅频特性是按照-20，-40，-60的斜率依次下降的，那么-180°就处于两个转折频率的几何中点处，即两个转折频率相乘后开方（容易证明所有惯性环节在相频特性曲线图上的几何形状都是一样的，区别只是转折频率而已，就连幅频特性曲线后面都是一样的，区别只是转折频率较高的惯性环节前面多出一节近似0分贝的图像）。</strong>如果函数没有这个规律，就老实用相角方程算。    </p>
+<hr>
+<h2 id="利用开环频率特性分析系统性能"><a href="#利用开环频率特性分析系统性能" class="headerlink" title="利用开环频率特性分析系统性能"></a>利用开环频率特性分析系统性能</h2><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/124.png" class="">
+
+<p>在截止频率附近的叫做<strong>中频段</strong>，左边的特别是第一个转折频率前叫做<strong>低频段</strong>，最后在0分贝线下较多的地方叫做<strong>高频段</strong>。注意：这只适用于单位反馈的最小相角系统，因为这样才能通过对数幅频曲线唯一确定对数相频曲线和闭环传递函数。</p>
+<p>低频段和系统的稳态精度息息相关，确定了开环增益和系统型别，只要系统稳定，K和v越大越好。中频段可以直接把相角裕度读出来，和系统的动态性能$t_s和\delta%$息息相关，如果要求相角裕度大于40°，截止频率就要尽量满足以-20斜率穿越0分贝线。高频段决定闭环系统的抗高频干扰能力（$\phi(s) = \frac{G(s)}{1+G(s)}&lt;&lt;1$）,越低越陡越好。</p>
+<p><strong>在最小相角系统中，要学会通过对数幅频曲线去推算相频特性曲线。</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/125.png" class="">
+
+<p>可以发现，斜率越小，相角归宿越小，每个转折频率后都有不同的相角归宿，在转折频率处，可以大概估计为之前的相角归宿和之后的相角归宿的中间值。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/126.png" class="">
+
+<p>可以看出，中间的频带拉的越宽，相角往中间的归宿靠的越近，这也是要用-20斜率穿过0分贝线并且要拉的比较宽的原因，这样相角就尽可能接近-90°，延缓向-180°靠的频率，相角裕度较大。（要注意型别大于等于2的系统可能存在的刚开始的穿越）</p>
+<p>并且可以同时调整K值，调整K值只会上下平移对数幅频曲线，不会改变对数相频曲线，把曲线的截止频率调整到相角最大的地方，也可以增大相角裕度。</p>
+<p><strong>对于典型二阶欠阻尼系统</strong>：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/127.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/128.png" class="">
+
+<p>可以看出系统的相角裕度只与阻尼比有关，和超调量有异曲同工之处。知道二阶系统的相角裕度后查图可以知其超调量。并且调节时间也同截止频率和相角裕度有关：$t_s\omega_c = \frac{7}{\tan\gamma}$。所以通过查图可以由相角裕度和截止频率推出其调节时间。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/129.png" class="">
+
+<p>二阶系统用时域方法计算更具优越性，但频域方法能扩展到更高级的系统中。</p>
+<p>估计高阶系统的动态性能是用以下两个公式或查图可以保守估计超调量和调节时间：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/130.png" class="">
+
+<h3 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a>题目</h3><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/131.png" class="">
+
+<p>可以看出右移倍频<strong>不会改变相角裕度</strong>，因为每个惯性环节在伯德图的相角曲线的几何形状是不变的，转折频率改变的只是相角所处的位置（右移），截止频率同样也整体右移同样幅度，因此相角裕度不变。</p>
+<hr>
+<h2 id="利用闭环频率特性曲线分析系统性能"><a href="#利用闭环频率特性曲线分析系统性能" class="headerlink" title="利用闭环频率特性曲线分析系统性能"></a>利用闭环频率特性曲线分析系统性能</h2><h3 id="闭环频率特性曲线绘制"><a href="#闭环频率特性曲线绘制" class="headerlink" title="闭环频率特性曲线绘制"></a>闭环频率特性曲线绘制</h3><p>开环曲线和闭环曲线的关系：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/132.png" class="">
+
+<p>可以看出，闭环曲线的模值和相角与OA和AB的夹角有关。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/133.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/134.png" class="">
+
+<p>这里可以利用两个工具：</p>
+<p>等M圆，在图中开环的Nyquist曲线上的点对应交于等M圆上的一个圆，可以直接读出这一点频率的闭环幅值。越靠近(-1,0)的点幅值越大，越靠近(0,0)的点幅值越小。</p>
+<p>等N圆，在图中开环的Nyquist曲线上的点对应交于等N圆上的一个圆，可以直接读出这一点频率的闭环相角。越往上相角越大，原理是圆内同弦所对的圆周角是相等的。</p>
+<p>移植到伯德图中：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/135.png" class="">
+
+<p>这样当约定一点的开环幅值相角后，可以在图中找到对应的点，看其与哪一个闭环的幅值相角曲线相交，可直接读数。</p>
+<p>这就是<strong>对数幅相特性曲线</strong>，是继频率特性，Nytuist图，伯德图之后分析系统的第四种绘图方式，现在基本不用了，用计算机可以直接完成闭环伯德图绘制。</p>
+<h3 id="闭环频率特性分析系统性能"><a href="#闭环频率特性分析系统性能" class="headerlink" title="闭环频率特性分析系统性能"></a>闭环频率特性分析系统性能</h3><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/136.png" class="">
+
+<ol>
+<li>零频值 $M_0 = M(0)$。</li>
+<li>谐振频率$\omega_r$，谐振峰值$M_r$。</li>
+<li>带宽频率$\omega_b$，表示$M(\omega)$下降到零频值的0.707倍时对应的频率。</li>
+</ol>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/137.png" class="">
+
+<p>二阶系统知道带宽和谐振峰值后，可以直接通过查表来确定闭环系统的超调量、阻尼比和调节时间。</p>
+<p>对于高阶系统：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/138.png" class="">
+
+<p>注意$\omega_c$是开环的截止频率，但是实际工程直接把闭环的带宽频率代进去计算也差不太多。同样也可以直接读图。</p>
+<hr>
+<h2 id="线性系统的时域校正"><a href="#线性系统的时域校正" class="headerlink" title="线性系统的时域校正"></a>线性系统的时域校正</h2><h4 id="反馈校正"><a href="#反馈校正" class="headerlink" title="反馈校正"></a>反馈校正</h4><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/73.png" class="">
+
+<p>可以看出，反馈校正较小被包围环节的时间常数的同时，也减小了增益。相反，改成正反馈可以增加增益，增大时间常数。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/74.png" class="">
+
+
+
+<hr>
+<h2 id="根轨迹"><a href="#根轨迹" class="headerlink" title="根轨迹"></a>根轨迹</h2><p>作用：研究系统中的某一参数发生变化时，系统性能的变化趋势。</p>
+<p>根的位置对系统表现有着至关重要的影响，掌握了根的变化规律，就可以利用补偿器来改变根的位置，从而达到影响系统表现的作用。</p>
+<p>开环传递函数化成首一标准形式后的系数叫根轨迹增益，仅对开环而言。</p>
+<p>例：其中研究对象是开环传递函数$G(s)H(s)$：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/45.png" class="">
+
+<p>其中根随着K从0增大到无穷的轨迹就是根轨迹。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/75.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/76.png" class="">
+
+<p><strong>因此根轨迹要满足模值条件和相角条件。</strong><br>$$<br>|G(s)H(s)| = K^*\frac{\prod_{i=1}^{m}|s-z_i|}{\prod_{j=1}^{n}|s-p_j|} = 1<br>$$</p>
+<p>$$<br>∠G(s)H(s)= \sum_{i=1}^{m}∠(s-z_i)-\sum_{j=1}^{n}∠(s-p_j) = (2k+1)\pi<br>$$</p>
+<p><strong>对于s平面上的任意的点，总存在一个K*，使其满足模值条件，但该点不一定是根轨迹上的点。但是满足相角条件的点一定在根轨迹上，而根轨迹上对应的K*值，应由模值条件确定。</strong></p>
+<p><strong>根轨迹规则：</strong></p>
+<ol>
+<li><p>根轨迹起始于开环极点，终止于开环零点。如果开环极点的个数n大于开环零点个数m，则有n-m条根轨迹终止于无穷远处。<br>$$<br>原因：K^* =\frac{\prod_{j=1}^{n}|s-p_j|}{\prod_{i=1}^{m}|s-z_i|}<br>$$</p>
+</li>
+<li><p>根轨迹的分支数=开环极点数，根轨迹连续且对称于实轴。通常开环传递函数的分母比分子阶数高，因此闭环极点数等于开环极点数等于根轨迹分支数。</p>
+</li>
+<li><p>从实轴上最右端的开环零、极点算起，奇数开环零、极点到偶数开环零、极点之间的区域必是根轨迹。</p>
+</li>
+<li><p>当$n-m\geq 2$时闭环根之和保持一个常值。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/46.png" class="">
+
+<p><strong>定理：两个开环极点一个开环零点，复平面出现根轨迹，一定是以开环零点为圆心的圆弧。</strong></p>
+</li>
+</ol>
+<p>​        <img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/77.png" class=""></p>
+<p>​        <img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/78.png" class=""></p>
+<ol start="5">
+<li><p>渐近线（σ为渐近线和实轴的交点，φ为渐近线与实轴的夹角）：<br>$$<br>\sigma_a = \frac{\sum_{i=1}^{n}p_i - \sum_{j=1}^{m}z_j}{n-m}<br>$$</p>
+<p>$$<br>\phi_a = \frac{(2k+1)\pi}{n-m}<br>$$</p>
+</li>
+<li><p>实轴上两个根的分离点d：<br>$$<br>\sum_{i=1}^{n} \frac{1}{d-p_i} =\sum_{j=1}^{m} \frac{1}{d-z_j}<br>$$<br>解方程的时候要试根，没有更好办法。然后把分离点带入模值条件中可以得到K*的值。</p>
+</li>
+<li><p>与虚轴的交点（系统临界稳定的点）：</p>
+<p>可以把s=jω代入特征方程中，并令特征方程为0，解实部和虚部两条方程可以得出与虚轴交点以及K*的值。</p>
+</li>
+<li><p>出射角/入射角（即满足相角条件）：<br>$$<br>\sum_{i=1}^{m}∠(s-z_i)-\sum_{j=1}^{n}∠(s-p_j) = (2k+1)\pi<br>$$</p>
+</li>
+</ol>
+<h4 id="参数根轨迹（除K之外其他参数变化时系统的根轨迹）"><a href="#参数根轨迹（除K之外其他参数变化时系统的根轨迹）" class="headerlink" title="参数根轨迹（除K之外其他参数变化时系统的根轨迹）"></a>参数根轨迹（除K之外其他参数变化时系统的根轨迹）</h4><p>需要根据特征方程构建等效开环传递函数，含参数的放分子，不含参数放分母。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/79.png" class="">
+
+<p>画出根轨迹后，等效开环传递函数的任务结束，分析系统要回到原来的函数并利用根轨迹。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/80.png" class="">
+
+<p>注意：如果参数在次数最大的项上，直接整体同除系数，把系数转移到次数低的项，然后再构造等效开环传递函数。</p>
+<h4 id="零度根轨迹（系统实质上处于正反馈时的根轨迹）"><a href="#零度根轨迹（系统实质上处于正反馈时的根轨迹）" class="headerlink" title="零度根轨迹（系统实质上处于正反馈时的根轨迹）"></a>零度根轨迹（系统实质上处于正反馈时的根轨迹）</h4><p>模值条件不变，相角条件变成2kπ。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/81.png" class="">
+
+<p>变动三条，实轴上的根轨迹变成偶数点左边，渐近线的夹角公式分子变为2kπ，出、入射角公式的右边变为2kπ。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/82.png" class="">
+
+<p>可以看出正反馈和负反馈不是对立的，而是一个事情的两个方面。可以看成K从零往负无穷大变化的根轨迹。相当于K的范围扩大到了整个实数域，构成完整的根轨迹图。</p>
+<h4 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h4><p>若开环零极点均为偶数个，且关于一条平行于虚轴的直线左右对称分布，则根轨迹一定关于该直线左右分布。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/83.png" class="">
+
+<h4 id="例题（重要）"><a href="#例题（重要）" class="headerlink" title="例题（重要）"></a>例题（重要）</h4><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/84.png" class="">
+
+<ul>
+<li><p>可以看出出现零极点对消情况后得到的开环传递函数得到的闭环传递函数不包含所有的根，还有的根不根据K变化，要用原来的函数求闭环传递函数才可得。</p>
+</li>
+<li><p>附加闭环极点会使超调量减小，峰值时间后移，附加闭环零点反之。 原因是附加开环极点后等于给原来的信号设置了延时环节，附加开环零点后等于在原来的信号基础上又添加一个微分信号。越靠近虚轴，点起到的作用越大。</p>
+</li>
+<li><p>附加开环零点使跟轨迹左移，系统更稳定。附加开环极点使跟轨迹右移，系统更不稳定。</p>
+</li>
+</ul>
+<p><strong>PID控制</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/85.png" class="">
+
+<p>比例+积分PI把稳态精度提高了，把动态性能指标变差了，相当于附加开环零极点，但极点位置为原点，影响程度高。比例+微分PD稳态精度不影响，动态性能有所改善，相当于附加 开环零点根轨迹向左扳。而PID控制即提高了稳态精度，也提高了稳态精度，增加一个开环极点（原点）和两个开环零点，导致附加的开环零点的影响大。</p>
+<hr>
+<h2 id="频率法串联校正"><a href="#频率法串联校正" class="headerlink" title="频率法串联校正"></a>频率法串联校正</h2><p>频率法串联校正仅使用于单位负反馈的最小相角系统，如果是非相角系统，需要画出伯德图的两幅图，在考虑稳定性的基础上进行校正。如果是非单位反馈，可以进行一下处理：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/185.png" class="">
+
+<h3 id="串联超前校正"><a href="#串联超前校正" class="headerlink" title="串联超前校正"></a>串联超前校正</h3><p>$$<br>关键公式 G_c(s) = \frac{aTs+1}{Ts + 1}(a&gt;1)<br>$$</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/139.png" class="">
+
+<p>用电路搭建的模型如上图所示，这样的一个电路可以给开环传递函数增加一个极点一个零点，改变增益。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/140.png" class="">
+
+<p>可以看出这个网络的相角都是大于0的，所以叫超前网络。好处是可以增加相角裕度。且最大相角恰好在两个转折频率的几何中点处，且其最大值只与a有关，此时拉起来的增益是$10lg a (dB)$。</p>
+<p>注意：一级超前网络最大超前角为60°，不能把a拉的太大，因为会导致高频抗干扰能力受影响，最有效的a在4到10之间。</p>
+<p>超前校正步骤（给定指标$e_{ss}^* ,\omega_c^* ,\gamma^* $）</p>
+<p>当截止频率和相角裕度都不够的情况下使用（因为超前校正同时增加了截止频率和相角裕度）。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/141.png" class="">
+
+<p>简单来说，是通过相角裕度的差值计算超前网络的a值，这个差值通常加5°~10°。</p>
+<h4 id="题目-3"><a href="#题目-3" class="headerlink" title="题目"></a>题目</h4><p>注意：设计系统的时候指标先紧着牙设计，给后面的设计留下充足的可调整空间。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/142.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/143.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/144.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/145.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/146.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/147.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/148.png" class="">
+
+<p>可以看出，加5°-10°的原因是超前网络提高了系统中频段的幅值，使得系统的截止频率延后，因此原本的相角裕度会减小，5°-10°就是用来补偿这部分减小的裕度的。并且通过后面的斜率变换可以自己控制具体补偿多少，后面的斜率越小越陡，要补偿的角度越多。当补偿之后的角度还差一点时，不用重新设计，可以把超前网络后面的转折频率往后移一下，可以保持第一次调整的截止频率不变的基础上，把补偿的相角往上提一提。可以发现超前网络的a负责提高相角和幅值的大小，补偿后截止频率往后提了$\sqrt{a}$倍频。而T则是负责提高的具体频率位置，把提高的最大相角刚好补偿到截止频率上。总之，设计的时候就围绕相角裕度的补偿设计，由要补偿的相角加5°~10°确定a，a确定了补偿的幅值以及补偿后的截止频率，通过补偿后的截止频率和a又可以反推两个转折频率，由此得出超前网络传递函数。</p>
+<p>如果按照相角补偿好了，计算截止频率的指标还达不到的情况下，直接按照截止频率的指标设计超前网络，把调整后截止频率直接设置成目标截止频率，并以这点直接算出两个转折频率（学会利用几何学）。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/149.png" class="">
+
+<hr>
+<p>当给定的参数是时域指标时，要通过查图或公式转换成频域指标（给定超调量唯一确定相角裕度，给定调节时间和已知相角裕度确定截止频率）：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/150.png" class="">
+
+<p>当其它指标都达标后，最后需要验算h指标：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/151.png" class="">
+
+<p>这里反正切函数过多，并且性质和-20，-40，-60的三段规律差不多，可以试根。</p>
+<h4 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h4><p>超前校正保持了低频段性质不变，满足稳态精度；改善了中频段，提高了相角裕度和截止频率，动态性能提高；但是抬高了高频段，使得抗高频干扰能力降低。</p>
+<hr>
+<h3 id="串联滞后校正"><a href="#串联滞后校正" class="headerlink" title="串联滞后校正"></a>串联滞后校正</h3><p>$$<br>关键公式 G_c(s) = \frac{bTs+1}{Ts + 1}(0&lt;b&lt;1)<br>$$</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/152.png" class="">
+
+<p>对滞后网络来说，其增益就是1，不需要另外增加比例环节调节。这个网络不利因素是相角衰减会影响相角裕度，但是可以把截止频率点尽量往后挪可以减小相角裕度的损失，但是幅值的衰减可以利用起来。因此我们可以把截止频率放在滞后网络<strong>第二个转折频率往后的十倍频程</strong>。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/153.png" class="">
+
+<p>可以看到b取得越小，相角裕度的损失越大，但不会超过-6°。</p>
+<p>滞后校正步骤（给定指标$ e_{ss}* ,\omega_c* ,\gamma* $）：</p>
+<p><strong>实质：利用滞后网络幅值衰减的属性挖掘系统自身的相角储备。</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/154.png" class="">
+
+<p>总结：当原有的截止频率有余而相角裕度严重不足的情况下优先考虑用滞后校正。考虑到相角裕度6°的损失，要找到原来曲线中有($\gamma*+6°$)的相角储备的点作为调整后截止频率的点。总之，设计时围绕相角裕度的挖掘展开。</p>
+<h4 id="题目-4"><a href="#题目-4" class="headerlink" title="题目"></a>题目</h4><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/155.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/156.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/157.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/158.png" class="">
+
+<p>这里用了一招试探法，根据-20，-40曲线的经验相角储备45°的点在第一个转折频率处，这里多了一个-60斜率，46°相角储备可以往前挪一挪。只有在题目要求的截止频率之后且相角储备大于$\gamma*+6°$即可，没有标准位置，这里的截止频率在2.3到2.6皆可，但尽量截止频率靠大的设计。</p>
+<p>找到了截止频率后，往前减小十倍频就是滞后环节第二个转折频率，第一个转折频率可以通过几何特性来计算。</p>
+<p>结果：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/159.png" class="">
+
+<p>然后进行验算：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/160.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/161.png" class="">
+
+<hr>
+<p>在设计好系统之后，题目如果需要验算h*的值，就需要求-180°相角的频率$\omega_g$，如果环节过多的话这个方程是很难解的，只能试根。但考试允许带计算器，这时候神器来了，一定要学会用计算器的<a target="_blank" rel="noopener" href="http://www.360doc.com/content/16/0622/06/7863900_569691363.shtml">牛顿法求解方程</a>，否则试根过程将非常痛苦。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/162.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/163.png" class="">
+
+<p>第二种方法不用试根也不用计算器的牛顿法，只要计算h=10dB的点不小于-180°，就能证明在-180°的点h&gt;10dB，缺点是无法切确知道h的值。</p>
+<hr>
+<p><strong>迟后校正的另一种用法：保持中频段基本不变，抬高低频段</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/164.png" class="">
+
+<p>这种情况的做法先求出低频段需要增加的增益$K_c$，然后将原来的转折频率降低十倍频作为第二个转折频率$\omega_2$，再通过$20lgK_c=20lg\frac{\omega_2}{\omega_1}$计算出第一个转折频率$\omega_1$。这样滞后环节的传递函数为$Kc \frac{\frac{s}{\omega_2}+1}{\frac{s}{\omega_1}+1}$。校正之后相角裕度会损失不到6°，牺牲少量动态性能大大提高稳态精度。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/165.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/166.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/167.png" class="">
+
+<h4 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h4><p>减小系统增益K可以增大相角裕度，但是稳态误差会增大。滞后网络既保存了低频段的稳态特性，又通过幅值衰减的特性充分挖掘了相角裕度。调节后截止频率再满足相角裕度的条件下要尽量往后设计，这是因为往前设计会导致第一个转折频率过小，使得惯性环节调节时间过长，并且不容易物理实现。同理原系统的增益K也是尽量往小的设计，K增大不改变校正后的截止频率，但会更加增大滞后校正的幅值衰减，导致第一个转折频率拉得更加靠前，物理实现不容易。另外校正完成之后要验证幅值裕度h的值要学会用计算器的牛顿法。滞后校正的另一种功能是保持中频段，抬高低频段。滞后网络压低了高频段，因此抗高频干扰能力提高。</p>
+<hr>
+<h3 id="串联滞后-超前校正"><a href="#串联滞后-超前校正" class="headerlink" title="串联滞后-超前校正"></a>串联滞后-超前校正</h3><p>$$<br>关键公式 G_c(s) = \frac{T_as+1}{aT_as + 1} * \frac{T_bs+1}{\frac{T_b}{a}s + 1}(aT_a&gt;T_a&gt;T_b&gt;\frac{T_b}{a})<br>$$</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/168.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/169.png" class="">
+
+<p>在滞后-超前校正的后半部分，相角超前，可以补充相角裕度；并且幅值衰减，可以挖掘自身的相角储备，因此应当把截止频率设定在最后两个转折频率的几何中点处，这是超前角最大的地方。在选择第二个转折频率的时候，应当与校正后的转折频率拉开十倍频，这样滞后部分对相角的损失不会超过-6°。</p>
+<p>滞后-超前校正步骤（给定指标$ e_{ss}* ,\omega_c* ,\gamma* $）：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/170.png" class="">
+
+<p>这里的角度补偿要好好理解一下，<strong>超前部分需要补偿的角度=目标角度-原有角度+6°</strong>，这里截止频率取的是目标的最小值，挖掘出最大的相角储备，但仍然达不到目标值，这时候要通过超前部分补偿起来，同时超前部分也要补偿滞后部分损失的6°，最多能补偿60°。算好补偿的角度后，就可以把超前部分a的值算出来：<br>$$<br>a = \frac{1+\sin\phi_m}{1-\sin\phi_m}<br>$$<br>第四个转折频率往后$\sqrt{a}$倍频，第三个转折频率往前$\sqrt{a}$倍频，注意第四个转折频率之后的线不一定在0dB。第二个转折频率往前10倍频，第一个转折频率直接以-20斜率拉到0dB线保证低频段不变，这个频率的计算要讲解，关系到后面超前环节的上下位置，能否把截止频率精准放在目标处。同样可以利用几何分析方便求解。</p>
+<h4 id="题目-5"><a href="#题目-5" class="headerlink" title="题目"></a>题目</h4><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/171.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/172.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/173.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/174.png" class="">
+
+<p>这里求解第一个转折点时需要用到一定的几何技巧，要熟记。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/175.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/176.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/177.png" class="">
+
+
+
+<h4 id="总结-4"><a href="#总结-4" class="headerlink" title="总结"></a>总结</h4><p>滞后-超前校正最主要的工作是算准最后两个转折频率相差的频程a值。通过需要补偿的超前角的角度算出a值以后，在截止频率处和原曲线实轴对称的地方，左右拉$\sqrt{a}$倍频就是第三和第四个转折频率，而不是直接拉到0dB线。只有最后两个转折频率决定的超前环节决定最后补偿的相角，滞后环节对相角的损失不超过6°，可以拉任意长度，但第一个转折频率要拉到0dB防止改变低频段的稳态指标。第一个转折频率决定后面超前环节的上下位置，能不能在预定截止频率处把幅值衰减到0dB。</p>
+<hr>
+<h3 id="串联PID校正"><a href="#串联PID校正" class="headerlink" title="串联PID校正"></a>串联PID校正</h3><p>$$<br>关键公式 G_c(s) = K_Ds + K_P + \frac{K_I}{s} = \frac{K_I(T_1s + 1)(T_2s+1)}{s}<br>$$</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/178.png" class="">
+
+<p>串联PID校正可以看成滞后-超前校正的特例，相当于第一个转折频率在左边无穷远处，第二个转折频率在右边无穷远处。它的好处是可以把系统的型别提高一个档次，并且后面最大能够把角度拉起90°。</p>
+<h4 id="题目-6"><a href="#题目-6" class="headerlink" title="题目"></a>题目</h4><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/179.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/180.png" class="">
+
+<p>这里决定用什么校正尤为重要，首先用超前的话计算频率为13.6的地方的相角裕度为4.789°目标是65°，需要拉起来超过65°-4.789&gt;60°，不能完成任务，用滞后只能在频率有余的时候做，超前-滞后是滞后的进化版，亦是如此。只能用PID校正。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/181.png" class="">
+
+<p>这里干脆把校正频率定到15，算出需要拉起的角度，然后计算第二个转折频率。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/182.png" class="">
+
+<p>第二个转折频率可以直接<strong>根据一阶复合微分的相频曲线</strong>进行设计（前面两个环节相当于滞后环节，损失不会超过-6°），第一个转折频率的计算方法是让刚开始的-20斜率线的延长线过频率为1的点，保证系统增益为1，同样要巧用几何特性。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/183.png" class="">
+
+<p>计算好转折频率后，传递函数就确定了，把分子可全部乘开就可以得到$K_P、K_I、K_D$的数值。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/184.png" class="">
+
+<hr>
+<h3 id="希望特性设计法"><a href="#希望特性设计法" class="headerlink" title="希望特性设计法"></a>希望特性设计法</h3><p>前面规范的方法要掌握透，但不要当成教条，实际情况可以灵活处理。“希望特性”设计方法通过预定指标直接设计校正后的传递函数，把这个函数减去原来的传递函数可以找到校正的函数。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/186.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/187.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/188.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/189.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/190.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/191.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/192.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/193.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/194.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/195.png" class="">
+
+<h2 id="综合题目"><a href="#综合题目" class="headerlink" title="综合题目"></a>综合题目</h2><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/196.png" class="">
+
+
+
+<h2 id="线性离散系统的分析与校正"><a href="#线性离散系统的分析与校正" class="headerlink" title="线性离散系统的分析与校正"></a>线性离散系统的分析与校正</h2><p>离散系统：系统中有一处或几处信号是脉冲或数码的系统。有采样系统 — 时间离散，数值连续；数字系统 — 时间离散，数值量化。</p>
+<p>计算机控制系统优点控制计算由程序实现，便于修改，容易实现复杂的控制律；抗干扰性强；一机多用，利用率高；便于联网，实现生产过程的自动化和宏观管理。缺点是采样点间信息丢失，与相同条件下的连续系统相比，性能会有所下降；需附加A/D, D/A转换装置。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/197.png" class="">
+
+<p>由于采样是时间上离散，数值上也是离散的，采用还有时间的延迟，为了简化计算，我们把采样过程理想化，认为采样瞬间完成，并且字节足够（忽略量化误差）。</p>
+<p>在采样以后，输入数码量，计算机进行计算以后的数值也是连续的，连续的量再采样成数码量。然后进行D\A的过程，广泛应用的是零阶保持器，把一个个脉冲转换成一个个阶梯信号。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/198.png" class="">
+
+<p>对于信号采样，相当于在每个采样时刻都乘上一个冲激函数，采用后的信号为：<br>$$<br>e^*(t) = e(t) * \sum_{n=0}^{\infty}\delta(t-nT) = \sum_{n=0}^{\infty}e(nT)\delta(t-nT)<br>$$<br>拉式变换后为：<br>$$<br>E^*(s) = \sum_{n=0}^{\infty}e(nT) * e^{-nTs}<br>$$<br>作用：</p>
+<p>① 给出$E^*(s)$与$e(t)$在采样点上取值之间的关系；</p>
+<p>② 一般可写成封闭形式；</p>
+<p>③ 用于求$e^*(t)$的<strong>z变换</strong>或系统的时间响应。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/199.png" class="">
+
+<p>拉式变换后是一个超越函数，不能用有限的多项式进行表示，不好分析，所以离散系统一般用Z变换。</p>
+<p>用傅里叶级数展开$\delta_T(t)$，代入原方程后进行拉式变换：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/200.png" class="">
+
+<p>结论：采样后的拉式变换为：<br>$$<br>E^*(s) = \frac{1}{T} \sum_{n=-\infty}^{\infty}E(s+jn\omega_s)<br>$$<br>作用：</p>
+<p>① 给出$E^*{(s)}$与$E(s)$之间的联系；</p>
+<p>② 一般写不成封闭形式；</p>
+<p>③ 用于$e^*(t)$的<strong>频谱分析</strong>。</p>
+<h3 id="香农采样定理-——信号复现的必要条件"><a href="#香农采样定理-——信号复现的必要条件" class="headerlink" title="香农采样定理 ——信号复现的必要条件"></a>香农采样定理 ——信号复现的必要条件</h3><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/201.png" class="">
+
+<p>结论：对一个连续的非周期信号，经过傅里叶变换后频谱是一个连续的非周期的值，并且在$\omega_h$处衰减到0。但对这个信号进行采样以后频谱变成了连续的周期的值，其频谱函数周期为$\omega_s$，原函数采样周期为$T = \frac{2\pi}{\omega_s}$，频谱幅值缩小T倍。但是这是有条件的，如果图上的采样角频率$\omega_s&lt; 2\omega_h$频谱就会混叠在一起无法分开。因此，信号复现的条件是$\omega_s$足够大，采样周期T足够短。<br>$$<br>\omega_s = \frac{2\pi}{T} &gt; 2\omega_h<br>$$<br> 然后通过一个理想低通滤波器把高频信号全部滤除，就可以得到原来连续信号的频谱，但如果频率混叠在一起，滤出来的信号将会失真。</p>
+<p>在实际工程中，把输入端的信号减去输出端的信号，对这个偏差信号进行采样变成数码量，在计算机上进行计算，然后再把<strong>计算机计算结果的控制量从离散信号转换为连续信号</strong>，这才是信号复现的用途。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/202.png" class="">
+
+<h3 id="零阶保持器"><a href="#零阶保持器" class="headerlink" title="零阶保持器"></a>零阶保持器</h3><p>要过滤高频信号，尽可能还原原频谱，需要找一个频率特性和理想滤波器接近的东西。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/203.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/204.png" class="">
+
+<p>可以看出，零阶保存器的幅频相频特性都和理想滤波器有一定差距。但是通过把零阶保持器之后的阶梯信号光滑地链接起来，可以近似看成原信号延迟二分之一的采样周期后的信号。零阶保持器看成二分之一拍纯延时环节。这样的坏处是导致了相角向后延，使得相角裕度变小，系统动态性能变差。但是换来的是计算机控制的诸多便利，在计算机输出端口读取寄存器的过程就是零阶保持器，工程实现不费事。因此在工程上广泛应用。</p>
+<p>总结：以上分析的采样过程在忽略了采样时间和量化误差的基础上。采样周期的选择要符合香农采样定理，然后采用零阶保持器来过滤信号，可以看成大致过滤出比原信号相角延迟二分之一个采样周期的信号。</p>
+<h3 id="Z变换"><a href="#Z变换" class="headerlink" title="Z变换"></a>Z变换</h3><p>$$<br>离散信号 e^*(t) = e(t) * \sum_{n=0}^{\infty}\delta(t-nT) = \sum_{n=0}^{\infty}e(nT)\delta(t-nT)<br>$$</p>
+<p>$$<br>离散信号的拉氏变换E^*(s) = \sum_{n=0}^{\infty}e(nT) * e^{-nTs}<br>$$</p>
+<p>由于超越函数不好分享，现在令：<br>$$<br>z = e^{Ts}<br>$$<br>则有<br>$$<br>E^*(z) = \sum_{n=0}^{\infty}e(nT) * z^{-n}<br>$$<br>z变换仅对离散信号而言，$z^{-1}$相当于一拍延迟算子，由$e(nT)$决定作用的幅值，由$z^{-n}$决定作用的时间，这就是z变换。<strong>注意是连续函数采样之后的拉式变换才能进行z变换</strong>。z变换有级数求和法（定义法）、查表法（部分分式展开法）、留数法（反演积分法）。</p>
+<h4 id="级数求和法"><a href="#级数求和法" class="headerlink" title="级数求和法"></a>级数求和法</h4><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/205.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/206.png" class="">
+
+<h4 id="查表法"><a href="#查表法" class="headerlink" title="查表法"></a>查表法</h4><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/207.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/208.png" class="">
+
+<h4 id="留数法"><a href="#留数法" class="headerlink" title="留数法"></a>留数法</h4><p>$$<br>E(z) = \sum_{i=1}^{l}[ResE(s)\frac{z}{z-e^{Ts}}]_{s=s_i}<br>$$</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/217.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/209.png" class="">
+
+<h4 id="z变换基本定理"><a href="#z变换基本定理" class="headerlink" title="z变换基本定理"></a>z变换基本定理</h4><ol>
+<li>线性性质    </li>
+</ol>
+<p>$$<br>Z[(a * e_1^*(t) \pm b * e_2^*(t))] = a * E_1(z) \pm b * E_2(z)<br>$$</p>
+<ol start="2">
+<li><p>实位移定理</p>
+<p>延迟定理<br>$$<br>Z(e(t-nT)) = z^{-n}E(z)<br>$$</p>
+</li>
+</ol>
+<p>​       超前定理<br>$$<br>Z[e(t+nT)] = z^n[E(z) - \sum_{k=0}^{n-1}e(kT)*z^{-k}]<br>$$<br>​       题目</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/210.png" class="">
+
+<ol start="3">
+<li>复位移定理</li>
+</ol>
+<p>$$<br>Z[e(t) * e^{\mp at}] = E(z * e^{\pm aT})<br>$$</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/211.png" class="">
+
+<ol start="4">
+<li>初值定理<br>$$<br>\lim_{n \to 0}e(nT) = \lim_{z \to \infty}E(z)<br>$$</li>
+</ol>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/212.png" class="">
+
+<ol start="5">
+<li>终值定理<br>$$<br>\lim_{n \to \infty}e(nT) = \lim_{z \to 1}(z-1)E(z)<br>$$</li>
+</ol>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/213.png" class="">
+
+<ol start="6">
+<li>卷积定理</li>
+</ol>
+<p>$$<br>设： c^*(t) = e^*(t) \otimes g^*(t) = \sum_{k=0}^{\infty} e(kT)*g[(n-k)T]<br>$$</p>
+<p>$$<br>则：C(z) = E(z) * G(z)<br>$$</p>
+<h4 id="z反变换"><a href="#z反变换" class="headerlink" title="z反变换"></a>z反变换</h4><p>有幂级数法（长除法）、查表法（部分分式展开法，以$\frac{E(z)}{z}$形式展开）、留数法（反演积分法）。</p>
+<p>长除法</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/214.png" class="">
+
+<p>查表法</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/215.png" class="">
+
+<p>留数法<br>$$<br>e(nT) = \sum Res[E(z) * z^{n-1}]<br>$$</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/216.png" class="">
+
+<h3 id="离散系统的数学模型"><a href="#离散系统的数学模型" class="headerlink" title="离散系统的数学模型"></a>离散系统的数学模型</h3><h4 id="线性常系数差分方程及其解法——离散系统的时域数学模型"><a href="#线性常系数差分方程及其解法——离散系统的时域数学模型" class="headerlink" title="线性常系数差分方程及其解法——离散系统的时域数学模型"></a>线性常系数差分方程及其解法——离散系统的时域数学模型</h4><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/218.png" class="">
+
+<p>结论：前项差分是从末尾往前看n拍的数据，共n+1拍数据。后项差分是从开头往后看n拍的数据，共n+1拍数据。n阶差分就有n+1个拍的加权和，相同阶数的前项差分和后项差分每一项的权重一致。连续函数中的微分（一阶导）可以看出一阶前项差分除以采样周期T。每一拍中都不出现一次以外的高次项，这就是线性的定义；所有前面的系数是常数，这就是定常的定义，这就是线性常系数差分方程。可以用迭代法或Z变换法求解。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/219.png" class="">
+
+<p>题目</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/220.png" class="">
+
+<p><strong>迭代法</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/221.png" class="">
+
+<p><strong>Z变换法</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/222.png" class="">
+
+<h4 id="脉冲传递函数——离散系统的复域数学模型"><a href="#脉冲传递函数——离散系统的复域数学模型" class="headerlink" title="脉冲传递函数——离散系统的复域数学模型"></a>脉冲传递函数——离散系统的复域数学模型</h4><p>定义：零初始条件下离散系统输出z变换对输入z变换之比。<br>$$<br>G(z) = \frac{C(z)}{R(z)}<br>$$<br><strong>定理</strong>：输出序列等于输入序列的单位脉冲响应序列的卷积。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/223.png" class="">
+
+<p><strong>性质</strong>：z同样是一个复数，$G(z)$只和系统的结构参数有关。有了G(z)可唯一确定一个系统的差分方程，是一一对应的。$G(z)$是系统单位脉冲响应的z变换。</p>
+<p>局限性：原则上不反映非零初始条件下系统响应的全部信息，一般只适合描述单输入单输出系统，只适合用于描述线性定常系统。</p>
+<p><strong>题目</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/224.png" class="">
+
+<h4 id="开环系统的脉冲传递函数"><a href="#开环系统的脉冲传递函数" class="headerlink" title="开环系统的脉冲传递函数"></a>开环系统的脉冲传递函数</h4><p>环节直接有开关时：<br>$$<br>G(z) = G_1(z)G_2(z)<br>$$<br>环节之间无开关时：<br>$$<br>G(z) = Z[G_1(s) * G_2(s)] = G_1G_2(z)<br>$$<br>有ZOH时：</p>
+<p>由于离散信号经过$1-e^{-Ts}$环节时还是一个离散信号，所以等价于在后面加采样开关，两边分别进行z变换。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/225.png" class="">
+
+<p><strong>零阶保持器不改变系统阶数，不改变开环极点，只改变开环零点。</strong></p>
+<h4 id="闭环系统的脉冲传递函数"><a href="#闭环系统的脉冲传递函数" class="headerlink" title="闭环系统的脉冲传递函数"></a>闭环系统的脉冲传递函数</h4><p>注意有采样开关的离散系统不能使用Mason公式。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/226.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/227.png" class="">
+
+<p>当采样开关不是对误差的采样，采样开关无法前移，这种情况下一般求不出$G(z)$，只能求出$C(z)$，可以把输入信号当成一个环节，输入单位脉冲进行激励。</p>
+<p>每一个对两个信号求差或求和的东西后面有开关都能等效到之前的几条线路。</p>
+<hr>
+<h3 id="离散系统的稳定性分析"><a href="#离散系统的稳定性分析" class="headerlink" title="离散系统的稳定性分析"></a>离散系统的稳定性分析</h3><p>z变换其实就是拉普拉斯变换把$e^{(Ts)}$换成z的结果，而$s= \sigma +j\omega$，有：<br>$$<br>z = e^{\sigma T}e^{j\omega T}<br>$$<br>所以z的幅值和s的实部有关，z的相角和s的虚部有关，s的虚轴相当于z域中半径为1的圆。同理s=-1的轴相当于z域中半径为$e^{-T}$的圆，s越往左，在z域中圆的半径越小。因此<strong>s的稳定域映射到z域中代表的是单位圆</strong>。当s域中的一点在实轴上从0到负无穷相当于在z域上从1到0，从0到正无穷相当于z域从1到正无穷。当频率达到二分之一的采样角频率时，映射到z域是180°角的线上。也就是说<strong>s域中每一个宽度为$\omega_s$的带都代表了一个z域</strong>。在实轴附近的那个带称为主带。在<strong>香农采样定理满足的条件（$\frac{\omega_n}{2}&gt;\omega_h$）下，我们系统的开环零极点在s域上都落在主带上</strong>。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/228.png" class="">
+
+<p>因为z域单位圆越往内数据密度越大，所以为了不造成太大失真，与离散系统有关的数字要用双字节长度。</p>
+<h3 id="离散系统的稳定性判据"><a href="#离散系统的稳定性判据" class="headerlink" title="离散系统的稳定性判据"></a>离散系统的稳定性判据</h3><h4 id="通过w变换使用劳斯判据"><a href="#通过w变换使用劳斯判据" class="headerlink" title="通过w变换使用劳斯判据"></a>通过w变换使用劳斯判据</h4><p>z域上不好进行稳定性判断（如列劳斯表），要把其进行w变换把单位圆的内外转换成虚轴左右。至少有三种方案可供变换：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/229.png" class="">
+
+<p>进行完w变换之后就可以用劳斯判据了。</p>
+<p><strong>题目</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/230.png" class="">
+
+<h4 id="z域中的Jurry稳定判据（重要）"><a href="#z域中的Jurry稳定判据（重要）" class="headerlink" title="z域中的Jurry稳定判据（重要）"></a>z域中的Jurry稳定判据（重要）</h4><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/231.png" class="">
+
+<p>$D(z)$是离散系统特征方程，$D(1)$一定要大于0，如果$D(z)$最高次项的次数是偶数，则$D(-1)&gt;0$，是奇数则$D(-1)&lt;0$。这两个条件成立后要列Jurry表。规则如上图，把从<strong>0次到最后一次的系数列第一行</strong>，倒序列第二行，然后第三行把第一列和最后一列往回列行列式计算，第四列把第三列倒序。看第一列元素，都取绝对值，第二行大于第一行，第三行大于第四行，第六行大于第五行以此类推，推到一行三个元素，全部满足系统稳定，否则不稳定。</p>
+<h4 id="题目-7"><a href="#题目-7" class="headerlink" title="题目"></a>题目</h4><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/232.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/233.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/234.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/235.png" class="">
+
+
+
+<h3 id="离散系统的稳态误差"><a href="#离散系统的稳态误差" class="headerlink" title="离散系统的稳态误差"></a>离散系统的稳态误差</h3><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/236.png" class="">
+
+<p>由于当s=0时，z=1，所以可以把z-1在分母中的次数称为系统的型别，把其他部分在z=1时的值称为系统的增益。<br>$$<br>GH(z) = Z[G(s)H(s)] = \frac{1}{(z-1)^v }GH_0(z)<br>$$</p>
+<p>$$<br>\lim_{z \to 1}GH_0(z) = K<br>$$</p>
+<p>用终值定理求$e(\infty)$：<br>$$<br>e(\infty) = \lim_{z \to 1}(z-1)\phi_e(z)R(z) = \lim_{z \to 1}(z-1)R(z) * \frac{1}{1+GH(z)}<br>$$<br><strong>题目</strong></p>
+<p>先判稳</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/237.png" class="">
+
+<p>求误差传递函数</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/238.png" class="">
+
+<hr>
+<p>由此看来，离散系统同样可以用<strong>静态误差系数法</strong>：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/239.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/240.png" class="">
+
+<hr>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/241.png" class="">
+
+<p>可以看到，加了零阶保持器之后不改变系统型别，系统的稳态误差只和原系统增益有关，去除了采样周期对稳态误差的影响。</p>
+<p><strong>动态误差系数法</strong></p>
+<p>可以参考连续系统的动态误差系数法。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/242.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/243.png" class="">
+
+
+
+<h3 id="闭环极点分布与动态响应"><a href="#闭环极点分布与动态响应" class="headerlink" title="闭环极点分布与动态响应"></a>闭环极点分布与动态响应</h3><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/244.png" class="">
+
+<p>结论：输入单位阶跃的稳态响应值为$\phi (1)$，相当于闭环增益。其他的极点都处于单位圆的内部，结果都衰减到0。对于极点位置对系统的影响，z域内极点位于单位圆内系统稳定，只有落在正实轴上才不产生振荡，越靠近180°振荡频率越高。当极点的模值相同时，信号衰减的速度一致。在进行z反变换时，解出来的是逐渐衰减的离散信号。<br>$$<br>Z^{-1}[\frac{z}{z-p}] = \sum_{n=1}^{\infty} p^n<br>$$<br>对于共轭复数极点，其解出来的系数也一定是共轭复数。有：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/245.png" class="">
+
+<p>因此，对于共轭极点有：<br>$$<br>Z^{-1}[C_1\frac{z}{z-p_1}+C_2\frac{z}{z-p_2}] = 2|C||p|^kcos(k\theta + \phi)<br>$$<br>其中θ是极点对于实轴正方向的夹角，φ是C对于实轴正方向的夹角，k是正整数变量。当极点的角度越小，即θ越小，三角函数中的离散信号越密集，比如$θ=\frac{\pi}{8}$时，一个三角函数周期内有8个离散信号。取90°时会发生一正一负的振铃现象。</p>
+<p><strong>计算动态性能的一般步骤</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/246.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/247.png" class="">
+
+<p>原理是直接用长除法来计算每一个采样点的值，只要值足够多就能定义采样点上的超调量和调节时间。</p>
+<p><strong>根轨迹分析与连续系统类似</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/248.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/249.png" class="">
+
+<h3 id="离散系统的校正"><a href="#离散系统的校正" class="headerlink" title="离散系统的校正"></a>离散系统的校正</h3><h2 id="非线性控制系统分析"><a href="#非线性控制系统分析" class="headerlink" title="非线性控制系统分析"></a>非线性控制系统分析</h2><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/250.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/251.png" class="">
+
+<h3 id="相平面法（了解）"><a href="#相平面法（了解）" class="headerlink" title="相平面法（了解）"></a>相平面法（了解）</h3><p><strong>相平面：由系统某变量及其导数构成的用以描述系统状态的平面。</strong></p>
+<p><strong>相轨迹：系统变量及其导数随时间变化在相平面上描绘出来的轨迹。</strong></p>
+<p>相平面法一般用于描述二阶非线性，二阶系统知道x和x的导数就能将运动规律描述清楚，三阶需要三维图像，不好在平面中表述。</p>
+<p>设二阶非线性系统方程为：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/253.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/252.png" class="">
+
+<p>结论：曲线总是顺时针旋转运动，且垂直过横轴，否则就是平衡点。</p>
+<p><strong>解析法绘制相轨迹</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/254.png" class="">
+
+<p>绘制一个二阶的非线性方程的相轨迹要点是把x的二阶导数化为只有x的一阶导数和x的项，然后两边积分可以得到相轨迹，其中的C和初始位置有关。这里运用到了高数中微分方程求解的技巧。</p>
+<p><strong>等倾斜线法绘制相轨迹</strong></p>
+<p>解析法有时由于微分方程难解行不通，而等倾斜线法是通用的方法。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/255.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/256.png" class="">
+
+<p>每条过原点的直线上轨迹通过的斜率都是一致的，通过绘制每条过原点的直线上轨迹的斜率可以大致刻画出轨迹。</p>
+<p>其他曲线也可以用等倾斜线法：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/261.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/262.png" class="">
+
+
+
+<p><strong>由相轨迹求时间解</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/257.png" class="">
+
+<p>这里一般求解每一小段的时间然后求和，可以近似得到时间。</p>
+<p><strong>二阶系统的相轨迹</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/258.png" class="">
+
+
+
+<h4 id="非线性系统的相平面分析"><a href="#非线性系统的相平面分析" class="headerlink" title="非线性系统的相平面分析"></a>非线性系统的相平面分析</h4><img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/259.png" class="">
+
+<p>结论：可以采用线性化方法来分析非线性系统在平衡点附近的运动规律。可以看出这个图在0和-1的点都不稳定，一个震荡发散，一个直接发散。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/260.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/263.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/264.png" class="">
+
+<p><strong>存在死区的非线性</strong>：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/265.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/266.png" class="">
+
+<p><strong>继电特性1</strong>：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/267.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/268.png" class="">
+
+<p><strong>继电特性2</strong>：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/269.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/270.png" class="">
+
+<p>不论初始点在什么地方都能回到中间的环中，这叫做<strong>极限环</strong>，这是稳定的周期运动——自振，对应二阶非线性系统的周期运动。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/271.png" class="">
+
+<p><strong>存在饱和区的非线性</strong>：</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/272.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/273.png" class="">
+
+
+
+<h3 id="描述函数法（重点）"><a href="#描述函数法（重点）" class="headerlink" title="描述函数法（重点）"></a>描述函数法（重点）</h3><p>这部分涉及傅里叶级数展开的知识点，请回看另一篇文章《傅里叶级数与傅里叶变换公式推导》。</p>
+<p><strong>描述函数定义：输出函数的基波分量（与输入函数频率相同）与输入函数的幅值比和相角差。</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/275.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/274.png" class="">
+
+<p>这里需要熟练掌握傅里叶级数展开中$sin\omega t$和$cos\omega t$前面系数$A_1$和$B_1$的求法。对输出函数求傅里叶展开和输入频率相同的那一项。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/276.png" class="">
+
+<p>也就是说，具有滞环特性（在某处同样输入的输出有两个值，取决于速度方向），那么描述函数一般是复数，否则为实数。</p>
+<p><strong>描述函数法分析非线性系统</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/277.png" class="">
+
+<p>这里使用线性的分析方法分析非线性系统，把系统分解为描述函数和线性系统的串联，并采用的是广义的$(-1,0)$点，在系统运行的过程中，这个点是移动的。</p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/278.png" class="">
+
+<p>当x存在比较小的波动即A较小时，广义点在曲线外，系统稳定，A值就会逐渐衰减并保存在曲线外。如果给的是比较大的波动，广义点在曲线内，A值会越来越大，因此第一次穿越曲线的点不是稳定点，而是一个临界点。当A足够大时使广义点在曲线外时，又会回退，最终稳定在曲线边缘，因此第二个曲线的穿越点是一个稳定点，这点的幅值由对应的A值确定，频率由Nyquist曲线决定。规律：从外穿里的不是自振点，从里穿到外的是自振点。</p>
+<p><strong>自振分析</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/279.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/280.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/281.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/282.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/283.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/284.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/285.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/286.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/287.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/288.png" class="">
+
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/289.png" class="">
+
+
+
+<p><strong>改善非线性系统性能的措施</strong></p>
+<img src="/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/290.png" class="">
+
+<p>有时可以在线性系统中人为引入非线性从而达到线性系统达不到的控制效果。如：波动小时死区，波动大时有输出的非线性引入到测速反馈前端。</p>
+<h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><ol>
+<li><p>留数法求z变换和逆变换怎么来的？</p>
+</li>
+<li><p>卷积的定义，为什么输出序列等于输入序列的单位脉冲响应序列的卷积？</p>
+</li>
+<li><p>完善离散系统校正的部分。</p>
+</li>
+</ol>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">微笑紫瞳星</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://tianjuewudi.gitee.io/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/">https://tianjuewudi.gitee.io/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">微笑紫瞳星</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E8%87%AA%E6%8E%A7/">
+                                    <span class="chip bg-color">自控</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'bpzS5Q9Q9zMl4doyyDGqIqqq-gzGzoHsz',
+        appKey: 'M0IfLJW2G1dCMyLTb90tFxT8',
+        notify: 'true' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '请畅所欲言'
+    });
+</script>
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2021/03/04/mei-sen-mason-gong-shi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="梅森(Mason)公式">
+                        
+                        <span class="card-title">梅森(Mason)公式</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-04
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%87%AA%E6%8E%A7/" class="post-category">
+                                    自控
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%87%AA%E6%8E%A7/">
+                        <span class="chip bg-color">自控</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/02/15/la-pu-la-si-bian-huan/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="拉普拉斯变换">
+                        
+                        <span class="card-title">拉普拉斯变换</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E5%AD%A6/" class="post-category">
+                                    数学
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%95%B0%E5%AD%A6/">
+                        <span class="chip bg-color">数学</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('50')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 微笑紫瞳星<br />'
+            + '文章作者: 微笑紫瞳星<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处，谢谢啦~';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="tencent"
+                   type="playlist"
+                   id="8075110837"
+                   fixed='true'
+                   autoplay='true'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.35'
+                   list-folded='false'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">微笑紫瞳星</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">170.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2021";
+                    var startMonth = "1";
+                    var startDate = "9";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "11";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1121452406" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1121452406" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false});</script></body>
+
+</html>
