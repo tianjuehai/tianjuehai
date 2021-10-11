@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="强化学习之A2C和A3C, 博客制作,个人经验分享,Unity,人工智能等">
+    <meta name="keywords" content="分布式强化学习, 博客制作,个人经验分享,Unity,人工智能等">
     <meta name="description" content="本站记录本人各种学习的旅途，用于巩固自我并启发后来人">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>强化学习之A2C和A3C | 微笑紫瞳星</title>
+    <title>分布式强化学习 | 微笑紫瞳星</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -322,12 +322,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">强化学习之A2C和A3C</h1>
+                    <h1 class="description center-align post-title">分布式强化学习</h1>
                 </div>
             </div>
         </div>
@@ -468,28 +468,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-09-02
+                    2021-10-10
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-09-10
+                    2021-10-10
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    4 分
                 </div>
                 
 
@@ -514,61 +514,132 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p> 阅读本文可参考我以前的文章《强化学习实践教学》<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-29%EF%BC%8C%E5%85%B6%E4%B8%AD%E7%9A%84%E8%BF%9E%E7%BB%AD%E5%8A%A8%E4%BD%9C%E7%A9%BA%E9%97%B4%E4%B8%8A%E6%B1%82%E8%A7%A3RL%E7%AB%A0%E8%8A%82%E6%98%AF%E6%9C%AC%E6%96%87%E7%9A%84%E5%9F%BA%E7%A1%80%EF%BC%8C%E5%85%B6%E4%B8%AD%E7%9A%84DDPG%E5%92%8CActor-Critic%E9%99%A4%E4%BA%86Target%E7%BD%91%E7%BB%9C%E5%A4%96%E5%85%B6%E4%BD%99%E9%83%BD%E4%B8%80%E8%87%B4%E3%80%82">https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-29，其中的连续动作空间上求解RL章节是本文的基础，其中的DDPG和Actor-Critic除了Target网络外其余都一致。</a></p>
-<p>首先，A2C的全称是Advantage Actor Critic，而A3C是Asynchronous Advantage Actor Critic，A2C源自A3C。</p>
-<h2 id="Actor-Critic"><a href="#Actor-Critic" class="headerlink" title="Actor Critic"></a>Actor Critic</h2><p>首先解释一下Actor Critic的概念，Q-learning是一种价值迭代法，而policy gradient是一种策略迭代法，Actor Critic同时使用了这两种方法。</p>
-<p>Actor直接负责输出每个Action的概率，有多少个Action就有多少个输出。Critic输出的是状态的价值V。这是两个神经网络。在Policy Gradient中，一个episode的累计Reward就像是一个Critic，决定了Actor的学习方向，使得Actor倾向于学习Critic累计Reward更高的逻辑。因此策略梯度可写作：<br>$$<br>g = E[\sum_{t=0}^{\infty}\psi_t \nabla_{\theta}log \pi_{\theta}(a_t|s_t)]<br>$$<br>其中这里的π就是actor，ψ就是critic，这是一个广义的框架。</p>
-<p>critic有多种形式：</p>
-<ol>
-<li>一个轨迹中的Reward相加。</li>
-<li>一个轨迹中后面某部分的Reward相加。</li>
-<li>相加后的Reward减去一个baseline。</li>
-<li>采用行为价值函数Q代替。</li>
-<li>采用优势函数A，即Q-V。</li>
-<li>采用TD-error，计算新的状态价值减去原本的状态价值。</li>
-</ol>
-<p>经典的AC方法使用的是4-6。</p>
-<p>权重更新公式为：<br>$$<br>w = w + \beta \psi \nabla_W \hat v(S_t,w)<br>$$</p>
+                <p> 阅读本文需要强化学习基础，可以阅读我以前的文章：<a href="https://tianjuewudi.gitee.io/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/">强化学习纲要（周博磊课程）</a>、<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/">强化学习实践教学</a></p>
+<h2 id="分布式系统"><a href="#分布式系统" class="headerlink" title="分布式系统"></a>分布式系统</h2><p>一般情况下我们做的论文课题都是小规模的，使用的都是一个相对较小的数据库，因此使用单机系统基本可以完成任务。但现实生活中的数据往往是巨量的，我们需要一个完整的分布式系统来处理这种大规模的数据。算法和结果只是冰山一角，只有拥有一个好的系统和框架作为支撑，才能得到好的算法和实验结果。</p>
+<p>分布式系统需要满足：</p>
+<ul>
+<li>一致性：确保多节点的协调运作并且结果和单机运行的结果一致。</li>
+<li>容错性：当分布式环境工作时，其中某一个节点出现错误（机器宕机等），任务能够分配到其他机器，工作也能正常。</li>
+<li>交流：分布式系统需要I\O和分布式文件系统的知识。</li>
+</ul>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/1.png" class="">
+
+<p>分布式系统中存在分布式学习的模型和数据，因此有两种并行。一种是不同的机器做一个网络不同部分的计算。第二种是一套机器拥有一个单独的模型拷贝，但是分配到的数据是不同的，计算结果汇总。</p>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/2.png" class="">
+
+<p>一台电脑可以拥有多块显卡，因此每一块显卡都可以负责模型的一部分，每台电脑都可以放置一个模型，然后把数据分配到每台电脑的每一块显卡上，这就是上面两种并行方法的综合运用。</p>
 <hr>
-<p><strong>以下是重点</strong>：</p>
-<p>在两个神经网络中，我们一般用$\pi (a|s;\theta)$表示策略网络actor，θ代表其中的参数，$q(s,a;w)$代表价值网络critic，w代表其中的参数。注意这里actor网络只需要输入状态，而critic网络则需要输入状态和动作，两个网络往往可以共用前一部分。</p>
-<p>actor网络的更新参数的目标是让critic网络的值越大越好。当确定状态s的情况下，如何选取动作action来使得critic的值最大就是actor网络需要优化的目标。而更新Critic的参数是为了让其的打分更精准，训练的依据就是环境给的reward。</p>
-<p>下面讲解如何更新Critic参数，依靠的是常用的TD算法：</p>
-<img src="/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/1.png" class>
+<p>使用算法和模型的时候需要在机器之间传输信息，怎么实施信息之间的交互是需要解决的问题。一种更新参数的方法是使用<strong>Parameter Server</strong>。我们可以用另外一台机器接收各个机器传回来的模型参数，然后给这些参数取平均得到更新值，然后把更新后的参数返回给各个机器，使得每一台机器都可以保持相同的参数进行分布式计算。这里我们也可以在各个机器中计算梯度后只把梯度传递回主机，主机中乘上一个学习率即可。</p>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/3.png" class="">
 
-<p>下面是更新Actor参数的方法：</p>
-<img src="/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/3.png" class>
-
-<p>下面做一个总结：</p>
-<img src="/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/2.png" class>
-
-<p>由于实际操作中我们不可能得出期望值，因此直接做蒙泰卡罗近似，每个episode拿一次的采样值来更新一点点 ，使得采样到的action得到的动作价值尽可能增大即可，操作比critic要简单得多。</p>
-<h2 id="Advantage-Actor-Critic"><a href="#Advantage-Actor-Critic" class="headerlink" title="Advantage Actor Critic"></a>Advantage Actor Critic</h2><p>​     A2C的出现是为了解决AC的高方差问题。在所有行为的得分为正的情况下不代表所有的行为都是正确的，我们必须有选择地学习更好的行为。因此我们会在原有Reward基础上减去一个常数，这个数的计算方式就是Advantage。这是因为我们对于输入的同一个状况，由于输出要具有一定随机性的存在，那么其实这些所有可能所能获得的Reward的平均值就是VθVθ，这就是Critic的含义。我们用来更新参数的AtAt是用Reward减去这个平均值，也就是<strong>如果对于一个状况的行为的得分比我们critic预测的要高，则采纳，反之舍弃</strong>。</p>
-<p>​    Advantage学习是使用两步以上的奖励来更新Q函数。这个步数需要自己设置合理，以下举例两步：<br>$$<br>Q(s_t,a_t) \rightarrow R(t+1) + \gamma R(t+2) + \gamma^2 max_a Q(s_{t+2},a)<br>$$</p>
 <hr>
-<p>以下是重点：</p>
-<p>A2C于AC的不同之处在于给Q值增加了一个baseline，我们用Q值减去这个baseline来判断当前逻辑的好坏，这个baseline通常由$V_t$来担任。那么原来更新的Q值被替换为：<br>$$<br>Q(s_t,a_t) - V(s_t)<br>$$<br>而Q值我们通常用的是一个回合随机出来的特殊值。我们想要采用期望值，这个期望值的计算方式是$r_t + \gamma V(s_{t+1})$，这是因为执行一个动作的下一回合必定更新到$s_{t+1}$的状态，在加上本回合获得的Reward就是Q的期望值 。这样我们就可以得到最后的价值公式：<br>$$<br>r_t+ \gamma V(s_{t+1}) - V(s_t)<br>$$<br>其中大于0时我们倾向于采用，反之亦然。</p>
-<p>这样的好处是我们现在只用计算V不用计算Q了。</p>
-<h2 id="Asynchronous-Advantage-Actor-Critic"><a href="#Asynchronous-Advantage-Actor-Critic" class="headerlink" title="Asynchronous Advantage Actor Critic"></a>Asynchronous Advantage Actor Critic</h2><p>A3C全称为异步优势动作评价算法（Asynchronous advantage actor-critic）。</p>
-<p>然而经验回放机制存在两个问题：</p>
-<ol>
-<li>agent 与环境的每次实时交互都需要耗费很多的内存和计算力；</li>
-<li>经验回放机制要求 agent 采用离策略（off-policy）方法来进行学习，而off-policy方法只能基于旧策略生成的数据进行更新；</li>
-</ol>
-<p>前文讲到，神经网络训练时，需要的数据是独立同分布的，为了打破数据之间的相关性，DQN和DDPG的方法都采用了经验回放的技巧。然而经验回放需要大量的内存，打破数据的相关性，经验回放并非是唯一的方法。另外一种是<strong>异步的方法，所谓异步的方法是指数据并非同时产生</strong>，A3C的方法便是其中表现非常优异的异步强化学习算法。</p>
-<p>A3C模型如下图所示，每个Worker直接从Global Network中拿参数，自己与环境互动输出行为。利用每个Worker的梯度，对Global Network的参数进行更新。每一个Worker都是一个A2C。A3C主要有两个操作，一个是pull，一个是push：<br> pull：把主网络的参数直接赋予Worker中的网络<br> push：使用各Worker中的梯度，对主网络的参数进行更新</p>
-<img src="/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/4.png" class>
+<p>对于<strong>模型的更新</strong>有两种常见的方法：同步更新和异步更新。</p>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/4.png" class="">
 
-<img src="/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/5.png" class>
-
-<p>这种异步更新的方法在多种算法中都适用。所有的异步agent执行完后再用累计的梯度信息更新网络参数。其中n-step的算法（后两个）需要每个异步agent复制一份子网络，每个anget执行n步后倒退算出每步的总回报和相关梯度，用累计梯度更新主网络参数。</p>
 <hr>
-<p>M Babaeizadeh等人提出了一种<a target="_blank" rel="noopener" href="https://openreview.net/forum?id=r1VGvBcxl&amp;noteId=r1VGvBcxl">混合CPU/GPU版的A3C</a>，并提供开源代码<a target="_blank" rel="noopener" href="https://github.com/NVlabs/GA3C%E3%80%82">https://github.com/NVlabs/GA3C。</a></p>
-<p>具体地，GA3C主要分为：</p>
-<p>Agent，和A3C功能一样，收集样本，但是不需要各自复制一份模型，只需要在每次选择Action前，将当前的State作为请求加入 Prediction Queue；执行动作n步后倒退算出每步的总回报，得到的n个(st,at,R,st+1)(st,at,R,st+1)加入 Trainning Queue；<br>Predictor，将 Prediction Queue 中的请求样本出队作为minibatch填入GPU的网络模型中，将模型预测的Action返回给各自的Agent，为减少延迟，可以使用多线程并行多个predictiors；<br>Trainer，将 Trainning Queue 的样本出队作为minibatch填入GPU的网络模型中，训练更新模型，同样，为减少延迟，可以使用多线程并行多个trainers；</p>
-<p>参考文献：</p>
-<p>1.<a target="_blank" rel="noopener" href="https://blog.csdn.net/u013236946/article/details/73195035?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163064699216780269875133%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163064699216780269875133&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-73195035.first_rank_v2_pc_rank_v29&amp;utm_term=%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0+A3C&amp;spm=1018.2226.3001.4187">深度强化学习——A3C</a></p>
-<p>2.<a target="_blank" rel="noopener" href="https://blog.csdn.net/bbbeoy/article/details/105603045">强化学习AC、A2C、A3C算法原理与实现</a></p>
+<p>上面的方法需要一个主机Parameter Sever，如果主机出现错误，整个训练就会失败。因此我们可以不用主机，这也叫做分散异步随机梯度下降，机器中间点对点传输梯度来更新参数。</p>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/5.png" class="">
+
+<hr>
+<p>分布式优化：asych SGD，不加lock，这样会导致一个进程读取的参数被另一个进程抢先更新的情况。但Hogwild给出证明两种算法在一定情况下结果趋紧一致。asych SGD是并行系统中广泛应用的设计。</p>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/6.png" class="">
+
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> torch<span class="token punctuation">.</span>multiprocessing <span class="token keyword">as</span> mp
+<span class="token keyword">from</span> model <span class="token keyword">import</span> MyModel
+
+<span class="token keyword">def</span> <span class="token function">train</span><span class="token punctuation">(</span>model<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># Construct data_loader,optimizer,etc.</span>
+    <span class="token keyword">for</span> data<span class="token punctuation">,</span>labels <span class="token keyword">in</span> data_loader<span class="token punctuation">:</span>
+        optimizer<span class="token punctuation">.</span>zero_frad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        loss_fn<span class="token punctuation">(</span>model<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">,</span>labels<span class="token punctuation">)</span><span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        opeimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>      <span class="token comment" spellcheck="true"># update the shared parameters</span>
+
+ <span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    num_processes <span class="token operator">=</span> <span class="token number">4</span>
+    model <span class="token operator">=</span> MyModel<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># NOTE: this is required for the "fork" method to work</span>
+    model<span class="token punctuation">.</span>share_memory<span class="token punctuation">(</span><span class="token punctuation">)</span> 
+    processes <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> rank <span class="token keyword">in</span> range<span class="token punctuation">(</span>num_processes<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        p <span class="token operator">=</span> mp<span class="token punctuation">.</span>Process<span class="token punctuation">(</span>target<span class="token operator">-</span>train<span class="token punctuation">,</span>args<span class="token operator">=</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        p<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> p <span class="token keyword">in</span> processes<span class="token punctuation">:</span>
+        p<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<hr>
+<p>MapReduce：分布式学习的开山鼻祖算法</p>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/7.png" class="">
+
+<hr>
+<p>DisBelief</p>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/8.png" class="">
+
+<hr>
+<p>AlexNet</p>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/9.png" class="">
+
+<hr>
+<h2 id="分布式强化学习系统"><a href="#分布式强化学习系统" class="headerlink" title="分布式强化学习系统"></a>分布式强化学习系统</h2><p>现在我们考虑强化学习系统的哪些部分可以实行分布式设计。</p>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/10.png" class="">
+
+<p>我们可以从以上三点出发：考虑增加更多的环境，让更多的智能体同时工作，并且让多个episode同时执行。</p>
+<p>在分布式强化学习之中，我们需要多个环境，多个智能体进行交互。因此在不同的机器中都可以有一个环境和一个智能体，得到多个轨迹，然后传回给learner，learner对参数进行更新，然后把更新后的参数传回给不同机器中的智能体。</p>
+<h3 id="经典算法"><a href="#经典算法" class="headerlink" title="经典算法"></a>经典算法</h3><p>分布式强化学习系统的进展：</p>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/11.png" class="">
+
+<p>GORILA系统是在DQN的基础上进行分布式加速：</p>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/12.png" class="">
+
+<p><strong>A3C</strong></p>
+<p>A3C相对于GORILA取缔了reply memory，每个线程都保留了自己的actor，因此每个线程的轨迹都是具有多样化的，可以直接采样进行学习。</p>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/13.png" class="">
+
+<p>部分代码：</p>
+<pre class=" language-python"><code class="language-python">processes <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> rank <span class="token keyword">in</span> range<span class="token punctuation">(</span>args<span class="token punctuation">.</span>processes<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    p <span class="token operator">=</span> mp<span class="token punctuation">.</span>Process<span class="token punctuation">(</span>target<span class="token operator">=</span>train<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>shared_model<span class="token punctuation">,</span> shared_optimizer<span class="token punctuation">,</span> rank<span class="token punctuation">,</span> args<span class="token punctuation">,</span> info<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    p<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    processes<span class="token punctuation">.</span>append<span class="token punctuation">(</span>p<span class="token punctuation">)</span>
+<span class="token keyword">for</span> p <span class="token keyword">in</span> processes<span class="token punctuation">:</span>
+    p<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p><strong>A2C</strong>：基于A3C的改进</p>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/14.png" class="">
+
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/15.png" class="">
+
+
+
+<p><strong>Apex-X</strong></p>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/16.png" class="">
+
+
+
+<p><strong>IMPALA</strong></p>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/17.png" class="">
+
+
+
+<p><strong>RLlib</strong></p>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/18.png" class="">
+
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/19.png" class="">
+
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/20.png" class="">
+
+
+
+<p><strong>Evolution Strategies</strong></p>
+<img src="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/21.png" class="">
+
+
+
+
+
+
+
+
+
+
+
 
                 
             </div>
@@ -595,7 +666,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://tianjuewudi.gitee.io/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/">https://tianjuewudi.gitee.io/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/</a>
+                    <a href="https://tianjuewudi.gitee.io/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/">https://tianjuewudi.gitee.io/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -841,98 +912,3 @@
         padding-left: 2em;
         word-spacing: 0.05rem;
     }
-
-    #vcomments ul li,
-    ol li {
-        display: list-item;
-        line-height: 1.8rem;
-        font-size: 1rem;
-    }
-
-    #vcomments ul li {
-        list-style-type: disc;
-    }
-
-    #vcomments ul ul li {
-        list-style-type: circle;
-    }
-
-    #vcomments table, th, td {
-        padding: 12px 13px;
-        border: 1px solid #dfe2e5;
-    }
-
-    #vcomments table, th, td {
-        border: 0;
-    }
-
-    table tr:nth-child(2n), thead {
-        background-color: #fafafa;
-    }
-
-    #vcomments table th {
-        background-color: #f2f2f2;
-        min-width: 80px;
-    }
-
-    #vcomments table td {
-        min-width: 80px;
-    }
-
-    #vcomments h1 {
-        font-size: 1.85rem;
-        font-weight: bold;
-        line-height: 2.2rem;
-    }
-
-    #vcomments h2 {
-        font-size: 1.65rem;
-        font-weight: bold;
-        line-height: 1.9rem;
-    }
-
-    #vcomments h3 {
-        font-size: 1.45rem;
-        font-weight: bold;
-        line-height: 1.7rem;
-    }
-
-    #vcomments h4 {
-        font-size: 1.25rem;
-        font-weight: bold;
-        line-height: 1.5rem;
-    }
-
-    #vcomments h5 {
-        font-size: 1.1rem;
-        font-weight: bold;
-        line-height: 1.4rem;
-    }
-
-    #vcomments h6 {
-        font-size: 1rem;
-        line-height: 1.3rem;
-    }
-
-    #vcomments p {
-        font-size: 1rem;
-        line-height: 1.5rem;
-    }
-
-    #vcomments hr {
-        margin: 12px 0;
-        border: 0;
-        border-top: 1px solid #ccc;
-    }
-
-    #vcomments blockquote {
-        margin: 15px 0;
-        border-left: 5px solid #42b983;
-        padding: 1rem 0.8rem 0.3rem 0.8rem;
-        color: #666;
-        background-color: rgba(66, 185, 131, .1);
-    }
-
-    #vcomments pre {
-        font-family: monospace, monospace;
-  
