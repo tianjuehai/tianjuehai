@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tianjuewudi.gitee.io/2021/10/12/fen-ceng-qiang-hua-xue-xi-hierarchy-rl/</loc>
+    <lastmod>2021-10-13</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/09/05/ge-ren-xue-xi-fang-xiang-ji-yan-jiu-fang-xiang/</loc>
+    <lastmod>2021-10-12</lastmod>
+  </url>
+  <url>
     <loc>https://tianjuewudi.gitee.io/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/</loc>
     <lastmod>2021-10-11</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/</loc>
-    <lastmod>2021-10-10</lastmod>
+    <lastmod>2021-10-11</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/10/10/mo-fang-xue-xi-imitation-learning/</loc>
@@ -55,10 +63,6 @@
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/09/03/qiang-hua-xue-xi-zhi-trpo/</loc>
     <lastmod>2021-09-09</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/09/05/ge-ren-xue-xi-fang-xiang-ji-yan-jiu-fang-xiang/</loc>
-    <lastmod>2021-09-05</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/09/01/wa-kuang-jiao-cheng/</loc>

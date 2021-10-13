@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="基于模型的深度强化学习(Model_based RL), 博客制作,个人经验分享,Unity,人工智能等">
+    <meta name="keywords" content="分层强化学习（Hierarchy RL）, 博客制作,个人经验分享,Unity,人工智能等">
     <meta name="description" content="本站记录本人各种学习的旅途，用于巩固自我并启发后来人">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>基于模型的深度强化学习(Model_based RL) | 微笑紫瞳星</title>
+    <title>分层强化学习（Hierarchy RL） | 微笑紫瞳星</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -322,12 +322,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">基于模型的深度强化学习(Model_based RL)</h1>
+                    <h1 class="description center-align post-title">分层强化学习（Hierarchy RL）</h1>
                 </div>
             </div>
         </div>
@@ -468,28 +468,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-10-05
+                    2021-10-12
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-10-09
+                    2021-10-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    3 分
                 </div>
                 
 
@@ -514,95 +514,22 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p> 参考视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1hV411d7Sg?spm_id_from=333.999.0.0">周博磊强化学习纲要</a></p>
-<p> 阅读本文前需要对强化学习model-free领域有一定的了解，可以查看我之前的文章：《<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/">强化学习实践教学</a>》，《<a href="https://tianjuewudi.gitee.io/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/#toc-heading-39">强化学习纲要（周博磊课程）</a>》</p>
-<p> 之前介绍的算法例如DQN，DDPG，PPO都是<strong>model-free（无模型）</strong>的，这也是比较多人的研究领域，这些算法是智能体直接和环境互动获得数据，不需要拟合环境模型，智能体对环境的认知只能通过和环境不断大量的交互来实现。这样做的优点是通过无数次与环境的交互可以保证智能体得到最优解。往往在游戏这样的没有采样成本的环境中都可以用model-free。</p>
-<p>接下来我介绍强化学习的另一个领域<strong>model-based（基于模型）</strong>，在这个领域中，智能体通过与环境进行交互获得数据，根据这些数据对环境进行建模拟合出一个模型，然后智能体根据模型来生成样本并利用RL算法优化自身。一旦模型拟合出来，智能体就可以根据该模型来生成样本，因此智能体和环境直接的交互次数会急剧减少，缺点是拟合的模型往往存在偏差，因此model-based的算法通常不保证能收敛到最优解。但是在现实生活中是需要一定的采样成本的，因此采样效率至关重要，因此model-free是一个提升采样效率的重要方式。</p>
-<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/2.png" class>
+                <p> 阅读本文需要有深度强化学习基础，可以翻看我以前的文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/120698199">强化学习纲要（周博磊课程）</a>、<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/">强化学习实践教学</a></p>
+<p>参考原文：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/267524544">分层强化学习survey</a>  ，这篇文章讲的十分全面，重复内容不再赘述。</p>
+<p>分层主要解决的是稀疏reward的问题，实际的强化问题往往reward很稀疏，再加上庞大的状态空间和动作空间组合，导致直接硬训往往训不出来，遇到头铁的agent更是如此。我们人类在解决一个复杂问题时，往往会将其分解为若干个容易解决的子问题，分而治之，分层的思想正是来源于此。个人理解目前分层的解决手段大体分两种，一种是基于目标的(goal-reach)，主要做法是选取一定的goal，使agent向着这些goal训练，可以预见这种方法的难点就是如何选取合适的goal；另一种方式是多级控制(multi-level control)，做法是抽象出不同级别的控制层，上层控制下层，这些抽象层在不同的文章中可能叫法不同，如常见的option、skill、macro action等，这种方式换一种说法也可以叫做时序抽象(temporal abstraction)。</p>
+<h2 id="SMDP"><a href="#SMDP" class="headerlink" title="SMDP"></a>SMDP</h2><p>SMDP指的是半马尔科夫决策过程。和马尔科夫决策过程中一个状态经过一个action就能到达下一个状态不同，它需要一段时间过后或是多个action才能到达下个状态。它可以分为两种：一种是时间连续的，每经过连续的时间状态发生改变。一种是时间离散的，经过几个时间步之后状态发生改变。分层强化学习研究第二种，并按照离散时间进行建模。</p>
+<h2 id="h-DQN"><a href="#h-DQN" class="headerlink" title="h-DQN"></a>h-DQN</h2><p>h-DQN也叫hierarchy DQN。是一个整合分层actor-critic函数的架构，可以在不同的时间尺度上进行运作，具有以目标驱动为内在动机的DRL。该模型在两个结构层次上进行决策：顶级模块（元控制器）接受状态并选择目标，低级模块（控制器）使用状态和选择的目标来进行决策。我们可以使用不同时间尺度的随机梯度下降来训练模型，以优化预期的未来内在动机（对应控制器）和外部奖励（对应元控制）。这种处理延迟问题的优势是：在获得最佳外在奖励之前具有长状态链的离散随机决策过程。</p>
+<img src="/2021/10/12/fen-ceng-qiang-hua-xue-xi-hierarchy-rl/1.png" class="">
 
-<p> model-based的强化学习算法分为两类，一类是值函数优化（value optimization），一类是策略优化（policy optinmization）。</p>
-<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/1.png" class>
+<p>元控制器接收状态并选择目标g，然后控制器使用状态和目标选择动作，目标在接下来的几个时间步中保持不变，直到达到目标或终止状态。内部的critic负责评估是否达到目标，并向控制器提供适当的奖励$r_t(g)$。在这项工作中，进行二元内部奖励的最小化，达到目标为1，否则为0。控制器的目标最大化累计内在奖励，元控制器的目的是优化累计的外在奖励。</p>
+<p>控制器Q值函数：<br>$$<br>Q_1(s,a;g) = \max_{\pi_{a,g}} E[r_t + \gamma \max_{a_{t+1}}Q_1^*(s_{t+1},a_{t+1};g) | s_t = s,a_t=a,g_t=g,\pi_{a,g}]<br>$$<br>元控制器Q值函数：<br>$$<br>Q_2(s,g) = \max_{\pi_{a,g}} E[\sum_{t’=t}^{t+N}f_{t’}+ \gamma \max_{g’}Q_2^*(s_{t+N},g’) | s_t = s,g_t=g,\pi_{a,g}]<br>$$<br>N表示当前目标下，控制器停止之前的时间步数。</p>
+<img src="/2021/10/12/fen-ceng-qiang-hua-xue-xi-hierarchy-rl/2.png" class="">
 
-<p>在model-based RL中不仅仅有原来model-free中的结构，还多了一个model，因此原本在model-free中用来训练价值函数和策略函数的experience有了第二个用处，那就是model learning，拟合出一个适当的环境模型。</p>
-<h2 id="环境模型的构成"><a href="#环境模型的构成" class="headerlink" title="环境模型的构成"></a>环境模型的构成</h2><img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/3.png" class>
-
-<p>环境通常由两部分构成，第一就是状态转移矩阵，也就是说在知道现在的状态和采取的动作的情况下，转移到其他各个状态的概率。第二就是奖励函数，在知道现在的状态和采取的动作的情况下,我们可以得到的奖励是多少。</p>
-<p>例如在围棋中的规则是十分清楚的，因此状态之间的转移也是十分清楚的，因此能够打败人类的围棋AI AlphaGO也是用model-based强化学习算法得到的。还有一种是物理模型，现实中的物理模型往往有固定的计算公式，也可以轻松得到其状态转移。</p>
-<p>通常假定状态转移和奖励函数是相互独立的关系。</p>
-<h2 id="环境模型的训练"><a href="#环境模型的训练" class="headerlink" title="环境模型的训练"></a>环境模型的训练</h2><img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/4.png" class>
-
-<p>那么如何训练一个环境使其符合预期呢？</p>
-<p>这里我们只需要用监督学习的方法，收集真实环境中的数据${S_t,A_t \rightarrow R_{t+1},S_{t+1}}$，通过收集很多组这样的数据就能把这个当成样本，输入到环境的神经网络中进行学习。</p>
-<p>这里列举几个常用的模型：</p>
-<ol>
-<li>Table Lookup Model</li>
-<li>Linear Expectation Model</li>
-<li>Linear Gaussian Model</li>
-<li>Gaussian Process Model</li>
-<li>Deep Belief Network Model</li>
-</ol>
-<p>我们通常要对模型的准确率进行评估，如果准确率低，那么应当采用model-free的方法。</p>
-<h2 id="Dyna"><a href="#Dyna" class="headerlink" title="Dyna"></a>Dyna</h2><p>这是Richard Sutton在1991年提出的算法，在现阶段的强化学习算法中并不足够强，但是是我们理解model-based方法的例子。在通过真实的经验数据学习出来的环境模型中，我们刻意采集大量的虚拟数据，这样就能和填补真实数据采集不到的空白，一起去训练值函数模型和策略网络。</p>
-<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/5.png" class>
-
-<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/6.png" class>
-
-
-
-<h2 id="Model-based-的策略优化（Policy-Optimization）"><a href="#Model-based-的策略优化（Policy-Optimization）" class="headerlink" title="Model-based 的策略优化（Policy Optimization）"></a>Model-based 的策略优化（Policy Optimization）</h2><p>在model-free的policy gradient中，条件转移概率是不需要的。但是在model-based知道转移概率的情况下，就能改进我们的策略优化。</p>
-<p>基于环境模型的策略优化受控制论的影响是非常深远的。因为控制问题也是优化一个controller，而环境通常叫做system dynamics，可以定义成知道现在状态和采取的控制措施，得到的下一个状态。这也是最优控制（optimal controls）的内容，在满足动态转移条件的情况下去优化控制方法，降低cost函数。这和强化学习有很深远的联系。<br>$$<br>arg min_{a_1,…,a_T} \sum_{t=1}^T c(s_t,a_t)  \  \  \ \ subject \ to \ s_t = f(s_{t-1},a_{t-1})<br>$$<br>在环境模型未知的情况下，我们可以结合模型学习和轨迹优化两种方法。</p>
-<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/7.png" class>
-
-<p>第一种算法是用监督学习训练出环境模型之后，直接采用控制算法（如LQR）来计算最优路径。</p>
-<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/8.png" class>
-
-<p>第二种算法是为了防止训练数据采样不充分，在训练出环境模型之后，自己产生新的数据加入训练当中。</p>
-<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/9.png" class>
-
-<p>第三种算法是一种非常有名的算法<strong>MPC（Model Predictive Control）</strong>,是自动驾驶和控制中的常用算法。我们对整个轨迹进行优化，但是我们实际执行时只执行第一步，然后把这一步的数据加入到训练数据集中，个人理解是第一步的误差都是比较小的，数据都比较可靠。</p>
-<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/10.png" class>
-
-<hr>
-<p>最后第四种算法是把policy learning、model learning、optimal control结合起来。</p>
-<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/11.png" class>
-
-<ol>
-<li><p>初始化策略函数产生随机策略对真实环境的数据进行收集。</p>
-</li>
-<li><p>用收集的数据训练自己的环境模型。</p>
-</li>
-<li><p>通过环境模型产生的数据来对策略进行优化。</p>
-</li>
-<li><p>用优化后的策略去环境模型中产生新的轨迹，并将新的轨迹数据加入训练数据当中</p>
-</li>
-<li><p>返回第二条。</p>
-</li>
-</ol>
-<p>下面是两种模型的选择：</p>
-<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/12.png" class>
-
-<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/13.png" class>
-
-
-
-<h2 id="model-based-RL在机器人的应用"><a href="#model-based-RL在机器人的应用" class="headerlink" title="model-based RL在机器人的应用"></a>model-based RL在机器人的应用</h2><img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/14.png" class>
-
-<p>首先是摄像机捕捉画面得到一个3D坐标，我们需要把3D坐标转换成机械臂各个部位旋转的角度，我们可以把奖励函数设置成和Target坐标的距离来进行训练。这里用了Gaussin Process来做环境模型。像这种低成本的机械臂有很大的误差，需要对不确定性有很好的建模。</p>
-<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/15.png" class>
-
-<hr>
-<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/16.png" class>
-
-<img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/17.png" class>
-
-
-
-
-
-
-
-
-
+<p>因此需要拟合两个Q函数，而每一Q函数配有一个储存空间，分别是$D_1$储存$(s_t,a_t,g_t,r_t,s_{t+1})$，$D_2$储存$(s_t,g_t,f_t,s_{t+N})$。</p>
+<p>对目标的选择上本文的做法是选取游戏画面中某些重要物体的图像作为目标，随state一起传入神经网络，这些目标图像都是人工选择好的。这也是本文的局限。</p>
+<h2 id="FuN"><a href="#FuN" class="headerlink" title="FuN"></a>FuN</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46928498">https://zhuanlan.zhihu.com/p/46928498</a></p>
+<h2 id="HIRO"><a href="#HIRO" class="headerlink" title="HIRO"></a>HIRO</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46946800">https://zhuanlan.zhihu.com/p/46946800</a></p>
+<h2 id="Option-Critic"><a href="#Option-Critic" class="headerlink" title="Option-Critic"></a>Option-Critic</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/47051292">https://zhuanlan.zhihu.com/p/47051292</a></p>
 
                 
             </div>
@@ -629,7 +556,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://tianjuewudi.gitee.io/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/">https://tianjuewudi.gitee.io/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/</a>
+                    <a href="https://tianjuewudi.gitee.io/2021/10/12/fen-ceng-qiang-hua-xue-xi-hierarchy-rl/">https://tianjuewudi.gitee.io/2021/10/12/fen-ceng-qiang-hua-xue-xi-hierarchy-rl/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1101,29 +1028,30 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/10/06/qiang-hua-xue-xi-zhi-td3/">
+                <a href="/2021/10/12/fen-ceng-qiang-hua-xue-xi-hierarchy-rl/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="强化学习之TD3">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="分层强化学习（Hierarchy RL）">
                         
-                        <span class="card-title">强化学习之TD3</span>
+                        <span class="card-title">分层强化学习（Hierarchy RL）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            强化学习的研究方向之一。
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-06
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-12
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1136,6 +1064,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1154,13 +1083,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/09/25/qiang-hua-xue-xi-zhi-dqn-chao-ji-jin-hua-ban-rainbow/">
+                <a href="/2021/10/10/fen-bu-shi-qiang-hua-xue-xi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="强化学习之DQN超级进化版Rainbow">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="分布式强化学习">
                         
-                        <span class="card-title">强化学习之DQN超级进化版Rainbow</span>
+                        <span class="card-title">分布式强化学习</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1171,7 +1100,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-10
                             </span>
                         <span class="publish-author">
                             

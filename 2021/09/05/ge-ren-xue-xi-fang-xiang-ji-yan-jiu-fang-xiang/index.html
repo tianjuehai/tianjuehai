@@ -479,21 +479,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-09-05
+                    2021-10-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    8.2k
+                    11.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    30 分
+                    48 分
                 </div>
                 
 
@@ -526,7 +526,7 @@
 <li>连续动作空间推荐：擅长调参就用<strong>TD3</strong>，不擅长调参就用<strong>PPO或SAC</strong>，如果训练环境 Reward function 都是初学者写的，那就用PPO</li>
 </ul>
 <p>来自另外一个大佬的建议：对于连续控制任务，推荐SAC、TD3和PPO，三种算法都值得试一试并从中择优；对于离散控制任务，推荐SAC-Discrete（即离散版SAC）和PPO。</p>
-<h3 id="离散的动作空间-discrete-action-space"><a href="#离散的动作空间-discrete-action-space" class="headerlink" title="离散的动作空间 discrete action space"></a>离散的动作空间 discrete action space</h3><ul>
+<h3 id="1-离散的动作空间-discrete-action-space"><a href="#1-离散的动作空间-discrete-action-space" class="headerlink" title="1.离散的动作空间 discrete action space"></a>1.离散的动作空间 discrete action space</h3><ul>
 <li><p><strong>DQN（Deep Q Network）</strong>可用于入门深度强化学习，使用一个Q Network来估计Q值，从而替换了 Q-table，完成从离散状态空间到连续状态空间的跨越。Q Network 会对每一个离散动作的Q值进行估计，执行的时候选择Q值最高的动作（greedy 策略）。并使用 epslion-greedy 策略进行探索（探索的时候，有很小的概率随机执行动作），来获得各种动作的训练数据。</p>
 </li>
 <li><p><strong>DDQN（Double DQN）</strong>更加稳定，因为最优化操作会传播高估误差，所以她同时训练两个Q network并选择较小的Q值用于计算TD-error，降低高估误差。详见和DDQN一样采用了两个估值网络的TD3 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/86297106">曾伊言：强化学习算法TD3论文的翻译与解读</a></p>
@@ -546,7 +546,7 @@
 <li><strong>Ape-X DQN（Distributed Prioritized Experience Replay）</strong>，也是 David Sliver 他们做的。使用了Distributed training，用多个进程创建了多个actor去与环境交互，然后使用收集到的数据去训练同一个learner，用来加快训练速度。Prioritized Experience Replay（优先经验回放 PER 下面会讲）。Ape-X通过充分利用CPU资源，合理利用GPU，从而加快了训练速度。注意，这不等同于减少训练总步数。NVIDIA 有一个叫 Apex的库，用于加速计算。</li>
 </ul>
 <hr>
-<h3 id="连续的动作空间-continuous-action-space"><a href="#连续的动作空间-continuous-action-space" class="headerlink" title="连续的动作空间 continuous action space"></a>连续的动作空间 continuous action space</h3><ul>
+<h3 id="2-连续的动作空间-continuous-action-space"><a href="#2-连续的动作空间-continuous-action-space" class="headerlink" title="2.连续的动作空间 continuous action space"></a>2.连续的动作空间 continuous action space</h3><ul>
 <li><strong>DDPG（Deep DPG ）</strong>，可用于入门连续动作空间的DRL算法。DPG 确定策略梯度算法，直接让策略网络输出action，成功在连续动作空间任务上训练出能用的策略，但是它使用 OU-noise 这种有很多超参数的方法去探索环境，训练慢，且不稳定。</li>
 <li><strong>soft target update（软更新）</strong>，用来稳定训练的方法，非常好用，公式是 <img src="https://www.zhihu.com/equation?tex=%5Ctheta%27+=+%5Ctau+%5Ctheta%27+++(1-%5Ctau)%5Ctheta" alt="[公式]"> ，其中 theta是使用梯度进行更新的网络参数，theta’ 是使用了软更新的目标网络target network参数，tau略小于1。软更新让参数的更新不至于发生剧变，从而稳定了训练。从DDPG开始就广泛使用，并且在深度学习的其他领域也能看到它的身影，如 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/159765213">谷歌自监督 BYOL Bootstrap Your Own Latent</a> ，看论文的公式（1），就用了soft target update</li>
 <li><strong>TD3（TDDD，Twin Delay DDPG）</strong>，擅长调参的人才建议用，因为它影响训练的敏感超参数很多。它从Double DQN那里继承了Twin Critic，用来降低高估误差；它用来和随机策略梯度很像的方法：计算用于更新TD-error的Q值时，给action加上了噪声，用于让Critic拟合更平滑的Q值估计函数。TD3建议 延迟更新目标网络，即多更新几次网络后，再使用 soft update 将网络更新到target network上，我认为这没有多大用，后来的其他算法也不用这个技巧。TD3还建议在计算Q值时，为动作添加一个噪声，用于平滑Critic函数，在确定策略中，TD3这么用很像“随机策略”。详见 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/86297106">曾伊言：强化学习算法TD3论文的翻译与解读</a></li>
@@ -569,7 +569,7 @@
 <li><strong>SAC（Automating Entropy Adjustment/ Automating Temperature Parameter</strong> <img src="https://www.zhihu.com/equation?tex=%5Calpha" alt="[公式]"> <strong>自动调整温度系数并维持策略的熵在某个值附近）</strong>一般我们使用的SAC是这个版本的SAC，它能自动调整一个叫温度系数alpha 的超参数（温度越高，熵越大）。SAC的策略网络的优化目标=累计收益+ alpha*策略的熵。一般在训练后期，策略找到合适的action分布均值时，它的action分布方差越小，其收益越高，因而对“累计收益”进行优化，会让策略熵倾向于减小。SAC会自动选择合适的温度系数，让策略的熵保持一种适合训练的动态平衡。SAC会事先确定一个目标熵 target entropy（论文作者的推荐值是 log(action_dim)），如果策略熵大于此值，则将alpha调小，反之亦然。从这个角度看，SAC就不是最大化策略熵了，而是将策略熵限制在某个合适大小内，这点又与PPO的“保持在信任域内，且不至于太小”不谋而合</li>
 </ul>
 <hr>
-<h3 id="混合的动作空间-hybrid-action-space"><a href="#混合的动作空间-hybrid-action-space" class="headerlink" title="混合的动作空间 hybrid action space"></a>混合的动作空间 hybrid action space</h3><p>在实际任务中，混合动作的需求经常出现：如王者荣耀游戏既需要离散动作（选择技能），又需要连续动作（移动角色）。只要入门了强化学习，就很容易独立地想出以下这些方法，所以我没有把它们放在前面：</p>
+<h3 id="3-混合的动作空间-hybrid-action-space"><a href="#3-混合的动作空间-hybrid-action-space" class="headerlink" title="3.混合的动作空间 hybrid action space"></a>3.混合的动作空间 hybrid action space</h3><p>在实际任务中，混合动作的需求经常出现：如王者荣耀游戏既需要离散动作（选择技能），又需要连续动作（移动角色）。只要入门了强化学习，就很容易独立地想出以下这些方法，所以我没有把它们放在前面：</p>
 <ul>
 <li><strong>强行使用DQN类算法，把连续动作分成多个离散动作：</strong>不建议这么做，这破坏了连续动作的优势。一个良性的神经网络会是一个平滑的函数（k-Lipschitz 连续），相近的输入会有相似的输出。在连续的动作空间开区间[-1, +1]中，智能体会在学了-1，+1两个样本后，猜测0的样本可能介于 -1，+1 之间。而强行将拆分为离散动作 -1，0，+1之后（无论拆分多么精细），它都猜不出 0的样本，一定要收集到 0的样本才能学习。此外，精细的拆分会增加离散动作个数，尽管更加逼近连续动作，但会增加训练成本。</li>
 <li><a href="https://link.zhihu.com/?target=https://arxiv.org/abs/1910.07207">SAC for Discrete Action Space</a><strong>，把输出的连续动作当成是离散动作的执行概率：</strong>SAC for Discrete Action Space 这个算法提供了将连续动作算法SAC应用在离散动作的一条技术路线：把这个输出的动作矢量当成每个动作的执行概率。一般可以直接把离散动作部分全部改成连续动作，然后套用连续动作算法，这方法简单，但是不一定最好的。</li>
@@ -577,14 +577,14 @@
 <li><a href="https://link.zhihu.com/?target=https://arxiv.org/abs/1903.01344">H-PPO</a> <strong>（Hybrid PPO），同时让策略网络输出混合动作</strong>。连续动作（策略梯度）算法中：DDPG、TD3、SAC使用 状态-动作值函数 Q(state, action)，A3C、<strong>PPO使用 状态值函数 Q(state)**。离散动作无法像连续动作一样将一个action输入到 Q(state, action) 里，因此 Hybird PPO选择了PPO。于是它的策略网络会像Q Network 一样为离散动作输出不同的Q值，也像PPO 一样输出连续动作。（</strong>警告，2021-03 前它依然没有开源代码，但论文描述的方法无误<strong>）。还有 <a href="https://link.zhihu.com/?target=https://arxiv.org/abs/2001.00449">H-MPO</a>（</strong>Hybrid MPO**），MPO是PPO算法的改进版。</li>
 </ul>
 <p>详见<a href="https://link.zhihu.com/?target=https://arxiv.org/abs/1903.01344">Hybird-PPO 2019-03</a> 这篇文章的 Related Work。知乎上也有 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/104581527">黑猫紧张：PN-46: H-PPO for Hybrid Action Space (IJCAI 2019)</a></p>
-<h3 id="改进经验回放，以适应稀疏奖励-sparse-reward"><a href="#改进经验回放，以适应稀疏奖励-sparse-reward" class="headerlink" title="改进经验回放，以适应稀疏奖励 sparse reward"></a>改进经验回放，以适应稀疏奖励 sparse reward</h3><p>训练LunarLander安全降落，它的奖励reward 在降落后+200，坠毁-100。当它还在空中时做任何动作都不会得到绝对值这么大的奖励。这样的奖励是稀疏的。一些算法（（其实它的奖励函数会根据飞行器在空中的稳定程度、燃料消耗给出一个很小的reward，在这种）</p>
+<h3 id="4-改进经验回放，以适应稀疏奖励-sparse-reward"><a href="#4-改进经验回放，以适应稀疏奖励-sparse-reward" class="headerlink" title="4.改进经验回放，以适应稀疏奖励 sparse reward"></a>4.改进经验回放，以适应稀疏奖励 sparse reward</h3><p>训练LunarLander安全降落，它的奖励reward 在降落后+200，坠毁-100。当它还在空中时做任何动作都不会得到绝对值这么大的奖励。这样的奖励是稀疏的。一些算法（（其实它的奖励函数会根据飞行器在空中的稳定程度、燃料消耗给出一个很小的reward，在这种）</p>
 <ul>
 <li><strong>Prioritized sweeping 优先清理：</strong>根据紧要程度调整样本的更新顺序，优先使用某些样本进行更新，用于加速训练，PER就是沿着这种思想发展出来的</li>
 <li><a href="https://link.zhihu.com/?target=https://arxiv.org/pdf/1511.05952.pdf">PER</a><strong>（优先经验回放 Prioritized Experience Replay）</strong>使用不同顺序的样本进行对网络进行训练，并将不同顺序对应的Q值差异保存下来，以此为依据调整样本更新顺序，用于加速训练。</li>
 <li><a href="https://link.zhihu.com/?target=https://papers.nips.cc/paper/2017/file/453fadbd8a1a3af50a9df4df899537b5-Paper.pdf">HER</a><strong>（后见经验回放 Hindsight Experience Replay）</strong>构建可以把失败经验也利用起来的经验池，提高稀疏奖励下对各种失败探索经验的利用效率。</li>
 </ul>
 <p>这种操作需要消耗CPU算力去完成。在奖励不稀疏的环境下，用了不会明显提升。在一些环境中，上面这类算法必不可少。例如 <a href="https://link.zhihu.com/?target=https://gym.openai.com/envs/%23robotics">Gym 基于收费MuJoCo 的机械臂环境 Robotics Fetch***</a> ，以及 基于<a href="https://link.zhihu.com/?target=https://github.com/bulletphysics/bullet3/blob/master/examples/pybullet/gym/pybullet_envs/bullet/kuka.py">开源PyBullet的机械臂 KukaBulletEnv-v0</a> 。如果不用这类算法，那么我们需要花费更多精力去设计Reward function。</p>
-<h3 id="在RL中使用RNN"><a href="#在RL中使用RNN" class="headerlink" title="在RL中使用RNN"></a>在RL中使用RNN</h3><p>有时候，我们需要观察连续的几个状态才能获得完整的状态。例如赛车游戏，打砖块游戏，我们在只观测单独一帧图片时（部分可观测 Partially Observable state），无法知晓物体的运动速度。因此将相邻几个可观测的状态堆叠起来（stack）可以很好地应对这些难题。</p>
+<h3 id="5-在RL中使用RNN"><a href="#5-在RL中使用RNN" class="headerlink" title="5.在RL中使用RNN"></a>5.在RL中使用RNN</h3><p>有时候，我们需要观察连续的几个状态才能获得完整的状态。例如赛车游戏，打砖块游戏，我们在只观测单独一帧图片时（部分可观测 Partially Observable state），无法知晓物体的运动速度。因此将相邻几个可观测的状态堆叠起来（stack）可以很好地应对这些难题。</p>
 <p>然而，堆叠相邻状态无法应对所有的 PO-MDPs。于是大家想到了用RNN（<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/94757947">RNN的入门例子：根据前9年的数据预测后3年的客流</a>）。然而RNN需要使用一整段序列去训练，很不适合TD-errors（贝尔曼公式）的更新方式。如图：普通Actor网络的输入只有state，而使用RNN的Actor网络的输入其实是 Partially Observable state 以及 hidden state。这意味着输入critic网络进行Q值评估的state不完整（不包含RNN内部的hidden state）。为了解决<strong>环境的PO-MDPs难题</strong>，我们直接引入RNN结构。然而引入RNN结构的行为又给RL带来了<strong>RNN内部的PO-MDPs难题</strong>。</p>
 <p><img src="https://pic4.zhimg.com/80/v2-bfb5ca44f103cf1de24aaff13c74c527_720w.jpg" alt="img"></p>
 <p>尽管在on-policy算法中，如果使用完整的轨迹（trajectory）进行更新，那么可以缓解critic观测不到 hidden state给训练到来的影响。（如腾讯绝悟的PPO算法使用了RNN），但是这个问题还是没有很好地得到解决。如果想要了解更多使用了RNN的RL算法，请看 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/349041830">羽根：【强化学习TOOLBOX 3】RNN, DRQN, R2D2</a> 。2021年前，我极少复现过效果好的RL+RNN算法，因此我不推荐任何使用了RL+RNN的算法。</p>
@@ -594,12 +594,12 @@
 <p><a href="https://link.zhihu.com/?target=https://arxiv.org/abs/2003.13350">Agent57</a>（<strong>Agent57</strong>: Outperforming the Atari Human Benchmark. 2020）</p>
 <p>一种在RL里使用RNN的方法<strong>（Note RL+RNN）：让使用了RNN 的Actor 输出hidden state 作为action，就像人类记笔记一样。</strong>把 part state + hidden state 视为完整的state，把 hidden state + action 视为完整的 action。无论是 state-value function 还是 state-action value function 都能使用这个方法。</p>
 <p><img src="https://pic4.zhimg.com/80/v2-6902e22cfa923c026e01b19f9612e287_720w.jpg" alt="img"></p>
-<h3 id="强化学习探索"><a href="#强化学习探索" class="headerlink" title="强化学习探索"></a>强化学习探索</h3><p>收集不同的state、在同一个state下尝试不同的action 的探索过程非常重要。通过探索收集到足够多的数据，是我们用RL训练出接近最优策略的前提。下面这篇系统介绍了各种探索策略：</p>
+<h3 id="6-强化学习探索"><a href="#6-强化学习探索" class="headerlink" title="6.强化学习探索"></a>6.强化学习探索</h3><p>收集不同的state、在同一个state下尝试不同的action 的探索过程非常重要。通过探索收集到足够多的数据，是我们用RL训练出接近最优策略的前提。下面这篇系统介绍了各种探索策略：</p>
 <p><a href="https://link.zhihu.com/?target=https://lilianweng.github.io/lil-log/2020/06/07/exploration-strategies-in-deep-reinforcement-learning.html">Exploration Strategies in Deep Reinforcement Learning - LiLianWeng</a> （我也推荐看她的其他文章）</p>
 <blockquote>
 <p>最近的 First return, then explore Nature.2021 是Go-explore. 2018的升级版</p>
 </blockquote>
-<h3 id="多智能体算法-MultiAgent-RL"><a href="#多智能体算法-MultiAgent-RL" class="headerlink" title="多智能体算法 MultiAgent RL"></a>多智能体算法 MultiAgent RL</h3><p>多智能体算法的综述：<a href="https://link.zhihu.com/?target=https://arxiv.org/abs/2011.00583">An Overview of Multi-agent Reinforcement Learning from Game Theoretical Perspective</a> - 2020-12。在比对了多份MARL综述后，只推荐这一篇，它的目录与注释如下：</p>
+<h3 id="7-多智能体算法-MultiAgent-RL"><a href="#7-多智能体算法-MultiAgent-RL" class="headerlink" title="7.多智能体算法 MultiAgent RL"></a>7.多智能体算法 MultiAgent RL</h3><p>多智能体算法的综述：<a href="https://link.zhihu.com/?target=https://arxiv.org/abs/2011.00583">An Overview of Multi-agent Reinforcement Learning from Game Theoretical Perspective</a> - 2020-12。在比对了多份MARL综述后，只推荐这一篇，它的目录与注释如下：</p>
 <pre class=" language-python3"><code class="language-python3">Contents
 1 Introduction
     ...
@@ -644,16 +644,147 @@
 END</code></pre>
 <p>部分多智能体算法的代码以及少量介绍：<a href="https://link.zhihu.com/?target=https://github.com/starry-sky6688/StarCraft">starry-sky6688/StarCraft 在星际争霸环境 复现了多种多智能体强化学习算法</a></p>
 <p>若智能体间通信没有受到限制（不限量，无延迟），那么我们完全可以把多智能体当成单智能体来处理。适用于部分可观测的MDPs的算法（<a href="https://link.zhihu.com/?target=https://en.wikipedia.org/wiki/Partially_observable_Markov_decision_process">Partially observable MDPs</a>），在多智能体任务中，每个视角有限的智能体观察到的只是 partially observable state。很多多智能体算法会参与 PO-MDPs 的讨论，由于每个智能体只能观察到局部信息而导致的部分可观测被称为 Dec-POMDP，在上面的MARL综述也有讨论。</p>
+<h4 id="7-1-Tutorial-and-Books"><a href="#7-1-Tutorial-and-Books" class="headerlink" title="7.1 Tutorial and Books"></a>7.1 Tutorial and Books</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://ora.ox.ac.uk/objects/uuid:a55621b3-53c0-4e1b-ad1c-92438b57ffa4">Deep Multi-Agent Reinforcement Learning</a> by Jakob N Foerster, 2018. PhD Thesis.</li>
+<li><a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781118884614">Multi-Agent Machine Learning: A Reinforcement Approach</a> by H. M. Schwartz, 2014.</li>
+<li><a target="_blank" rel="noopener" href="http://www.ecmlpkdd2013.org/wp-content/uploads/2013/09/Multiagent-Reinforcement-Learning.pdf">Multiagent Reinforcement Learning</a> by Daan Bloembergen, Daniel Hennes, Michael Kaisers, Peter Vrancx. ECML, 2013.</li>
+<li><a target="_blank" rel="noopener" href="http://www.masfoundations.org/download.html">Multiagent systems: Algorithmic, game-theoretic, and logical foundations</a> by Shoham Y, Leyton-Brown K. Cambridge University Press, 2008.</li>
+</ul>
+<h4 id="7-2-Review-Papers"><a href="#7-2-Review-Papers" class="headerlink" title="7.2 Review Papers"></a>7.2 Review Papers</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://www.jair.org/index.php/jair/article/view/11396">A Survey on Transfer Learning for Multiagent Reinforcement Learning Systems</a> by Silva, Felipe Leno da; Costa, Anna Helena Reali. JAIR, 2019.</li>
+<li><a target="_blank" rel="noopener" href="https://www.ijcai.org/proceedings/2018/774">Autonomously Reusing Knowledge in Multiagent Reinforcement Learning</a> by Silva, Felipe Leno da; Taylor, Matthew E.; Costa, Anna Helena Reali. IJCAI, 2018.</li>
+<li><a target="_blank" rel="noopener" href="https://project-archive.inf.ed.ac.uk/msc/20162091/msc_proj.pdf">Deep Reinforcement Learning Variants of Multi-Agent Learning Algorithms</a> by Castaneda A O. 2016.</li>
+<li><a target="_blank" rel="noopener" href="https://www.jair.org/index.php/jair/article/view/10952">Evolutionary Dynamics of Multi-Agent Learning: A Survey</a> by Bloembergen, Daan, et al. JAIR, 2015.</li>
+<li><a target="_blank" rel="noopener" href="https://www.researchgate.net/publication/269100101_Game_Theory_and_Multi-agent_Reinforcement_Learning">Game theory and multi-agent reinforcement learning</a> by Nowé A, Vrancx P, De Hauwere Y M. Reinforcement Learning. Springer Berlin Heidelberg, 2012.</li>
+<li><a target="_blank" rel="noopener" href="http://www.dcsc.tudelft.nl/~bdeschutter/pub/rep/10_003.pdf">Multi-agent reinforcement learning: An overview</a> by Buşoniu L, Babuška R, De Schutter B. Innovations in multi-agent systems and applications-1. Springer Berlin Heidelberg, 2010</li>
+<li><a target="_blank" rel="noopener" href="http://www.dcsc.tudelft.nl/~bdeschutter/pub/rep/07_019.pdf">A comprehensive survey of multi-agent reinforcement learning</a> by Busoniu L, Babuska R, De Schutter B. IEEE Transactions on Systems Man and Cybernetics Part C Applications and Reviews, 2008</li>
+<li>[If multi-agent learning is the answer, what is the question?](<a target="_blank" rel="noopener" href="http://robotics.stanford.edu/~shoham/www">http://robotics.stanford.edu/~shoham/www</a> papers/LearningInMAS.pdf) by Shoham Y, Powers R, Grenager T. Artificial Intelligence, 2007.</li>
+<li><a target="_blank" rel="noopener" href="http://users.isr.ist.utl.pt/~mtjspaan/readingGroup/learningNeto05.pdf">From single-agent to multi-agent reinforcement learning: Foundational concepts and methods</a> by Neto G. Learning theory course, 2005.</li>
+<li><a target="_blank" rel="noopener" href="https://pdfs.semanticscholar.org/bb9f/bee22eae2b47bbf304804a6ac07def1aecdb.pdf">Evolutionary game theory and multi-agent reinforcement learning</a> by Tuyls K, Nowé A. The Knowledge Engineering Review, 2005.</li>
+<li><a target="_blank" rel="noopener" href="https://www.researchgate.net/publication/221622801_An_Overview_of_Cooperative_and_Competitive_Multiagent_Learning">An Overview of Cooperative and Competitive Multiagent Learning</a> by Pieter Jan ’t HoenKarl TuylsLiviu PanaitSean LukeJ. A. La Poutré. AAMAS’s workshop LAMAS, 2005.</li>
+<li><a target="_blank" rel="noopener" href="https://cs.gmu.edu/~eclab/papers/panait05cooperative.pdf">Cooperative multi-agent learning: the state of the art</a> by Liviu Panait and Sean Luke, 2005.</li>
+</ul>
+<h4 id="7-3-Framework-papers"><a href="#7-3-Framework-papers" class="headerlink" title="7.3 Framework papers"></a>7.3 Framework papers</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1802.05438.pdf">Mean Field Multi-Agent Reinforcement Learning</a> by Yaodong Yang, Rui Luo, Minne Li, Ming Zhou, Weinan Zhang, and Jun Wang. ICML 2018.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1706.02275.pdf">Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments</a> by Lowe R, Wu Y, Tamar A, et al. arXiv, 2017.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1703.06182.pdf">Deep Decentralized Multi-task Multi-Agent RL under Partial Observability</a> by Omidshafiei S, Pazis J, Amato C, et al. arXiv, 2017.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1703.10069.pdf">Multiagent Bidirectionally-Coordinated Nets for Learning to Play StarCraft Combat Games</a> by Peng P, Yuan Q, Wen Y, et al. arXiv, 2017.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1703.02702.pdf">Robust Adversarial Reinforcement Learning</a> by Lerrel Pinto, James Davidson, Rahul Sukthankar, Abhinav Gupta. arXiv, 2017.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1702.08887.pdf">Stabilising Experience Replay for Deep Multi-Agent Reinforcement Learning</a> by Foerster J, Nardelli N, Farquhar G, et al. arXiv, 2017.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1508.05328.pdf">Multiagent reinforcement learning with sparse interactions by negotiation and knowledge transfer</a> by Zhou L, Yang P, Chen C, et al. IEEE transactions on cybernetics, 2016.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1409.4561.pdf">Decentralised multi-agent reinforcement learning for dynamic and uncertain environments</a> by Marinescu A, Dusparic I, Taylor A, et al. arXiv, 2014.</li>
+<li><a target="_blank" rel="noopener" href="http://irll.eecs.wsu.edu/wp-content/papercite-data/pdf/2014iat-holmesparker.pdf">CLEANing the reward: counterfactual actions to remove exploratory action noise in multiagent learning</a> by HolmesParker C, Taylor M E, Agogino A, et al. AAMAS, 2014.</li>
+<li><a target="_blank" rel="noopener" href="http://www.fransoliehoek.net/docs/Amato13MSDM.pdf">Bayesian reinforcement learning for multiagent systems with state uncertainty</a> by Amato C, Oliehoek F A. MSDM Workshop, 2013.</li>
+<li><a target="_blank" rel="noopener" href="http://www.weiss-gerhard.info/publications/AI_MAGAZINE_2012_TuylsWeiss.pdf">Multiagent learning: Basics, challenges, and prospects</a> by Tuyls, Karl, and Gerhard Weiss. AI Magazine, 2012.</li>
+<li><a target="_blank" rel="noopener" href="http://icml2010.haifa.il.ibm.com/papers/191.pdf">Classes of multiagent q-learning dynamics with epsilon-greedy exploration</a> by Wunder M, Littman M L, Babes M. ICML, 2010.</li>
+<li><a target="_blank" rel="noopener" href="http://www.machinelearning.org/proceedings/icml2007/papers/89.pdf">Conditional random fields for multi-agent reinforcement learning</a> by Zhang X, Aberdeen D, Vishwanathan S V N. ICML, 2007.</li>
+<li><a target="_blank" rel="noopener" href="http://ama.imag.fr/~partalas/partalasmarl.pdf">Multi-agent reinforcement learning using strategies and voting</a> by Partalas, Ioannis, Ioannis Feneris, and Ioannis Vlahavas. ICTAI, 2007.</li>
+<li><a target="_blank" rel="noopener" href="https://pdfs.semanticscholar.org/57fb/ae00e17c0d798559ebab0e8f4267e032f41d.pdf">A reinforcement learning scheme for a partially-observable multi-agent game</a> by Ishii S, Fujita H, Mitsutake M, et al. Machine Learning, 2005.</li>
+<li><a target="_blank" rel="noopener" href="http://lib.tkk.fi/Diss/2004/isbn9512273594/article1.pdf">Asymmetric multiagent reinforcement learning</a> by Könönen V. Web Intelligence and Agent Systems, 2004.</li>
+<li><a target="_blank" rel="noopener" href="http://dl.acm.org/citation.cfm?id=860686">Adaptive policy gradient in multiagent learning</a> by Banerjee B, Peng J. AAMAS, 2003.</li>
+<li><a target="_blank" rel="noopener" href="https://papers.nips.cc/paper/2171-reinforcement-learning-to-play-an-optimal-nash-equilibrium-in-team-markov-games.pdf">Reinforcement learning to play an optimal Nash equilibrium in team Markov games</a> by Wang X, Sandholm T. NIPS, 2002.</li>
+<li><a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S0004370202001212">Multiagent learning using a variable learning rate</a> by Michael Bowling and Manuela Veloso, 2002.</li>
+<li><a target="_blank" rel="noopener" href="http://www.sts.rpi.edu/~rsun/si-mal/article3.pdf">Value-function reinforcement learning in Markov game</a> by Littman M L. Cognitive Systems Research, 2001.</li>
+<li><a target="_blank" rel="noopener" href="http://researchers.lille.inria.fr/~ghavamza/my_website/Publications_files/agents01.pdf">Hierarchical multi-agent reinforcement learning</a> by Makar, Rajbala, Sridhar Mahadevan, and Mohammad Ghavamzadeh. The fifth international conference on Autonomous agents, 2001.</li>
+<li><a target="_blank" rel="noopener" href="https://www.cs.cmu.edu/~mmv/papers/00TR-mike.pdf">An analysis of stochastic game theory for multiagent reinforcement learning</a> by Michael Bowling and Manuela Veloso, 2000.</li>
+</ul>
+<h4 id="7-4-Joint-action-learning"><a href="#7-4-Joint-action-learning" class="headerlink" title="7.4 Joint action learning"></a>7.4 Joint action learning</h4><ul>
+<li><a target="_blank" rel="noopener" href="http://www.cs.cmu.edu/~conitzer/awesomeML06.pdf">AWESOME: A general multiagent learning algorithm that converges in self-play and learns a best response against stationary opponents</a> by Conitzer V, Sandholm T. Machine Learning, 2007.</li>
+<li><a target="_blank" rel="noopener" href="https://papers.nips.cc/paper/2503-extending-q-learning-to-general-adaptive-multi-agent-systems.pdf">Extending Q-Learning to General Adaptive Multi-Agent Systems</a> by Tesauro, Gerald. NIPS, 2003.</li>
+<li><a target="_blank" rel="noopener" href="http://www.lirmm.fr/~jq/Cours/3cycle/module/HuWellman98icml.pdf">Multiagent reinforcement learning: theoretical framework and an algorithm.</a> by Hu, Junling, and Michael P. Wellman. ICML, 1998.</li>
+<li><a target="_blank" rel="noopener" href="http://www.aaai.org/Papers/AAAI/1998/AAAI98-106.pdf">The dynamics of reinforcement learning in cooperative multiagent systems</a> by Claus C, Boutilier C. AAAI, 1998.</li>
+<li><a target="_blank" rel="noopener" href="https://www.cs.duke.edu/courses/spring07/cps296.3/littman94markov.pdf">Markov games as a framework for multi-agent reinforcement learning</a> by Littman, Michael L. ICML, 1994.</li>
+</ul>
+<h4 id="7-5-Cooperation-and-competition"><a href="#7-5-Cooperation-and-competition" class="headerlink" title="7.5 Cooperation and competition"></a>7.5 Cooperation and competition</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1710.03748.pdf">Emergent complexity through multi-agent competition</a> by Trapit Bansal, Jakub Pachocki, Szymon Sidor, Ilya Sutskever, Igor Mordatch, 2018.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1709.04326.pdf">Learning with opponent learning awareness</a> by Jakob Foerster, Richard Y. Chen2, Maruan Al-Shedivat, Shimon Whiteson, Pieter Abbeel, Igor Mordatch, 2018.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1702.03037.pdf">Multi-agent Reinforcement Learning in Sequential Social Dilemmas</a> by Leibo J Z, Zambaldi V, Lanctot M, et al. arXiv, 2017. [<a target="_blank" rel="noopener" href="https://deepmind.com/blog/understanding-agent-cooperation/">Post</a>]</li>
+<li><a target="_blank" rel="noopener" href="http://orca.st.usm.edu/~banerjee/papers/p530-ceren.pdf">Reinforcement Learning in Partially Observable Multiagent Settings: Monte Carlo Exploring Policies with PAC Bounds</a> by Roi Ceren, Prashant Doshi, and Bikramjit Banerjee, pp. 530-538, AAMAS 2016.</li>
+<li><a target="_blank" rel="noopener" href="http://www.umiacs.umd.edu/~hal/docs/daume16opponent.pdf">Opponent Modeling in Deep Reinforcement Learning</a> by He H, Boyd-Graber J, Kwok K, et al. ICML, 2016.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1511.08779.pdf">Multiagent cooperation and competition with deep reinforcement learning</a> by Tampuu A, Matiisen T, Kodelja D, et al. arXiv, 2015.</li>
+<li><a target="_blank" rel="noopener" href="http://www.uow.edu.au/~fren/documents/EMR_2013.pdf">Emotional multiagent reinforcement learning in social dilemmas</a> by Yu C, Zhang M, Ren F. International Conference on Principles and Practice of Multi-Agent Systems, 2013.</li>
+<li><a target="_blank" rel="noopener" href="http://www.jmlr.org/papers/volume9/bab08a/bab08a.pdf">Multi-agent reinforcement learning in common interest and fixed sum stochastic games: An experimental study</a> by Bab, Avraham, and Ronen I. Brafman. Journal of Machine Learning Research, 2008.</li>
+<li><a target="_blank" rel="noopener" href="https://pdfs.semanticscholar.org/5120/d9f2c738ad223e9f8f14cb3fd5612239a35c.pdf">Combining policy search with planning in multi-agent cooperation</a> by Ma J, Cameron S. Robot Soccer World Cup, 2008.</li>
+<li><a target="_blank" rel="noopener" href="http://www.jmlr.org/papers/volume7/kok06a/kok06a.pdf">Collaborative multiagent reinforcement learning by payoff propagation</a> by Kok J R, Vlassis N. JMLR, 2006.</li>
+<li><a target="_blank" rel="noopener" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.107.335&amp;rep=rep1&amp;type=pdf">Learning to cooperate in multi-agent social dilemmas</a> by de Cote E M, Lazaric A, Restelli M. AAMAS, 2006.</li>
+<li><a target="_blank" rel="noopener" href="http://www.machinelearning.org/proceedings/icml2005/papers/021_Learning_CrandallGoodrich.pdf">Learning to compete, compromise, and cooperate in repeated general-sum games</a> by Crandall J W, Goodrich M A. ICML, 2005.</li>
+<li><a target="_blank" rel="noopener" href="http://www.machinelearning.org/proceedings/icml2004/papers/267.pdf">Sparse cooperative Q-learning</a> by Kok J R, Vlassis N. ICML, 2004.</li>
+</ul>
+<h4 id="7-6-Coordination"><a href="#7-6-Coordination" class="headerlink" title="7.6 Coordination"></a>7.6 Coordination</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1703.03121.pdf">Coordinated Multi-Agent Imitation Learning</a> by Le H M, Yue Y, Carr P. arXiv, 2017.</li>
+<li><a target="_blank" rel="noopener" href="http://mipc.inf.ed.ac.uk/2014/papers/mipc2014_hao_etal.pdf">Reinforcement social learning of coordination in networked cooperative multiagent systems</a> by Hao J, Huang D, Cai Y, et al. AAAI Workshop, 2014.</li>
+<li><a target="_blank" rel="noopener" href="http://www.aamas-conference.org/Proceedings/aamas2013/docs/p1101.pdf">Coordinating multi-agent reinforcement learning with limited communication</a> by Zhang, Chongjie, and Victor Lesser. AAMAS, 2013.</li>
+<li><a target="_blank" rel="noopener" href="http://www.ifaamas.org/Proceedings/aamas2012/papers/1B_1.pdf">Coordination guided reinforcement learning</a> by Lau Q P, Lee M L, Hsu W. AAMAS, 2012.</li>
+<li><a target="_blank" rel="noopener" href="https://www.cs.toronto.edu/~cebly/Papers/bayesMARL.pdf">Coordination in multiagent reinforcement learning: a Bayesian approach</a> by Chalkiadakis G, Boutilier C. AAMAS, 2003.</li>
+<li><a target="_blank" rel="noopener" href="https://users.cs.duke.edu/~parr/icml02.pdf">Coordinated reinforcement learning</a> by Guestrin C, Lagoudakis M, Parr R. ICML, 2002.</li>
+<li><a target="_blank" rel="noopener" href="http://www.aaai.org/Papers/AAAI/2002/AAAI02-050.pdf">Reinforcement learning of coordination in cooperative multi-agent systems</a> by Kapetanakis S, Kudenko D. AAAI/IAAI, 2002.</li>
+</ul>
+<h4 id="7-7-Security"><a href="#7-7-Security" class="headerlink" title="7.7 Security"></a>7.7 Security</h4><ul>
+<li><a target="_blank" rel="noopener" href="http://www.fransoliehoek.net/docs/Klima16LICMAS.pdf">Markov Security Games: Learning in Spatial Security Problems</a> by Klima R, Tuyls K, Oliehoek F. The Learning, Inference and Control of Multi-Agent Systems at NIPS, 2016.</li>
+<li><a target="_blank" rel="noopener" href="http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7244682">Cooperative Capture by Multi-Agent using Reinforcement Learning, Application for Security Patrol Systems</a> by Yasuyuki S, Hirofumi O, Tadashi M, et al. Control Conference (ASCC), 2015</li>
+<li><a target="_blank" rel="noopener" href="http://www4.ncsu.edu/~hdai/infocom-2015-XH.pdf">Improving learning and adaptation in security games by exploiting information asymmetry</a> by He X, Dai H, Ning P. INFOCOM, 2015.</li>
+</ul>
+<h4 id="7-8-Self-Play"><a href="#7-8-Self-Play" class="headerlink" title="7.8 Self-Play"></a>7.8 Self-Play</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1711.00832.pdf">A Unified Game-Theoretic Approach to Multiagent Reinforcement Learning</a> by Marc Lanctot, Vinicius Zambaldi, Audrunas Gruslys, Angeliki Lazaridou, Karl Tuyls, Julien Perolat, David Silver, Thore Graepel. NIPS 2017.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1603.01121.pdf">Deep reinforcement learning from self-play in imperfect-information games</a> by Heinrich, Johannes, and David Silver. arXiv, 2016.</li>
+<li><a target="_blank" rel="noopener" href="http://jmlr.org/proceedings/papers/v37/heinrich15.pdf">Fictitious Self-Play in Extensive-Form Games</a> by Heinrich, Johannes, Marc Lanctot, and David Silver. ICML, 2015.</li>
+</ul>
+<h4 id="7-9-Learning-To-Communicate"><a href="#7-9-Learning-To-Communicate" class="headerlink" title="7.9 Learning To Communicate"></a>7.9 Learning To Communicate</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://openreview.net/pdf?id=Hk6WhagRW">Emergent Communication through Negotiation</a> by Kris Cao, Angeliki Lazaridou, Marc Lanctot, Joel Z Leibo, Karl Tuyls, Stephen Clark, 2018.</li>
+<li><a target="_blank" rel="noopener" href="https://openreview.net/pdf?id=HJGv1Z-AW">Emergence of Linguistic Communication From Referential Games with Symbolic and Pixel Input</a> by Angeliki Lazaridou, Karl Moritz Hermann, Karl Tuyls, Stephen Clark</li>
+<li><a target="_blank" rel="noopener" href="https://openreview.net/pdf?id=SkaxnKEYg">EMERGENCE OF LANGUAGE WITH MULTI-AGENT GAMES: LEARNING TO COMMUNICATE WITH SEQUENCES OF SYMBOLS</a> by Serhii Havrylov, Ivan Titov. ICLR Workshop, 2017.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1703.06585.pdf">Learning Cooperative Visual Dialog Agents with Deep Reinforcement Learning</a> by Abhishek Das, Satwik Kottur, et al. arXiv, 2017.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1703.04908.pdf">Emergence of Grounded Compositional Language in Multi-Agent Populations</a> by Igor Mordatch, Pieter Abbeel. arXiv, 2017. [<a target="_blank" rel="noopener" href="https://openai.com/blog/learning-to-communicate/">Post</a>]</li>
+<li><a target="_blank" rel="noopener" href="https://repositories.lib.utexas.edu/handle/2152/45681">Cooperation and communication in multiagent deep reinforcement learning</a> by Hausknecht M J. 2017.</li>
+<li><a target="_blank" rel="noopener" href="https://openreview.net/pdf?id=Hk8N3Sclg">Multi-agent cooperation and the emergence of (natural) language</a> by Lazaridou A, Peysakhovich A, Baroni M. arXiv, 2016.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1602.02672.pdf">Learning to communicate to solve riddles with deep distributed recurrent q-networks</a> by Foerster J N, Assael Y M, de Freitas N, et al. arXiv, 2016.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1605.06676.pdf">Learning to communicate with deep multi-agent reinforcement learning</a> by Foerster J, Assael Y M, de Freitas N, et al. NIPS, 2016.</li>
+<li><a target="_blank" rel="noopener" href="http://papers.nips.cc/paper/6398-learning-multiagent-communication-with-backpropagation.pdf">Learning multiagent communication with backpropagation</a> by Sukhbaatar S, Fergus R. NIPS, 2016.</li>
+<li><a target="_blank" rel="noopener" href="http://people.csail.mit.edu/lpk/papers/dars08.pdf">Efficient distributed reinforcement learning through agreement</a> by Varshavskaya P, Kaelbling L P, Rus D. Distributed Autonomous Robotic Systems, 2009.</li>
+</ul>
+<h4 id="7-10-Transfer-Learning"><a href="#7-10-Transfer-Learning" class="headerlink" title="7.10 Transfer Learning"></a>7.10 Transfer Learning</h4><ul>
+<li><a target="_blank" rel="noopener" href="http://www.ifaamas.org/Proceedings/aamas2017/pdfs/p1100.pdf">Simultaneously Learning and Advising in Multiagent Reinforcement Learning</a> by Silva, Felipe Leno da; Glatt, Ruben; and Costa, Anna Helena Reali. AAMAS, 2017.</li>
+<li><a target="_blank" rel="noopener" href="https://www.aaai.org/ocs/index.php/AAAI/AAAI17/paper/download/14217/14005">Accelerating Multiagent Reinforcement Learning through Transfer Learning</a> by Silva, Felipe Leno da; and Costa, Anna Helena Reali. AAAI, 2017.</li>
+<li><a target="_blank" rel="noopener" href="https://web.cs.umass.edu/publication/docs/2015/UM-CS-2015-004.pdf">Accelerating multi-agent reinforcement learning with dynamic co-learning</a> by Garant D, da Silva B C, Lesser V, et al. Technical report, 2015</li>
+<li><a target="_blank" rel="noopener" href="https://www.scss.tcd.ie/~tayloral/res/papers/Taylor_ParallelTransferLearning_ICML_2013.pdf">Transfer learning in multi-agent systems through parallel transfer</a> by Taylor, Adam, et al. ICML, 2013.</li>
+<li><a target="_blank" rel="noopener" href="https://ewrl.files.wordpress.com/2011/08/ewrl2011_submission_19.pdf">Transfer learning in multi-agent reinforcement learning domains</a> by Boutsioukis, Georgios, Ioannis Partalas, and Ioannis Vlahavas. European Workshop on Reinforcement Learning, 2011.</li>
+<li><a target="_blank" rel="noopener" href="https://ai.vub.ac.be/~ydehauwe/publications/ICAART2011_2.pdf">Transfer Learning for Multi-agent Coordination</a> by Vrancx, Peter, Yann-Michaël De Hauwere, and Ann Nowé. ICAART, 2011.</li>
+</ul>
+<h4 id="7-11-Imitation-and-Inverse-Reinforcement-Learning"><a href="#7-11-Imitation-and-Inverse-Reinforcement-Learning" class="headerlink" title="7.11 Imitation and Inverse Reinforcement Learning"></a>7.11 Imitation and Inverse Reinforcement Learning</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1907.13220">Multi-Agent Adversarial Inverse Reinforcement Learning</a> by Lantao Yu, Jiaming Song, Stefano Ermon. ICML 2019.</li>
+<li><a target="_blank" rel="noopener" href="https://papers.nips.cc/paper/7975-multi-agent-generative-adversarial-imitation-learning">Multi-Agent Generative Adversarial Imitation Learning</a> by Jiaming Song, Hongyu Ren, Dorsa Sadigh, Stefano Ermon. NeurIPS 2018.</li>
+<li><a target="_blank" rel="noopener" href="http://papers.nips.cc/paper/6420-cooperative-inverse-reinforcement-learning.pdf">Cooperative inverse reinforcement learning</a> by Hadfield-Menell D, Russell S J, Abbeel P, et al. NIPS, 2016.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1403.6822.pdf">Comparison of Multi-agent and Single-agent Inverse Learning on a Simulated Soccer Example</a> by Lin X, Beling P A, Cogill R. arXiv, 2014.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1403.6508.pdf">Multi-agent inverse reinforcement learning for zero-sum games</a> by Lin X, Beling P A, Cogill R. arXiv, 2014.</li>
+<li><a target="_blank" rel="noopener" href="http://aamas2014.lip6.fr/proceedings/aamas/p173.pdf">Multi-robot inverse reinforcement learning under occlusion with interactions</a> by Bogert K, Doshi P. AAMAS, 2014.</li>
+<li><a target="_blank" rel="noopener" href="http://homes.soic.indiana.edu/natarasr/Papers/mairl.pdf">Multi-agent inverse reinforcement learning</a> by Natarajan S, Kunapuli G, Judah K, et al. ICMLA, 2010.</li>
+</ul>
+<h4 id="7-12-Meta-Learning"><a href="#7-12-Meta-Learning" class="headerlink" title="7.12 Meta Learning"></a>7.12 Meta Learning</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1710.03641.pdf">Continuous Adaptation via Meta-Learning in Nonstationary and Competitive Environments</a> by l-Shedivat, M. 2018.</li>
+</ul>
+<h4 id="7-13-Application"><a href="#7-13-Application" class="headerlink" title="7.13 Application"></a>7.13 Application</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1712.00600.pdf">MAgent: A Many-Agent Reinforcement Learning Platform for Artificial Collective Intelligence</a> by Zheng L et al. NIPS 2017 &amp; AAAI 2018 Demo. (<a target="_blank" rel="noopener" href="https://github.com/geek-ai/MAgent">Github Page</a>)</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1702.05573.pdf">Collaborative Deep Reinforcement Learning for Joint Object Search</a> by Kong X, Xin B, Wang Y, et al. arXiv, 2017.</li>
+<li><a target="_blank" rel="noopener" href="http://www.ibpsa.org/proceedings/BS2017/BS2017_051.pdf">Multi-Agent Stochastic Simulation of Occupants for Building Simulation</a> by Chapman J, Siebers P, Darren R. Building Simulation, 2017.</li>
+<li><a target="_blank" rel="noopener" href="http://www.ibpsa.org/proceedings/BS2017/BS2017_056.pdf">Extending No-MASS: Multi-Agent Stochastic Simulation for Demand Response of residential appliances</a> by Sancho-Tomás A, Chapman J, Sumner M, Darren R. Building Simulation, 2017.</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1610.03295.pdf">Safe, Multi-Agent, Reinforcement Learning for Autonomous Driving</a> by Shalev-Shwartz S, Shammah S, Shashua A. arXiv, 2016.</li>
+<li><a target="_blank" rel="noopener" href="https://www.researchgate.net/profile/Karl_Mason/publication/299416955_Applying_Multi-Agent_Reinforcement_Learning_to_Watershed_Management/links/56f545b908ae95e8b6d1d3ff.pdf">Applying multi-agent reinforcement learning to watershed management</a> by Mason, Karl, et al. Proceedings of the Adaptive and Learning Agents workshop at AAMAS, 2016.</li>
+<li><a target="_blank" rel="noopener" href="http://www.aaai.org/ocs/index.php/AIIDE/AIIDE10/paper/viewFile/2112/2550">Crowd Simulation Via Multi-Agent Reinforcement Learning</a> by Torrey L. AAAI, 2010.</li>
+<li><a target="_blank" rel="noopener" href="https://pdfs.semanticscholar.org/61bc/b98b7ae3df894f4f72aba3d145bd48ca2cd5.pdf">Traffic light control by multiagent reinforcement learning systems</a> by Bakker, Bram, et al. Interactive Collaborative Information Systems, 2010.</li>
+<li><a target="_blank" rel="noopener" href="https://staff.science.uva.nl/s.a.whiteson/pubs/kuyerecml08.pdf">Multiagent reinforcement learning for urban traffic control using coordination graphs</a> by Kuyer, Lior, et al. oint European Conference on Machine Learning and Knowledge Discovery in Databases, 2008.</li>
+<li><a target="_blank" rel="noopener" href="https://www.researchgate.net/publication/221465347_A_Multi-agent_Q-learning_Framework_for_Optimizing_Stock_Trading_Systems">A multi-agent Q-learning framework for optimizing stock trading systems</a> by Lee J W, Jangmin O. DEXA, 2002.</li>
+<li><a target="_blank" rel="noopener" href="http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=422747CB9AF552CF1C4E455220E3F96F?doi=10.1.1.32.9887&amp;rep=rep1&amp;type=pdf">Multi-agent reinforcement learning for traffic light control</a> by Wiering, Marco. ICML. 2000.</li>
+</ul>
 <p>本文作者认为，多智能体强化学习算法在2021年前，<strong>只有QMix（基于Q值分解+DQN）和MAPPO（基于MADDPG提出的CTDE框架+PPO）这两个算法可信</strong>。其他MARL算法我只能当它们不存在。</p>
 <hr>
-<h3 id="分层强化学习-Hierarchical-RL"><a href="#分层强化学习-Hierarchical-RL" class="headerlink" title="分层强化学习 Hierarchical RL"></a>分层强化学习 Hierarchical RL</h3><p>神经网络有一个缺陷（特性）：在数据集A上面训练的网络，拿到数据集B上训练后，这个网络会把数据集A学到的东西忘掉（灾难性遗忘 <a href="https://link.zhihu.com/?target=https://www.sciencedirect.com/science/article/pii/S1364661399012942">Catastrophic forgetting 1999</a>）。如果我让智能体学游泳，再让它学跑步，它容易把游泳给忘了（人好像也这样，不够没有它那么严重）。深度学习领域有「迁移学习」、强化学习领域有「分层强化学习」在试图解决这些难题。</p>
+<h3 id="8-分层强化学习-Hierarchical-RL"><a href="#8-分层强化学习-Hierarchical-RL" class="headerlink" title="8.分层强化学习 Hierarchical RL"></a>8.分层强化学习 Hierarchical RL</h3><p>神经网络有一个缺陷（特性）：在数据集A上面训练的网络，拿到数据集B上训练后，这个网络会把数据集A学到的东西忘掉（灾难性遗忘 <a href="https://link.zhihu.com/?target=https://www.sciencedirect.com/science/article/pii/S1364661399012942">Catastrophic forgetting 1999</a>）。如果我让智能体学游泳，再让它学跑步，它容易把游泳给忘了（人好像也这样，不够没有它那么严重）。深度学习领域有「迁移学习」、强化学习领域有「分层强化学习」在试图解决这些难题。</p>
 <ul>
 <li><strong>FuNs，分级网络 FeUdal Networks</strong> ，分层强化学习不再用单一策略去解决这些更复杂的问题，而是将策略分为上层策略与多个下层策略 sub-policy 。上层策略会根据不同的状态决定使用哪个下层策略。它使用了同策路on-policy的A3C算法</li>
 <li><strong>HIRO，使用异策略进行校正的分层强化学习 HIerarchical Reinforcement learning with Off-policy correction</strong>，警惕HIRO这个算法：FuN使用同策路on-policy的A3C算法，HIRO使用异策略off-policy的TD3算法，这个让我警惕：我个人认为不能像HIRO那样去使用TD3算法。</li>
 <li><strong>Option-Critic，有控制权的下层策略</strong>，让将上层的策略和下层策略的控制权也当成是可以学习的，让下层的策略学习把“决定使用哪个策略的选择权”交还给上层策略的时机，这是一种隐式的分层强化学习方案，我没有复现过这个算法，我不确定这是否真的有效。</li>
 </ul>
 <p>我不懂分层强化学习，请看别人写的 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46928498">张楚珩：【强化学习算法 18】FuN</a> ，<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46946800">张楚珩：【强化学习算法 19】HIRO</a> ，<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/47051292">张楚珩：【强化学习算法 20】Option-Critic</a></p>
-<h3 id="逆向强化学习-Inverse-RL-与-模仿学习-Imitation-Learning"><a href="#逆向强化学习-Inverse-RL-与-模仿学习-Imitation-Learning" class="headerlink" title="逆向强化学习 Inverse RL 与 模仿学习 Imitation Learning"></a>逆向强化学习 Inverse RL 与 模仿学习 Imitation Learning</h3><p>强化学习会在回报函数 Reward function的指导下探索训练环境，并使用未来的期望收益来强化当前动作，试图求出更优的策略。然而，现实中不容易找到需要既懂任务又懂RL的人类去手动设计Reward function。</p>
+<h3 id="9-逆向强化学习-Inverse-RL-与-模仿学习-Imitation-Learning"><a href="#9-逆向强化学习-Inverse-RL-与-模仿学习-Imitation-Learning" class="headerlink" title="9.逆向强化学习 Inverse RL 与 模仿学习 Imitation Learning"></a>9.逆向强化学习 Inverse RL 与 模仿学习 Imitation Learning</h3><p>强化学习会在回报函数 Reward function的指导下探索训练环境，并使用未来的期望收益来强化当前动作，试图求出更优的策略。然而，现实中不容易找到需要既懂任务又懂RL的人类去手动设计Reward function。</p>
 <blockquote>
 <p>以 LunarLander为例子：降落+200 坠毁-100，消耗燃料会扣0~100。其实只有这些我们也能用很长的时间训练得到能安全降落的飞行器。但实际上，我们还可以根据飞行器的平稳程度给它每步一位数的奖惩，根据飞行器距离降落点的距离给他额外的奖励。这些很细节的调整可以减少智能体的训练时间。所以我前面建议：如果训练环境 Reward function 都是初学者写的，那就用PPO。等到 Reward function 设计得更合理之后，才适合用SAC。</p>
 </blockquote>
@@ -662,7 +793,7 @@ END</code></pre>
 <li>逆向强化学习：训练环境+IRL算法+好的策略 = 逆向得到Reward Function</li>
 </ul>
 <p>逆向强化学习为了解决这个问题，提出：通过模仿好的策略 去反向得到 Reward function。我不懂逆向强化学习，如果强行写解释也只能翻译其他人的综述：<a href="https://link.zhihu.com/?target=https://arxiv.org/abs/1806.06877">A Survey of Inverse Reinforcement Learning: Challenges, Methods and Progress</a></p>
-<h3 id="基于模型的强化学习算法-Model-based-RL（重点介绍MuZero）"><a href="#基于模型的强化学习算法-Model-based-RL（重点介绍MuZero）" class="headerlink" title="基于模型的强化学习算法 Model-based RL（重点介绍MuZero）"></a>基于模型的强化学习算法 Model-based RL（重点介绍MuZero）</h3><p>这里的「模型」指：状态转移模型。离散状态空间下的状态转移模型可以用 状态转移矩阵去描述。基于模型的算法需要将状态转移模型探索出来（或由人类提供），而 无模型算法 model-free RL 不需要探索出模型，它仅依靠智能体在环境中探索 rollout 得到的一条条 trajectory 中记录的 environment transition (s, a, r, next state) 即可对策略进行更新。</p>
+<h3 id="10-基于模型的强化学习算法-Model-based-RL（重点介绍MuZero）"><a href="#10-基于模型的强化学习算法-Model-based-RL（重点介绍MuZero）" class="headerlink" title="10.基于模型的强化学习算法 Model-based RL（重点介绍MuZero）"></a>10.基于模型的强化学习算法 Model-based RL（重点介绍MuZero）</h3><p>这里的「模型」指：状态转移模型。离散状态空间下的状态转移模型可以用 状态转移矩阵去描述。基于模型的算法需要将状态转移模型探索出来（或由人类提供），而 无模型算法 model-free RL 不需要探索出模型，它仅依靠智能体在环境中探索 rollout 得到的一条条 trajectory 中记录的 environment transition (s, a, r, next state) 即可对策略进行更新。</p>
 <p>我对无模型算法不够了解，如果强行写解释也只能翻译其他人的综述：<a href="https://link.zhihu.com/?target=https://arxiv.org/abs/2006.16712">Model-based Reinforcement Learning: A Survey</a> 。OpenAI 提供了一些简单的代码： <a href="https://link.zhihu.com/?target=https://spinningup.openai.com/en/latest/spinningup/rl_intro2.html">SpinningUp Model-based RL</a> 。</p>
 <p><strong>近年来受到最多圈外人关注的 model-based RL 是 MuZero</strong>。在下棋、雅达利游戏这种状态转移模型相对容易拟合的离散动作空间任务中，MuZero取得了非常不错的表现。它有三个网络：</p>
 <ul>
@@ -682,6 +813,143 @@ END</code></pre>
 <li>無（无）。MuZero（AlphaZero）不需要像前身AlphaGo 那依赖人类知识去学习。</li>
 </ul>
 <p>推荐看知乎问题：如何评价DeepMind新提出的MuZero算法？ 下面的 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/356976342/answer/1653420480">什么名字可以吸粉的回答</a>（他的翻译比较好：representation function 编码器，prediction function 预测器，dynamics function 生成器） 与 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/356976342/answer/906149260">Evensgn的回答</a> （Value Prediction Network 值得看一看）。</p>
+<h3 id="11-会议-amp-期刊"><a href="#11-会议-amp-期刊" class="headerlink" title="11.会议&amp;期刊"></a>11.会议&amp;期刊</h3><h4 id="会议"><a href="#会议" class="headerlink" title="会议"></a>会议</h4><p>AAAI、NIPS、ICML、ICLR、IJCAI、AAMAS、IROS等</p>
+<h4 id="期刊"><a href="#期刊" class="headerlink" title="期刊"></a>期刊</h4><p>AI、JMLR、JAIR、Machine Learning、JAAMAS等</p>
+<h4 id="计算机和人工智能会议（期刊）排名"><a href="#计算机和人工智能会议（期刊）排名" class="headerlink" title="计算机和人工智能会议（期刊）排名"></a>计算机和人工智能会议（期刊）排名</h4><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg4MDE3OTA5NA==&amp;mid=2247490957&amp;idx=1&amp;sn=b9aa515f7833ba1503be298ac2360960&amp;source=41#wechat_redirect">清华发布新版计算机学科推荐学术会议和期刊列表，与CCF有何不同？</a><br><a target="_blank" rel="noopener" href="https://www.aminer.cn/ranks/conf/artificial-intelligence-and-pattern-recognition">https://www.aminer.cn/ranks/conf/artificial-intelligence-and-pattern-recognition</a></p>
+<h3 id="12-公众号"><a href="#12-公众号" class="headerlink" title="12.公众号"></a>12.公众号</h3><p>深度强化学习实验室、机器之心、AI科技评论、新智元、学术头条</p>
+<h3 id="13-知乎"><a href="#13-知乎" class="headerlink" title="13.知乎"></a>13.知乎</h3><h4 id="大牛"><a href="#大牛" class="headerlink" title="大牛"></a>大牛</h4><p>田渊栋、Flood Sung、许铁-巡洋舰科技（微信公众号同名）、<br>周博磊、俞扬、张楚珩、天津包子馅儿、JQWang2048 及其互关大牛等</p>
+<h4 id="专栏"><a href="#专栏" class="headerlink" title="专栏"></a>专栏</h4><ul>
+<li>David Silver强化学习公开课中文讲解及实践（叶强，比较经典）</li>
+<li>强化学习知识大讲堂（《深入浅出强化学习：原理入门》作者天津包子馅儿）</li>
+<li>智能单元（杜克、Floodsung、wxam，聚焦通用人工智能，Flood Sung：深度学习论文阅读路线图 Deep Learning Papers Reading Roadmap很棒，Flood Sung：最前沿：深度强化学习的强者之路）</li>
+<li>深度强化学习落地方法论（西交 大牛，实操经验丰富）</li>
+<li>深度强化学习（知乎：JQWang2048，GitHub：NeuronDance，CSDN：J. Q. Wang）</li>
+<li>神经网络与强化学习（《Reinforcement Learning: An Introduction》读书笔记）</li>
+<li>强化学习基础David Silver笔记（陈雄辉，南大，DiDi AI Labs）</li>
+</ul>
+<h3 id="14-官网"><a href="#14-官网" class="headerlink" title="14. 官网"></a>14. 官网</h3><h4 id="OpenAI"><a href="#OpenAI" class="headerlink" title="OpenAI"></a><a target="_blank" rel="noopener" href="http://deeprl.neurondance.com/d/www.openai.com">OpenAI</a></h4><h4 id="DeepMind"><a href="#DeepMind" class="headerlink" title="DeepMind"></a><a target="_blank" rel="noopener" href="http://deeprl.neurondance.com/d/www.deepmind.com">DeepMind</a></h4><h4 id="Berkeley-Artificial-Intelligence-Research"><a href="#Berkeley-Artificial-Intelligence-Research" class="headerlink" title="Berkeley Artificial Intelligence Research"></a><a target="_blank" rel="noopener" href="http://deeprl.neurondance.com/d/bair.berkeley.edu">Berkeley Artificial Intelligence Research</a></h4><p>以及Sutton老爷子、Andrew NG、David Silver、Pieter Abbeel、John Schulman、Sergey Levine、Chelsea Finn、Andrej Karpathy等主页</p>
+<h3 id="15-环境及框架"><a href="#15-环境及框架" class="headerlink" title="15.环境及框架"></a>15.环境及框架</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://gym.openai.com/">OpenAI Gym</a> (<a target="_blank" rel="noopener" href="https://github.com/openai/gym">GitHub</a>) (<a target="_blank" rel="noopener" href="https://gym.openai.com/docs/">docs</a>)</p>
+</li>
+<li><p>rllab (<a target="_blank" rel="noopener" href="https://github.com/rll/rllab">GitHub</a>) (<a target="_blank" rel="noopener" href="http://rllab.readthedocs.io/">readthedocs</a>)</p>
+</li>
+<li><p>Ray <a target="_blank" rel="noopener" href="https://ray.readthedocs.io/en/latest/index.html">(Doc)</a></p>
+</li>
+<li><p>Dopamine: <a target="_blank" rel="noopener" href="https://github.com/google/dopamine">https://github.com/google/dopamine</a> (uses some tensorflow)</p>
+</li>
+<li><p>trfl: <a target="_blank" rel="noopener" href="https://github.com/deepmind/trfl">https://github.com/deepmind/trfl</a> (uses tensorflow)</p>
+</li>
+<li><p>ChainerRL (<a target="_blank" rel="noopener" href="https://github.com/chainer/chainerrl">GitHub</a>) (API: Python)</p>
+</li>
+<li><p>Surreal <a target="_blank" rel="noopener" href="https://github.com/SurrealAI/surreal">GitHub</a> (API: Python) (support: Stanford Vision and Learning Lab).<a target="_blank" rel="noopener" href="https://surreal.stanford.edu/img/surreal-corl2018.pdf">Paper</a></p>
+</li>
+<li><p>PyMARL <a target="_blank" rel="noopener" href="https://github.com/oxwhirl/pymarl">GitHub</a> (support: <a target="_blank" rel="noopener" href="http://whirl.cs.ox.ac.uk/">http://whirl.cs.ox.ac.uk/</a>)</p>
+</li>
+<li><p>TF-Agents: <a target="_blank" rel="noopener" href="https://github.com/tensorflow/agents">https://github.com/tensorflow/agents</a> (uses tensorflow)</p>
+</li>
+<li><p>TensorForce (<a target="_blank" rel="noopener" href="https://github.com/reinforceio/tensorforce">GitHub</a>) (uses tensorflow)</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://sites.google.com/a/rl-community.org/rl-glue/Home/rl-glue">RL-Glue</a> (<a target="_blank" rel="noopener" href="https://code.google.com/archive/p/rl-glue-ext/wikis/RLGlueCore.wiki">Google Code Archive</a>) (API: C/C++, Java, Matlab, Python, Lisp) (support: Alberta)</p>
+</li>
+<li><p>MAgent <a target="_blank" rel="noopener" href="https://github.com/geek-ai/MAgent">https://github.com/geek-ai/MAgent</a> (uses tensorflow)</p>
+</li>
+<li><p>RLlib <a target="_blank" rel="noopener" href="http://ray.readthedocs.io/en/latest/rllib.html">http://ray.readthedocs.io/en/latest/rllib.html</a> (API: Python)</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://burlap.cs.brown.edu/">http://burlap.cs.brown.edu/</a> (API: Java)</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://bair.berkeley.edu/blog/2019/09/24/rlpyt/">rlpyt: A Research Code Base for Deep Reinforcement Learning in PyTorch</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/araffin/robotics-rl-srl">robotics-rl-srl</a> - S-RL Toolbox: Reinforcement Learning (RL) and State Representation Learning (SRL) for Robotics</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/deepmind/pysc2">pysc2: StarCraft II Learning Environment</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/mgbellemare/Arcade-Learning-Environment">Arcade-Learning-Environment</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/openai/universe">OpenAI universe</a> - A software platform for measuring and training an AI’s general intelligence across the world’s supply of games, websites and other applications</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/deepmind/lab">DeepMind Lab</a> - A customisable 3D platform for agent-based AI research</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/Microsoft/malmo">Project Malmo</a> - A platform for Artificial Intelligence experimentation and research built on top of Minecraft by Microsoft</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/nadavbh12/Retro-Learning-Environment">Retro Learning Environment</a> - An AI platform for reinforcement learning based on video game emulators. Currently supports SNES and Sega Genesis. Compatible with OpenAI gym.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/twitter/torch-twrl">torch-twrl</a> - A package that enables reinforcement learning in Torch by Twitter</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/facebook/UETorch">UETorch</a> - A Torch plugin for Unreal Engine 4 by Facebook</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/TorchCraft/TorchCraft">TorchCraft</a> - Connecting Torch to StarCraft</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/openai/rllab">rllab</a> - A framework for developing and evaluating reinforcement learning algorithms, fully compatible with OpenAI Gym</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/reinforceio/tensorforce">TensorForce</a> - Practical deep reinforcement learning on TensorFlow with Gitter support and OpenAI Gym/Universe/DeepMind Lab integration.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/kengz/openai_lab">OpenAI lab</a> - An experimentation system for Reinforcement Learning using OpenAI Gym, Tensorflow, and Keras.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/matthiasplappert/keras-rl">keras-rl</a> - State-of-the art deep reinforcement learning algorithms in Keras designed for compatibility with OpenAI.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://burlap.cs.brown.edu/">BURLAP</a> - Brown-UMBC Reinforcement Learning and Planning, a library written in Java</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/geek-ai/MAgent">MAgent</a> - A Platform for Many-agent Reinforcement Learning.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://ray.readthedocs.io/en/latest/rllib.html">Ray RLlib</a> - Ray RLlib is a reinforcement learning library that aims to provide both performance and composability.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/kengz/SLM-Lab">SLM Lab</a> - A research framework for Deep Reinforcement Learning using Unity, OpenAI Gym, PyTorch, Tensorflow.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/Unity-Technologies/ml-agents">Unity ML Agents</a> - Create reinforcement learning environments using the Unity Editor</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/NervanaSystems/coach">Intel Coach</a> - Coach is a python reinforcement learning research framework containing implementation of many state-of-the-art algorithms.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/ELF">ELF</a> - An End-To-End, Lightweight and Flexible Platform for Game Research</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1809.02627v1.pdf">Unity ML-Agents Toolkit</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/vitchyr/rlkit">rlkit</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://gym.openai.com/envs/#classic_control">https://gym.openai.com/envs/#classic_control</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/erlerobot/gym-gazebo">https://github.com/erlerobot/gym-gazebo</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/robotology/gym-ignition">https://github.com/robotology/gym-ignition</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/dartsim/gym-dart">https://github.com/dartsim/gym-dart</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/Roboy/gym-roboy">https://github.com/Roboy/gym-roboy</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/openai/retro">https://github.com/openai/retro</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/openai/gym-soccer">https://github.com/openai/gym-soccer</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/duckietown/gym-duckietown">https://github.com/duckietown/gym-duckietown</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/Unity-Technologies/ml-agents">https://github.com/Unity-Technologies/ml-agents</a> (Unity, multiagent)</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/koulanurag/ma-gym">https://github.com/koulanurag/ma-gym</a> (multiagent)</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/ucuapps/modelicagym">https://github.com/ucuapps/modelicagym</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/mwydmuch/ViZDoom">https://github.com/mwydmuch/ViZDoom</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/benelot/pybullet-gym">https://github.com/benelot/pybullet-gym</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/Healthcare-Robotics/assistive-gym">https://github.com/Healthcare-Robotics/assistive-gym</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/Microsoft/malmo">https://github.com/Microsoft/malmo</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/nadavbh12/Retro-Learning-Environment">https://github.com/nadavbh12/Retro-Learning-Environment</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/twitter/torch-twrl">https://github.com/twitter/torch-twrl</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/arex18/rocket-lander">https://github.com/arex18/rocket-lander</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/ppaquette/gym-doom">https://github.com/ppaquette/gym-doom</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/thedimlebowski/Trading-Gym">https://github.com/thedimlebowski/Trading-Gym</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/Phylliade/awesome-openai-gym-environments">https://github.com/Phylliade/awesome-openai-gym-environments</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/deepmind/pysc2">https://github.com/deepmind/pysc2</a> (by DeepMind) (Blizzard StarCraft II Learning Environment (SC2LE) component)</p>
+</li>
+</ul>
 <h3 id="好用的强化学习算法"><a href="#好用的强化学习算法" class="headerlink" title="好用的强化学习算法"></a>好用的强化学习算法</h3><ul>
 <li>没有很多需要调整的超参数。D3QN、SAC超参数较少，且SAC可自行调整超参数 <img src="https://www.zhihu.com/equation?tex=%5Calpha" alt="[公式]"></li>
 <li>超参数很容易调整或确定。SAC的 reward scaling 可以在训练前直接推算出来。PPO超参数的细微改变不会极大地影响训练</li>
@@ -1520,7 +1788,7 @@ END</code></pre>
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">170.8k</span>&nbsp;字
+                class="white-color">174.8k</span>&nbsp;字
             
             
             
