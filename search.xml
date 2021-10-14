@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>分布式强化学习之IMPALA</title>
+      <link href="2021/10/14/fen-bu-shi-qiang-hua-xue-xi-zhi-impala/"/>
+      <url>2021/10/14/fen-bu-shi-qiang-hua-xue-xi-zhi-impala/</url>
+      
+        <content type="html"><![CDATA[<p> 参考内容：<a href="https://zhuanlan.zhihu.com/p/58226117">https://zhuanlan.zhihu.com/p/58226117</a></p><p>参考书籍：《深度强化学习学术前沿与实战应用》</p><p>IMPALA全名Importance Weighted Actor-Learner Architecture，也就是重要性加权Actor-learner架构，可以训练高效复杂的任务序列。</p><h2 id="框架概述"><a href="#框架概述" class="headerlink" title="框架概述"></a>框架概述</h2><p>在实际的问题场景中，我们可以将数百个Actor设置在每一个服务器的每一个线程上，它们可以相互独立，同时处理一个任务，也可以同时训练不同的任务，下面开始运行一个完整的过程。</p><p>从每一段训练过程开始，每个Actor将自己的本地策略和中心Learner的最新策略同步，之后于自身所处的环境交互n个时间步。在n步之后，Actor发送自己经历这一段“状态——动作——奖励”轨迹$“s_1,a_1,r_1,s_2,a_2,r_2,…s_n,a_n,r_n”$，以及自己本地的策略分布（包括LSTM的初始状态，通过相应的队列等数据结构），发送回给Learner，我们的Learner从训练启动开始就在不断地收到来自Actor的这些序列信息和策略，并且在这些序列信息中不断进行自身更新。在各个线程训练actor的过程中，Learner是在不断学习更新策略的，无需等待actor都训练完毕，因此<strong>Learner的策略是在时间上比所有actor超前很多的</strong>，每一个Actor和Learner的时间差距有不同，这样的巨大差异是不利于训练质量的，但为了训练速度我们又不能妥协去把异步改为同步，使得服务器相互等待。</p><h2 id="V-trace"><a href="#V-trace" class="headerlink" title="V-trace"></a>V-trace</h2><p>这里引入了一种off-policy的actor-critic算法——V-trace，它用在像IMPALA这样的分布式任务框架上，改进了原先计算梯度的公式，来适应Actor于Learner在策略上的时间差。</p><p>在A3C这样的on-policy场景，值函数的更新可以表示为：<br>$$<br>V_s = V(x_s) + \sum_{t=s}^{s+n-1} \gamma^{t-s}(r_t + \gamma V(x_{t+1}) - V(x_t))<br>$$<br>这时候我们采用off-policy策略来修正时间差，从比较过时和比较新的策略去估计一个最好的策略，这就需要用到重要性采样（Importance Sampling）。这时候我们可以得到在n步下V-trace算法下的目标价值函数：<br>$$<br>V_s =^{def}  V(x_s) + \sum_{t=s}^{s+n-1} \gamma^{t-s}(\prod_{i=s}^{t-1} c_i )\delta_t V<br>$$</p><p>$$<br>\delta_t V =^{def} p_t(r_t + \gamma V(x_{t+1}) - V(x_t))</p><p>$$</p><p>$$<br>p_t =^{def} min(\bar{\rho},\frac{\pi(a_t|x_t)}{\mu(a_t|x_t)})<br>$$</p><p>$$<br>c_i =^{def}min(\bar{c},\frac{\pi(a_i|x_i)}{\mu(a_i|x_i)})<br>$$</p><p>这是一个经过裁剪的重要性采样。裁剪的原因是π于μ的实际分布差距越大，最后估计的策略的差异就越大。而为了更好的估计相应的策略分布，我们采用一步步累积的方法进行s到t步的逐步估计，这样将致使方差越来越大，所以我们才需要进行裁剪，采用相应策略之比的平均值来稳定方差，使训练效果更加稳定。</p><p>引入额外的重要性参数$\rho_t$的作用是为V-trace中的TD-error定义一个不动点，在取不动点的时候，值函数$V_{\pi_{\bar{p}}}$对应的策略是：<br>$$<br>\pi_{\bar{p}}(a|x) =^{def} \frac{min(\bar{\rho} \mu(a|x),\pi(a|x))}{\sum_{b \in A} \min(\bar{\rho} \mu(b|x),\pi(b|x))}<br>$$<br>这样的策略中，不动点$\bar{\rho}$的作用很大，当$\bar{\rho}$为无穷大的时候，我们可以很容易求出这个结果相当于<br>$$<br>\pi_{\bar{p}}(a|x) =^{def} \frac{\pi(a|x)}{\sum_{b \in A} \pi(b|x)} = \pi(a|x)<br>$$<br>当$\bar{\rho}$不是无穷大的时候，生成的策略是目标策略和执行策略之间的中间策略，完美弥补两个策略之间的差异。</p><p>V-trace算法加入裁剪后的重要性因子，$\bar{c}$影响的是模型收敛到最好结果的速度，而$\bar{\rho}$决定的是最后我们想收敛到的目标价值函数，可以更好解决不同的Actor和learner出现的时间差。</p><p>后面的更新用$V_s$替换掉相应的价值函数后，依然是标准的actor-critic算法。值函数的损失梯度依旧采取L2平方损失。<br>$$<br>(V_s - V_{\theta}(x_s)) \nabla_{\theta} V_{\theta}(x_s)<br>$$<br>在当前训练时间为s时，参数为w的策略网络的梯度表示形式如下：<br>$$<br>\rho_s \nabla_w \log \pi_w(a_s,x_s)(r_s + \gamma v_{s+1} - V_{\theta}(x_s))<br>$$<br>与A3C相同，为了防止过早收敛，算法不能达到最优解，还需要在损失梯度中加上一个熵奖励（entropy bonus）：<br>$$</p><ul><li>\nabla_w \sum_a \pi_w(a|x_s) \log \pi_w(a|x_s)<br>$$<br>这<strong>三项配合一定的权重后求和得到最终损失梯度</strong>，也就得到了算法的整体更新公式。</li></ul><p>在这种大规模训练中，训练一次耗资巨大，为了避免训练的这一波陷入局部极小值点，采用了 <strong><a href="https://link.zhihu.com/?target=https://deepmind.com/blog/population-based-training-neural-networks/">population based training（PBT）</a></strong> 方法。每次训练若干个智能体，每隔一段时间剔除表现不好的，并且对于表现较好的智能体进行mutation（通常是扰动一下超参数组合）。通过这种方法，保证长达几天的训练结束后能得到好的结果。</p><p>有意思是，通过这种方法，学习率会随着学习进度自然慢慢减小，这和很多算法里面linear scheduled learning rate的trick不谋而合。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 强化学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 强化学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>分布式强化学习之D4PG</title>
+      <link href="2021/10/14/fen-bu-shi-qiang-hua-xue-xi-zhi-d4pg/"/>
+      <url>2021/10/14/fen-bu-shi-qiang-hua-xue-xi-zhi-d4pg/</url>
+      
+        <content type="html"><![CDATA[<p> D4PG全称Distributed Distributional Deterministic Policy Gradient，是总所周知的DDPG的分布式版本。因此学习D4PG之前，需要了解DDPG。</p><p>首先DDPG是DQN在连续空间的版本，DQN只能处理离散动作空间的问题，对于连续动作空间是无法处理的，因此我们引入了DDPG。DDPG是actor-critic的结构，并且借鉴了DQN的技巧，也就是目标网络和经验回放。因此DDPG有四个网络，一个actor，一个Target-actor，一个critic，一个Target-critic。对于Critic的更新方法和DQN一样，而Actor的更新就是最大化Critic的输出，也就是得到最高的评价。DDPG和DQN具体细节可以参考我以前的文章：<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-30">强化学习实践教学</a></p><hr><p>D4PG将经验收集的Actor和策略学习的Learner分开，使用多个并行的Actor收集数据，并分享一个大的经验数据缓存区，发送给learner进行学习，经验使用N步奖励的方法进行处理，也可以使用优先级经验复用，给每个经验加上一个初始优先级。</p><p>critic的输出是一个分布，这也就是distributional的概念。</p><img src="/2021/10/14/fen-bu-shi-qiang-hua-xue-xi-zhi-d4pg/1.png" class=""><img src="/2021/10/14/fen-bu-shi-qiang-hua-xue-xi-zhi-d4pg/2.png" class=""><p>D4PG的改进使得我们可以运用上百台甚至更多的机器资源，这样就能够采样更多用于训练的数据，比DPPO更好的地方在于Learner不需要等待Actor计算梯度，真正实现了样本采集和训练过程的分离，所以，D4PG可以用于更复杂的连续动作控制领域。缺点在于Actor和Learner的分离可能导致学习到的策略和正在执行的策略产生差距，因此在一个不是很好的策略下采集到的样本也不好，D4PG没有解决两者的平衡问题。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 强化学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 强化学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>分层强化学习（Hierarchy RL）</title>
       <link href="2021/10/12/fen-ceng-qiang-hua-xue-xi-hierarchy-rl/"/>
       <url>2021/10/12/fen-ceng-qiang-hua-xue-xi-hierarchy-rl/</url>
