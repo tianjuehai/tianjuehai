@@ -528,10 +528,8 @@
 <p>这是一个经过裁剪的重要性采样。裁剪的原因是π于μ的实际分布差距越大，最后估计的策略的差异就越大。而为了更好的估计相应的策略分布，我们采用一步步累积的方法进行s到t步的逐步估计，这样将致使方差越来越大，所以我们才需要进行裁剪，采用相应策略之比的平均值来稳定方差，使训练效果更加稳定。</p>
 <p>引入额外的重要性参数$\rho_t$的作用是为V-trace中的TD-error定义一个不动点，在取不动点的时候，值函数$V_{\pi_{\bar{p}}}$对应的策略是：<br>$$<br>\pi_{\bar{p}}(a|x) =^{def} \frac{min(\bar{\rho} \mu(a|x),\pi(a|x))}{\sum_{b \in A} \min(\bar{\rho} \mu(b|x),\pi(b|x))}<br>$$<br>这样的策略中，不动点$\bar{\rho}$的作用很大，当$\bar{\rho}$为无穷大的时候，我们可以很容易求出这个结果相当于<br>$$<br>\pi_{\bar{p}}(a|x) =^{def} \frac{\pi(a|x)}{\sum_{b \in A} \pi(b|x)} = \pi(a|x)<br>$$<br>当$\bar{\rho}$不是无穷大的时候，生成的策略是目标策略和执行策略之间的中间策略，完美弥补两个策略之间的差异。</p>
 <p>V-trace算法加入裁剪后的重要性因子，$\bar{c}$影响的是模型收敛到最好结果的速度，而$\bar{\rho}$决定的是最后我们想收敛到的目标价值函数，可以更好解决不同的Actor和learner出现的时间差。</p>
-<p>后面的更新用$V_s$替换掉相应的价值函数后，依然是标准的actor-critic算法。值函数的损失梯度依旧采取L2平方损失。<br>$$<br>(V_s - V_{\theta}(x_s)) \nabla_{\theta} V_{\theta}(x_s)<br>$$<br>在当前训练时间为s时，参数为w的策略网络的梯度表示形式如下：<br>$$<br>\rho_s \nabla_w \log \pi_w(a_s,x_s)(r_s + \gamma v_{s+1} - V_{\theta}(x_s))<br>$$<br>与A3C相同，为了防止过早收敛，算法不能达到最优解，还需要在损失梯度中加上一个熵奖励（entropy bonus）：<br>$$</p>
-<ul>
-<li>\nabla_w \sum_a \pi_w(a|x_s) \log \pi_w(a|x_s)<br>$$<br>这<strong>三项配合一定的权重后求和得到最终损失梯度</strong>，也就得到了算法的整体更新公式。</li>
-</ul>
+<p>后面的更新用$V_s$替换掉相应的价值函数后，依然是标准的actor-critic算法。值函数的损失梯度依旧采取L2平方损失。<br>$$<br>(V_s - V_{\theta}(x_s)) \nabla_{\theta} V_{\theta}(x_s)<br>$$<br>在当前训练时间为s时，参数为w的策略网络的梯度表示形式如下：<br>$$<br>\rho_s \nabla_w \log \pi_w(a_s,x_s)(r_s + \gamma v_{s+1} - V_{\theta}(x_s))<br>$$<br>与A3C相同，为了防止过早收敛，算法不能达到最优解，还需要在损失梯度中加上一个熵奖励（entropy bonus）：<br>$$<br>-\nabla_w \sum_a \pi_w(a|x_s) \log \pi_w(a|x_s)<br>$$</p>
+<p>这<strong>三项配合一定的权重后求和得到最终损失梯度</strong>，也就得到了算法的整体更新公式。</p>
 <p>在这种大规模训练中，训练一次耗资巨大，为了避免训练的这一波陷入局部极小值点，采用了 <strong><a href="https://link.zhihu.com/?target=https://deepmind.com/blog/population-based-training-neural-networks/">population based training（PBT）</a></strong> 方法。每次训练若干个智能体，每隔一段时间剔除表现不好的，并且对于表现较好的智能体进行mutation（通常是扰动一下超参数组合）。通过这种方法，保证长达几天的训练结束后能得到好的结果。</p>
 <p>有意思是，通过这种方法，学习率会随着学习进度自然慢慢减小，这和很多算法里面linear scheduled learning rate的trick不谋而合。</p>
 
@@ -1032,30 +1030,29 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/10/14/fen-bu-shi-qiang-hua-xue-xi-zhi-impala/">
+                <a href="/2021/10/15/duo-zhi-neng-ti-shen-du-qiang-hua-xue-xi-ji-chu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="分布式强化学习之IMPALA">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="多智能体深度强化学习基础">
                         
-                        <span class="card-title">分布式强化学习之IMPALA</span>
+                        <span class="card-title">多智能体深度强化学习基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            该方法及其它的变体一直主宰MTDRL，是AlphaStar所采用的基本训练方法，这就是目标性能最佳的异步RL框架————IMPALA!
+                            终于学到我想搞的方向了
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-14
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-15
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1068,7 +1065,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1360,7 +1356,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">176.7k</span>&nbsp;字
+                class="white-color">185.2k</span>&nbsp;字
             
             
             
