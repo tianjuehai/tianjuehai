@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="强化学习之SAC, 博客制作,个人经验分享,Unity,人工智能等">
+    <meta name="keywords" content="多智能体强化学习之MADDPG, 博客制作,个人经验分享,Unity,人工智能等">
     <meta name="description" content="本站记录本人各种学习的旅途，用于巩固自我并启发后来人">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>强化学习之SAC | 微笑紫瞳星</title>
+    <title>多智能体强化学习之MADDPG | 微笑紫瞳星</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -322,12 +322,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">强化学习之SAC</h1>
+                    <h1 class="description center-align post-title">多智能体强化学习之MADDPG</h1>
                 </div>
             </div>
         </div>
@@ -468,14 +468,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-10-06
+                    2021-10-25
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-10-09
+                    2021-10-26
                 </div>
                 
 
@@ -514,76 +514,86 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p> 参考视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1EK41157fD/?spm_id_from=333.788.recommend_more_video.-1">周博磊强化学习课程</a> </p>
-<p>价值函数优化学习主线：Q-learning→DQN→DDPG→TD3→SAC</p>
-<p>Q-Learning，DQN和DDPG请可以参考我之前的文章：<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-20">强化学习实践教学</a></p>
-<p>TD3可以参考我之前的博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/120626544">强化学习之TD3(pytorch实现)</a></p>
-<p>SAC可以参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38587510/article/details/104970837">https://blog.csdn.net/qq_38587510/article/details/104970837</a></p>
-<p>参考论文：</p>
+                <p> 论文原文：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1706.02275.pdf">Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments</a></p>
+<p>论文翻译：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qiusuoxiaozi/article/details/79066612">MADDPG翻译</a></p>
+<p>阅读本文需要强化学习基础，可以参考我前面的文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/120932729">多智能体强化学习入门</a></p>
+<p>关于MADDPG强化学习算法的基础DDPG的可以查看我的文章：<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-30">强化学习实践教学</a></p>
+<p>对于MADDPG推荐的博客有：<a target="_blank" rel="noopener" href="https://ask.hellobi.com/blog/wenwen/12283">探秘多智能体强化学习-MADDPG算法原理及简单实现</a>，里面包含代码实现。</p>
+<p>github代码（基于Tensorflow）：<a target="_blank" rel="noopener" href="https://github.com/princewen/tensorflow_practice/tree/master/RL/Basic-MADDPG-Demo">https://github.com/princewen/tensorflow_practice/tree/master/RL/Basic-MADDPG-Demo</a></p>
+<p>MADDPG算法是单智能体算法DDPG在多智能体环境下的改进。其中最核心的差别就是，每个Agent的Critic部分都能够获取所有Agent的动作信息，进行中心化训练和非中心化执行。即在训练的时候，引入可以观察全局的critic来指导actor训练，而测试的时候只使用有局部观测的actor采取行动。off-line采用中心化训练，on-line采用非中心化执行，on-line与off-line的共同点就是actor，即只需要利用观测到的局部信息。</p>
+<p>下面以两个智能体的情况为例：<br>$$<br>r_1(s,a_1) = E_{a_2 \in A,s’ \in S}[r_1(s’)p(s’|s,a_1,a_2) \pi_2(a_2| s)]<br>$$</p>
+<p>$$<br>p_1(s’ |s ,a_1) = \sum_{a_2 \in A} p(s’ |s,a_1,a_2) \pi_2 (a_2| s)<br>$$</p>
+<p>根据论文描述，算法在以下约束条件下运行：（1）学习的策略只能在执行时只能使用本地信息（即它们自己的观察结果），（2）与[24]不同，我们无需知道环境的可微分动力学模型（3）我们对智能体之间的通信方法不做任何结构上的假设（即，我们不假设一个可区分的通信渠道）。 一旦满足上述要求，那么将产生一个通用的多智能体学习算法，不仅可以应用于具有明确通信渠道的合作博弈，还可以应用竞争性博弈和只涉及主体之间物理交互的博弈。</p>
+<p>论文中三个改进是：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1801.01290">Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor</a>，2018年8月发表。</li>
-<li><a href="https://link.zhihu.com/?target=https://arxiv.org/pdf/1812.05905.pdf">Soft Actor-Critic Algorithms and Applications</a>，2019年1月发表。</li>
+<li>集中式训练，分布式执行：训练时采用集中式学习训练critic与actor，使用时actor只用知道局部信息就能运行。critic需要其他智能体的策略信息，本文给了一种估计其他智能体策略的方法，能够只用知道其他智能体的观测与动作。</li>
+<li>改进了经验回放记录的数据。为了能够适用于动态环境，每一条信息由$(x,x’,a_q,…,a_n,r_1,…,r_n)$ 组成，$x = (o_1,…,o_n)$  表示每个智能体的观测。</li>
+<li>利用策略集合效果优化（policy ensemble）：对每个智能体学习多个策略，改进时利用所有策略的整体效果进行优化。以提高算法的稳定性以及鲁棒性。</li>
 </ol>
-<p>​       SAC全称Soft Actor-Critic，它整合了entropy regularization的思想。论文有以上两篇，第一篇采用模型包括一个actor网络，两个状态价值V网络，两个动作价值Q网络，第二篇的模型包括一个actor网络，四个动作价值Q网络。</p>
-<p>​       model-free深度强化学习算法面临两个主要挑战：<strong>高采样复杂度和脆弱的收敛性，因此严重依赖调参</strong>，这两个挑战限制了强化学习向现实应用的推广。SAC引入了<strong>最大熵（Maximum Entropy）强化学习</strong>，要求actor在同时最大化期望和策略分布的熵，也就是说，在保证任务成果的同时希望策略尽可能的随机。</p>
-<h3 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h3><p>这里说明一下信息熵的概念：当一件事情发生的概率越小，这件事情的信息量越大，对于一个分布而言，信息量的计算方式是：<br>$$<br>H(U) = E[-\log p_i] = - \sum_{i=1}^n p_i log p_i<br>$$<br>因此actor输出总概率相加为1的情况下，动作概率的分布越散，越不集中于一个action，这个熵的值越大。对于连续动作领域来说，就是随机噪声的采样值越偏离平均值，越出现在高斯分布边缘，这个值越大。</p>
-<h3 id="Maximum-Entropy"><a href="#Maximum-Entropy" class="headerlink" title="Maximum Entropy"></a>Maximum Entropy</h3><p>​       在标准强化学习中需要最大化累积期望reward：<br>$$<br>\sum_{t} E_{（s_t,a_t）～ p_{\pi}}[\gamma^t r(s_t,a_t)]<br>$$<br>​       在最大熵强化学习中需要优化的目标是：<br>$$<br>argmax_{\pi}\sum_{t} E_{\tau ～ \pi}[\gamma^t (R(s_t,a_r,s_{t+1})+ \alpha H(\pi(.|s_t)))]<br>$$<br>​       最大熵强化学习在标准的最大reward强化目标上增加了一个最大熵项，提高了探索能力和鲁棒性。既降低了采样复杂度，又提高了收敛稳定性。可以学到更多near-optimal的行为，也就是在一些状态下，可能存在多个动作都是最优的，那么使选择它们的概率相同，可以提高学习的速度。</p>
-<p>此时有：<br>$$<br> V^{\pi}(s) =  E_{\tau ～ \pi}[\sum_t \gamma^t (R(s_t,a_r,s_{t+1})+ \alpha H(\pi(.|s_t))) | s_0 = s]<br>$$</p>
-<p>$$<br>Q^{\pi}(s，a) =  E_{s’ ～ P,a’～ \pi }[R(s,a,s’)+ \gamma (Q^{\pi}(s’,a’)  + \alpha H(\pi(.|s_t))) ] \<br>=  E_{s’ ～ P,a’～ \pi }[R(s,a,s’)+ \gamma (Q^{\pi}(s’,a’)  - \alpha \log \pi(a’|s’)) ]<br>$$</p>
-<p>因此，采样更新公式应该是：<br>$$<br>Q^{\pi}(s，a) \approx   r + \gamma (Q^{\pi}(s’,\hat{ a’})  - \alpha \log \pi(\hat {a’}|s’)) ,\hat{a’} ～ \pi(.|s’)<br>$$<br>损失函数为：<br>$$<br>L（\phi_i,D） = E[(Q_{\phi}(s,a) - y(r,s’,d))^2]<br>$$<br>TD3类似，SAC也采用了两个Q网络的更新形式，然后使用较小的Q值进行更新。<br>$$<br>y(r,s’,d) =  r + \gamma (1-d)(\min_{j=1,2}Q_{\phi_{targ,j}}(s’,\hat{a’}) - \alpha \log \pi_{\theta}(\hat{a’}|s’)) ,\hat{a’} ～ \pi(.|s’)<br>$$<br>对于状态价值V有：<br>$$<br>V^{\pi}(s) = E_{a ～ \pi}[Q^{\pi}(s,a)] + \alpha H(\pi(.|s))  \<br> = E_{a ～ \pi}[Q^{\pi}(s,a)] - \alpha \log \pi(a|s))<br>$$</p>
-<h3 id="Reparameterization-Trick"><a href="#Reparameterization-Trick" class="headerlink" title="Reparameterization Trick"></a>Reparameterization Trick</h3><p>同时也在动作输出中加入了噪声。这就是Reparameterization Trick。让a从策略网络中进行采样转变成和其没有什么关系的采样。<br>$$<br>\hat{a_{\theta}}(s,\epsilon) = \tanh(μ<em>{\theta}(s) + \sigma</em>{\theta}(s) \odot \epsilon),\epsilon～N(0,1)<br>$$<br>其中μ和σ都是由神经网络学习得到的，因此在奖励最大化的同时鼓励探索的话，σ会尽可能增大以达到探索的目的，这样一个μ和σ都会变化的动作分布大大增加了动作策略的灵活性。</p>
-<h2 id="actor部分代码："><a href="#actor部分代码：" class="headerlink" title="actor部分代码："></a>actor部分代码：</h2><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">GaussianPolicy</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> num_inputs<span class="token punctuation">,</span> num_actions<span class="token punctuation">,</span> hidden_dim<span class="token punctuation">,</span> action_space<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        super<span class="token punctuation">(</span>GaussianPolicy<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<img src="/2021/10/25/duo-zhi-neng-ti-qiang-hua-xue-xi-zhi-maddpg/1.png" class="">
 
-        self<span class="token punctuation">.</span>linear1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>num_inputs<span class="token punctuation">,</span> hidden_dim<span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>linear2 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>hidden_dim<span class="token punctuation">,</span> hidden_dim<span class="token punctuation">)</span>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">actor_network</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token keyword">as</span> scope<span class="token punctuation">:</span>
+        x <span class="token operator">=</span> state_input
+        x <span class="token operator">=</span> tf<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>dense<span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>layer_norm<span class="token punctuation">:</span>
+            x <span class="token operator">=</span> tc<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>layer_norm<span class="token punctuation">(</span>x<span class="token punctuation">,</span> center<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> scale<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+        x <span class="token operator">=</span> tf<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
 
-        self<span class="token punctuation">.</span>mean_linear <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>hidden_dim<span class="token punctuation">,</span> num_actions<span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>log_std_linear <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>hidden_dim<span class="token punctuation">,</span> num_actions<span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true"># 使用对应函数初始化所有的全连接层参数</span>
-        self<span class="token punctuation">.</span>apply<span class="token punctuation">(</span>weights_init_<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> tf<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>dense<span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>layer_norm<span class="token punctuation">:</span>
+            x <span class="token operator">=</span> tc<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>layer_norm<span class="token punctuation">(</span>x<span class="token punctuation">,</span> center<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> scale<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+        x <span class="token operator">=</span> tf<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
 
-        <span class="token comment" spellcheck="true"># action rescaling</span>
-        <span class="token keyword">if</span> action_space <span class="token keyword">is</span> None<span class="token punctuation">:</span>
-            self<span class="token punctuation">.</span>action_scale <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
-            self<span class="token punctuation">.</span>action_bias <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-            self<span class="token punctuation">.</span>action_scale <span class="token operator">=</span> torch<span class="token punctuation">.</span>FloatTensor<span class="token punctuation">(</span>
-                <span class="token punctuation">(</span>action_space<span class="token punctuation">.</span>high <span class="token operator">-</span> action_space<span class="token punctuation">.</span>low<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
-            self<span class="token punctuation">.</span>action_bias <span class="token operator">=</span> torch<span class="token punctuation">.</span>FloatTensor<span class="token punctuation">(</span>
-                <span class="token punctuation">(</span>action_space<span class="token punctuation">.</span>high <span class="token operator">+</span> action_space<span class="token punctuation">.</span>low<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+        x <span class="token operator">=</span> tf<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>dense<span class="token punctuation">(</span>x<span class="token punctuation">,</span> self<span class="token punctuation">.</span>nb_actions<span class="token punctuation">,</span>
+        kernel_initializer<span class="token operator">=</span>tf<span class="token punctuation">.</span>random_uniform_initializer<span class="token punctuation">(</span>minval<span class="token operator">=</span><span class="token operator">-</span><span class="token number">3e</span><span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span> maxval<span class="token operator">=</span><span class="token number">3e</span><span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        x <span class="token operator">=</span> tf<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>tanh<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> x
 
-    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> state<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        x <span class="token operator">=</span> F<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>self<span class="token punctuation">.</span>linear1<span class="token punctuation">(</span>state<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        x <span class="token operator">=</span> F<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>self<span class="token punctuation">.</span>linear2<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        mean <span class="token operator">=</span> self<span class="token punctuation">.</span>mean_linear<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-        log_std <span class="token operator">=</span> self<span class="token punctuation">.</span>log_std_linear<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-        log_std <span class="token operator">=</span> torch<span class="token punctuation">.</span>clamp<span class="token punctuation">(</span>log_std<span class="token punctuation">,</span> min<span class="token operator">=</span>LOG_SIG_MIN<span class="token punctuation">,</span> max<span class="token operator">=</span>LOG_SIG_MAX<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> mean<span class="token punctuation">,</span> log_std
 
-    <span class="token keyword">def</span> <span class="token function">sample</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> state<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        mean<span class="token punctuation">,</span> log_std <span class="token operator">=</span> self<span class="token punctuation">.</span>forward<span class="token punctuation">(</span>state<span class="token punctuation">)</span>
-        std <span class="token operator">=</span> log_std<span class="token punctuation">.</span>exp<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true"># 创建高斯分布</span>
-        normal <span class="token operator">=</span> Normal<span class="token punctuation">(</span>mean<span class="token punctuation">,</span> std<span class="token punctuation">)</span>
-        x_t <span class="token operator">=</span> normal<span class="token punctuation">.</span>rsample<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># for reparameterization trick (mean + std * N(0,1))</span>
-        y_t <span class="token operator">=</span> torch<span class="token punctuation">.</span>tanh<span class="token punctuation">(</span>x_t<span class="token punctuation">)</span>
-        action <span class="token operator">=</span> y_t <span class="token operator">*</span> self<span class="token punctuation">.</span>action_scale <span class="token operator">+</span> self<span class="token punctuation">.</span>action_bias
-        log_prob <span class="token operator">=</span> normal<span class="token punctuation">.</span>log_prob<span class="token punctuation">(</span>x_t<span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true"># Enforcing Action Bound</span>
-        <span class="token comment" spellcheck="true"># ---重点问题---</span>
-        log_prob <span class="token operator">-=</span> torch<span class="token punctuation">.</span>log<span class="token punctuation">(</span>self<span class="token punctuation">.</span>action_scale <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> y_t<span class="token punctuation">.</span>pow<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> epsilon<span class="token punctuation">)</span>
-        log_prob <span class="token operator">=</span> log_prob<span class="token punctuation">.</span>sum<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> keepdim<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">critic_network</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> action_input<span class="token punctuation">,</span> reuse<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">with</span> tf<span class="token punctuation">.</span>variable_scope<span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token keyword">as</span> scope<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> reuse<span class="token punctuation">:</span>
+            scope<span class="token punctuation">.</span>reuse_variables<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-        mean <span class="token operator">=</span> torch<span class="token punctuation">.</span>tanh<span class="token punctuation">(</span>mean<span class="token punctuation">)</span> <span class="token operator">*</span> self<span class="token punctuation">.</span>action_scale <span class="token operator">+</span> self<span class="token punctuation">.</span>action_bias
-        <span class="token keyword">return</span> action<span class="token punctuation">,</span> log_prob<span class="token punctuation">,</span> mean
+        x <span class="token operator">=</span> state_input
+        x <span class="token operator">=</span> tf<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>dense<span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>layer_norm<span class="token punctuation">:</span>
+            x <span class="token operator">=</span> tc<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>layer_norm<span class="token punctuation">(</span>x<span class="token punctuation">,</span> center<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> scale<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+        x <span class="token operator">=</span> tf<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
 
-    <span class="token keyword">def</span> <span class="token function">to</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> device<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        self<span class="token punctuation">.</span>action_scale <span class="token operator">=</span> self<span class="token punctuation">.</span>action_scale<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>action_bias <span class="token operator">=</span> self<span class="token punctuation">.</span>action_bias<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> super<span class="token punctuation">(</span>GaussianPolicy<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> tf<span class="token punctuation">.</span>concat<span class="token punctuation">(</span><span class="token punctuation">[</span>x<span class="token punctuation">,</span> action_input<span class="token punctuation">]</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        x <span class="token operator">=</span> tf<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>dense<span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>layer_norm<span class="token punctuation">:</span>
+            x <span class="token operator">=</span> tc<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>layer_norm<span class="token punctuation">(</span>x<span class="token punctuation">,</span> center<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> scale<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+        x <span class="token operator">=</span> tf<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+
+        x <span class="token operator">=</span> tf<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>dense<span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> kernel_initializer<span class="token operator">=</span>tf<span class="token punctuation">.</span>random_uniform_initializer<span class="token punctuation">(</span>minval<span class="token operator">=</span><span class="token operator">-</span><span class="token number">3e</span><span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span> maxval<span class="token operator">=</span><span class="token number">3e</span><span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> x</code></pre>
+<p>上面是模型部分的代码，actor部分相对于DDPG没有变化，Critic部分只需要加入其它智能体的动作作为输入即可。</p>
+<pre class=" language-python"><code class="language-python"> <span class="token comment" spellcheck="true"># 最大化Q值</span>
+self<span class="token punctuation">.</span>actor_loss <span class="token operator">=</span> <span class="token operator">-</span>tf<span class="token punctuation">.</span>reduce_mean<span class="token punctuation">(</span>
+critic_network<span class="token punctuation">(</span>name <span class="token operator">+</span> <span class="token string">'_critic'</span><span class="token punctuation">,</span> action_input<span class="token operator">=</span>tf<span class="token punctuation">.</span>concat<span class="token punctuation">(</span><span class="token punctuation">[</span>self<span class="token punctuation">.</span>action_output<span class="token punctuation">,</span> other_action_input<span class="token punctuation">]</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+reuse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+self<span class="token punctuation">.</span>actor_train <span class="token operator">=</span> self<span class="token punctuation">.</span>actor_optimizer<span class="token punctuation">.</span>minimize<span class="token punctuation">(</span>self<span class="token punctuation">.</span>actor_loss<span class="token punctuation">)</span>
+
+self<span class="token punctuation">.</span>target_Q <span class="token operator">=</span> tf<span class="token punctuation">.</span>placeholder<span class="token punctuation">(</span>shape<span class="token operator">=</span><span class="token punctuation">[</span>None<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>tf<span class="token punctuation">.</span>float32<span class="token punctuation">)</span>
+self<span class="token punctuation">.</span>critic_loss <span class="token operator">=</span> tf<span class="token punctuation">.</span>reduce_mean<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>square<span class="token punctuation">(</span>self<span class="token punctuation">.</span>target_Q <span class="token operator">-</span> self<span class="token punctuation">.</span>critic_output<span class="token punctuation">)</span><span class="token punctuation">)</span>
+self<span class="token punctuation">.</span>critic_train <span class="token operator">=</span> self<span class="token punctuation">.</span>critic_optimizer<span class="token punctuation">.</span>minimize<span class="token punctuation">(</span>self<span class="token punctuation">.</span>critic_loss<span class="token punctuation">)</span>
 </code></pre>
+<p>在Loss计算上可以看到依旧遵循DDPG的方法。Critic的估计值尽量靠近预测值，actor尽量使得Critic的估计值越大越好。</p>
+<pre class=" language-python"><code class="language-python">agent1_memory<span class="token punctuation">.</span>add<span class="token punctuation">(</span>np<span class="token punctuation">.</span>vstack<span class="token punctuation">(</span><span class="token punctuation">[</span>o_n<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> o_n<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> o_n<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                  np<span class="token punctuation">.</span>vstack<span class="token punctuation">(</span><span class="token punctuation">[</span>agent1_action<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> agent2_action<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> agent3_action<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                  r_n<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>vstack<span class="token punctuation">(</span><span class="token punctuation">[</span>o_n_next<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> o_n_next<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> o_n_next<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">)</span>
+
+agent2_memory<span class="token punctuation">.</span>add<span class="token punctuation">(</span>np<span class="token punctuation">.</span>vstack<span class="token punctuation">(</span><span class="token punctuation">[</span>o_n<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> o_n<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> o_n<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                  np<span class="token punctuation">.</span>vstack<span class="token punctuation">(</span><span class="token punctuation">[</span>agent2_action<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> agent3_action<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> agent1_action<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                  r_n<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>vstack<span class="token punctuation">(</span><span class="token punctuation">[</span>o_n_next<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> o_n_next<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> o_n_next<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">)</span>
+
+agent3_memory<span class="token punctuation">.</span>add<span class="token punctuation">(</span>np<span class="token punctuation">.</span>vstack<span class="token punctuation">(</span><span class="token punctuation">[</span>o_n<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> o_n<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> o_n<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                  np<span class="token punctuation">.</span>vstack<span class="token punctuation">(</span><span class="token punctuation">[</span>agent3_action<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> agent1_action<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> agent2_action<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                  r_n<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>vstack<span class="token punctuation">(</span><span class="token punctuation">[</span>o_n_next<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> o_n_next<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> o_n_next<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">)</span></code></pre>
+<p>在经验池储存上，MADDPG不但要储存自身的可观察的状态信息，还要储存的是其它智能体的可观测状态信息。同时储存自身和他人的动作信息。以及每个智能体的下一个状态。</p>
 
                 
             </div>
@@ -610,7 +620,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://tianjuewudi.gitee.io/2021/10/06/qiang-hua-xue-xi-zhi-sac/">https://tianjuewudi.gitee.io/2021/10/06/qiang-hua-xue-xi-zhi-sac/</a>
+                    <a href="https://tianjuewudi.gitee.io/2021/10/25/duo-zhi-neng-ti-qiang-hua-xue-xi-zhi-maddpg/">https://tianjuewudi.gitee.io/2021/10/25/duo-zhi-neng-ti-qiang-hua-xue-xi-zhi-maddpg/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1082,17 +1092,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/10/10/mo-fang-xue-xi-imitation-learning/">
+                <a href="/2021/10/25/duo-zhi-neng-ti-qiang-hua-xue-xi-zhi-maddpg/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="模仿学习（Imitation Learning）">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="多智能体强化学习之MADDPG">
                         
-                        <span class="card-title">模仿学习（Imitation Learning）</span>
+                        <span class="card-title">多智能体强化学习之MADDPG</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1102,9 +1113,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-10
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1117,6 +1128,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1135,13 +1147,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/10/06/qiang-hua-xue-xi-zhi-td3/">
+                <a href="/2021/10/23/fps-you-xi-zhi-zuo-bi-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="强化学习之TD3">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="FPS游戏制作笔记">
                         
-                        <span class="card-title">强化学习之TD3</span>
+                        <span class="card-title">FPS游戏制作笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1152,14 +1164,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-23
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    强化学习
+                            <a href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" class="post-category">
+                                    游戏开发
                                 </a>
                             
                             
@@ -1169,8 +1181,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">强化学习</span>
+                    <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">
+                        <span class="chip bg-color">游戏开发</span>
                     </a>
                     
                 </div>
