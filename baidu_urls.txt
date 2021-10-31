@@ -1,3 +1,6 @@
+https://tianjuewudi.gitee.io/2021/10/29/zi-chuang-qiang-hua-xue-xi-huan-jing-zhi-unity3d-cha-jian-ml-agent-de-shi-yong/
+https://tianjuewudi.gitee.io/2021/10/28/duo-ren-wu-shen-du-qiang-hua-xue-xi-ru-men/
+https://tianjuewudi.gitee.io/2021/10/28/duo-zhi-neng-ti-qiang-hua-xue-xi-zhi-mappo/
 https://tianjuewudi.gitee.io/2021/10/26/duo-zhi-neng-ti-qiang-hua-xue-xi-zhi-qmix/
 https://tianjuewudi.gitee.io/2021/10/25/duo-zhi-neng-ti-qiang-hua-xue-xi-zhi-maddpg/
 https://tianjuewudi.gitee.io/2021/10/23/fps-you-xi-zhi-zuo-bi-ji/
