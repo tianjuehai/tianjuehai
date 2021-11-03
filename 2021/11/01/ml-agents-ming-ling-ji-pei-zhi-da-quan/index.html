@@ -1,0 +1,1889 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ML-Agents命令及配置大全, 博客制作,个人经验分享,Unity,人工智能等">
+    <meta name="description" content="本站记录本人各种学习的旅途，用于巩固自我并启发后来人">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>ML-Agents命令及配置大全 | 微笑紫瞳星</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">微笑紫瞳星</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">微笑紫瞳星</div>
+        <div class="logo-desc">
+            
+            本站记录本人各种学习的旅途，用于巩固自我并启发后来人
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ML-Agents命令及配置大全</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">强化学习</span>
+                            </a>
+                        
+                            <a href="/tags/ML-Agents/">
+                                <span class="chip bg-color">ML-Agents</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Unity%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                Unity强化学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-11-01
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2021-11-03
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    15 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p> 关于ML-Agents插件的入门，请查看我前面的博文： <a href="https://tianjuewudi.gitee.io/2021/10/29/zi-chuang-qiang-hua-xue-xi-huan-jing-zhi-unity3d-cha-jian-ml-agent-de-shi-yong/">自创强化学习环境之Unity3D插件ML-Agent的使用</a></p>
+<p>本文内容基于ML-Agents的官方文档：<a target="_blank" rel="noopener" href="https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Training-ML-Agents.md">Training ML-Agents</a>以及<a target="_blank" rel="noopener" href="https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Training-Configuration-File.md">Training Configuration File</a></p>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://developer.unity.cn/projects/ml-agents-qi-xun-lian-zhi-ling-yu-xun-lian-pei-zhi-wen-jian">ML-Agents（七）训练指令与训练配置文件</a></p>
+<h2 id="ML-Agents命令"><a href="#ML-Agents命令" class="headerlink" title="ML-Agents命令"></a>ML-Agents命令</h2><p>查看所有的命令：</p>
+<pre class=" language-cmd"><code class="language-cmd">mlagents-learn --help</code></pre>
+<p>训练的基本命令是：</p>
+<pre class=" language-cmd"><code class="language-cmd">mlagents-learn <trainer-config-file> --env=<env_name> --run-id=<run-identifier></run-identifier></env_name></trainer-config-file></code></pre>
+<ul>
+<li><code>&lt;trainer-config-file&gt;</code>是训练器配置 YAML 的文件路径。里面包含所有超参数值。<code>&lt;env_name&gt;</code>（可选）是包含要训练的代理的<a target="_blank" rel="noopener" href="https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Learning-Environment-Executable.md">Unity 可执行文件</a>的名称（包括路径） 。如果不写，则训练将在编辑器中进行。<code>&lt;run-identifier&gt;</code> 是一个唯一的名称，主要用于命名保存的训练模型、统计信息以及模型名称。训练过程产生的文件都保存在<code>results/&lt;run-identifier&gt;</code>文件夹中。</li>
+<li><em>–curriculum=<code>&lt;file&gt;*</code>：如果你的训练是</em>Curriculum Learning*，这个命令可以指定你要训练的课程配置文件，官方也有一个示例（<strong>Wall Jump</strong>）专门展示了 <em>Curriculum Learning</em>这种训练类型，这里我们之后的文章再去深入研究。</li>
+<li>*–lesson=<code>&lt;n&gt;</code>*：指定在执行Curriculum Learning时要开始的课程，默认为0。</li>
+<li>*–sampler=<code>&lt;file&gt;</code>*：用于指定训练环境的可变参数的配置文件。具体内容可以看<a target="_blank" rel="noopener" href="https://www.cnblogs.com/gentlesunshine/p/12602404.html">ML-Agents（四）3DBall补充の引入泛化</a>。</li>
+<li>*–save-freq=<code>&lt;n&gt;</code>*：指定在训练过程中保存模型的频率，默认为50000。</li>
+<li>*–keep-checkpoints=<code>&lt;n&gt;</code><em>：指定了要保存模型的检查点的最大数量。该属性与上面的</em>–save-freq=<code>&lt;n&gt;</code>*有命令关，即在n步后，会记录一个检查点。此外，新的检查点形成，会使得老的检查点删除，默认存5个检查点。。</li>
+<li>*–num-envs=<code>&lt;n&gt;</code>*：指定在训练时，从几个Unity环境实例中收集数据，默认为1。当然如果是发布的程序，你就可以多开几个程序让训练数据更多。</li>
+<li>*–seed=<code>&lt;n&gt;</code>*：指定一个数字作为训练代码使用的随机数生成器的seed。</li>
+<li><em>–env-args=<code>&lt;string&gt;*</code>：为可执行程序传参，具体给Unity传参可以参考官方文档<a target="_blank" rel="noopener" href="https://docs.unity3d.com/Manual/CommandLineArguments.html">Unity Command Line Arguments</a>。例如，命令</em>mlagents-learn config/trainer_config.yaml –env-args –num-orcs 42<em>会将</em>–num-ors 42传递给可执行文件。</li>
+<li><em>–base-port</em>：指定启动的端口。用于多个Unity程序连接会依次分配一个端口。默认是5005。当然我们之前都是直接使用IDE进行训练的，所以这一项直接可以忽略。</li>
+<li><em>–inference</em>：指定是否仅在推理模式下运行。这种模式会忽略对对模型的训练。要加载现有的训练模型，需要结合*–reusme*以及run-id来使用。</li>
+<li><em>–resume</em>：如果设置这一项，则训练代码会在训练前加载已经训练好的模型去初始化神经网络。训练代码会在**models/<code>&lt;run-id&gt;</code>**目录下查找训练模型。这个选项仅在模型存在且具有与场景中当前代理相同的行为名称（Behavior Name）时才有效。</li>
+<li><em>–force</em>：当要使用之前已经使用过的run-id来训练模型会抛出错误。适用*–force*来强制覆盖原有id的数据模型和数据统计。</li>
+<li>*–initialize-form=<code>&lt;run-identifier&gt;</code>*：指定一个已存在的训练模型来初始化新的训练模型。但是注意，当前的训练环境行为参数要与之前保存的训练模型参数相同才可以。</li>
+<li><em>–no-graphics</em>：指定Unity以*-batchmode*运行，并且不初始化图形驱动程序。当然注意只适用于训练中不涉及视觉观察（Observations，读取像素训练）。关于Unity不利用GPU运行请查看这里<a target="_blank" rel="noopener" href="https://docs.unity3d.com/Manual/CommandLineArguments.html">Unity官方文档</a>。</li>
+<li><em>–debug</em>：此选项可以输出代码某些部分的调试代码日志。</li>
+<li><em>–cpu</em>：强制只使用CPU训练。</li>
+<li>Unity设置：</li>
+<li><em>–width</em>：Unity运行时窗口的宽度，单位像素，默认84（IDE训练可忽略）。</li>
+<li><em>–height</em>：有width，就有height，与上相同，指高度，默认84，同样IDE训练可忽略。</li>
+<li><em>–quality-level</em>：设置Unity的<em>QualitySettings.SetQualityLevel</em>属性，即画面质量，默认为5。</li>
+<li><em>–time-scale</em>：设置Unity的<em>Time.timeScale</em>属性，即游戏时间缩放比例，默认为20，最大为100。下次试试把这个值调大一些，是否可以加快训练速度。</li>
+<li><em>–target-frame-rate</em>：设置Unity的<em>Application.targetFrameRate</em>，即设置游戏帧率，默认为-1，即不设置，一般为60帧每秒。</li>
+</ul>
+<hr>
+<h2 id="ML-Agents配置"><a href="#ML-Agents配置" class="headerlink" title="ML-Agents配置"></a>ML-Agents配置</h2><h3 id="参数配置"><a href="#参数配置" class="headerlink" title="参数配置"></a>参数配置</h3><p>在配置文件YAML文件中，你可以添加以下参数：</p>
+<p>环境设置：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">env_settings</span><span class="token punctuation">:</span>
+  <span class="token key atrule">env_path</span><span class="token punctuation">:</span> FoodCollector
+  <span class="token key atrule">env_args</span><span class="token punctuation">:</span> <span class="token null important">null</span>
+  <span class="token key atrule">base_port</span><span class="token punctuation">:</span> <span class="token number">5005</span>
+  <span class="token key atrule">num_envs</span><span class="token punctuation">:</span> <span class="token number">1</span>
+  <span class="token key atrule">seed</span><span class="token punctuation">:</span> <span class="token number">-1</span>
+  <span class="token key atrule">max_lifetime_restarts</span><span class="token punctuation">:</span> <span class="token number">10</span>
+  <span class="token key atrule">restarts_rate_limit_n</span><span class="token punctuation">:</span> <span class="token number">1</span>
+  <span class="token key atrule">restarts_rate_limit_period_s</span><span class="token punctuation">:</span> <span class="token number">60</span></code></pre>
+<p>引擎设置：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">engine_settings</span><span class="token punctuation">:</span>
+  <span class="token key atrule">width</span><span class="token punctuation">:</span> <span class="token number">84</span>
+  <span class="token key atrule">height</span><span class="token punctuation">:</span> <span class="token number">84</span>
+  <span class="token key atrule">quality_level</span><span class="token punctuation">:</span> <span class="token number">5</span>
+  <span class="token key atrule">time_scale</span><span class="token punctuation">:</span> <span class="token number">20</span>
+  <span class="token key atrule">target_frame_rate</span><span class="token punctuation">:</span> <span class="token number">-1</span>
+  <span class="token key atrule">capture_frame_rate</span><span class="token punctuation">:</span> <span class="token number">60</span>
+  <span class="token key atrule">no_graphics</span><span class="token punctuation">:</span> <span class="token boolean important">false</span></code></pre>
+<p>检查点设置：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">checkpoint_settings</span><span class="token punctuation">:</span>
+  <span class="token key atrule">run_id</span><span class="token punctuation">:</span> foodtorch
+  <span class="token key atrule">initialize_from</span><span class="token punctuation">:</span> <span class="token null important">null</span>
+  <span class="token key atrule">load_model</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+  <span class="token key atrule">resume</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+  <span class="token key atrule">force</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">train_model</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+  <span class="token key atrule">inference</span><span class="token punctuation">:</span> <span class="token boolean important">false</span></code></pre>
+<p>Torch设置：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">torch_settings</span><span class="token punctuation">:</span>
+  <span class="token key atrule">device</span><span class="token punctuation">:</span> cpu</code></pre>
+<hr>
+<h3 id="所有功能展示（基于PPO）"><a href="#所有功能展示（基于PPO）" class="headerlink" title="所有功能展示（基于PPO）"></a>所有功能展示（基于PPO）</h3><p>如果我们使用了<strong>所有的训练功能的PPO算法</strong>（包含记忆，行为克隆，好奇心，GAIL和self-play），配置文件应该这样写（自己灵活选择功能）：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
+  <span class="token key atrule">BehaviorPPO</span><span class="token punctuation">:</span>
+    <span class="token key atrule">trainer_type</span><span class="token punctuation">:</span> ppo
+
+    <span class="token key atrule">hyperparameters</span><span class="token punctuation">:</span>
+      <span class="token comment" spellcheck="true"># Hyperparameters common to PPO and SAC</span>
+      <span class="token key atrule">batch_size</span><span class="token punctuation">:</span> <span class="token number">1024</span>
+      <span class="token key atrule">buffer_size</span><span class="token punctuation">:</span> <span class="token number">10240</span>
+      <span class="token key atrule">learning_rate</span><span class="token punctuation">:</span> <span class="token number">3.0e-4</span>
+      <span class="token key atrule">learning_rate_schedule</span><span class="token punctuation">:</span> linear
+
+      <span class="token comment" spellcheck="true"># PPO-specific hyperparameters</span>
+      <span class="token comment" spellcheck="true"># Replaces the "PPO-specific hyperparameters" section above</span>
+      <span class="token key atrule">beta</span><span class="token punctuation">:</span> <span class="token number">5.0e-3</span>
+      <span class="token key atrule">beta_schedule</span><span class="token punctuation">:</span> constant
+      <span class="token key atrule">epsilon</span><span class="token punctuation">:</span> <span class="token number">0.2</span>
+      <span class="token key atrule">epsilon_schedule</span><span class="token punctuation">:</span> linear
+      <span class="token key atrule">lambd</span><span class="token punctuation">:</span> <span class="token number">0.95</span>
+      <span class="token key atrule">num_epoch</span><span class="token punctuation">:</span> <span class="token number">3</span>
+
+    <span class="token comment" spellcheck="true"># Configuration of the neural network (common to PPO/SAC)</span>
+    <span class="token key atrule">network_settings</span><span class="token punctuation">:</span>
+      <span class="token key atrule">vis_encode_type</span><span class="token punctuation">:</span> simple
+      <span class="token key atrule">normalize</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+      <span class="token key atrule">hidden_units</span><span class="token punctuation">:</span> <span class="token number">128</span>
+      <span class="token key atrule">num_layers</span><span class="token punctuation">:</span> <span class="token number">2</span>
+      <span class="token comment" spellcheck="true"># memory</span>
+      <span class="token key atrule">memory</span><span class="token punctuation">:</span>
+        <span class="token key atrule">sequence_length</span><span class="token punctuation">:</span> <span class="token number">64</span>
+        <span class="token key atrule">memory_size</span><span class="token punctuation">:</span> <span class="token number">256</span>
+
+    <span class="token comment" spellcheck="true"># Trainer configurations common to all trainers</span>
+    <span class="token key atrule">max_steps</span><span class="token punctuation">:</span> <span class="token number">5.0e5</span>
+    <span class="token key atrule">time_horizon</span><span class="token punctuation">:</span> <span class="token number">64</span>
+    <span class="token key atrule">summary_freq</span><span class="token punctuation">:</span> <span class="token number">10000</span>
+    <span class="token key atrule">keep_checkpoints</span><span class="token punctuation">:</span> <span class="token number">5</span>
+    <span class="token key atrule">checkpoint_interval</span><span class="token punctuation">:</span> <span class="token number">50000</span>
+    <span class="token key atrule">threaded</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+    <span class="token key atrule">init_path</span><span class="token punctuation">:</span> <span class="token null important">null</span>
+
+    <span class="token comment" spellcheck="true"># behavior cloning</span>
+    <span class="token key atrule">behavioral_cloning</span><span class="token punctuation">:</span>
+      <span class="token key atrule">demo_path</span><span class="token punctuation">:</span> Project/Assets/ML<span class="token punctuation">-</span>Agents/Examples/Pyramids/Demos/ExpertPyramid.demo
+      <span class="token key atrule">strength</span><span class="token punctuation">:</span> <span class="token number">0.5</span>
+      <span class="token key atrule">steps</span><span class="token punctuation">:</span> <span class="token number">150000</span>
+      <span class="token key atrule">batch_size</span><span class="token punctuation">:</span> <span class="token number">512</span>
+      <span class="token key atrule">num_epoch</span><span class="token punctuation">:</span> <span class="token number">3</span>
+      <span class="token key atrule">samples_per_update</span><span class="token punctuation">:</span> <span class="token number">0</span>
+
+    <span class="token key atrule">reward_signals</span><span class="token punctuation">:</span>
+      <span class="token comment" spellcheck="true"># environment reward (default)</span>
+      <span class="token key atrule">extrinsic</span><span class="token punctuation">:</span>
+        <span class="token key atrule">strength</span><span class="token punctuation">:</span> <span class="token number">1.0</span>
+        <span class="token key atrule">gamma</span><span class="token punctuation">:</span> <span class="token number">0.99</span>
+
+      <span class="token comment" spellcheck="true"># curiosity module</span>
+      <span class="token key atrule">curiosity</span><span class="token punctuation">:</span>
+        <span class="token key atrule">strength</span><span class="token punctuation">:</span> <span class="token number">0.02</span>
+        <span class="token key atrule">gamma</span><span class="token punctuation">:</span> <span class="token number">0.99</span>
+        <span class="token key atrule">encoding_size</span><span class="token punctuation">:</span> <span class="token number">256</span>
+        <span class="token key atrule">learning_rate</span><span class="token punctuation">:</span> <span class="token number">3.0e-4</span>
+
+      <span class="token comment" spellcheck="true"># GAIL</span>
+      <span class="token key atrule">gail</span><span class="token punctuation">:</span>
+        <span class="token key atrule">strength</span><span class="token punctuation">:</span> <span class="token number">0.01</span>
+        <span class="token key atrule">gamma</span><span class="token punctuation">:</span> <span class="token number">0.99</span>
+        <span class="token key atrule">encoding_size</span><span class="token punctuation">:</span> <span class="token number">128</span>
+        <span class="token key atrule">demo_path</span><span class="token punctuation">:</span> Project/Assets/ML<span class="token punctuation">-</span>Agents/Examples/Pyramids/Demos/ExpertPyramid.demo
+        <span class="token key atrule">learning_rate</span><span class="token punctuation">:</span> <span class="token number">3.0e-4</span>
+        <span class="token key atrule">use_actions</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+        <span class="token key atrule">use_vail</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+
+    <span class="token comment" spellcheck="true"># self-play</span>
+    <span class="token key atrule">self_play</span><span class="token punctuation">:</span>
+      <span class="token key atrule">window</span><span class="token punctuation">:</span> <span class="token number">10</span>
+      <span class="token key atrule">play_against_latest_model_ratio</span><span class="token punctuation">:</span> <span class="token number">0.5</span>
+      <span class="token key atrule">save_steps</span><span class="token punctuation">:</span> <span class="token number">50000</span>
+      <span class="token key atrule">swap_steps</span><span class="token punctuation">:</span> <span class="token number">2000</span>
+      <span class="token key atrule">team_change</span><span class="token punctuation">:</span> <span class="token number">100000</span></code></pre>
+<hr>
+<h3 id="SAC部分展示"><a href="#SAC部分展示" class="headerlink" title="SAC部分展示"></a>SAC部分展示</h3><p>如果使用的是<strong>SAC</strong>而不是PPO算法，只需要做简单的修改：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
+  <span class="token key atrule">BehaviorSAC</span><span class="token punctuation">:</span>
+    <span class="token key atrule">trainer_type</span><span class="token punctuation">:</span> sac
+    <span class="token key atrule">hyperparameters</span><span class="token punctuation">:</span>
+      <span class="token comment" spellcheck="true"># SAC-specific hyperparameters</span>
+      <span class="token comment" spellcheck="true"># Replaces the "PPO-specific hyperparameters" section above</span>
+      <span class="token key atrule">buffer_init_steps</span><span class="token punctuation">:</span> <span class="token number">0</span>
+      <span class="token key atrule">tau</span><span class="token punctuation">:</span> <span class="token number">0.005</span>
+      <span class="token key atrule">steps_per_update</span><span class="token punctuation">:</span> <span class="token number">10.0</span>
+      <span class="token key atrule">save_replay_buffer</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+      <span class="token key atrule">init_entcoef</span><span class="token punctuation">:</span> <span class="token number">0.5</span>
+      <span class="token key atrule">reward_signal_steps_per_update</span><span class="token punctuation">:</span> <span class="token number">10.0</span>
+
+     <span class="token comment" spellcheck="true"># 下面内容相同</span></code></pre>
+<h3 id="配置说明"><a href="#配置说明" class="headerlink" title="配置说明"></a>配置说明</h3><p><strong>batch_size</strong>：一次性抽取多少条数据样本一起训练。连续动作空间推荐：512-5120，离散动作空间推荐：32-512</p>
+<p><strong>buffer_size</strong>：经验池容量。推荐：2048-409600</p>
+<p><strong>epsilon</strong>：影响策略在训练过程中的成型速度。对应新旧策略之间可接受的差异阈值，较小有较稳定的稳定，但会减慢训练过程。推荐：0.1-0.3</p>
+<p>i<strong>nit_entcoef</strong>：在训练开始时，agent应该探索多深。</p>
+<p><strong>learning_rate</strong>：学习率，数据更新强度，训练不稳定应降低该值。推荐：1e-5-1e-3</p>
+<p><strong>learning_rate_Schedule</strong>：对应于学习率如何随时间变化，逐渐降低学习速率可以更稳定收敛。linear指线性衰减，maxSteps达到0，constant不衰减。</p>
+<p><strong>max_steps</strong>：每一个episode执行的最大步数。推荐：5e5-1e7</p>
+<p><strong>normalize</strong>：是否自动标准化观测值。这对于复杂连续控制问题很有用，但对于简单离散控制可能反而有害。</p>
+<p><strong>behavioral_cloning</strong>：使用演示引导神经网络的策略。strength：模仿学习的学习率，推荐：0.1-0.5。demo_path：是.demo文件的路径。Steps：对应于激活BC的步骤，，BC的学习率随步骤逐步提高，设置为0会在整个训练过程中持续模仿。</p>
+<p><strong>save_replay_buffer</strong>：退出训练时保存到回放缓冲区，并在恢复时加载。</p>
+<p><strong>summary_freq</strong>：设置多久一次保存统计数据。主要决定了在tensorboard中显示数据点的数值。</p>
+<p><strong>time_horizon</strong>：在将每个agent添加到经验缓冲池之前，需要经过多少步训练。推荐：32-2048</p>
+<p><strong>train_interval</strong>：更新智能体的频率。</p>
+<p><strong>use_recurrent</strong>：是否使用循环神经网络。以下参数在use_recurrent为true时使用。sequence_length：训练中通过网络传递的经验序列的长度，较大的值可以记住较长时间的信息。推荐：4-128。memory_size：对应了存储策略的循环神经网络隐藏状态的浮点数数组大小，必须是2的倍数，并且与期望agent成功完成任务所需记住的信息量成比例。推荐：32-256</p>
+<p><strong>Reward Signals</strong>：在强化训练中，目标就是要学习一种是奖励最大化的策略。在基础层面上将来是由环境给出的。然而我们很可能遇到鼓励探索的agent。我们可以让agent探索新的状态而获得奖励，而不是仅仅给予明确的奖励；我们还可以使用混合奖励信号来帮助学习过程。使用reward_signals可以定义奖励信号。ML-Agents默认提供三种奖励信号：外部奖励信号（环境给予）、好奇心奖励信号（鼓励探索）、GAIL奖励信号（对抗模仿学习）。</p>
+<p><strong>lambd</strong>：agents更新估计值时依赖于当前值的多少，趋近于1时则靠近更新值，趋近于0靠近当前的估计值。推荐：0.9-0.95</p>
+<p><strong>num_epoch</strong>：梯度下降过程中通过经验池的次数。batch_size越大它可以设置得越大。减小该值可以确保更新稳定，但降低学习速率。推荐：3-10</p>
+<p><strong>num_layer</strong>：观察值输入后或CNN之后存在的隐藏层的数量，复杂的问题需要更多的层，推荐：1-3</p>
+<p><strong>hidden_units</strong>：对应神经网络每个全连接层有多少个单元。推荐：32-512</p>
+<p><strong>vis_encode_type</strong>：对应于可视化观测进行编码的编码器类型，选项包含：simple（默认）：两个卷积层组成的简单编码器，nature_cnn：三个卷积层组成，详见<a target="_blank" rel="noopener" href="https://www.nature.com/articles/nature14236%E3%80%82resnet%EF%BC%9A%E7%94%B1%E4%B8%89%E4%B8%AA%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B1%82%E6%9E%84%E6%88%90%EF%BC%8C%E6%98%AF%E6%AF%94%E5%85%B6%E4%BB%96%E4%B8%A4%E4%B8%AA%E6%9B%B4%E5%A4%A7%E7%9A%84%E7%BD%91%E7%BB%9C%EF%BC%8C%E8%AF%A6%E8%A7%81https://arxiv.org/abs/1802.01561%E3%80%82">https://www.nature.com/articles/nature14236。resnet：由三个堆叠的层构成，是比其他两个更大的网络，详见https://arxiv.org/abs/1802.01561。</a></p>
+<p><strong>init_path</strong>：指定在开始训练之前训练的模型，注意以前的模型的训练配置需要与当前运行的相同，并且使用相同版本的ML-Agents保存，同时要提供全路径存储。</p>
+<p><strong>reward_signal_num_update</strong>：对应于每次更新过程中采样并用于更新奖励信号的小批量数。默认在每次主policy更新时都会更新一次奖励信号，但为了模仿某些论文中的训练过程，我们需要更新N次策略，然后将奖励信号（GAIL）更新M次。此时我们可以将SAC的train_interval和num_update设置为N，将reward_signals下的reward_signal_num_update设置为M。默认其值为num_update。</p>
+<p><strong>buffer_init_steps</strong>训练之前预填充经验池的数据量。未经训练的策略是随机的，用随机动作预填充对于探索十分有用。</p>
+<p><strong>num_update</strong>：每个训练时间期间采样并用于训练的最小批量数。通常情况下，该值为1。</p>
+<p><strong>tau</strong>：SAC模型更新期间目标Q网络更新的快慢，因为存在Q和Target Q两个网络，每隔一段时间需要对Target Q进行更新，推荐：0.005-0.01</p>
+<p><strong>strength</strong>：原始奖励的倍乘系数，范围根据奖励信号变化。推荐：1.0</p>
+<p><strong>gamma</strong>：对应未来奖励的折扣因子。推荐：0.8-0.995</p>
+<p><strong>好奇心奖励信号</strong>：包括正向模型：采用当前已编码的观测值和动作，预测下一个已编码的观测值，逆向模型：采用agent的当前和下一个观测值，对它们进行编码，并使用编码来预测观测值之间采取的动作。正向模型的损失（预测值和实际值之间的差异）被用作内在奖励。</p>
+<p><strong>encoding_size</strong>：好奇心模块使用的编码大小，该值足够小可以鼓励ICM压缩原始的观察值，但太小也会导致ICM学习区分输出的行为和实际的行为。推荐：64-256</p>
+<p><strong>GAIL</strong>：即生成对抗模仿学习。和GANs类似。对于strength的设置取决于人的水平，人的演示很好这个值设高一点，推荐：0.01-1。</p>
+<p><strong>use_actions</strong>：鉴别器是根据观察和操作进行区分，还是仅仅根据观察值进行区分，如果希望agent模仿操作，则应该设为true，如果希望agent使用不同的操作达到相同的状态，则设为false。设为false更加稳定，特别是演示不完美的情况下，但学习速度较慢。</p>
+<p><strong>use_vail</strong>：是鉴别器学习一种更笼统的表示，降低了其在鉴别方面的过拟合，使学习更加稳定，但也会增加训练时间，如果模仿学习不成功，可以启用这个功能。</p>
+<hr>
+<h3 id="环境参数"><a href="#环境参数" class="headerlink" title="环境参数"></a>环境参数</h3><p>为了<strong>控制环境参数</strong>，可以在下方再加上一段配置：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
+  <span class="token key atrule">BehaviorY</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># &lt; Same as above ></span>
+
+<span class="token comment" spellcheck="true"># Add this section</span>
+<span class="token key atrule">environment_parameters</span><span class="token punctuation">:</span>
+  <span class="token key atrule">my_environment_parameter</span><span class="token punctuation">:</span> <span class="token number">3.0</span></code></pre>
+<p>然后再Unity仿真中，可以通过以下方式访问参数：</p>
+<pre class=" language-c#"><code class="language-c#">Academy.Instance.EnvironmentParameters.GetWithDefault("my_environment_parameter", 0.0f);</code></pre>
+<hr>
+<p>为了使<strong>参数随机</strong>，我们可以不直接提供数值，而是让它自己采样，下面是包含三个环境参数的示例：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
+  <span class="token key atrule">BehaviorY</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># &lt; Same as above ></span>
+
+<span class="token comment" spellcheck="true"># Add this section</span>
+<span class="token key atrule">environment_parameters</span><span class="token punctuation">:</span>
+  <span class="token key atrule">mass</span><span class="token punctuation">:</span>
+    <span class="token key atrule">sampler_type</span><span class="token punctuation">:</span> uniform
+    <span class="token key atrule">sampler_parameters</span><span class="token punctuation">:</span>
+        <span class="token key atrule">min_value</span><span class="token punctuation">:</span> <span class="token number">0.5</span>
+        <span class="token key atrule">max_value</span><span class="token punctuation">:</span> <span class="token number">10</span>
+
+  <span class="token key atrule">length</span><span class="token punctuation">:</span>
+    <span class="token key atrule">sampler_type</span><span class="token punctuation">:</span> multirangeuniform
+    <span class="token key atrule">sampler_parameters</span><span class="token punctuation">:</span>
+        <span class="token key atrule">intervals</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">15</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+
+  <span class="token key atrule">scale</span><span class="token punctuation">:</span>
+    <span class="token key atrule">sampler_type</span><span class="token punctuation">:</span> gaussian
+    <span class="token key atrule">sampler_parameters</span><span class="token punctuation">:</span>
+        <span class="token key atrule">mean</span><span class="token punctuation">:</span> <span class="token number">2</span>
+        <span class="token key atrule">st_dev</span><span class="token punctuation">:</span> <span class="token number">.3</span></code></pre>
+<p>其中uniform是统一采样器，从给定最大值和最小值的范围中采样，gaussian是高斯采样器，给定均值和标准差从正态分布中采样。multirange_uniform是多范围均匀采样，根据区间的相对长度从一组区间中采用一个区间。从这个区间中统一采样一个单浮点值。</p>
+<p>在3DBall的第二个配置文件中有这个用法。</p>
+<p>定义采样器配置后，输入响应命令可以启用参数随机化的训练器配置（如下）：</p>
+<pre class=" language-yaml"><code class="language-yaml">mlagents<span class="token punctuation">-</span>learn config/ppo/3DBall_randomize.yaml <span class="token punctuation">-</span><span class="token punctuation">-</span>run<span class="token punctuation">-</span>id=3D<span class="token punctuation">-</span>Ball<span class="token punctuation">-</span>randomize</code></pre>
+<hr>
+<h3 id="Curriculum-Learning"><a href="#Curriculum-Learning" class="headerlink" title="Curriculum Learning"></a><em>Curriculum Learning</em></h3><p>如果想启用<strong>课程学习</strong>，需要添加一段配置：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">ehaviors</span><span class="token punctuation">:</span>
+  <span class="token key atrule">BehaviorY</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># &lt; Same as above ></span>
+
+<span class="token comment" spellcheck="true"># Add this section</span>
+<span class="token key atrule">environment_parameters</span><span class="token punctuation">:</span>
+  <span class="token key atrule">my_environment_parameter</span><span class="token punctuation">:</span>
+    <span class="token key atrule">curriculum</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> MyFirstLesson <span class="token comment" spellcheck="true"># The '-' is important as this is a list</span>
+        <span class="token key atrule">completion_criteria</span><span class="token punctuation">:</span>
+          <span class="token key atrule">measure</span><span class="token punctuation">:</span> progress
+          <span class="token key atrule">behavior</span><span class="token punctuation">:</span> my_behavior
+          <span class="token key atrule">signal_smoothing</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+          <span class="token key atrule">min_lesson_length</span><span class="token punctuation">:</span> <span class="token number">100</span>
+          <span class="token key atrule">threshold</span><span class="token punctuation">:</span> <span class="token number">0.2</span>
+        <span class="token key atrule">value</span><span class="token punctuation">:</span> <span class="token number">0.0</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> MySecondLesson <span class="token comment" spellcheck="true"># This is the start of the second lesson</span>
+        <span class="token key atrule">completion_criteria</span><span class="token punctuation">:</span>
+          <span class="token key atrule">measure</span><span class="token punctuation">:</span> progress
+          <span class="token key atrule">behavior</span><span class="token punctuation">:</span> my_behavior
+          <span class="token key atrule">signal_smoothing</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+          <span class="token key atrule">min_lesson_length</span><span class="token punctuation">:</span> <span class="token number">100</span>
+          <span class="token key atrule">threshold</span><span class="token punctuation">:</span> <span class="token number">0.6</span>
+          <span class="token key atrule">require_reset</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+        <span class="token key atrule">value</span><span class="token punctuation">:</span>
+          <span class="token key atrule">sampler_type</span><span class="token punctuation">:</span> uniform
+          <span class="token key atrule">sampler_parameters</span><span class="token punctuation">:</span>
+            <span class="token key atrule">min_value</span><span class="token punctuation">:</span> <span class="token number">4.0</span>
+            <span class="token key atrule">max_value</span><span class="token punctuation">:</span> <span class="token number">7.0</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> MyLastLesson
+        <span class="token key atrule">value</span><span class="token punctuation">:</span> <span class="token number">8.0</span></code></pre>
+<p>name是用户定义的课程名称，completion_criteria决定了需要模拟的世间，当满足条件是课程转到下一个lessons，value就是环境参数在课程中需要采用的值。</p>
+<p>measure是衡量学习进度和课程进展的依据，behavior指定正在跟踪的行为，可以有多个名称不同的行为，每个行为处于不同的训练点。此设置允许课程仅跟踪其中之一。threshold确定在measure的哪里增加课程的值。</p>
+<p>min_lesson_length指的是更改课程之前应完成的最少episode数。如果<code>measure</code>设置为<code>reward</code>，<code>min_lesson_length</code>将使用最后一集的平均累积奖励来确定课程是否应该更改。必须是非负的。<strong>重要提示</strong>：与阈值比较的平均奖励不同于记录到控制台的平均奖励。例如，如果<code>min_lesson_length</code>是<code>100</code>，则在最后一<code>100</code>集的平均累积奖励超过当前阈值后，课程将增加。记录到控制台的平均奖励由<code>summary_freq</code>上面定义的参数决定。</p>
+<p>signal_smoothing决定是否按以前的值对当前进度度量进行加权。</p>
+<p>require_reset决定更改课程是否需要重置环境（默认：false）。</p>
+<p>一旦我们指定了我们的元课程和课程，我们就可以启动 <code>mlagents-learn</code>指向包含我们课程的配置文件，PPO 将使用课程学习进行训练。例如，要通过课程学习在 Wall Jump 环境中训练智能体，我们可以运行：</p>
+<pre class=" language-yaml"><code class="language-yaml">mlagents<span class="token punctuation">-</span>learn config/ppo/WallJump_curriculum.yaml <span class="token punctuation">-</span><span class="token punctuation">-</span>run<span class="token punctuation">-</span>id=wall<span class="token punctuation">-</span>jump<span class="token punctuation">-</span>curriculum</code></pre>
+<hr>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>对于上面的命令不理解的不用着急，ML-Agents提供了一系列实例来演示大部分的功能，后面会一一开文章进行讲解。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">微笑紫瞳星</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://tianjuewudi.gitee.io/2021/11/01/ml-agents-ming-ling-ji-pei-zhi-da-quan/">https://tianjuewudi.gitee.io/2021/11/01/ml-agents-ming-ling-ji-pei-zhi-da-quan/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">微笑紫瞳星</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">强化学习</span>
+                                </a>
+                            
+                                <a href="/tags/ML-Agents/">
+                                    <span class="chip bg-color">ML-Agents</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'bpzS5Q9Q9zMl4doyyDGqIqqq-gzGzoHsz',
+        appKey: 'M0IfLJW2G1dCMyLTb90tFxT8',
+        notify: 'true' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '请畅所欲言'
+    });
+</script>
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2021/11/02/ml-agents-an-li-zhi-crawler/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="ML-Agents案例之Crawler">
+                        
+                        <span class="card-title">ML-Agents案例之Crawler</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-02
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Unity%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    Unity强化学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">强化学习</span>
+                    </a>
+                    
+                    <a href="/tags/ML-Agents/">
+                        <span class="chip bg-color">ML-Agents</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/10/29/zi-chuang-qiang-hua-xue-xi-huan-jing-zhi-unity3d-cha-jian-ml-agent-de-shi-yong/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="自创强化学习环境之Unity3D插件ML-Agent的使用">
+                        
+                        <span class="card-title">自创强化学习环境之Unity3D插件ML-Agent的使用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Unity%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    Unity强化学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">强化学习</span>
+                    </a>
+                    
+                    <a href="/tags/ML-Agents/">
+                        <span class="chip bg-color">ML-Agents</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('50')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 微笑紫瞳星<br />'
+            + '文章作者: 微笑紫瞳星<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处，谢谢啦~';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="tencent"
+                   type="playlist"
+                   id="8075110837"
+                   fixed='true'
+                   autoplay='true'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.35'
+                   list-folded='false'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">微笑紫瞳星</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">198.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2021";
+                    var startMonth = "1";
+                    var startDate = "9";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "11";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1121452406" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1121452406" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false});</script></body>
+
+</html>

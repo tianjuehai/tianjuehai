@@ -479,21 +479,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-11-01
+                    2021-11-03
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.1k
+                    3.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    13 分
+                    14 分
                 </div>
                 
 
@@ -554,7 +554,7 @@ conda create -n ml-agents python=3.6
 activete ml-agent</code></pre>
 </li>
 <li><p>解压从Github上下载的文件，分别cd到ml-agents和ml-agents-envs两个目录，执行以下命令安装两个包：</p>
-<pre><code>pip install .</code></pre>
+<pre class=" language-cmd"><code class="language-cmd">pip install .</code></pre>
 </li>
 <li><p>执行以下命令看看安装是否成功</p>
 <pre class=" language-cmd"><code class="language-cmd">mlagents-learn --help</code></pre>
@@ -570,14 +570,14 @@ conda config --set show_channel_urls yes#下载时显示文件来源</code></pre
 <li>下一步打开Unity编辑器，创建一个3D工程，点击windows菜单下的Package Manager，点击左上角的加号，选择Add package from disk,然后弹出的窗口中打开com.unity.ml-agents中的package.json文件，即可把包添加到Unity中，com.unity.ml-agents.extensions同理。安装完之后，就可以在下方文件中的Packages看到ML-Agents以及ML-Agent Extensions。</li>
 </ul>
 <h2 id="小试牛刀"><a href="#小试牛刀" class="headerlink" title="小试牛刀"></a>小试牛刀</h2><p>首先把官方包下的Project用Unity编辑器打开，进入到ML-Agents –&gt;Examples目录下，里面的全部都是ML-Agents各种实现的示例，包含了ML-Agents的主要功能展示，我们打开第一个项目3DBall，点击场景Scenes中的第一个：</p>
-<img src="/2021/10/29/zi-chuang-qiang-hua-xue-xi-huan-jing-zhi-unity3d-cha-jian-ml-agent-de-shi-yong/3.png" class="">
+<img src="/2021/10/29/zi-chuang-qiang-hua-xue-xi-huan-jing-zhi-unity3d-cha-jian-ml-agent-de-shi-yong/3.png" class>
 
 <p>现在可以看到画面了，这是一个相当简单的初级项目，我们只需要训练一个智能体顶着小球不让它落下即可。</p>
 <p>我们打开Anaconda Prompt，切换到我们创建的环境，cd到官方包的目录，执行命令：</p>
 <pre class=" language-cmd"><code class="language-cmd">mlagents-learn config/ppo/3DBall.yaml --run-id=3DBallTest --force</code></pre>
 <p>这条命令的意思是采用的配置文件是3DBall.yaml，以3DBallTest这个名字来进行训练，训练数据也将保存在官方包下results目录下的同名文件夹，–force是强制执行，这会覆盖上一次的数据，如果没有写–force而存在同名文件夹，则训练无法执行。</p>
 <p>执行命令后，它会弹出以下界面，然后你可以在Unity中点击运行了：</p>
-<img src="/2021/10/29/zi-chuang-qiang-hua-xue-xi-huan-jing-zhi-unity3d-cha-jian-ml-agent-de-shi-yong/4.png" class="">
+<img src="/2021/10/29/zi-chuang-qiang-hua-xue-xi-huan-jing-zhi-unity3d-cha-jian-ml-agent-de-shi-yong/4.png" class>
 
 <p>如果前面的步骤没有问题，就可以看到Unity中的画面是加速运行的，并且控制台逐渐输出以下信息：</p>
 <pre class=" language-cmd"><code class="language-cmd">[INFO] Connected to Unity environment with package version 2.1.0-exp.1 and communication version 1.5.0
@@ -631,7 +631,7 @@ conda config --set show_channel_urls yes#下载时显示文件来源</code></pre
 <p>当结束Unity的运行时，模型会自动保存到官方包下results下对应的文件夹，找到onnx后缀的文件，这是训练好的神经网络模型，导进项目中后，拖到Behavior Parameters组件的Model参数中，点击运行就可以查看实际的运行效果啦！</p>
 <h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><p>首先在布置好环境之后，我们需要在智能体下挂载以下脚本：</p>
 <p>为了驱动智能体，我们需要在智能体下挂上<strong>Behavior Parameters组件</strong>来调节各种参数，然后我们设置组件参数：</p>
-<img src="/2021/10/29/zi-chuang-qiang-hua-xue-xi-huan-jing-zhi-unity3d-cha-jian-ml-agent-de-shi-yong/2.png" class="">
+<img src="/2021/10/29/zi-chuang-qiang-hua-xue-xi-huan-jing-zhi-unity3d-cha-jian-ml-agent-de-shi-yong/2.png" class>
 
 <p>其中我们需要修改的有Space Size，代表输入的维度，通常位置的输入是三维的，旋转涉及四元数所以是四维的，速度和角速度都是三维的。这样我们就可以根据需要观察的智能体的参数来计算输入的维度。Action是输出，其中的Continuous Action是输出的连续动作，Descrete Branch是离散动作，我们根据需求填写数量。</p>
 <p>还有一个必要的组件是<strong>Decision Requester</strong>，这个组件提供了方便快捷的方式触发智能体决策过程。可以调节采取决策的步数，和不采取决策时是否执行动作。</p>
@@ -664,7 +664,7 @@ EnvironmentParameters m_ResetParams;</code></pre>
     m_BallRb = ball.GetComponent<Rigidbody>();
     m_ResetParams = Academy.Instance.EnvironmentParameters;
     SetResetParameters();
-}</code></pre>
+}</Rigidbody></code></pre>
 <p>CollectObservations方法：</p>
 <pre class=" language-c#"><code class="language-c#">public override void CollectObservations(VectorSensor sensor)
 {
@@ -676,6 +676,30 @@ EnvironmentParameters m_ResetParams;</code></pre>
         sensor.AddObservation(m_BallRb.velocity);
     }
 }</code></pre>
+<p>在hard版本的3DBall中，采用了另一种方式代替CollectObservations方法（输入维度为5，忽略小球速度）：</p>
+<pre class=" language-c#"><code class="language-c#">// 标记该变量可观察，观察状态的帧数为9
+[Observable(numStackedObservations: 9)]
+Vector2 Rotation
+{
+    get
+    {
+        return new Vector2(gameObject.transform.rotation.z, gameObject.transform.rotation.x);
+    }
+}
+
+[Observable(numStackedObservations: 9)]
+Vector3 PositionDelta
+{
+    get
+    {
+        return ball.transform.position - gameObject.transform.position;
+    }
+}</code></pre>
+<p>第三种替代CollectObservations是加上相机脚本即Camera Sensor脚本，再把相机的预制体拖入其中，设置好参数，相机自己就会获取画面作为输入，但会大大增加训练时间。</p>
+<img src="/2021/10/29/zi-chuang-qiang-hua-xue-xi-huan-jing-zhi-unity3d-cha-jian-ml-agent-de-shi-yong/5.png" class>
+
+
+
 <p>OnActionReceived方法：</p>
 <pre class=" language-c#"><code class="language-c#">public override void OnActionReceived(ActionBuffers actionBuffers)
 {
@@ -736,7 +760,7 @@ public void SetResetParameters()
 {
     SetBall();
 }</code></pre>
-<p>到这里智能体的脚本就写完了。接下来我们需要设置算法和参数。进入到config文件夹下，里面存放着算法的配置，对于单智能体强化学习，Unity官方提供了两种算法，PPO和SAC，这里我们使用PPO算法。进入PPO文件夹中，打开3DBall.yaml，通过修改其中的参数就能改变训练的配置，这需要对相应的强化学习算法有一定的了解。</p>
+<p>到这里智能体的脚本就写完了。接下来我们需要设置算法和参数。进入到config文件夹下，里面存放着算法的配置，对于单智能体强化学习，Unity官方提供了两种算法，PPO和SAC，这里我们使用PPO算法。进入PPO文件夹中，打开3DBall.yaml，通过修改其中的参数就能改变训练的配置，这需要对相应的强化学习算法有一定的了解。具体可以参考配置文档：<a target="_blank" rel="noopener" href="https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Training-Configuration-File.md">https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Training-Configuration-File.md</a></p>
 <pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
   <span class="token key atrule">3DBall</span><span class="token punctuation">:</span>
     <span class="token key atrule">trainer_type</span><span class="token punctuation">:</span> ppo
@@ -770,10 +794,14 @@ public void SetResetParameters()
 <h2 id="TensorBoard的使用"><a href="#TensorBoard的使用" class="headerlink" title="TensorBoard的使用"></a>TensorBoard的使用</h2><p>在上面的控制台环境下输入下列命令（训练过程中可以另外开一个Anaconda Prompt）：</p>
 <pre class=" language-cmd"><code class="language-cmd">tensorboard --logdir .\results\ --port 6006</code></pre>
 <p>在浏览器中的网址栏输入localhost:6006，就可以看到tensorboard的界面了。这样就能把数据进行可视化。奖励和Loss的变化一清二楚。</p>
-<img src="/2021/10/29/zi-chuang-qiang-hua-xue-xi-huan-jing-zhi-unity3d-cha-jian-ml-agent-de-shi-yong/1.png" class="">
+<img src="/2021/10/29/zi-chuang-qiang-hua-xue-xi-huan-jing-zhi-unity3d-cha-jian-ml-agent-de-shi-yong/1.png" class>
 
 
 
+<h2 id="加速训练"><a href="#加速训练" class="headerlink" title="加速训练"></a>加速训练</h2><p>在编辑器中的训练是需要消耗非常多性能的，因此我们需要先把它打包成exe文件，具体操作是File–&gt;Build Settings–&gt;Build。</p>
+<p>打包好后，把配置文件yaml文件也放入文件夹中。cd到该文件夹中，输入以下命令：</p>
+<pre class=" language-cmd"><code class="language-cmd">mlagents-learn 配置文件名.yaml --run-id=自己随意起名 --env=执行文件名.exe --num-envs=9 --force</code></pre>
+<p>就可以开启9个窗口同时训练。如果不显示图形界面可以快一大截，只需在命令后面加上–no-graphics即可。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文中介绍了Unity插件ML-Agents的安装和使用方法，并且跑通了ML-Agents的第一个入门级示例。现在算是对ML-Agents的整体框架有了大概的了解，后面还有更加复杂功能的实现，自创环境，自创算法等着我们去探索，我会另外开文章对每个要点进行详细的解读。</p>
 
                 
@@ -1277,18 +1305,17 @@ public void SetResetParameters()
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/10/29/zi-chuang-qiang-hua-xue-xi-huan-jing-zhi-unity3d-cha-jian-ml-agent-de-shi-yong/">
+                <a href="/2021/11/01/ml-agents-ming-ling-ji-pei-zhi-da-quan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="自创强化学习环境之Unity3D插件ML-Agent的使用">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="ML-Agents命令及配置大全">
                         
-                        <span class="card-title">自创强化学习环境之Unity3D插件ML-Agent的使用</span>
+                        <span class="card-title">ML-Agents命令及配置大全</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1298,9 +1325,9 @@ public void SetResetParameters()
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-29
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-01
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1313,7 +1340,6 @@ public void SetResetParameters()
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1609,7 +1635,7 @@ public void SetResetParameters()
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">194.3k</span>&nbsp;字
+                class="white-color">198.8k</span>&nbsp;字
             
             
             
