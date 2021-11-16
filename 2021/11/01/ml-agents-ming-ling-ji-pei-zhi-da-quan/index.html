@@ -479,21 +479,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-11-11
+                    2021-11-16
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.9k
+                    5.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    15 分
+                    20 分
                 </div>
                 
 
@@ -524,7 +524,7 @@
 <h2 id="ML-Agents命令"><a href="#ML-Agents命令" class="headerlink" title="ML-Agents命令"></a>ML-Agents命令</h2><p>查看所有的命令：</p>
 <pre class=" language-cmd"><code class="language-cmd">mlagents-learn --help</code></pre>
 <p>训练的基本命令是：</p>
-<pre class=" language-cmd"><code class="language-cmd">mlagents-learn <trainer-config-file> --env=<env_name> --run-id=<run-identifier></code></pre>
+<pre class=" language-cmd"><code class="language-cmd">mlagents-learn <trainer-config-file> --env=<env_name> --run-id=<run-identifier></run-identifier></env_name></trainer-config-file></code></pre>
 <ul>
 <li><code>&lt;trainer-config-file&gt;</code>是训练器配置 YAML 的文件路径。里面包含所有超参数值。<code>&lt;env_name&gt;</code>（可选）是包含要训练的代理的<a target="_blank" rel="noopener" href="https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Learning-Environment-Executable.md">Unity 可执行文件</a>的名称（包括路径） 。如果不写，则训练将在编辑器中进行。<code>&lt;run-identifier&gt;</code> 是一个唯一的名称，主要用于命名保存的训练模型、统计信息以及模型名称。训练过程产生的文件都保存在<code>results/&lt;run-identifier&gt;</code>文件夹中。</li>
 <li><em>–curriculum=<code>&lt;file&gt;*</code>：如果你的训练是</em>Curriculum Learning*，这个命令可以指定你要训练的课程配置文件，官方也有一个示例（<strong>Wall Jump</strong>）专门展示了 <em>Curriculum Learning</em>这种训练类型，这里我们之后的文章再去深入研究。</li>
@@ -713,21 +713,69 @@
 <p><strong>use_actions</strong>：鉴别器是根据观察和操作进行区分，还是仅仅根据观察值进行区分，如果希望agent模仿操作，则应该设为true，如果希望agent使用不同的操作达到相同的状态，则设为false。设为false更加稳定，特别是演示不完美的情况下，但学习速度较慢。</p>
 <p><strong>use_vail</strong>：是鉴别器学习一种更笼统的表示，降低了其在鉴别方面的过拟合，使学习更加稳定，但也会增加训练时间，如果模仿学习不成功，可以启用这个功能。</p>
 <hr>
-<h3 id="环境参数"><a href="#环境参数" class="headerlink" title="环境参数"></a>环境参数</h3><p>为了<strong>控制环境参数</strong>，可以在下方再加上一段配置：</p>
+<h2 id="Self-Play"><a href="#Self-Play" class="headerlink" title="Self Play"></a>Self Play</h2><p>Self Play是计算机的“左右互搏术”，通过自己随机的一个个智能体相互战斗，共同进步，从而共同实现策略的优化。</p>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32528578">左右互搏，self-play，《Emergent Complexity via Multi-Agent Competition》</a></p>
+<p>Self Play为强化学习面临的常见问题增加了额外的混杂因素。一般在技能水平、最终策略通用性、学习的稳定性之间进行权衡。和低多样性对手进行训练比和高多样性对手进行训练会使学习过程更稳定。在此背景下，本指南讨论了可以调整的self play超参数。</p>
+<p>如果环境包含多个分成多个团队的智能体，您可以通过为每个行为提供以下配置来使用Self Play：</p>
+<table>
+<thead>
+<tr>
+<th><strong>环境</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>save_steps</code></td>
+<td>（默认 = <code>20000</code>）存储智能体策略的训练步数。例如，如果<code>save_steps=10000</code>当前策略的模型每个<code>10000</code>step保存一次，保存的叫做<strong>快照</strong>（snapshots）。请注意，训练步数是按每个智能体单独计算的。有关更多信息，请参阅v0.13 之后的<a target="_blank" rel="noopener" href="https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Migrating.md">迁移文档</a>。  较大的<code>save_steps</code>会使智能体接受更多的训练，因此将产生一组涵盖更广泛比赛风格的对手。智能体针对更广泛的对手进行训练。学习一个策略来击败更多样化的对手是一个更难的问题，因此可能需要更多的整体训练步骤，实现更通用和更强大的策略。该值还取决于环境对智能体的困难程度。  典型范围：<code>10000</code>-<code>100000</code></td>
+</tr>
+<tr>
+<td><code>team_change</code></td>
+<td>（默认 = <code>5 * save_steps</code>）切换学习团队的训练步数。每个团体学习到一定步数后，将切换给另一个团体进行学习。在不对称的比赛中，对方团体可能需要较少的训练步骤来获得类似的性能提升。与更简单的智能体团队相比，较高的team_change使用户能够训练更复杂的智能体团队。  较大的值<code>team-change</code>将允许智能体针对其对手进行更长时间的训练。智能体针对同一组对手训练的时间越长，击败他们的能力就越大。然而，针对同样的训练时间过长可能会导致对特定对手策略的过度拟合，智能体可能会在对抗下一批对手时失败。  <code>team-change</code>还决定保存多少智能体的训练快照用作其他团队的对手。因此，我们建议将此值设置为<code>save_steps</code>的倍数。  典型范围：4x-10x，其中 x=<code>save_steps</code></td>
+</tr>
+<tr>
+<td><code>swap_steps</code></td>
+<td>（默认 = <code>10000</code>）切换对手快照之间的步数。此时对手遵循固定策略而不学习。在非对称游戏中，我们可能有智能体数量不同的团队。例如两个智能体的团队每个step收集的智能体数据是一个智能体的团队的两倍。因此，这两个值应该不同，以确保相同数量的训练步数。swap_steps的公式为：(num_agents / num_opponent_agents)*(team_change / x)，x是交换次数。详细解释在下方。</td>
+</tr>
+<tr>
+<td><code>play_against_latest_model_ratio</code></td>
+<td>（默认 = <code>0.5</code>）智能体与对手的最新策略对抗的概率。也就是说有 1 - <code>play_against_latest_model_ratio</code>概率智能体将与过去迭代中对手的快照进行对抗。  较大的值<code>play_against_latest_model_ratio</code>表示智能体将更频繁地与当前对手对战。由于智能体正在更新其策略，如果每次迭代的对手都会有所不同，可能会导致学习环境的不稳定，但会给智能体带来更具挑战性的情况的<a target="_blank" rel="noopener" href="https://openai.com/blog/emergent-tool-use/">自动课程</a>，这可能最终使其更强大。  典型范围：<code>0.0</code>-<code>1.0</code></td>
+</tr>
+<tr>
+<td><code>window</code></td>
+<td>（默认 = <code>10</code>）储存快照的容量大小，智能体的对手从中采样。例如，<code>window</code>大小为 5 将保存最近拍摄的 5 个快照。每次拍摄新快照时，最老的快照将被丢弃。较大的值<code>window</code>意味着智能体的对手池将包含更多的行为多样性，因为它将包含训练早期的策略。就像在<code>save_steps</code>超参数中一样，智能体针对更广泛的对手进行训练。学习一个策略来击败更多样化的对手是一个更难的问题，因此需要更多的整体训练步骤，但也会在使得自身策略训练得更加强大。  典型范围：<code>5</code>-<code>30</code></td>
+</tr>
+</tbody></table>
+<h3 id="ELO机制"><a href="#ELO机制" class="headerlink" title="ELO机制"></a>ELO机制</h3><p>ELO等级分制度是衡量选手水平的评分方法，在训练智能体的过程中，各个智能体团队通过相互博弈共同进步，会使得ELO分数持续升高。一般来说，初始分为1200，赢了奖励一定分数，输了会扣除一定分数。详细规则请查看链接：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/57480433">ELO算法的原理及应用</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/houzhuoming1/article/details/50541415">ELO评分算法</a></p>
+<h3 id="交换步骤的注意事项"><a href="#交换步骤的注意事项" class="headerlink" title="交换步骤的注意事项"></a>交换步骤的注意事项</h3><p>例如，在 2v1 场景中，如果我们希望在 team-change=200000 步期间交换发生 x=4 次，则一个智能体的团队的 swap_steps 为：</p>
+<p>swap_steps = (1 / 2) * (200000 / 4) = 25000 </p>
+<p>两个智能体的团队的 swap_steps 为：</p>
+<p>swap_steps = (2 / 1) * (200000 / 4) = 100000 注意，在团队规模相同的情况下，第一项等于 1，swap_steps 可以通过将总步数除以所需的交换次数来计算。</p>
+<p>较大的 swap_steps 值意味着智能体将在更长的训练迭代次数中与相同的固定对手对战。使训练环境更稳定，但让智能体面临针对该特定对手过度拟合其行为的风险。</p>
+<p>双人足球中的具体配置：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">self_play</span><span class="token punctuation">:</span>
+      <span class="token key atrule">save_steps</span><span class="token punctuation">:</span> <span class="token number">50000</span>
+      <span class="token key atrule">team_change</span><span class="token punctuation">:</span> <span class="token number">200000</span>
+      <span class="token key atrule">swap_steps</span><span class="token punctuation">:</span> <span class="token number">2000</span>
+      <span class="token key atrule">window</span><span class="token punctuation">:</span> <span class="token number">10</span>
+      <span class="token key atrule">play_against_latest_model_ratio</span><span class="token punctuation">:</span> <span class="token number">0.5</span>
+      <span class="token key atrule">initial_elo</span><span class="token punctuation">:</span> <span class="token number">1200.0</span></code></pre>
+<hr>
+<h2 id="环境参数"><a href="#环境参数" class="headerlink" title="环境参数"></a>环境参数</h2><p>为了<strong>控制环境参数</strong>，可以在下方再加上一段配置：</p>
 <pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
   <span class="token key atrule">BehaviorY</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># &lt; Same as above ></span>
+    <span class="token comment" spellcheck="true"># &lt; Same as above &gt;</span>
 
 <span class="token comment" spellcheck="true"># Add this section</span>
 <span class="token key atrule">environment_parameters</span><span class="token punctuation">:</span>
   <span class="token key atrule">my_environment_parameter</span><span class="token punctuation">:</span> <span class="token number">3.0</span></code></pre>
 <p>然后再Unity仿真中，可以通过以下方式访问参数：</p>
 <pre class=" language-c#"><code class="language-c#">Academy.Instance.EnvironmentParameters.GetWithDefault("my_environment_parameter", 0.0f);</code></pre>
-<hr>
 <p>为了使<strong>参数随机</strong>，我们可以不直接提供数值，而是让它自己采样，下面是包含三个环境参数的示例：</p>
 <pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
   <span class="token key atrule">BehaviorY</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># &lt; Same as above ></span>
+    <span class="token comment" spellcheck="true"># &lt; Same as above &gt;</span>
 
 <span class="token comment" spellcheck="true"># Add this section</span>
 <span class="token key atrule">environment_parameters</span><span class="token punctuation">:</span>
@@ -752,10 +800,10 @@
 <p>定义采样器配置后，输入响应命令可以启用参数随机化的训练器配置（如下）：</p>
 <pre class=" language-yaml"><code class="language-yaml">mlagents<span class="token punctuation">-</span>learn config/ppo/3DBall_randomize.yaml <span class="token punctuation">-</span><span class="token punctuation">-</span>run<span class="token punctuation">-</span>id=3D<span class="token punctuation">-</span>Ball<span class="token punctuation">-</span>randomize</code></pre>
 <hr>
-<h3 id="Curriculum-Learning"><a href="#Curriculum-Learning" class="headerlink" title="Curriculum Learning"></a><em>Curriculum Learning</em></h3><p>如果想启用<strong>课程学习</strong>，需要添加一段配置：</p>
+<h2 id="Curriculum-Learning"><a href="#Curriculum-Learning" class="headerlink" title="Curriculum Learning"></a><em>Curriculum Learning</em></h2><p>如果想启用<strong>课程学习</strong>，需要添加一段配置：</p>
 <pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">ehaviors</span><span class="token punctuation">:</span>
   <span class="token key atrule">BehaviorY</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># &lt; Same as above ></span>
+    <span class="token comment" spellcheck="true"># &lt; Same as above &gt;</span>
 
 <span class="token comment" spellcheck="true"># Add this section</span>
 <span class="token key atrule">environment_parameters</span><span class="token punctuation">:</span>
@@ -1632,7 +1680,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">210.9k</span>&nbsp;字
+                class="white-color">218.1k</span>&nbsp;字
             
             
             

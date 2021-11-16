@@ -493,7 +493,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    14 分
+                    15 分
                 </div>
                 
 
@@ -597,14 +597,14 @@ public class WallJumpAgent : Agent
     public override void Initialize()
     {
         // 寻找设定参数的脚本
-        m_WallJumpSettings = FindObjectOfType<WallJumpSettings>();
+        m_WallJumpSettings = FindObjectOfType<walljumpsettings>();
         // 随机墙的高度
         m_Configuration = Random.Range(0, 5);
        // 获取物体中的各种组件
-        m_AgentRb = GetComponent<Rigidbody>();
-        m_ShortBlockRb = shortBlock.GetComponent<Rigidbody>();
-        m_SpawnAreaBounds = spawnArea.GetComponent<Collider>().bounds;
-        m_GroundRenderer = ground.GetComponent<Renderer>();
+        m_AgentRb = GetComponent<rigidbody>();
+        m_ShortBlockRb = shortBlock.GetComponent<rigidbody>();
+        m_SpawnAreaBounds = spawnArea.GetComponent<collider>().bounds;
+        m_GroundRenderer = ground.GetComponent<renderer>();
         m_GroundMaterial = m_GroundRenderer.material;
         // 使生成区域不可见
         spawnArea.SetActive(false);
@@ -612,7 +612,7 @@ public class WallJumpAgent : Agent
         m_ResetParams = Academy.Instance.EnvironmentParameters;
 
         // Update model references if we're overriding
-        var modelOverrider = GetComponent<ModelOverrider>();
+        var modelOverrider = GetComponent<modeloverrider>();
         // 导入三个模型，采用配置文件的参数
         if (modelOverrider.HasOverrides)
         {
@@ -651,7 +651,7 @@ public class WallJumpAgent : Agent
             //如果检测到对应标签，则判断触地
             foreach (var col in hitGroundColliders)
             {
-                if (col != null && col.transform != transform &&
+                if (col != null &amp;&amp; col.transform != transform &amp;&amp;
                     (col.CompareTag("walkableSurface") ||
                      col.CompareTag("block") ||
                      col.CompareTag("wall")))
@@ -670,11 +670,11 @@ public class WallJumpAgent : Agent
             Physics.Raycast(transform.position + new Vector3(0, -0.05f, 0), -Vector3.up, out hit,
                 1f);
            // 射线检测到对应标签的物体代表触地
-            if (hit.collider != null &&
+            if (hit.collider != null &amp;&amp;
                 (hit.collider.CompareTag("walkableSurface") ||
                  hit.collider.CompareTag("block") ||
                  hit.collider.CompareTag("wall"))
-                && hit.normal.y > 0.95f)
+                &amp;&amp; hit.normal.y &gt; 0.95f)
             {
                 return true;
             }
@@ -755,16 +755,7 @@ public class WallJumpAgent : Agent
         else if (dirToGoSideAction == 2)
             dirToGo = (largeGrounded ? 1f : 0.5f) * 0.6f * transform.right;
         if (jumpAction == 1)
-            if ((jumpingTime <= 0f) && smallGrounded)
-            {
-                Jump();
-            }
-        // 执行动作
-        transform.Rotate(rotateDir, Time.fixedDeltaTime * 300f);
-        m_AgentRb.AddForce(dirToGo * m_WallJumpSettings.agentRunSpeed,
-            ForceMode.VelocityChange);
-        // 跳跃尚未结束，往最高点移动
-        if (jumpingTime > 0f)
+            if ((jumpingTime &lt;= 0f) &amp;&amp; smallgrounded) { jump(); } 执行动作 transform.rotate(rotatedir, time.fixeddeltatime * 300f); m_agentrb.addforce(dirtogo m_walljumpsettings.agentrunspeed, forcemode.velocitychange); 跳跃尚未结束，往最高点移动 if (jumpingtime&gt; 0f)
         {
             m_JumpTargetPos =
                 new Vector3(m_AgentRb.position.x,
@@ -774,7 +765,7 @@ public class WallJumpAgent : Agent
                 m_WallJumpSettings.agentJumpVelocityMaxChange);
         }
         // 在空中下坠时添加一个下坠的力
-        if (!(jumpingTime > 0f) && !largeGrounded)
+        if (!(jumpingTime &gt; 0f) &amp;&amp; !largeGrounded)
         {
             m_AgentRb.AddForce(
                 Vector3.down * fallingForce, ForceMode.Acceleration);
@@ -822,7 +813,7 @@ public class WallJumpAgent : Agent
     // 接触到目标点，加分，重开
     void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.CompareTag("goal") && DoGroundCheck(true))
+        if (col.gameObject.CompareTag("goal") &amp;&amp; DoGroundCheck(true))
         {
             SetReward(1f);
             EndEpisode();
@@ -896,7 +887,7 @@ public class WallJumpAgent : Agent
         }
     }
 }
-</code></pre>
+<!--=--></int></modeloverrider></renderer></collider></rigidbody></rigidbody></walljumpsettings></code></pre>
 <p>注意这个案例终于用到了Override这个脚本，它的作用是在训练中也能通过SetModel(m_BigWallBehaviorName, bigWallBrain)替换模型，其中第一个参数是配置文件中的Behavior Name，第二个就是对应的模型文件。这样我们就能在不同的情况采用不同的模型了。</p>
 <h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>配置文件1：PPO算法，于以往不同，可以看到我们配置了两个神经网络，一个名字是BigWallJump，一个是SmallWallJump。这是因为我们的环境需要给智能体配置两个神经网络，根据不同的情况调用不同的神经网络分别进行学习。因为一个神经网络如果要做的事情太多往往需要的训练时间很长，很可能train不起来。如果分成几个任务，适时调用不同的神经网络，不仅可以加快训练速度，还能达到更好的效果。</p>
 <p>亲测这种算法在高墙时无法收敛，没办法利用方块，平均得分-0.6。</p>
@@ -1155,7 +1146,7 @@ public class WallJumpAgent : Agent
   <span class="token key atrule">signal_smoothing</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
   <span class="token key atrule">parameters</span><span class="token punctuation">:</span>
     <span class="token key atrule">small_wall_height</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">1.5</span><span class="token punctuation">,</span> <span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token number">2.5</span><span class="token punctuation">,</span> <span class="token number">4.0</span><span class="token punctuation">]</span></code></pre>
-<p>亲测这种算法最终平均得分0.6，存在完不成任务的情况，但效果比上面两种要好，可以再对课程进行细分来提高得分。</p>
+<p>亲测这种算法最终平均得分0.7，存在少量完不成任务的情况，但效果比上面两种要好得多，可以再对课程进行细分来提高得分。</p>
 <p>训练命令：</p>
 <pre class=" language-cmd"><code class="language-cmd">mlagents-learn config/ppo/WallJump.yaml --run-id=WallJump --force</code></pre>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>相对于以前的案例，这个案例的新颖之处在于：</p>
@@ -1666,18 +1657,17 @@ public class WallJumpAgent : Agent
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/11/09/ml-agents-an-li-zhi-walljump/">
+                <a href="/2021/11/12/ml-agents-an-li-zhi-shi-wu-shou-ji-zhe/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="ML-Agents案例之WallJump">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="ML-Agents案例之食物收集者">
                         
-                        <span class="card-title">ML-Agents案例之WallJump</span>
+                        <span class="card-title">ML-Agents案例之食物收集者</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1687,9 +1677,9 @@ public class WallJumpAgent : Agent
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-09
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-12
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1702,7 +1692,6 @@ public class WallJumpAgent : Agent
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -2002,7 +1991,7 @@ public class WallJumpAgent : Agent
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">210.9k</span>&nbsp;字
+                class="white-color">218.1k</span>&nbsp;字
             
             
             
