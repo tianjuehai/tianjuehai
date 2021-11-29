@@ -479,7 +479,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-11-08
+                    2021-11-17
                 </div>
                 
 
@@ -521,7 +521,7 @@
                 <p>  本案例源自ML-Agents官方的示例，Github地址：<a target="_blank" rel="noopener" href="https://github.com/Unity-Technologies/ml-agents">https://github.com/Unity-Technologies/ml-agents</a></p>
 <p>  本文基于我前面发的两篇文章，需要对ML-Agents有一定的了解，详情请见：<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121115480">Unity强化学习之ML-Agents的使用</a>、<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121116043">ML-Agents命令及配置大全</a>。</p>
 <p>参考资料：<a target="_blank" rel="noopener" href="https://developer.unity.cn/projects/5ea6d76eedbc2a001f1e4f4b">ML-Agents（八）PushBlock</a>、<a target="_blank" rel="noopener" href="https://developer.unity.cn/projects/610a0666edbc2a001fea825e">训练ML-Agents玩躲避球</a>、<a target="_blank" rel="noopener" href="https://developer.unity.cn/projects/61090e12edbc2a00219964a5">ML-Agents 2.0：合作行为训练</a></p>
-<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/1.png" class="">
+<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/1.png" class>
 
 <p>游戏目标：智能体把白色的方块推到指定的绿色区域为游戏胜利。</p>
 <p>推箱子游戏分为单人模式和多人模式。</p>
@@ -529,9 +529,9 @@
 <p>首先是正常的Behavior Parameters，Decision Requester，Model Overrider三件套，Behavior Parameters的观测维度直接设定为0，这是由于我们采用了Ray Perception Sensor3D脚本来采集观测数据。输出的空间是离散的，只有一个输出，这就表示移动和旋转共用一个输出且移动方向固定。</p>
 <hr>
 <p>射线感知器<em>Ray Perception Sensor Component 3D</em>组件</p>
-<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/2.png" class="">
+<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/2.png" class>
 
-<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/3.png" class="">
+<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/3.png" class>
 
 <p>可以看到一个智能体上挂了两个<em>Ray Perception Sensor Component 3D</em>组件,第一个在脚下，主要用来探测方块和目标点，第二个在头顶，主要是为了越过方块探测到方块后有没有墙体。两个传感器的参数只在两个offset上有差异。</p>
 <ul>
@@ -600,7 +600,7 @@ public void SetBlockProperties()
     m_BlockRb.transform.localScale = new Vector3(scale, 0.75f, scale);
     // Set the drag of the block
     m_BlockRb.drag = m_ResetParams.GetWithDefault("block_drag", 0.5f);
-}</code></pre>
+}</Collider></Renderer></Collider></Rigidbody></Rigidbody></GoalDetect></PushBlockSettings></code></pre>
 <p>最为关键的OnActionReceived函数：</p>
 <pre class=" language-c#"><code class="language-c#">public void MoveAgent(ActionSegment<int> act)
 {
@@ -642,7 +642,7 @@ public override void OnActionReceived(ActionBuffers actionBuffers)
 {
     MoveAgent(actionBuffers.DiscreteActions);
     AddReward(-1f / MaxStep);
-}</code></pre>
+}</int></code></pre>
 <p>Heuristic方法，可以由玩家手动控制智能体：</p>
 <pre class=" language-c#"><code class="language-c#">public override void Heuristic(in ActionBuffers actionsOut)
 {
@@ -788,21 +788,21 @@ public Vector3 GetRandomSpawnPos()
     <span class="token key atrule">summary_freq</span><span class="token punctuation">:</span> <span class="token number">100000</span>
 </code></pre>
 <h2 id="多人模式"><a href="#多人模式" class="headerlink" title="多人模式"></a>多人模式</h2><p>接下来就是重头戏多人模式了：</p>
-<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/4.png" class="">
+<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/4.png" class>
 
 <p>这个模式拥有三个智能体，六个大小不一的方块随机放置在不靠近墙体边缘的地方，小方块一个人能推动，中等方块需要两个人才能推动，大的方块需要三个人才能推动，推的方块越大，奖励越高。如何把所有的方块都推到指定目标，并且用时最短是我们追求的目标。</p>
 <p>由于拥有多个智能体，所有团队协作是我们需要考虑的重要因素之一，因此单智能体算法已经满足不了我们的需求了，这里ML-Agents官方示例使用了一种多智能体算法MA-POCA，这也是ML-Agents目前新推出的唯一一种多智能体算法。在版本16之后，我们可以定义具有共同目标的多智能体了，MA-POCA是一个多智能体训练器，是所有智能体的“教练”。教练向整个团队发放奖励，智能体们也可以学习如何更好为共同目标做出贡献，每个智能体可以获得个人的reward，这样它们可以很好地保持积极性，并帮助彼此实现目标。即使有个智能体死亡（被移除），也依然可以采集信息，理解它们的行为是否可以有助于获得胜利，把群体放在第一位，能够通过自我牺牲来获取游戏的胜利。</p>
 <p>这种新算法采用了集中式学习与分散式执行。一个中心裁判负责评估所有智能体的状态，进而对其表现进行打分，而多个分散的执行程序（每个智能体一个）负责控制智能体。如此一来，每个智能体可根据自己的感知进行决策，同时评估其行为在整个群体中的作用。下图展示了MA-POCA的集中式学习和分散式执行。</p>
-<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/5.png" class="">
+<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/5.png" class>
 
 <p>MA-POCA算法的一个新颖之处在于，它使用了一种称为<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">attention networks（注意力网络）</a>的特殊神经网络结构，可以处理不定量输入。这意味着裁判可以评估任意数量的智能体，而MA-POCA也因此特别适用于游戏中的合作行为。智能体可在任何时候加入或退出小组——类似于游戏角色在团战中的复活与死亡。MA-POCA的设计是为了让智能体能够做出利他性决定，让团队利益最大化。这种利他行为很难通过人工编程实现，但可在其他智能体为团队做贡献的先例中学习。最后，大多数多智能体强化学习算法默认让所有智能体在同一时间点选择下一个行动，但在真实游戏中，多智能体同时决策很有可能会产生掉帧。这也是为什么MA-POCA不会采取这种方法，而是支持异步的智能体行为决策。</p>
 <p>MA-POCA 使用与 PPO 相同的配置，并且没有额外的 POCA 特定参数。</p>
 <p>对比单人模式的推箱子，多人模式的机制并没有太大的改变。</p>
 <h3 id="脚本代码-1"><a href="#脚本代码-1" class="headerlink" title="脚本代码"></a>脚本代码</h3><h4 id="Grid-Sensor"><a href="#Grid-Sensor" class="headerlink" title="Grid Sensor"></a>Grid Sensor</h4><p>多人模式的脚本甚至可以说变得更为简单了，Behavior Parameter的设置和单智能体一致。在获取观测值的方面，没有采用单智能体的射线传感器，而是采用了Grid Sensor（网格传感器），这个传感器并没有直接挂在智能体下，而是挂在智能体的子物体（空物体）下，这是为了使得这个传感器的中心不要放在智能体上，这样就能训练出一个只能探测到180度范围的传感器。现在我们来看看Grid Sensor。</p>
-<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/6.png" class="">
+<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/6.png" class>
 
 <p>Grid Sensor使用一组网格形状的框查询作为观察。</p>
-<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/7.png" class="">
+<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/7.png" class>
 
 <p>基于网格的观测结合了视觉观测中二维空间表示的优势和RayCast 观测中定义可检测对象的灵活性。传感器使用一组网格形状的框查询，并提供围绕智能体的自上而下的 2D 视图。</p>
 <p>在观察过程中，传感器检测每个单元格中可检测物体的存在，并将其编码为 one-hot 表示。从每个单元收集的信息形成一个 3D 张量观察，并将像视觉观察一样馈入代理策略的卷积神经网络 (CNN)。对应标签的物体只要于网格发生碰撞，这个网格就会打上相应的标签。</p>
@@ -810,7 +810,7 @@ public Vector3 GetRandomSpawnPos()
 <p>其中的参数属性如下：</p>
 <ul>
 <li>Cell Scale表示网格中每个单元<em>格的比例</em>。</li>
-<li>Grid Size表示每一侧的单元格数。</li>
+<li>Grid Size表示每一侧的单元格数。<strong>注意：这里有个Bug，x和z必须设置为一样，否则训练时报错！！！希望官方后续能修复！</strong></li>
 <li>Agent Game Object表示搭载该组件的智能体物体。便于把自己从检测范围排除。</li>
 <li>Rotate With Agent决定了网格是否随着智能体而转动，在相对变化较小的环境可以固定网格达到更好的训练效果。</li>
 <li>Detectable Tags是一个标签的列表，可以填上我们需要检测到的物体的标签。</li>
@@ -833,7 +833,7 @@ public Vector3 GetRandomSpawnPos()
 public override void Initialize()
 {
     m_AgentRb = GetComponent<Rigidbody>();
-}</code></pre>
+}</Rigidbody></PushBlockSettings></code></pre>
 <p>动作执行（和单智能体一样）：</p>
 <pre class=" language-c#"><code class="language-c#">public void MoveAgent(ActionSegment<int> act)
 {
@@ -871,7 +871,7 @@ public override void Initialize()
 public override void OnActionReceived(ActionBuffers actionBuffers)
 {
     MoveAgent(actionBuffers.DiscreteActions);
-}</code></pre>
+}</int></code></pre>
 <p>人工操作（和单智能体一样）：</p>
 <pre class=" language-c#"><code class="language-c#">public override void Heuristic(in ActionBuffers actionsOut)
 {
@@ -943,9 +943,9 @@ public override void OnActionReceived(ActionBuffers actionBuffers)
     {
         m_col = GetComponent<Collider>();
     }
-}</code></pre>
+}</Collider></Collider,></code></pre>
 <p>事件是一种方便调用其他脚本函数的方法，订阅事件：</p>
-<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/8.png" class="">
+<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/8.png" class>
 
 <p>订阅事件对应的方法，位于环境脚本中（下面会讲）：</p>
 <pre class=" language-c#"><code class="language-c#">public void ScoredAGoal(Collider col, float score)
@@ -1176,7 +1176,7 @@ public class PushBlockEnvController : MonoBehaviour
         m_NumberOfRemainingBlocks = BlocksList.Count;
     }
 }
-</code></pre>
+</Rigidbody></Rigidbody></PushBlockSettings></Renderer></Collider></BlockInfo></BlockInfo></PlayerInfo></PlayerInfo></code></pre>
 <h3 id="多智能体训练注意事项"><a href="#多智能体训练注意事项" class="headerlink" title="多智能体训练注意事项"></a>多智能体训练注意事项</h3><p>ML-Agents 中的协作行为可以通过实例化来启用<code>SimpleMultiAgentGroup</code>，通常在环境控制器或类似脚本中，并使用该RegisterAgent方法向其中添加智能体。请注意，添加到同一个的所有智能体<code>SimpleMultiAgentGroup</code> 必须在Behavior Parameters中具有相同的Behavior Name和参数。使用<code>SimpleMultiAgentGroup</code>使组内的智能体能够学习实现共同目标（最大化团体奖励），即使一个或多个组成员在episode结束之前被移除，也同样可以添加团体奖励，可以使用AddGroupReward()<code>，</code>SetGroupReward()<code>，</code>EndGroupEpisode()<code>，和 </code>GroupEpisodeInterrupted()`方法。</p>
 <p>这种多智能体的用法要与MA-POCA算法一起使用。</p>
 <ul>
@@ -2059,7 +2059,7 @@ public class PushBlockEnvController : MonoBehaviour
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">218.1k</span>&nbsp;字
+                class="white-color">223.1k</span>&nbsp;字
             
             
             

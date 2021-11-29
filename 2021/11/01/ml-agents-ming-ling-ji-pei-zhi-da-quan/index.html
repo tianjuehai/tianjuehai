@@ -479,21 +479,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-11-16
+                    2021-11-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5.3k
+                    5.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    20 分
+                    21 分
                 </div>
                 
 
@@ -591,38 +591,59 @@
 
     <span class="token key atrule">hyperparameters</span><span class="token punctuation">:</span>
       <span class="token comment" spellcheck="true"># Hyperparameters common to PPO and SAC</span>
+      <span class="token comment" spellcheck="true"># 一次抽取多少条数据进行训练</span>
       <span class="token key atrule">batch_size</span><span class="token punctuation">:</span> <span class="token number">1024</span>
+      <span class="token comment" spellcheck="true"># 经验池大小</span>
       <span class="token key atrule">buffer_size</span><span class="token punctuation">:</span> <span class="token number">10240</span>
+      <span class="token comment" spellcheck="true"># 学习率</span>
       <span class="token key atrule">learning_rate</span><span class="token punctuation">:</span> <span class="token number">3.0e-4</span>
+      <span class="token comment" spellcheck="true"># 学习率是Linear则线性递减，达到训练的最大步数衰减为，如果设为Constant则恒定</span>
       <span class="token key atrule">learning_rate_schedule</span><span class="token punctuation">:</span> linear
 
       <span class="token comment" spellcheck="true"># PPO-specific hyperparameters</span>
       <span class="token comment" spellcheck="true"># Replaces the "PPO-specific hyperparameters" section above</span>
+      <span class="token comment" spellcheck="true"># β值，PPO参数，决定了新旧策略的差距大小</span>
       <span class="token key atrule">beta</span><span class="token punctuation">:</span> <span class="token number">5.0e-3</span>
       <span class="token key atrule">beta_schedule</span><span class="token punctuation">:</span> constant
+      <span class="token comment" spellcheck="true"># 决定了策略的随机性，一般在前期应基于较大的随机有利于探索，后期随机减小</span>
       <span class="token key atrule">epsilon</span><span class="token punctuation">:</span> <span class="token number">0.2</span>
       <span class="token key atrule">epsilon_schedule</span><span class="token punctuation">:</span> linear
+      <span class="token comment" spellcheck="true"># agents更新估计值时依赖于当前值的多少，趋近于1时则靠近更新值，趋近于0靠近当前的估计值</span>
       <span class="token key atrule">lambd</span><span class="token punctuation">:</span> <span class="token number">0.95</span>
+      <span class="token comment" spellcheck="true"># 梯度下降过程中采样经验池的次数</span>
       <span class="token key atrule">num_epoch</span><span class="token punctuation">:</span> <span class="token number">3</span>
 
     <span class="token comment" spellcheck="true"># Configuration of the neural network (common to PPO/SAC)</span>
     <span class="token key atrule">network_settings</span><span class="token punctuation">:</span>
+      <span class="token comment" spellcheck="true"># 可视化观察的编码类型，simple对应两层卷积神经网络，nature_cnn是三个卷积层，resnet是叠的复杂卷积层</span>
       <span class="token key atrule">vis_encode_type</span><span class="token punctuation">:</span> simple
+      <span class="token comment" spellcheck="true"># 是否自动标准化观测值</span>
       <span class="token key atrule">normalize</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+      <span class="token comment" spellcheck="true"># 隐藏层神经网络单元个数</span>
       <span class="token key atrule">hidden_units</span><span class="token punctuation">:</span> <span class="token number">128</span>
-      <span class="token key atrule">num_layers</span><span class="token punctuation">:</span> <span class="token number">2</span>
-      <span class="token comment" spellcheck="true"># memory</span>
+      <span class="token comment" spellcheck="true"># 隐藏层层数</span>
+      <span class="token key atrule">num_layers</span><span class="token punctuation">:</span> <span class="token number">3</span>
+      <span class="token comment" spellcheck="true"># 循环神经网络，注意：LSTM不适用于连续动作，离散动作可以获得更好的结果</span>
       <span class="token key atrule">memory</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 需要记住的经验序列长度，越大记忆越久</span>
         <span class="token key atrule">sequence_length</span><span class="token punctuation">:</span> <span class="token number">64</span>
+        <span class="token comment" spellcheck="true"># 智能体保存的记忆大小，必须是2的倍数，且应与期望agent完成任务所需记住的信息量成正比</span>
         <span class="token key atrule">memory_size</span><span class="token punctuation">:</span> <span class="token number">256</span>
 
     <span class="token comment" spellcheck="true"># Trainer configurations common to all trainers</span>
+    <span class="token comment" spellcheck="true"># 最大训练步数，达到后自动退出</span>
     <span class="token key atrule">max_steps</span><span class="token punctuation">:</span> <span class="token number">5.0e5</span>
+    <span class="token comment" spellcheck="true"># 在添加到经验池之前智能体要经过的步数，如果有频繁的奖励，可以设的小一些</span>
     <span class="token key atrule">time_horizon</span><span class="token punctuation">:</span> <span class="token number">64</span>
+    <span class="token comment" spellcheck="true"># 每经过多少步数在面板上显示统计数据</span>
     <span class="token key atrule">summary_freq</span><span class="token punctuation">:</span> <span class="token number">10000</span>
+    <span class="token comment" spellcheck="true"># 训练中保留模型的数量</span>
     <span class="token key atrule">keep_checkpoints</span><span class="token punctuation">:</span> <span class="token number">5</span>
+    <span class="token comment" spellcheck="true"># 每收集多少经验数据保存一个模型数据，所有保留的模型都会以.onnx文件的形式保存</span>
     <span class="token key atrule">checkpoint_interval</span><span class="token punctuation">:</span> <span class="token number">50000</span>
+    <span class="token comment" spellcheck="true"># 允许环境在更新模型时运行，当使用SAC时设为True有利于加速训练，但用Self Play时应设为False</span>
     <span class="token key atrule">threaded</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+    <span class="token comment" spellcheck="true"># 之前保存的模型路径</span>
     <span class="token key atrule">init_path</span><span class="token punctuation">:</span> <span class="token null important">null</span>
 
     <span class="token comment" spellcheck="true"># behavior cloning</span>
@@ -765,7 +786,7 @@
 <h2 id="环境参数"><a href="#环境参数" class="headerlink" title="环境参数"></a>环境参数</h2><p>为了<strong>控制环境参数</strong>，可以在下方再加上一段配置：</p>
 <pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
   <span class="token key atrule">BehaviorY</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># &lt; Same as above &gt;</span>
+    <span class="token comment" spellcheck="true"># &lt; Same as above ></span>
 
 <span class="token comment" spellcheck="true"># Add this section</span>
 <span class="token key atrule">environment_parameters</span><span class="token punctuation">:</span>
@@ -775,7 +796,7 @@
 <p>为了使<strong>参数随机</strong>，我们可以不直接提供数值，而是让它自己采样，下面是包含三个环境参数的示例：</p>
 <pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
   <span class="token key atrule">BehaviorY</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># &lt; Same as above &gt;</span>
+    <span class="token comment" spellcheck="true"># &lt; Same as above ></span>
 
 <span class="token comment" spellcheck="true"># Add this section</span>
 <span class="token key atrule">environment_parameters</span><span class="token punctuation">:</span>
@@ -803,7 +824,7 @@
 <h2 id="Curriculum-Learning"><a href="#Curriculum-Learning" class="headerlink" title="Curriculum Learning"></a><em>Curriculum Learning</em></h2><p>如果想启用<strong>课程学习</strong>，需要添加一段配置：</p>
 <pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">ehaviors</span><span class="token punctuation">:</span>
   <span class="token key atrule">BehaviorY</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># &lt; Same as above &gt;</span>
+    <span class="token comment" spellcheck="true"># &lt; Same as above ></span>
 
 <span class="token comment" spellcheck="true"># Add this section</span>
 <span class="token key atrule">environment_parameters</span><span class="token punctuation">:</span>
@@ -1680,7 +1701,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">218.1k</span>&nbsp;字
+                class="white-color">223.1k</span>&nbsp;字
             
             
             
