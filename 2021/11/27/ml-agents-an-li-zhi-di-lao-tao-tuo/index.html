@@ -322,7 +322,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/DungeonEscape.gif')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -479,7 +479,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-11-30
+                    2021-12-13
                 </div>
                 
 
@@ -527,7 +527,7 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121350822">ML-Agents案例之食物收集者</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121383791">ML-Agents案例之双人足球</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121526192">Unity人工智能之不断自我进化的五人足球赛</a></p>
-<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/1.png" class>
+<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/1.png" class="">
 
 <h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><ul>
 <li><p>设置：特工被困在一个有龙的地牢中，必须共同努力才能逃脱。为了取回钥匙，其中一名特工必须找到并杀死龙，为此牺牲自己。龙会掉落一把钥匙供其他人使用。然后其他特工可以拿起这把钥匙并打开地牢门。如果特工花费的时间过长，龙将通过传送门逃跑并且环境会重置。</p>
@@ -539,14 +539,14 @@
 <li><p>此项目的训练难点在于，智能体为了团队奖励，必须学会牺牲自己。</p>
 </li>
 <li><p>输入：智能体的输入包含一个射线传感器RayPerceptionSensor3D，识别的标签分别为墙，队友，龙，钥匙，门锁，龙的洞穴。共15根射线，参数见下方图片。关于该传感器的详细说明见<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121250025">ML-Agents案例之推箱子游戏</a>。</p>
-<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/2.png" class>
+<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/2.png" class="">
 
-<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/3.png" class>
+<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/3.png" class="">
 
 <p>除了传感器之外，程序中还加入了一项检测智能体身上是否有钥匙的输入。</p>
 </li>
 <li><p>输出：智能体只采取了一项的离散输出，其中这个离散输出包含七个只，代表什么都不做、前进、后退、向左走、向右转、向左转、向右转。较少的输出会大大降低神经网络复杂度，减少训练时间。缺点是同一时间只能执行一个动作，降低智能体的灵活性，例如不能同时前进和旋转，也不能前进和向右转等。</p>
-<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/4.png" class>
+<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/4.png" class="">
 
 
 
@@ -985,7 +985,7 @@ namespace Unity.MLAgentsExamples
 }
 </code></pre>
 <p>订阅事件：</p>
-<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/5.png" class>
+<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/5.png" class="">
 
 <p>其中执行的方法如下：</p>
 <pre class=" language-c#"><code class="language-c#">public void BaddieTouchedBlock()
@@ -1021,7 +1021,7 @@ namespace Unity.MLAgentsExamples
     <span class="token key atrule">time_horizon</span><span class="token punctuation">:</span> <span class="token number">64</span>
     <span class="token key atrule">summary_freq</span><span class="token punctuation">:</span> <span class="token number">60000</span>
 </code></pre>
-<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/6.gif" class>
+<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/6.gif" class="">
 
 
 
@@ -1535,8 +1535,7 @@ namespace Unity.MLAgentsExamples
                 <a href="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="ML-Agents案例之金字塔">
+                        <img src="/images/Pyraimd.gif" class="responsive-img" alt="ML-Agents案例之金字塔">
                         
                         <span class="card-title">ML-Agents案例之金字塔</span>
                     </div>
@@ -1588,8 +1587,7 @@ namespace Unity.MLAgentsExamples
                 <a href="/2021/11/16/unity-ren-gong-zhi-neng-zhi-bu-duan-zi-wo-jin-hua-de-wu-ren-zu-qiu-sai/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Unity人工智能之不断自我进化的五人足球赛">
+                        <img src="/images/SoccerFive.gif" class="responsive-img" alt="Unity人工智能之不断自我进化的五人足球赛">
                         
                         <span class="card-title">Unity人工智能之不断自我进化的五人足球赛</span>
                     </div>
@@ -1862,7 +1860,7 @@ namespace Unity.MLAgentsExamples
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">231.9k</span>&nbsp;字
+                class="white-color">233.7k</span>&nbsp;字
             
             
             

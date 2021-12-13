@@ -1,32 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tianjuewudi.gitee.io/2021/01/10/ge-ren-jian-li-hexo-bo-ke-matery-zhu-ti-de-guo-cheng-xin-de/</loc>
+    <lastmod>2021-12-13</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/11/16/unity-ren-gong-zhi-neng-zhi-bu-duan-zi-wo-jin-hua-de-wu-ren-zu-qiu-sai/</loc>
+    <lastmod>2021-12-13</lastmod>
+  </url>
+  <url>
     <loc>https://tianjuewudi.gitee.io/2021/12/12/ml-agents-an-li-zhi-ji-qi-ren-xue-zou-lu/</loc>
-    <lastmod>2021-12-12</lastmod>
+    <lastmod>2021-12-13</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/01/13/python-bian-cheng-cong-ru-men-dao-shi-jian-bi-ji/</loc>
+    <lastmod>2021-12-13</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/11/13/ml-agents-an-li-zhi-shuang-ren-zu-qiu/</loc>
+    <lastmod>2021-12-13</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/</loc>
+    <lastmod>2021-12-13</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/</loc>
+    <lastmod>2021-12-13</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/12/04/ml-agents-an-li-zhi-ruan-chong/</loc>
-    <lastmod>2021-12-12</lastmod>
+    <lastmod>2021-12-13</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/12/12/ml-agents-an-li-zhi-kan-tu-ji-yi/</loc>
+    <lastmod>2021-12-13</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/12/02/qiang-hua-xue-xi-zhong-de-hao-qi-xin-jiang-li-ji-zhi/</loc>
     <lastmod>2021-12-03</lastmod>
   </url>
   <url>
-    <loc>https://tianjuewudi.gitee.io/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/</loc>
-    <lastmod>2021-12-03</lastmod>
-  </url>
-  <url>
     <loc>https://tianjuewudi.gitee.io/2021/01/23/markdown-shu-xue-gong-shi-biao-shi-fa/</loc>
     <lastmod>2021-12-02</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/</loc>
-    <lastmod>2021-11-29</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/11/16/unity-ren-gong-zhi-neng-zhi-bu-duan-zi-wo-jin-hua-de-wu-ren-zu-qiu-sai/</loc>
-    <lastmod>2021-11-24</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/10/29/zi-chuang-qiang-hua-xue-xi-huan-jing-zhi-unity3d-cha-jian-ml-agent-de-shi-yong/</loc>
@@ -35,10 +51,6 @@
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/11/01/ml-agents-ming-ling-ji-pei-zhi-da-quan/</loc>
     <lastmod>2021-11-19</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/11/13/ml-agents-an-li-zhi-shuang-ren-zu-qiu/</loc>
-    <lastmod>2021-11-17</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/</loc>
@@ -299,14 +311,6 @@
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/01/21/ji-qi-xue-xi-bi-ji-yi/</loc>
     <lastmod>2021-01-24</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/01/10/ge-ren-jian-li-hexo-bo-ke-matery-zhu-ti-de-guo-cheng-xin-de/</loc>
-    <lastmod>2021-01-22</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/01/13/python-bian-cheng-cong-ru-men-dao-shi-jian-bi-ji/</loc>
-    <lastmod>2021-01-21</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/01/13/guan-yu-chao-shen-cha-jian-you-hou-jiao-ben-tampermonkey-de-an-zhuang-he-shi-yong/</loc>

@@ -322,7 +322,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/SoccerTwo.gif')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -479,7 +479,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-11-17
+                    2021-12-13
                 </div>
                 
 
@@ -525,12 +525,12 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121250025">ML-Agents案例之推箱子游戏</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121269518">ML-Agents案例之跳墙游戏</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121350822">ML-Agents案例之食物收集者</a></p>
-<h1 id="对称环境博弈"><a href="#对称环境博弈" class="headerlink" title="对称环境博弈"></a>对称环境博弈</h1><h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><img src="/2021/11/13/ml-agents-an-li-zhi-shuang-ren-zu-qiu/1.png" class>
+<h1 id="对称环境博弈"><a href="#对称环境博弈" class="headerlink" title="对称环境博弈"></a>对称环境博弈</h1><h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><img src="/2021/11/13/ml-agents-an-li-zhi-shuang-ren-zu-qiu/1.png" class="">
 
 <p> 这是一场对称性的2对2的足球比赛，双方人员配置一致，目标是在防止球进入己方球门的同时，把球送进对方的球门。</p>
 <p>奖励设置：当把球踢到对方的球门时，分数+1，但是还要减去和花费时间成正比的惩罚。当求踢进己方球门时，分数-1。</p>
 <p>输入维度：</p>
-<img src="/2021/11/13/ml-agents-an-li-zhi-shuang-ren-zu-qiu/2.png" class>
+<img src="/2021/11/13/ml-agents-an-li-zhi-shuang-ren-zu-qiu/2.png" class="">
 
 <p>可以看到，每个智能体身上都有14根射线传感器，前面120读角均匀分布11根，后面均匀分布3根，探测的标签有球，己方球门，对方球门，己方队友，对手，墙壁。关于射线传感器Ray Perception Sensor 3D，请参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121250025">ML-Agents案例之推箱子游戏</a>。</p>
 <p>输出维度：</p>
@@ -668,7 +668,7 @@ public class SoccerEnvController : MonoBehaviour
         ResetBall();
     }
 }
-</Rigidbody></Rigidbody></SoccerSettings></PlayerInfo></PlayerInfo></code></pre>
+</code></pre>
 <h3 id="智能体控制"><a href="#智能体控制" class="headerlink" title="智能体控制"></a>智能体控制</h3><p>AgentSoccer.cs文件：</p>
 <p>这里有两个枚举变量，分别代表所处的队和所处位置：</p>
 <pre class=" language-c#"><code class="language-c#">public enum Team
@@ -735,7 +735,7 @@ public class SoccerEnvController : MonoBehaviour
     agentRb.maxAngularVelocity = 500;
     // 获取配置文件参数
     m_ResetParams = Academy.Instance.EnvironmentParameters;
-}</Rigidbody></SoccerSettings></BehaviorParameters></SoccerEnvController></code></pre>
+}</code></pre>
 <p>输出动作：</p>
 <pre class=" language-c#"><code class="language-c#">// 接收神经网络输出，驱动智能体
 public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -799,7 +799,7 @@ public void MoveAgent(ActionSegment<int> act)
     transform.Rotate(rotateDir, Time.deltaTime * 100f);
     agentRb.AddForce(dirToGo * m_SoccerSettings.agentRunSpeed,
                      ForceMode.VelocityChange);
-}</int></code></pre>
+}</code></pre>
 <p>每个episode开始时的处理：</p>
 <pre class=" language-c#"><code class="language-c#">// 从配置文件中获取数据，与球碰撞的奖励系数，课程学习会使用
 public override void OnEpisodeBegin()
@@ -826,7 +826,7 @@ public override void OnEpisodeBegin()
         c.gameObject.GetComponent<Rigidbody>().AddForce(dir * force);
     }
 }
-</Rigidbody></code></pre>
+</code></pre>
 <p>挂载在足球上的脚本SoccerBallContraller.cs：</p>
 <pre class=" language-c#"><code class="language-c#">using UnityEngine;
 
@@ -855,7 +855,7 @@ public class SoccerBallController : MonoBehaviour
         }
     }
 }
-</SoccerEnvController></code></pre>
+</code></pre>
 <h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>本案例使用了多智能体算法poca，上一个使用多智能体算法的案例是<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121250025">ML-Agents案例之推箱子游戏</a></p>
 <p>对称环境的好处就是双方都共用一套模型。</p>
 <p>配置如下：</p>
@@ -939,17 +939,17 @@ public class SoccerBallController : MonoBehaviour
 <p>两个智能体的团队的 swap_steps 为：</p>
 <p>swap_steps = (2 / 1) * (200000 / 4) = 100000 注意，在团队规模相同的情况下，第一项等于 1，swap_steps 可以通过将总步数除以所需的交换次数来计算。</p>
 <p>较大的 swap_steps 值意味着智能体将在更长的训练迭代次数中与相同的固定对手对战。使训练环境更稳定，但让智能体面临针对该特定对手过度拟合其行为的风险。</p>
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><img src="/2021/11/13/ml-agents-an-li-zhi-shuang-ren-zu-qiu/3.gif" class>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><img src="/2021/11/13/ml-agents-an-li-zhi-shuang-ren-zu-qiu/3.gif" class="">
 
 
 
-<h1 id="非对称环境博弈"><a href="#非对称环境博弈" class="headerlink" title="非对称环境博弈"></a>非对称环境博弈</h1><h2 id="环境说明-1"><a href="#环境说明-1" class="headerlink" title="环境说明"></a>环境说明</h2><img src="/2021/11/13/ml-agents-an-li-zhi-shuang-ren-zu-qiu/4.png" class>
+<h1 id="非对称环境博弈"><a href="#非对称环境博弈" class="headerlink" title="非对称环境博弈"></a>非对称环境博弈</h1><h2 id="环境说明-1"><a href="#环境说明-1" class="headerlink" title="环境说明"></a>环境说明</h2><img src="/2021/11/13/ml-agents-an-li-zhi-shuang-ren-zu-qiu/4.png" class="">
 
 <p>如图所示，在非对称的环境博弈中，守门员只有一人，任务是防守两个前锋的进攻，把球保持在球门之外，而两个前锋的任务就是把球踢进球门。</p>
 <p>在对称性的环境博弈中，模型都是可以相互通用的，例如在上面2V2的例子中，四个球员都是共享一个网络模型，就能实现对抗。</p>
 <p>而在1个守门员对2个前锋的环境中，两者的逻辑必然存在巨大的不同，因此，我们需要给双方设定不同的网络进行训练。</p>
 <p>代码依然采用的是我们在对称性环境所用的代码，守门员和前锋的不同之处在于给其设定了不同的Position参数，如图：</p>
-<img src="/2021/11/13/ml-agents-an-li-zhi-shuang-ren-zu-qiu/5.png" class>
+<img src="/2021/11/13/ml-agents-an-li-zhi-shuang-ren-zu-qiu/5.png" class="">
 
 <p>Position是个公有变量，守门员设定为Goalie，前锋设定为Striker。这样我们回头查看初始化函数Initialize()的代码，就会发现守门员和前锋所拥有的前向移动速度和侧向移动速度是不同的。守门员横向速度高，而前锋前向速度高。</p>
 <h2 id="配置文件-1"><a href="#配置文件-1" class="headerlink" title="配置文件"></a>配置文件</h2><pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
@@ -1017,7 +1017,7 @@ public class SoccerBallController : MonoBehaviour
       <span class="token key atrule">initial_elo</span><span class="token punctuation">:</span> <span class="token number">1200.0</span></code></pre>
 <p>可以看到，于2v2的对称性环境博弈相比，这个环境需要的模型多了一个（Behavior Name分别为Goalie和Striker），因此需要配置的量也多了一倍。两个网络参数唯一的不同就在于Self Play中的swap_steps。具体原因可以查看上面的Self Play章节。</p>
 <p>在非对称性的环境中，双方都会随机出许多团队进行相互对抗，并且相互学习共同进步。每个团队不仅与不同的对手战斗，还会与对手以前的模型进行战斗，最终能训练出一个适应性，通用性较强的智能体团队。</p>
-<h2 id="效果-1"><a href="#效果-1" class="headerlink" title="效果"></a>效果</h2><img src="/2021/11/13/ml-agents-an-li-zhi-shuang-ren-zu-qiu/6.gif" class>
+<h2 id="效果-1"><a href="#效果-1" class="headerlink" title="效果"></a>效果</h2><img src="/2021/11/13/ml-agents-an-li-zhi-shuang-ren-zu-qiu/6.gif" class="">
 
 
 
@@ -1535,8 +1535,7 @@ public class SoccerBallController : MonoBehaviour
                 <a href="/2021/11/16/unity-ren-gong-zhi-neng-zhi-bu-duan-zi-wo-jin-hua-de-wu-ren-zu-qiu-sai/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Unity人工智能之不断自我进化的五人足球赛">
+                        <img src="/images/SoccerFive.gif" class="responsive-img" alt="Unity人工智能之不断自我进化的五人足球赛">
                         
                         <span class="card-title">Unity人工智能之不断自我进化的五人足球赛</span>
                     </div>
@@ -1862,7 +1861,7 @@ public class SoccerBallController : MonoBehaviour
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">231.9k</span>&nbsp;字
+                class="white-color">233.7k</span>&nbsp;字
             
             
             
