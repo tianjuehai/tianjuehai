@@ -479,7 +479,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-13
+                    2021-12-14
                 </div>
                 
 
@@ -531,20 +531,20 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121692539">ML-Agents案例之金字塔</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121885508">ML-Agents案例之蠕虫</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121892825">ML-Agents案例之机器人学走路</a></p>
-<img src="/2021/12/12/ml-agents-an-li-zhi-kan-tu-ji-yi/1.png" class="">
+<img src="/2021/12/12/ml-agents-an-li-zhi-kan-tu-ji-yi/1.png" class>
 
 
 
 <h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><p>如图所示，这个案例官方称其为Hallway，智能体需要根据前面给的符号来去后面选择对应的符号，注意，这个案例的难点在于，智能体在选择时是看不到给定的符号的，而我们的程序并不会帮助智能体去记录看过的信息，这就要求智能体自己拥有记忆功能，即神经网络能够自己学习出“以前看到过什么现在就选什么”这种行为模式，因此拥有记忆功能的循环神经网络中的大哥LSTM是必不可少的。而这在ML-Agents中只需要配置一下文件就能做到。</p>
 <p>状态输入：首先智能体用了射线传感器Ray Perception Sensor 3D，一共发射5条射线，检测的标签有给定的O、给定的X、目标的O、目标的X、墙壁，一共5个标签。对于射线传感器的详细讲解请查看<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121250025">ML-Agents案例之推箱子游戏</a>。</p>
-<img src="/2021/12/12/ml-agents-an-li-zhi-kan-tu-ji-yi/2.png" class="">
+<img src="/2021/12/12/ml-agents-an-li-zhi-kan-tu-ji-yi/2.png" class>
 
-<img src="/2021/12/12/ml-agents-an-li-zhi-kan-tu-ji-yi/3.png" class="">
+<img src="/2021/12/12/ml-agents-an-li-zhi-kan-tu-ji-yi/3.png" class>
 
 <p>另外，程序中还给了一个已执行的步数除以最大步数来作为输入，随着游戏的运行而增大，当episode结束时这个值会等于1，个人认为这个输入作用不大，可有可无。</p>
-<p>动作输出：动作输出只有一个离散输出，这个输出有0-4共5个值可供选择。0代表什么都不做，1代表前进，2代表后退，3代表右转，4代表左转。</p>
+<p>动作输出：只有一个离散输出，这个输出有0-4共5个值可供选择。0代表什么都不做，1代表前进，2代表后退，3代表右转，4代表左转。</p>
 <p>因此Behavior Parameters设置如下：</p>
-<img src="/2021/12/12/ml-agents-an-li-zhi-kan-tu-ji-yi/4.png" class="">
+<img src="/2021/12/12/ml-agents-an-li-zhi-kan-tu-ji-yi/4.png" class>
 
 
 
@@ -782,7 +782,7 @@ IEnumerator <span class="token function">GoalScoredSwapGroundMaterial</span><spa
         <span class="token key atrule">sequence_length</span><span class="token punctuation">:</span> <span class="token number">64</span>
         <span class="token key atrule">memory_size</span><span class="token punctuation">:</span> <span class="token number">128</span></code></pre>
 <p>默认不加这部分的时候，我们的模型中是没有循环神经网络的，当我们设置了这个参数后，相当于给模型加入了一个LSTM，sequence_length指的是需要记住的经验序列长度，memory_size是智能体保存的记忆大小，必须是2的倍数。我们要合理设置参数，设置过大将大大降低训练速度，过小会导致记不住东西。</p>
-<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><img src="/2021/12/12/ml-agents-an-li-zhi-kan-tu-ji-yi/5.gif" class="">
+<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><img src="/2021/12/12/ml-agents-an-li-zhi-kan-tu-ji-yi/5.gif" class>
 
 
 
@@ -1289,17 +1289,16 @@ IEnumerator <span class="token function">GoalScoredSwapGroundMaterial</span><spa
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/12/12/ml-agents-an-li-zhi-kan-tu-ji-yi/">
+                <a href="/2021/12/13/ml-agents-an-li-zhi-ying-he-pai-xu/">
                     <div class="card-image">
                         
-                        <img src="/images/Hallway.gif" class="responsive-img" alt="ML-Agents案例之看图记忆">
+                        <img src="/images/Sorter.gif" class="responsive-img" alt="ML-Agents案例之“硬核排序”">
                         
-                        <span class="card-title">ML-Agents案例之看图记忆</span>
+                        <span class="card-title">ML-Agents案例之“硬核排序”</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1309,9 +1308,9 @@ IEnumerator <span class="token function">GoalScoredSwapGroundMaterial</span><spa
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-12
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-13
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1324,7 +1323,6 @@ IEnumerator <span class="token function">GoalScoredSwapGroundMaterial</span><spa
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1623,7 +1621,7 @@ IEnumerator <span class="token function">GoalScoredSwapGroundMaterial</span><spa
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">233.7k</span>&nbsp;字
+                class="white-color">236.5k</span>&nbsp;字
             
             
             
