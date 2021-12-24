@@ -17,7 +17,7 @@
 
 
     <title>ML-Agents案例之“硬核排序” | 微笑紫瞳星</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/MyLogo.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -53,7 +53,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/MyLogo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">微笑紫瞳星</span>
                 </a>
@@ -152,7 +152,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/MyLogo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">微笑紫瞳星</div>
         <div class="logo-desc">
@@ -479,21 +479,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-14
+                    2021-12-15
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.8k
+                    3.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    12 分
+                    13 分
                 </div>
                 
 
@@ -532,19 +532,19 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121885508">ML-Agents案例之蠕虫</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121892825">ML-Agents案例之机器人学走路</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121913163">ML-Agents案例之看图配对</a></p>
-<img src="/2021/12/13/ml-agents-an-li-zhi-ying-he-pai-xu/1.png" class>
+<img src="/2021/12/13/ml-agents-an-li-zhi-ying-he-pai-xu/1.png" class="">
 
 
 
 <h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><p>如图所示，智能体在一个圆形的房间中，墙壁上会随机出现带有数字的方块，智能体需要从小到大以此与方块进行碰撞，碰撞过的方块会变成绿色，分数+1，一旦碰撞顺序不对，游戏结束，分数-1。</p>
-<p>这个案例的挑战是，墙壁上出现的数字方块的个数是不定的，也就是说每个episode我们都需要接收不同个数的输入，这应该怎么处理呢？</p>
-<p>状态输入：这里用到了一个新的传感器Buffer Sensor。</p>
-<img src="/2021/12/13/ml-agents-an-li-zhi-ying-he-pai-xu/2.png" class>
+<p>这个案例的挑战是，我们不会告诉智能体怎么排序是对的，智能体需要在环境中试错，从而自己学习到这种从小到大排序，碰撞对应方块的行为模式，同时墙壁上出现的数字方块的个数是不定的，也就是说每个episode我们都需要接收不同个数的输入，这应该怎么处理呢？</p>
+<p>状态输入：这里用到了一个新我们不会告诉智能体怎么排序是对的，智能体需要在环境中试错，从而自己学习到这种从小到大排序，碰撞对应方块的行为模式，同时的传感器Buffer Sensor。</p>
+<img src="/2021/12/13/ml-agents-an-li-zhi-ying-he-pai-xu/2.png" class="">
 
 <p>这个传感器的作用是可以接收个数变化的状态输入。我们需要每次传入一个向量，这个向量我们可以用数组listObservation表示。通过        m_BufferSensor.AppendObservation(listObservation)传入到BufferSensor中，而BufferSensor可以接收无数个这样的向量输入，但是每个向量的维度必须相同。也就是说即使我们输入的向量个数每次都不同，我们还是能训练网络还是产生我们所期望的输出，具体是怎么实现的项目代码中没有，集成在了ML-Agents包中，根据我的经验，应该用了Self-attention这种网络的结构，这样就能接收不同个数向量的输入了。</p>
 <p>除了传给BufferSensor的输入之外，还传入了四维的向量，分别是智能体位置到场地中心的向量在x轴和z轴上的分量，智能体前进方向在x轴和z轴的分量。</p>
 <p>动作输出：输出三个离散值，每个离散值包含0-2三个数，第一个离散值决定了前进后退，第二个离散值决定了左移右移，第三个离散值决定了左转右转。</p>
-<img src="/2021/12/13/ml-agents-an-li-zhi-ying-he-pai-xu/3.png" class>
+<img src="/2021/12/13/ml-agents-an-li-zhi-ying-he-pai-xu/3.png" class="">
 
 
 
@@ -572,13 +572,13 @@ Rigidbody m_AgentRb<span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// BufferSensorComponent 是一个传感器，允许观察不同数量的输入</span>
 BufferSensorComponent m_BufferSensor<span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// 数字方块的列表</span>
-<span class="token keyword">public</span> List<span class="token operator">&lt;</span>NumberTile<span class="token operator">></span> NumberTilesList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span>NumberTile<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> List<span class="token operator">&lt;</span>NumberTile<span class="token operator">&gt;</span> NumberTilesList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span>NumberTile<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// 出现在场景中的方块列表</span>
-<span class="token keyword">private</span> List<span class="token operator">&lt;</span>NumberTile<span class="token operator">></span> CurrentlyVisibleTilesList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span>NumberTile<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">private</span> List<span class="token operator">&lt;</span>NumberTile<span class="token operator">&gt;</span> CurrentlyVisibleTilesList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span>NumberTile<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// 已经被接触过的方块列表</span>
-<span class="token keyword">private</span> List<span class="token operator">&lt;</span>Transform<span class="token operator">></span> AlreadyTouchedList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span>Transform<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">private</span> List<span class="token operator">&lt;</span>Transform<span class="token operator">&gt;</span> AlreadyTouchedList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span>Transform<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token keyword">private</span> List<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> m_UsedPositionsList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">private</span> List<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> m_UsedPositionsList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// 初始位置</span>
 <span class="token keyword">private</span> Vector3 m_StartingPos<span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// 整个场景</span>
@@ -589,7 +589,7 @@ EnvironmentParameters m_ResetParams<span class="token punctuation">;</span>
 <span class="token keyword">private</span> <span class="token keyword">int</span> m_NextExpectedTileIndex<span class="token punctuation">;</span></code></pre>
 <p>初始化方法Initialize()：</p>
 <pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Initialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 获取父物体</span>
     m_Area <span class="token operator">=</span> transform<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>gameObject<span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 获取方块的最大数量</span>
@@ -597,15 +597,15 @@ EnvironmentParameters m_ResetParams<span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 从配置文件中获取环境参数</span>
     m_ResetParams <span class="token operator">=</span> Academy<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span>EnvironmentParameters<span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 获取传感器脚本</span>
-    m_BufferSensor <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>BufferSensorComponent<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_BufferSensor <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>BufferSensorComponent<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 获取刚体</span>
-    m_AgentRb <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Rigidbody<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_AgentRb <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Rigidbody<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 起始位置</span>
     m_StartingPos <span class="token operator">=</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
 <p>状态输入方法：</p>
 <pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">CollectObservations</span><span class="token punctuation">(</span>VectorSensor sensor<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 获取智能体到场地中心的x轴和z轴上的距离</span>
     sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">.</span>x <span class="token operator">-</span> m_Area<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">.</span>x<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">20f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">.</span>z <span class="token operator">-</span> m_Area<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">.</span>z<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">20f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -614,7 +614,7 @@ EnvironmentParameters m_ResetParams<span class="token punctuation">;</span>
     sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>transform<span class="token punctuation">.</span>forward<span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> item <span class="token keyword">in</span> CurrentlyVisibleTilesList<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">// 定义一个数组，存放一系列观察值，数组长度为数字方块最大数量 + 3，默认初始化全部为0</span>
         <span class="token keyword">float</span><span class="token punctuation">[</span><span class="token punctuation">]</span> listObservation <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">float</span><span class="token punctuation">[</span>k_HighestTileValue <span class="token operator">+</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">// 获取方块的数字，设置对应的one-hot向量</span>
@@ -628,18 +628,18 @@ EnvironmentParameters m_ResetParams<span class="token punctuation">;</span>
         listObservation<span class="token punctuation">[</span>k_HighestTileValue <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> item<span class="token punctuation">.</span>IsVisited <span class="token operator">?</span> <span class="token number">1.0f</span> <span class="token punctuation">:</span> <span class="token number">0.0f</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">// 把数组添加到Buffer Sensor中（不直接输入到网络的原因是需要添加的数组个数个数是变化的）</span>
         m_BufferSensor<span class="token punctuation">.</span><span class="token function">AppendObservation</span><span class="token punctuation">(</span>listObservation<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
 <p>动作输出方法OnActionReceived：</p>
 <pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnActionReceived</span><span class="token punctuation">(</span>ActionBuffers actionBuffers<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 移动智能体</span>
     <span class="token function">MoveAgent</span><span class="token punctuation">(</span>actionBuffers<span class="token punctuation">.</span>DiscreteActions<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 时间惩罚，激励智能体越快完成越好</span>
     <span class="token function">AddReward</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1f</span> <span class="token operator">/</span> MaxStep<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span> 
-<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">MoveAgent</span><span class="token punctuation">(</span>ActionSegment<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> act<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> 
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">MoveAgent</span><span class="token punctuation">(</span>ActionSegment<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> act<span class="token punctuation">)</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token keyword">var</span> dirToGo <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
     <span class="token keyword">var</span> rotateDir <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 获取神经网络三个离散输出</span>
@@ -648,42 +648,42 @@ EnvironmentParameters m_ResetParams<span class="token punctuation">;</span>
     <span class="token keyword">var</span> rotateAxis <span class="token operator">=</span> act<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 第一个离散输出决定了前进后退</span>
     <span class="token keyword">switch</span> <span class="token punctuation">(</span>forwardAxis<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         <span class="token keyword">case</span> <span class="token number">1</span><span class="token punctuation">:</span>
             dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>forward <span class="token operator">*</span> <span class="token number">1f</span><span class="token punctuation">;</span>
             <span class="token keyword">break</span><span class="token punctuation">;</span>
         <span class="token keyword">case</span> <span class="token number">2</span><span class="token punctuation">:</span>
             dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>forward <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">;</span>
             <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 第二个离散输出决定了左移右移</span>
     <span class="token keyword">switch</span> <span class="token punctuation">(</span>rightAxis<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         <span class="token keyword">case</span> <span class="token number">1</span><span class="token punctuation">:</span>
             dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>right <span class="token operator">*</span> <span class="token number">1f</span><span class="token punctuation">;</span>
             <span class="token keyword">break</span><span class="token punctuation">;</span>
         <span class="token keyword">case</span> <span class="token number">2</span><span class="token punctuation">:</span>
             dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>right <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">;</span>
             <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 第三个离散输出决定了左转右转</span>
     <span class="token keyword">switch</span> <span class="token punctuation">(</span>rotateAxis<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         <span class="token keyword">case</span> <span class="token number">1</span><span class="token punctuation">:</span>
             rotateDir <span class="token operator">=</span> transform<span class="token punctuation">.</span>up <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">;</span>
             <span class="token keyword">break</span><span class="token punctuation">;</span>
         <span class="token keyword">case</span> <span class="token number">2</span><span class="token punctuation">:</span>
             rotateDir <span class="token operator">=</span> transform<span class="token punctuation">.</span>up <span class="token operator">*</span> <span class="token number">1f</span><span class="token punctuation">;</span>
             <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 执行动作</span>
     transform<span class="token punctuation">.</span><span class="token function">Rotate</span><span class="token punctuation">(</span>rotateDir<span class="token punctuation">,</span> Time<span class="token punctuation">.</span>deltaTime <span class="token operator">*</span> <span class="token number">200f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     m_AgentRb<span class="token punctuation">.</span><span class="token function">AddForce</span><span class="token punctuation">(</span>dirToGo <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">,</span> ForceMode<span class="token punctuation">.</span>VelocityChange<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token punctuation">}</span></code></pre>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
 <p>每一个episode（回合）开始时执行的方法OnEpisodeBegin：</p>
 <pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnEpisodeBegin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 从配置文件中获取方块的数量，没有的话设为DefaultMaxNumTiles</span>
     m_MaxNumberOfTiles <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>m_ResetParams<span class="token punctuation">.</span><span class="token function">GetWithDefault</span><span class="token punctuation">(</span><span class="token string">"num_tiles"</span><span class="token punctuation">,</span> DefaultMaxNumTiles<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 随机生成方块的数量</span>
@@ -696,91 +696,91 @@ EnvironmentParameters m_ResetParams<span class="token punctuation">;</span>
     transform<span class="token punctuation">.</span>position <span class="token operator">=</span> m_StartingPos<span class="token punctuation">;</span>
     m_AgentRb<span class="token punctuation">.</span>velocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
     m_AgentRb<span class="token punctuation">.</span>angularVelocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
 <span class="token keyword">void</span> <span class="token function">SelectTilesToShow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 清除两个列表</span>
     CurrentlyVisibleTilesList<span class="token punctuation">.</span><span class="token function">Clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     AlreadyTouchedList<span class="token punctuation">.</span><span class="token function">Clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// 共生成nunLeft个方块</span>
     <span class="token keyword">int</span> numLeft <span class="token operator">=</span> m_NumberOfTilesToSpawn<span class="token punctuation">;</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>numLeft <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>numLeft <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">// 在范围内取随机数生成对应方块</span>
         <span class="token keyword">int</span> rndInt <span class="token operator">=</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> k_HighestTileValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">var</span> tmp <span class="token operator">=</span> NumberTilesList<span class="token punctuation">[</span>rndInt<span class="token punctuation">]</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">// 如果对应的方块列表中没有才进行添加</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>CurrentlyVisibleTilesList<span class="token punctuation">.</span><span class="token function">Contains</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
+        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
             CurrentlyVisibleTilesList<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
             numLeft<span class="token operator">--</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// 给方块列表列表按照数字升序进行排序</span>
-    CurrentlyVisibleTilesList<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> x<span class="token punctuation">.</span>NumberValue<span class="token punctuation">.</span><span class="token function">CompareTo</span><span class="token punctuation">(</span>y<span class="token punctuation">.</span>NumberValue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    CurrentlyVisibleTilesList<span class="token punctuation">.</span><span class="token function">Sort</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> x<span class="token punctuation">.</span>NumberValue<span class="token punctuation">.</span><span class="token function">CompareTo</span><span class="token punctuation">(</span>y<span class="token punctuation">.</span>NumberValue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     m_NextExpectedTileIndex <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
 <span class="token keyword">void</span> <span class="token function">SetTilePositions</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 清空列表</span>
     m_UsedPositionsList<span class="token punctuation">.</span><span class="token function">Clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 重置所有方块的状态,ResetTile方法可以在数字方块的脚本中看到</span>
     <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> item <span class="token keyword">in</span> NumberTilesList<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         item<span class="token punctuation">.</span><span class="token function">ResetTile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         item<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
     <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> item <span class="token keyword">in</span> CurrentlyVisibleTilesList<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         <span class="token keyword">bool</span> posChosen <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">// rndPosIndx决定了我们方块的旋转角度（即在圆形场地的哪里）</span>
         <span class="token keyword">int</span> rndPosIndx <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
         <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>posChosen<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
+        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
             rndPosIndx <span class="token operator">=</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> k_HighestTileValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token comment" spellcheck="true">// 这个旋转角度是否被选了，没被选就加入列表中</span>
             <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>m_UsedPositionsList<span class="token punctuation">.</span><span class="token function">Contains</span><span class="token punctuation">(</span>rndPosIndx<span class="token punctuation">)</span><span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
+            <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
                 m_UsedPositionsList<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>rndPosIndx<span class="token punctuation">)</span><span class="token punctuation">;</span>
                 posChosen <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">// 执行方块角度的旋转并激活物体</span>
         item<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>localRotation <span class="token operator">=</span> Quaternion<span class="token punctuation">.</span><span class="token function">Euler</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> rndPosIndx <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">360f</span> <span class="token operator">/</span> k_HighestTileValue<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         item<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
 <p>当与别的物体开始发生碰撞执行方法OnCollisionEnter：</p>
 <pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">OnCollisionEnter</span><span class="token punctuation">(</span>Collision col<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 只检测和数字方块的碰撞</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>col<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"tile"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 如果方块已经碰撞过，也排除在碰撞对象之外</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>AlreadyTouchedList<span class="token punctuation">.</span><span class="token function">Contains</span><span class="token punctuation">(</span>col<span class="token punctuation">.</span>transform<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 如果碰撞的顺序错误，奖励-1，结束游戏</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>col<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>parent <span class="token operator">!=</span> CurrentlyVisibleTilesList<span class="token punctuation">[</span>m_NextExpectedTileIndex<span class="token punctuation">]</span><span class="token punctuation">.</span>transform<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         <span class="token function">AddReward</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">EndEpisode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 碰撞到正确的方块的情况</span>
     <span class="token keyword">else</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">// 奖励+1</span>
         <span class="token function">AddReward</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">// 改变方块的材质</span>
-        <span class="token keyword">var</span> tile <span class="token operator">=</span> col<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token generic-method function">GetComponentInParent<span class="token punctuation">&lt;</span>NumberTile<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> tile <span class="token operator">=</span> col<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token generic-method function">GetComponentInParent<span class="token punctuation">&lt;</span>NumberTile<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         tile<span class="token punctuation">.</span><span class="token function">VisitTile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">// 索引+1</span>
         m_NextExpectedTileIndex<span class="token operator">++</span><span class="token punctuation">;</span>
@@ -789,48 +789,48 @@ EnvironmentParameters m_ResetParams<span class="token punctuation">;</span>
 
         <span class="token comment" spellcheck="true">// 如果完成了所有的任务，游戏结束</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>m_NextExpectedTileIndex <span class="token operator">==</span> m_NumberOfTilesToSpawn<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
+        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
             <span class="token function">EndEpisode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
 <p>当智能体没有模型，人想手动录制示例时可以采用Heuristic方法：</p>
 <pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Heuristic</span><span class="token punctuation">(</span><span class="token keyword">in</span> ActionBuffers actionsOut<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token keyword">var</span> discreteActionsOut <span class="token operator">=</span> actionsOut<span class="token punctuation">.</span>DiscreteActions<span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//forward</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>W<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         discreteActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>S<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         discreteActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//rotate</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>A<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         discreteActionsOut<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>D<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         discreteActionsOut<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//right</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>E<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         discreteActionsOut<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>Q<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         discreteActionsOut<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
 <p>挂载在数字方块上的脚本NumberTile.cs：</p>
 <pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> UnityEngine<span class="token punctuation">;</span>
 
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">NumberTile</span> <span class="token punctuation">:</span> MonoBehaviour
-<span class="token punctuation">{</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 方块上的数字</span>
     <span class="token keyword">public</span> <span class="token keyword">int</span> NumberValue<span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 默认材质和成功时转换用的材质</span>
@@ -842,26 +842,26 @@ EnvironmentParameters m_ResetParams<span class="token punctuation">;</span>
     <span class="token keyword">private</span> MeshRenderer m_Renderer<span class="token punctuation">;</span>
 
     <span class="token keyword">public</span> <span class="token keyword">bool</span> IsVisited
-    <span class="token punctuation">{</span>
-        <span class="token keyword">get</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> m_Visited<span class="token punctuation">;</span> <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">get</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token keyword">return</span> m_Visited<span class="token punctuation">;</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 用于转换材质的方法</span>
     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">VisitTile</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         m_Renderer<span class="token punctuation">.</span>sharedMaterial <span class="token operator">=</span> SuccessMaterial<span class="token punctuation">;</span>
         m_Visited <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 重置方块的方法，材质还原，m_Visited状态还原</span>
     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">ResetTile</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>m_Renderer <span class="token keyword">is</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            m_Renderer <span class="token operator">=</span> <span class="token generic-method function">GetComponentInChildren<span class="token punctuation">&lt;</span>MeshRenderer<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
+        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            m_Renderer <span class="token operator">=</span> <span class="token generic-method function">GetComponentInChildren<span class="token punctuation">&lt;</span>MeshRenderer<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
         m_Renderer<span class="token punctuation">.</span>sharedMaterial <span class="token operator">=</span> DefaultMaterial<span class="token punctuation">;</span>
         m_Visited <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
 <h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
   <span class="token key atrule">Sorter</span><span class="token punctuation">:</span>
     <span class="token key atrule">trainer_type</span><span class="token punctuation">:</span> ppo
@@ -966,7 +966,7 @@ EnvironmentParameters m_ResetParams<span class="token punctuation">;</span>
         <span class="token key atrule">value</span><span class="token punctuation">:</span> <span class="token number">20.0</span>
 </code></pre>
 <p>可以看到配置文件采用了最为常用的PPO算法，而且是没有带其他“配件”例如LSTM，内在奖励机制等模块的普通PPO，唯一的不同是这里加入了Curriculum Learning（课程学习），也就是说，这种能够数十个方块的排序的智能体是很难一下子训练出来的，因此我们需要从易到难给它安排任务，从一开始能排序两个方块逐渐两个两个递增，最后达到20个。关于Curriculum Learning有关参数的详细解释，请查看我前面的文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121269518">ML-Agents案例之跳墙游戏</a>。</p>
-<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><img src="/2021/12/13/ml-agents-an-li-zhi-ying-he-pai-xu/4.gif" class>
+<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><img src="/2021/12/13/ml-agents-an-li-zhi-ying-he-pai-xu/4.gif" class="">
 
 
 
@@ -1164,7 +1164,7 @@ EnvironmentParameters m_ResetParams<span class="token punctuation">;</span>
     <div id="rewardModal" class="modal">
         <div class="modal-content">
             <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <h4 class="reward-title">您的赏识是我前进的动力</h4>
             <div class="reward-content">
                 <div class="reward-tabs">
                     <ul class="tabs row">
@@ -1475,17 +1475,17 @@ EnvironmentParameters m_ResetParams<span class="token punctuation">;</span>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/12/13/ml-agents-an-li-zhi-ying-he-pai-xu/">
+                <a href="/2021/12/15/ml-agents-zhong-de-mo-fang-xue-xi/">
                     <div class="card-image">
                         
-                        <img src="/images/Sorter.gif" class="responsive-img" alt="ML-Agents案例之“硬核排序”">
                         
-                        <span class="card-title">ML-Agents案例之“硬核排序”</span>
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="ML-Agents中的模仿学习">
+                        
+                        <span class="card-title">ML-Agents中的模仿学习</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1495,9 +1495,9 @@ EnvironmentParameters m_ResetParams<span class="token punctuation">;</span>
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-13
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-15
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1510,7 +1510,6 @@ EnvironmentParameters m_ResetParams<span class="token punctuation">;</span>
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1809,7 +1808,7 @@ EnvironmentParameters m_ResetParams<span class="token punctuation">;</span>
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">236.5k</span>&nbsp;字
+                class="white-color">241.3k</span>&nbsp;字
             
             
             
@@ -1879,6 +1878,10 @@ EnvironmentParameters m_ResetParams<span class="token punctuation">;</span>
         <div class="col s12 m4 l4 social-link social-statis">
 
 
+    <a href="mailto:1121452406@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
 
 
 
@@ -1892,6 +1895,10 @@ EnvironmentParameters m_ResetParams<span class="token punctuation">;</span>
 
 
 
+
+    <a href="https://blog.csdn.net/tianjuewudi" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://blog.csdn.net/tianjuewudi" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
 
 
 

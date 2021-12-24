@@ -2,9 +2,100 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://tianjuewudi.gitee.io/2021/12/24/lun-wen-yue-du-variational-discriminator-bottleneck/</loc>
+    
+    <lastmod>2021-12-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/12/15/ml-agents-zhong-de-mo-fang-xue-xi/</loc>
+    
+    <lastmod>2021-12-23</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/11/01/ml-agents-ming-ling-ji-pei-zhi-da-quan/</loc>
+    
+    <lastmod>2021-12-20</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/</loc>
+    
+    <lastmod>2021-12-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/10/29/zi-chuang-qiang-hua-xue-xi-huan-jing-zhi-unity3d-cha-jian-ml-agent-de-shi-yong/</loc>
+    
+    <lastmod>2021-12-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/11/02/ml-agents-an-li-zhi-crawler/</loc>
+    
+    <lastmod>2021-12-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/11/09/ml-agents-an-li-zhi-walljump/</loc>
+    
+    <lastmod>2021-12-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/11/12/ml-agents-an-li-zhi-shi-wu-shou-ji-zhe/</loc>
+    
+    <lastmod>2021-12-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/11/13/ml-agents-an-li-zhi-shuang-ren-zu-qiu/</loc>
+    
+    <lastmod>2021-12-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/11/16/unity-ren-gong-zhi-neng-zhi-bu-duan-zi-wo-jin-hua-de-wu-ren-zu-qiu-sai/</loc>
+    
+    <lastmod>2021-12-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/</loc>
+    
+    <lastmod>2021-12-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/</loc>
+    
+    <lastmod>2021-12-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2021/12/04/ml-agents-an-li-zhi-ruan-chong/</loc>
+    
+    <lastmod>2021-12-16</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://tianjuewudi.gitee.io/2021/12/13/ml-agents-an-li-zhi-ying-he-pai-xu/</loc>
     
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-15</lastmod>
     
   </url>
   
@@ -17,13 +108,6 @@
   
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/01/10/ge-ren-jian-li-hexo-bo-ke-matery-zhu-ti-de-guo-cheng-xin-de/</loc>
-    
-    <lastmod>2021-12-13</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/11/16/unity-ren-gong-zhi-neng-zhi-bu-duan-zi-wo-jin-hua-de-wu-ren-zu-qiu-sai/</loc>
     
     <lastmod>2021-12-13</lastmod>
     
@@ -44,34 +128,6 @@
   </url>
   
   <url>
-    <loc>https://tianjuewudi.gitee.io/2021/11/13/ml-agents-an-li-zhi-shuang-ren-zu-qiu/</loc>
-    
-    <lastmod>2021-12-13</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/</loc>
-    
-    <lastmod>2021-12-13</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/</loc>
-    
-    <lastmod>2021-12-13</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/12/04/ml-agents-an-li-zhi-ruan-chong/</loc>
-    
-    <lastmod>2021-12-13</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://tianjuewudi.gitee.io/2021/12/02/qiang-hua-xue-xi-zhong-de-hao-qi-xin-jiang-li-ji-zhi/</loc>
     
     <lastmod>2021-12-03</lastmod>
@@ -82,48 +138,6 @@
     <loc>https://tianjuewudi.gitee.io/2021/01/23/markdown-shu-xue-gong-shi-biao-shi-fa/</loc>
     
     <lastmod>2021-12-02</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/10/29/zi-chuang-qiang-hua-xue-xi-huan-jing-zhi-unity3d-cha-jian-ml-agent-de-shi-yong/</loc>
-    
-    <lastmod>2021-11-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/11/01/ml-agents-ming-ling-ji-pei-zhi-da-quan/</loc>
-    
-    <lastmod>2021-11-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/</loc>
-    
-    <lastmod>2021-11-17</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/11/12/ml-agents-an-li-zhi-shi-wu-shou-ji-zhe/</loc>
-    
-    <lastmod>2021-11-12</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/11/09/ml-agents-an-li-zhi-walljump/</loc>
-    
-    <lastmod>2021-11-11</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2021/11/02/ml-agents-an-li-zhi-crawler/</loc>
-    
-    <lastmod>2021-11-07</lastmod>
     
   </url>
   
@@ -620,7 +634,7 @@
 
   <url>
     <loc>https://tianjuewudi.gitee.io/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -628,140 +642,140 @@
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/Markdown/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/Pycharm%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/Pycharm%E9%85%8D%E7%BD%AE%E5%92%8C%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/Python/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/app/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/%E7%BD%91%E7%AB%99/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/Pycharm/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/%E6%95%B0%E5%AD%A6/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/%E8%87%AA%E6%8E%A7/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/%E6%8A%95%E8%B5%84/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/tags/ML-Agents/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -770,105 +784,105 @@
   
   <url>
     <loc>https://tianjuewudi.gitee.io/categories/%E5%8D%9A%E5%AE%A2/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/categories/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/categories/Pycharm/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/categories/Python/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/categories/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%84%9A%E6%9C%AC/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/categories/%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/categories/Markdown/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/categories/%E6%95%B0%E5%AD%A6/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/categories/%E8%87%AA%E6%8E%A7/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/categories/%E5%85%B6%E4%BB%96/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/categories/%E6%8A%95%E8%B5%84/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://tianjuewudi.gitee.io/categories/Unity%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2021-12-14</lastmod>
+    <lastmod>2021-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

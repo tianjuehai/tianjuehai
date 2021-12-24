@@ -17,7 +17,7 @@
 
 
     <title>ML-Agents案例之推箱子游戏 | 微笑紫瞳星</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/MyLogo.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -53,7 +53,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/MyLogo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">微笑紫瞳星</span>
                 </a>
@@ -152,7 +152,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/MyLogo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">微笑紫瞳星</div>
         <div class="logo-desc">
@@ -322,7 +322,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/PushBlockCollab.gif')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -479,21 +479,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-11-17
+                    2021-12-16
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5.5k
+                    5.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    22 分
+                    23 分
                 </div>
                 
 
@@ -554,183 +554,183 @@
 <hr>
 <p>接下来看看主脚本Push Agent Basic：</p>
 <p>先看看初始化时做了什么：</p>
-<pre class=" language-c#"><code class="language-c#">void Awake()
-{
-    // 找到挂载训练参数的脚本
-    m_PushBlockSettings = FindObjectOfType<PushBlockSettings>();
-}
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">Awake</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 找到挂载训练参数的脚本</span>
+    m_PushBlockSettings <span class="token operator">=</span> <span class="token generic-method function">FindObjectOfType<span class="token punctuation">&lt;</span>PushBlockSettings<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-public override void Initialize()
-{
-    goalDetect = block.GetComponent<GoalDetect>();
-    goalDetect.agent = this;
+<span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Initialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    goalDetect <span class="token operator">=</span> block<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>GoalDetect<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    goalDetect<span class="token punctuation">.</span>agent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
 
-    m_AgentRb = GetComponent<Rigidbody>();
-    m_BlockRb = block.GetComponent<Rigidbody>();
-    // 获取碰撞器的世界空间边界体积（只读）。
-    areaBounds = ground.GetComponent<Collider>().bounds;
-    // 获取地面渲染器，便于更换材质
-    m_GroundRenderer = ground.GetComponent<Renderer>();
-    // 初始材质
-    m_GroundMaterial = m_GroundRenderer.material;
-    // 获取配置文件中的参数
-    m_ResetParams = Academy.Instance.EnvironmentParameters;
-    //设置参数
-    SetResetParameters();
-}
-void SetResetParameters()
-{
-    // 设置方块动摩擦和静摩擦系数
-    SetGroundMaterialFriction();
-    // 设置方块的大小，以及空气阻力
-    SetBlockProperties();
-}
+    m_AgentRb <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Rigidbody<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_BlockRb <span class="token operator">=</span> block<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Rigidbody<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 获取碰撞器的世界空间边界体积（只读）。</span>
+    areaBounds <span class="token operator">=</span> ground<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Collider<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>bounds<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 获取地面渲染器，便于更换材质</span>
+    m_GroundRenderer <span class="token operator">=</span> ground<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Renderer<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 初始材质</span>
+    m_GroundMaterial <span class="token operator">=</span> m_GroundRenderer<span class="token punctuation">.</span>material<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 获取配置文件中的参数</span>
+    m_ResetParams <span class="token operator">=</span> Academy<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span>EnvironmentParameters<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//设置参数</span>
+    <span class="token function">SetResetParameters</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">SetResetParameters</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 设置方块动摩擦和静摩擦系数</span>
+    <span class="token function">SetGroundMaterialFriction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 设置方块的大小，以及空气阻力</span>
+    <span class="token function">SetBlockProperties</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-public void SetGroundMaterialFriction()
-{
-    var groundCollider = ground.GetComponent<Collider>();
-    groundCollider.material.dynamicFriction = m_ResetParams.GetWithDefault("dynamic_friction", 0);
-    groundCollider.material.staticFriction = m_ResetParams.GetWithDefault("static_friction", 0);
-}
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">SetGroundMaterialFriction</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> groundCollider <span class="token operator">=</span> ground<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Collider<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    groundCollider<span class="token punctuation">.</span>material<span class="token punctuation">.</span>dynamicFriction <span class="token operator">=</span> m_ResetParams<span class="token punctuation">.</span><span class="token function">GetWithDefault</span><span class="token punctuation">(</span><span class="token string">"dynamic_friction"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    groundCollider<span class="token punctuation">.</span>material<span class="token punctuation">.</span>staticFriction <span class="token operator">=</span> m_ResetParams<span class="token punctuation">.</span><span class="token function">GetWithDefault</span><span class="token punctuation">(</span><span class="token string">"static_friction"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-public void SetBlockProperties()
-{
-    var scale = m_ResetParams.GetWithDefault("block_scale", 2);
-    //Set the scale of the block
-    m_BlockRb.transform.localScale = new Vector3(scale, 0.75f, scale);
-    // Set the drag of the block
-    m_BlockRb.drag = m_ResetParams.GetWithDefault("block_drag", 0.5f);
-}</Collider></Renderer></Collider></Rigidbody></Rigidbody></GoalDetect></PushBlockSettings></code></pre>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">SetBlockProperties</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> scale <span class="token operator">=</span> m_ResetParams<span class="token punctuation">.</span><span class="token function">GetWithDefault</span><span class="token punctuation">(</span><span class="token string">"block_scale"</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//Set the scale of the block</span>
+    m_BlockRb<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>localScale <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>scale<span class="token punctuation">,</span> <span class="token number">0.75f</span><span class="token punctuation">,</span> scale<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// Set the drag of the block</span>
+    m_BlockRb<span class="token punctuation">.</span>drag <span class="token operator">=</span> m_ResetParams<span class="token punctuation">.</span><span class="token function">GetWithDefault</span><span class="token punctuation">(</span><span class="token string">"block_drag"</span><span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>最为关键的OnActionReceived函数：</p>
-<pre class=" language-c#"><code class="language-c#">public void MoveAgent(ActionSegment<int> act)
-{
-    var dirToGo = Vector3.zero;
-    var rotateDir = Vector3.zero;
-    // 获取一个离散输出，范围是0~6
-    var action = act[0];
-    // 根据离散的输出判断六种运动可能分别是前后左右移动和左右旋转，0是什么都不做。
-    switch (action)
-    {
-        case 1:
-            dirToGo = transform.forward * 1f;
-            break;
-        case 2:
-            dirToGo = transform.forward * -1f;
-            break;
-        case 3:
-            rotateDir = transform.up * 1f;
-            break;
-        case 4:
-            rotateDir = transform.up * -1f;
-            break;
-        case 5:
-            dirToGo = transform.right * -0.75f;
-            break;
-        case 6:
-            dirToGo = transform.right * 0.75f;
-            break;
-    }
-    transform.Rotate(rotateDir, Time.fixedDeltaTime * 200f);
-    // 注意这里要对刚体施加力的方式让其前进，不能直接改变其位置，否则不能达到一个智能体推不动大方块的效果
-    m_AgentRb.AddForce(dirToGo * m_PushBlockSettings.agentRunSpeed,
-                       ForceMode.VelocityChange);
-}
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">MoveAgent</span><span class="token punctuation">(</span>ActionSegment<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> act<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> dirToGo <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> rotateDir <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 获取一个离散输出，范围是0~6</span>
+    <span class="token keyword">var</span> action <span class="token operator">=</span> act<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 根据离散的输出判断六种运动可能分别是前后左右移动和左右旋转，0是什么都不做。</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>action<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> <span class="token number">1</span><span class="token punctuation">:</span>
+            dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>forward <span class="token operator">*</span> <span class="token number">1f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">2</span><span class="token punctuation">:</span>
+            dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>forward <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">3</span><span class="token punctuation">:</span>
+            rotateDir <span class="token operator">=</span> transform<span class="token punctuation">.</span>up <span class="token operator">*</span> <span class="token number">1f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">4</span><span class="token punctuation">:</span>
+            rotateDir <span class="token operator">=</span> transform<span class="token punctuation">.</span>up <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">5</span><span class="token punctuation">:</span>
+            dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>right <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">0.75f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">6</span><span class="token punctuation">:</span>
+            dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>right <span class="token operator">*</span> <span class="token number">0.75f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    transform<span class="token punctuation">.</span><span class="token function">Rotate</span><span class="token punctuation">(</span>rotateDir<span class="token punctuation">,</span> Time<span class="token punctuation">.</span>fixedDeltaTime <span class="token operator">*</span> <span class="token number">200f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 注意这里要对刚体施加力的方式让其前进，不能直接改变其位置，否则不能达到一个智能体推不动大方块的效果</span>
+    m_AgentRb<span class="token punctuation">.</span><span class="token function">AddForce</span><span class="token punctuation">(</span>dirToGo <span class="token operator">*</span> m_PushBlockSettings<span class="token punctuation">.</span>agentRunSpeed<span class="token punctuation">,</span>
+                       ForceMode<span class="token punctuation">.</span>VelocityChange<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-// 每个step都调用的函数，每次都扣除微量分数，这就鼓励智能体完成得越快越好
-public override void OnActionReceived(ActionBuffers actionBuffers)
+<span class="token comment" spellcheck="true">// 每个step都调用的函数，每次都扣除微量分数，这就鼓励智能体完成得越快越好</span>
+<span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnActionReceived</span><span class="token punctuation">(</span>ActionBuffers actionBuffers<span class="token punctuation">)</span>
 
-{
-    MoveAgent(actionBuffers.DiscreteActions);
-    AddReward(-1f / MaxStep);
-}</int></code></pre>
+<span class="token punctuation">{</span>
+    <span class="token function">MoveAgent</span><span class="token punctuation">(</span>actionBuffers<span class="token punctuation">.</span>DiscreteActions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">AddReward</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1f</span> <span class="token operator">/</span> MaxStep<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>Heuristic方法，可以由玩家手动控制智能体：</p>
-<pre class=" language-c#"><code class="language-c#">public override void Heuristic(in ActionBuffers actionsOut)
-{
-    var discreteActionsOut = actionsOut.DiscreteActions;
-    if (Input.GetKey(KeyCode.D))
-    {
-        discreteActionsOut[0] = 3;
-    }
-    else if (Input.GetKey(KeyCode.W))
-    {
-        discreteActionsOut[0] = 1;
-    }
-    else if (Input.GetKey(KeyCode.A))
-    {
-        discreteActionsOut[0] = 4;
-    }
-    else if (Input.GetKey(KeyCode.S))
-    {
-        discreteActionsOut[0] = 2;
-    }
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Heuristic</span><span class="token punctuation">(</span><span class="token keyword">in</span> ActionBuffers actionsOut<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> discreteActionsOut <span class="token operator">=</span> actionsOut<span class="token punctuation">.</span>DiscreteActions<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>D<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        discreteActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>W<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        discreteActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>A<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        discreteActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>S<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        discreteActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>每个episode开始时调用的OnEpisodeBegin方法：</p>
-<pre class=" language-c#"><code class="language-c#">public override void OnEpisodeBegin()
-{
-    // 场地四个角度任意旋转
-    var rotation = Random.Range(0, 4);
-    var rotationAngle = rotation * 90f;
-    area.transform.Rotate(new Vector3(0f, rotationAngle, 0f));
-    // 重置方块的参数,速度和角速度归零，位置随机
-    ResetBlock();
-    // 重置智能体参数，速度和角速度归零，位置随机
-    transform.position = GetRandomSpawnPos();
-    m_AgentRb.velocity = Vector3.zero;
-    m_AgentRb.angularVelocity = Vector3.zero;
-    // 设置方块动摩擦和静摩擦系数，方块大小，空气阻力
-    SetResetParameters();
-}
-void ResetBlock()
-{
-    block.transform.position = GetRandomSpawnPos();
-    m_BlockRb.velocity = Vector3.zero;
-    m_BlockRb.angularVelocity = Vector3.zero;
-}
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnEpisodeBegin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 场地四个角度任意旋转</span>
+    <span class="token keyword">var</span> rotation <span class="token operator">=</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> rotationAngle <span class="token operator">=</span> rotation <span class="token operator">*</span> <span class="token number">90f</span><span class="token punctuation">;</span>
+    area<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">Rotate</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">,</span> rotationAngle<span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 重置方块的参数,速度和角速度归零，位置随机</span>
+    <span class="token function">ResetBlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 重置智能体参数，速度和角速度归零，位置随机</span>
+    transform<span class="token punctuation">.</span>position <span class="token operator">=</span> <span class="token function">GetRandomSpawnPos</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_AgentRb<span class="token punctuation">.</span>velocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+    m_AgentRb<span class="token punctuation">.</span>angularVelocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 设置方块动摩擦和静摩擦系数，方块大小，空气阻力</span>
+    <span class="token function">SetResetParameters</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">ResetBlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    block<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">=</span> <span class="token function">GetRandomSpawnPos</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_BlockRb<span class="token punctuation">.</span>velocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+    m_BlockRb<span class="token punctuation">.</span>angularVelocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-public Vector3 GetRandomSpawnPos()
-{
-    var foundNewSpawnLocation = false;
-    var randomSpawnPos = Vector3.zero;
-    while (foundNewSpawnLocation == false)
-    {
-        var randomPosX = Random.Range(-areaBounds.extents.x * m_PushBlockSettings.spawnAreaMarginMultiplier,
-                                      areaBounds.extents.x * m_PushBlockSettings.spawnAreaMarginMultiplier);
+<span class="token keyword">public</span> Vector3 <span class="token function">GetRandomSpawnPos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> foundNewSpawnLocation <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> randomSpawnPos <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>foundNewSpawnLocation <span class="token operator">==</span> <span class="token keyword">false</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> randomPosX <span class="token operator">=</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>areaBounds<span class="token punctuation">.</span>extents<span class="token punctuation">.</span>x <span class="token operator">*</span> m_PushBlockSettings<span class="token punctuation">.</span>spawnAreaMarginMultiplier<span class="token punctuation">,</span>
+                                      areaBounds<span class="token punctuation">.</span>extents<span class="token punctuation">.</span>x <span class="token operator">*</span> m_PushBlockSettings<span class="token punctuation">.</span>spawnAreaMarginMultiplier<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        var randomPosZ = Random.Range(-areaBounds.extents.z * m_PushBlockSettings.spawnAreaMarginMultiplier,
-                                      areaBounds.extents.z * m_PushBlockSettings.spawnAreaMarginMultiplier);
-        randomSpawnPos = ground.transform.position + new Vector3(randomPosX, 1f, randomPosZ);
-        // checkBox检查生成的地方是否与其他碰撞体碰撞，第一个参数是中心，第二个是cube范围半径
-        if (Physics.CheckBox(randomSpawnPos, new Vector3(2.5f, 0.01f, 2.5f)) == false)
-        {
-            foundNewSpawnLocation = true;
-        }
-    }
-    return randomSpawnPos;
-}</code></pre>
+        <span class="token keyword">var</span> randomPosZ <span class="token operator">=</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>areaBounds<span class="token punctuation">.</span>extents<span class="token punctuation">.</span>z <span class="token operator">*</span> m_PushBlockSettings<span class="token punctuation">.</span>spawnAreaMarginMultiplier<span class="token punctuation">,</span>
+                                      areaBounds<span class="token punctuation">.</span>extents<span class="token punctuation">.</span>z <span class="token operator">*</span> m_PushBlockSettings<span class="token punctuation">.</span>spawnAreaMarginMultiplier<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        randomSpawnPos <span class="token operator">=</span> ground<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">+</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>randomPosX<span class="token punctuation">,</span> <span class="token number">1f</span><span class="token punctuation">,</span> randomPosZ<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// checkBox检查生成的地方是否与其他碰撞体碰撞，第一个参数是中心，第二个是cube范围半径</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>Physics<span class="token punctuation">.</span><span class="token function">CheckBox</span><span class="token punctuation">(</span>randomSpawnPos<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">2.5f</span><span class="token punctuation">,</span> <span class="token number">0.01f</span><span class="token punctuation">,</span> <span class="token number">2.5f</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token keyword">false</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            foundNewSpawnLocation <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> randomSpawnPos<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>最后就是看看挂载在方块上检测碰撞的脚本了：</p>
-<pre class=" language-c#"><code class="language-c#">public class GoalDetect : MonoBehaviour
-{
-    [HideInInspector]
-    public PushAgentBasic agent;  
-    void OnCollisionEnter(Collision col)
-    {
-        // 调用agent中的函数
-        if (col.gameObject.CompareTag("goal"))
-        {
-            agent.ScoredAGoal();
-        }
-    }
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GoalDetect</span> <span class="token punctuation">:</span> MonoBehaviour
+<span class="token punctuation">{</span>
+    <span class="token punctuation">[</span>HideInInspector<span class="token punctuation">]</span>
+    <span class="token keyword">public</span> PushAgentBasic agent<span class="token punctuation">;</span>  
+    <span class="token keyword">void</span> <span class="token function">OnCollisionEnter</span><span class="token punctuation">(</span>Collision col<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 调用agent中的函数</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>col<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"goal"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            agent<span class="token punctuation">.</span><span class="token function">ScoredAGoal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>在主脚本Push Agent Basic中有：</p>
-<pre class=" language-c#"><code class="language-c#">public void ScoredAGoal()
-{
-    // 方块到达指定区域加5分
-    AddReward(5f);
-    // 结束本轮
-    EndEpisode();
-    // 改变材质
-    StartCoroutine(GoalScoredSwapGroundMaterial(m_PushBlockSettings.goalScoredMaterial, 0.5f));
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">ScoredAGoal</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 方块到达指定区域加5分</span>
+    <span class="token function">AddReward</span><span class="token punctuation">(</span><span class="token number">5f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 结束本轮</span>
+    <span class="token function">EndEpisode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 改变材质</span>
+    <span class="token function">StartCoroutine</span><span class="token punctuation">(</span><span class="token function">GoalScoredSwapGroundMaterial</span><span class="token punctuation">(</span>m_PushBlockSettings<span class="token punctuation">.</span>goalScoredMaterial<span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>PPO算法：</p>
 <pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
   <span class="token key atrule">PushBlock</span><span class="token punctuation">:</span>
@@ -825,358 +825,358 @@ public Vector3 GetRandomSpawnPos()
 <p>可检测的标签的数量和网格的数量要尽可能小，以减少数据量，这需要在观察精度和训练速度直接权衡。</p>
 <p>注意：这个组件只使用3D环境，2D环境下无法运行。</p>
 <h4 id="智能体脚本"><a href="#智能体脚本" class="headerlink" title="智能体脚本"></a>智能体脚本</h4><p>初始化：</p>
-<pre class=" language-c#"><code class="language-c#">void Awake()
-{
-    m_PushBlockSettings = FindObjectOfType<PushBlockSettings>();
-}
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">Awake</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_PushBlockSettings <span class="token operator">=</span> <span class="token generic-method function">FindObjectOfType<span class="token punctuation">&lt;</span>PushBlockSettings<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-public override void Initialize()
-{
-    m_AgentRb = GetComponent<Rigidbody>();
-}</Rigidbody></PushBlockSettings></code></pre>
+<span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Initialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_AgentRb <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Rigidbody<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>动作执行（和单智能体一样）：</p>
-<pre class=" language-c#"><code class="language-c#">public void MoveAgent(ActionSegment<int> act)
-{
-    var dirToGo = Vector3.zero;
-    var rotateDir = Vector3.zero;
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">MoveAgent</span><span class="token punctuation">(</span>ActionSegment<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> act<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> dirToGo <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> rotateDir <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
 
-    var action = act[0];
+    <span class="token keyword">var</span> action <span class="token operator">=</span> act<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-    switch (action)
-    {
-        case 1:
-            dirToGo = transform.forward * 1f;
-            break;
-        case 2:
-            dirToGo = transform.forward * -1f;
-            break;
-        case 3:
-            rotateDir = transform.up * 1f;
-            break;
-        case 4:
-            rotateDir = transform.up * -1f;
-            break;
-        case 5:
-            dirToGo = transform.right * -0.75f;
-            break;
-        case 6:
-            dirToGo = transform.right * 0.75f;
-            break;
-    }
-    transform.Rotate(rotateDir, Time.fixedDeltaTime * 200f);
-    m_AgentRb.AddForce(dirToGo * m_PushBlockSettings.agentRunSpeed,
-                       ForceMode.VelocityChange);
-}
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>action<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> <span class="token number">1</span><span class="token punctuation">:</span>
+            dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>forward <span class="token operator">*</span> <span class="token number">1f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">2</span><span class="token punctuation">:</span>
+            dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>forward <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">3</span><span class="token punctuation">:</span>
+            rotateDir <span class="token operator">=</span> transform<span class="token punctuation">.</span>up <span class="token operator">*</span> <span class="token number">1f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">4</span><span class="token punctuation">:</span>
+            rotateDir <span class="token operator">=</span> transform<span class="token punctuation">.</span>up <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">5</span><span class="token punctuation">:</span>
+            dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>right <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">0.75f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">6</span><span class="token punctuation">:</span>
+            dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>right <span class="token operator">*</span> <span class="token number">0.75f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    transform<span class="token punctuation">.</span><span class="token function">Rotate</span><span class="token punctuation">(</span>rotateDir<span class="token punctuation">,</span> Time<span class="token punctuation">.</span>fixedDeltaTime <span class="token operator">*</span> <span class="token number">200f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_AgentRb<span class="token punctuation">.</span><span class="token function">AddForce</span><span class="token punctuation">(</span>dirToGo <span class="token operator">*</span> m_PushBlockSettings<span class="token punctuation">.</span>agentRunSpeed<span class="token punctuation">,</span>
+                       ForceMode<span class="token punctuation">.</span>VelocityChange<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-public override void OnActionReceived(ActionBuffers actionBuffers)
-{
-    MoveAgent(actionBuffers.DiscreteActions);
-}</int></code></pre>
+<span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnActionReceived</span><span class="token punctuation">(</span>ActionBuffers actionBuffers<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">MoveAgent</span><span class="token punctuation">(</span>actionBuffers<span class="token punctuation">.</span>DiscreteActions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>人工操作（和单智能体一样）：</p>
-<pre class=" language-c#"><code class="language-c#">public override void Heuristic(in ActionBuffers actionsOut)
-{
-    var discreteActionsOut = actionsOut.DiscreteActions;
-    if (Input.GetKey(KeyCode.D))
-    {
-        discreteActionsOut[0] = 3;
-    }
-    else if (Input.GetKey(KeyCode.W))
-    {
-        discreteActionsOut[0] = 1;
-    }
-    else if (Input.GetKey(KeyCode.A))
-    {
-        discreteActionsOut[0] = 4;
-    }
-    else if (Input.GetKey(KeyCode.S))
-    {
-        discreteActionsOut[0] = 2;
-    }
-}</code></pre>
-<h4 id="挂载在物块上的脚本："><a href="#挂载在物块上的脚本：" class="headerlink" title="挂载在物块上的脚本："></a>挂载在物块上的脚本：</h4><pre class=" language-c#"><code class="language-c#">public class GoalDetectTrigger : MonoBehaviour
-{
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Heuristic</span><span class="token punctuation">(</span><span class="token keyword">in</span> ActionBuffers actionsOut<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> discreteActionsOut <span class="token operator">=</span> actionsOut<span class="token punctuation">.</span>DiscreteActions<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>D<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        discreteActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>W<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        discreteActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>A<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        discreteActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>S<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        discreteActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h4 id="挂载在物块上的脚本："><a href="#挂载在物块上的脚本：" class="headerlink" title="挂载在物块上的脚本："></a>挂载在物块上的脚本：</h4><pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GoalDetectTrigger</span> <span class="token punctuation">:</span> MonoBehaviour
+<span class="token punctuation">{</span>
 
-    [Header("Trigger Collider Tag To Detect")]
-    public string tagToDetect = "goal"; //collider tag to detect
+    <span class="token punctuation">[</span><span class="token function">Header</span><span class="token punctuation">(</span><span class="token string">"Trigger Collider Tag To Detect"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token keyword">string</span> tagToDetect <span class="token operator">=</span> <span class="token string">"goal"</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//collider tag to detect</span>
 
-    [Header("Goal Value")]
-    public float GoalValue = 1;
+    <span class="token punctuation">[</span><span class="token function">Header</span><span class="token punctuation">(</span><span class="token string">"Goal Value"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token keyword">float</span> GoalValue <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 
-    private Collider m_col;
-    // 继承了一个泛型事件
-    [System.Serializable]
-    public class TriggerEvent : UnityEvent<Collider, float>
-    {
-    }
+    <span class="token keyword">private</span> Collider m_col<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 继承了一个泛型事件</span>
+    <span class="token punctuation">[</span>System<span class="token punctuation">.</span>Serializable<span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TriggerEvent</span> <span class="token punctuation">:</span> UnityEvent<span class="token operator">&lt;</span>Collider<span class="token punctuation">,</span> <span class="token keyword">float</span><span class="token operator">></span>
+    <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
 
-    // 实例化了三个事件，订阅事件要到Unity编辑器中
-    [Header("Trigger Callbacks")]
-    public TriggerEvent onTriggerEnterEvent = new TriggerEvent();
-    public TriggerEvent onTriggerStayEvent = new TriggerEvent();
-    public TriggerEvent onTriggerExitEvent = new TriggerEvent();
+    <span class="token comment" spellcheck="true">// 实例化了三个事件，订阅事件要到Unity编辑器中</span>
+    <span class="token punctuation">[</span><span class="token function">Header</span><span class="token punctuation">(</span><span class="token string">"Trigger Callbacks"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> TriggerEvent onTriggerEnterEvent <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TriggerEvent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> TriggerEvent onTriggerStayEvent <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TriggerEvent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> TriggerEvent onTriggerExitEvent <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TriggerEvent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col.CompareTag(tagToDetect))
-        {
-            onTriggerEnterEvent.Invoke(m_col, GoalValue);
-        }
-    }
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">OnTriggerEnter</span><span class="token punctuation">(</span>Collider col<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>col<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span>tagToDetect<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            onTriggerEnterEvent<span class="token punctuation">.</span><span class="token function">Invoke</span><span class="token punctuation">(</span>m_col<span class="token punctuation">,</span> GoalValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    private void OnTriggerStay(Collider col)
-    {
-        if (col.CompareTag(tagToDetect))
-        {
-            onTriggerStayEvent.Invoke(m_col, GoalValue);
-        }
-    }
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">OnTriggerStay</span><span class="token punctuation">(</span>Collider col<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>col<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span>tagToDetect<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            onTriggerStayEvent<span class="token punctuation">.</span><span class="token function">Invoke</span><span class="token punctuation">(</span>m_col<span class="token punctuation">,</span> GoalValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    private void OnTriggerExit(Collider col)
-    {
-        if (col.CompareTag(tagToDetect))
-        {
-            onTriggerExitEvent.Invoke(m_col, GoalValue);
-        }
-    }
-    // Start is called before the first frame update
-    void Awake()
-    {
-        m_col = GetComponent<Collider>();
-    }
-}</Collider></Collider,></code></pre>
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">OnTriggerExit</span><span class="token punctuation">(</span>Collider col<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>col<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span>tagToDetect<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            onTriggerExitEvent<span class="token punctuation">.</span><span class="token function">Invoke</span><span class="token punctuation">(</span>m_col<span class="token punctuation">,</span> GoalValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// Start is called before the first frame update</span>
+    <span class="token keyword">void</span> <span class="token function">Awake</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        m_col <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Collider<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>事件是一种方便调用其他脚本函数的方法，订阅事件：</p>
 <img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/8.png" class>
 
 <p>订阅事件对应的方法，位于环境脚本中（下面会讲）：</p>
-<pre class=" language-c#"><code class="language-c#">public void ScoredAGoal(Collider col, float score)
-{
-    print($"Scored {score} on {gameObject.name}");
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">ScoredAGoal</span><span class="token punctuation">(</span>Collider col<span class="token punctuation">,</span> <span class="token keyword">float</span> score<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">print</span><span class="token punctuation">(</span>$<span class="token string">"Scored {score} on {gameObject.name}"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // 场上剩余物体计数
-    m_NumberOfRemainingBlocks--;
+    <span class="token comment" spellcheck="true">// 场上剩余物体计数</span>
+    m_NumberOfRemainingBlocks<span class="token operator">--</span><span class="token punctuation">;</span>
 
-    // 是否结束游戏
-    bool done = m_NumberOfRemainingBlocks == 0;
+    <span class="token comment" spellcheck="true">// 是否结束游戏</span>
+    <span class="token keyword">bool</span> done <span class="token operator">=</span> m_NumberOfRemainingBlocks <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>
 
-    // 把物体暂时从场景中删除
-    col.gameObject.SetActive(false);
+    <span class="token comment" spellcheck="true">// 把物体暂时从场景中删除</span>
+    col<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // 添加集体奖励
-    m_AgentGroup.AddGroupReward(score);
+    <span class="token comment" spellcheck="true">// 添加集体奖励</span>
+    m_AgentGroup<span class="token punctuation">.</span><span class="token function">AddGroupReward</span><span class="token punctuation">(</span>score<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // Swap ground material for a bit to indicate we scored.
-    StartCoroutine(GoalScoredSwapGroundMaterial(m_PushBlockSettings.goalScoredMaterial, 0.5f));
+    <span class="token comment" spellcheck="true">// Swap ground material for a bit to indicate we scored.</span>
+    <span class="token function">StartCoroutine</span><span class="token punctuation">(</span><span class="token function">GoalScoredSwapGroundMaterial</span><span class="token punctuation">(</span>m_PushBlockSettings<span class="token punctuation">.</span>goalScoredMaterial<span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    if (done)
-    {
-        //重新开始一轮游戏
-        m_AgentGroup.EndGroupEpisode();
-        ResetScene();
-    }
-}</code></pre>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>done<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//重新开始一轮游戏</span>
+        m_AgentGroup<span class="token punctuation">.</span><span class="token function">EndGroupEpisode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">ResetScene</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>注意了，多智能体的不同点显现出来了，添加奖励使用的是AddGroupReward函数添加的是集体奖励</p>
 <h4 id="环境控制脚本"><a href="#环境控制脚本" class="headerlink" title="环境控制脚本"></a>环境控制脚本</h4><p>这个脚本挂载在空物体上运行，智能体作为子物体。</p>
-<pre class=" language-c#"><code class="language-c#">using System.Collections;
-using System.Collections.Generic;
-using Unity.MLAgents;
-using UnityEngine;
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> System<span class="token punctuation">.</span>Collections<span class="token punctuation">;</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Collections<span class="token punctuation">.</span>Generic<span class="token punctuation">;</span>
+<span class="token keyword">using</span> Unity<span class="token punctuation">.</span>MLAgents<span class="token punctuation">;</span>
+<span class="token keyword">using</span> UnityEngine<span class="token punctuation">;</span>
 
-public class PushBlockEnvController : MonoBehaviour
-{
-    // 智能体信息类
-    [System.Serializable]
-    public class PlayerInfo
-    {
-        public PushAgentCollab Agent;
-        [HideInInspector]
-        public Vector3 StartingPos;
-        [HideInInspector]
-        public Quaternion StartingRot;
-        [HideInInspector]
-        public Rigidbody Rb;
-    }
-    // 物块信息类
-    [System.Serializable]
-    public class BlockInfo
-    {
-        public Transform T;
-        [HideInInspector]
-        public Vector3 StartingPos;
-        [HideInInspector]
-        public Quaternion StartingRot;
-        [HideInInspector]
-        public Rigidbody Rb;
-    }
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PushBlockEnvController</span> <span class="token punctuation">:</span> MonoBehaviour
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 智能体信息类</span>
+    <span class="token punctuation">[</span>System<span class="token punctuation">.</span>Serializable<span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PlayerInfo</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> PushAgentCollab Agent<span class="token punctuation">;</span>
+        <span class="token punctuation">[</span>HideInInspector<span class="token punctuation">]</span>
+        <span class="token keyword">public</span> Vector3 StartingPos<span class="token punctuation">;</span>
+        <span class="token punctuation">[</span>HideInInspector<span class="token punctuation">]</span>
+        <span class="token keyword">public</span> Quaternion StartingRot<span class="token punctuation">;</span>
+        <span class="token punctuation">[</span>HideInInspector<span class="token punctuation">]</span>
+        <span class="token keyword">public</span> Rigidbody Rb<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 物块信息类</span>
+    <span class="token punctuation">[</span>System<span class="token punctuation">.</span>Serializable<span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BlockInfo</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> Transform T<span class="token punctuation">;</span>
+        <span class="token punctuation">[</span>HideInInspector<span class="token punctuation">]</span>
+        <span class="token keyword">public</span> Vector3 StartingPos<span class="token punctuation">;</span>
+        <span class="token punctuation">[</span>HideInInspector<span class="token punctuation">]</span>
+        <span class="token keyword">public</span> Quaternion StartingRot<span class="token punctuation">;</span>
+        <span class="token punctuation">[</span>HideInInspector<span class="token punctuation">]</span>
+        <span class="token keyword">public</span> Rigidbody Rb<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    [Header("Max Environment Steps")] public int MaxEnvironmentSteps = 25000;
+    <span class="token punctuation">[</span><span class="token function">Header</span><span class="token punctuation">(</span><span class="token string">"Max Environment Steps"</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token keyword">public</span> <span class="token keyword">int</span> MaxEnvironmentSteps <span class="token operator">=</span> <span class="token number">25000</span><span class="token punctuation">;</span>
 
-    // 区域边界
-    [HideInInspector]
-    public Bounds areaBounds;
+    <span class="token comment" spellcheck="true">// 区域边界</span>
+    <span class="token punctuation">[</span>HideInInspector<span class="token punctuation">]</span>
+    <span class="token keyword">public</span> Bounds areaBounds<span class="token punctuation">;</span>
 
-    public GameObject ground;
+    <span class="token keyword">public</span> GameObject ground<span class="token punctuation">;</span>
 
-    public GameObject area;
+    <span class="token keyword">public</span> GameObject area<span class="token punctuation">;</span>
 
-    Material m_GroundMaterial; //cached on Awake()
-    Renderer m_GroundRenderer;
+    Material m_GroundMaterial<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//cached on Awake()</span>
+    Renderer m_GroundRenderer<span class="token punctuation">;</span>
 
-    // 智能体信息的列表
-    public List<PlayerInfo> AgentsList = new List<PlayerInfo>();
-    // 物块信息的列表
-    public List<BlockInfo> BlocksList = new List<BlockInfo>();
+    <span class="token comment" spellcheck="true">// 智能体信息的列表</span>
+    <span class="token keyword">public</span> List<span class="token operator">&lt;</span>PlayerInfo<span class="token operator">></span> AgentsList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span>PlayerInfo<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 物块信息的列表</span>
+    <span class="token keyword">public</span> List<span class="token operator">&lt;</span>BlockInfo<span class="token operator">></span> BlocksList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span>BlockInfo<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    public bool UseRandomAgentRotation = true;
-    public bool UseRandomAgentPosition = true;
-    public bool UseRandomBlockRotation = true;
-    public bool UseRandomBlockPosition = true;
-    private PushBlockSettings m_PushBlockSettings;
+    <span class="token keyword">public</span> <span class="token keyword">bool</span> UseRandomAgentRotation <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">bool</span> UseRandomAgentPosition <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">bool</span> UseRandomBlockRotation <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">bool</span> UseRandomBlockPosition <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> PushBlockSettings m_PushBlockSettings<span class="token punctuation">;</span>
 
-    private int m_NumberOfRemainingBlocks;
-    // 注意了，这是一个多智能体类
-    private SimpleMultiAgentGroup m_AgentGroup;
-    private int m_ResetTimer;
+    <span class="token keyword">private</span> <span class="token keyword">int</span> m_NumberOfRemainingBlocks<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 注意了，这是一个多智能体类</span>
+    <span class="token keyword">private</span> SimpleMultiAgentGroup m_AgentGroup<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> m_ResetTimer<span class="token punctuation">;</span>
 
-    void Start()
-    {
+    <span class="token keyword">void</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
 
-        // Get the ground's bounds
-        areaBounds = ground.GetComponent<Collider>().bounds;
-        // Get the ground renderer so we can change the material when a goal is scored
-        m_GroundRenderer = ground.GetComponent<Renderer>();
-        // Starting material
-        m_GroundMaterial = m_GroundRenderer.material;
-        m_PushBlockSettings = FindObjectOfType<PushBlockSettings>();
-        // Initialize Blocks
-        foreach (var item in BlocksList)
-        {
-            item.StartingPos = item.T.transform.position;
-            item.StartingRot = item.T.transform.rotation;
-            item.Rb = item.T.GetComponent<Rigidbody>();
-        }
-        // Initialize TeamManager
-        m_AgentGroup = new SimpleMultiAgentGroup();
-        foreach (var item in AgentsList)
-        {
-            item.StartingPos = item.Agent.transform.position;
-            item.StartingRot = item.Agent.transform.rotation;
-            item.Rb = item.Agent.GetComponent<Rigidbody>();
-            // 把单智能体都添加到多智能体中
-            m_AgentGroup.RegisterAgent(item.Agent);
-        }
-        ResetScene();
-    }
+        <span class="token comment" spellcheck="true">// Get the ground's bounds</span>
+        areaBounds <span class="token operator">=</span> ground<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Collider<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>bounds<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// Get the ground renderer so we can change the material when a goal is scored</span>
+        m_GroundRenderer <span class="token operator">=</span> ground<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Renderer<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// Starting material</span>
+        m_GroundMaterial <span class="token operator">=</span> m_GroundRenderer<span class="token punctuation">.</span>material<span class="token punctuation">;</span>
+        m_PushBlockSettings <span class="token operator">=</span> <span class="token generic-method function">FindObjectOfType<span class="token punctuation">&lt;</span>PushBlockSettings<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// Initialize Blocks</span>
+        <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> item <span class="token keyword">in</span> BlocksList<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            item<span class="token punctuation">.</span>StartingPos <span class="token operator">=</span> item<span class="token punctuation">.</span>T<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+            item<span class="token punctuation">.</span>StartingRot <span class="token operator">=</span> item<span class="token punctuation">.</span>T<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">;</span>
+            item<span class="token punctuation">.</span>Rb <span class="token operator">=</span> item<span class="token punctuation">.</span>T<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Rigidbody<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">// Initialize TeamManager</span>
+        m_AgentGroup <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SimpleMultiAgentGroup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> item <span class="token keyword">in</span> AgentsList<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            item<span class="token punctuation">.</span>StartingPos <span class="token operator">=</span> item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+            item<span class="token punctuation">.</span>StartingRot <span class="token operator">=</span> item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">;</span>
+            item<span class="token punctuation">.</span>Rb <span class="token operator">=</span> item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Rigidbody<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 把单智能体都添加到多智能体中</span>
+            m_AgentGroup<span class="token punctuation">.</span><span class="token function">RegisterAgent</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>Agent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">ResetScene</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    void FixedUpdate()
-    {
-        m_ResetTimer += 1;
-        // 到时间了并到达最大训练步数就结束训练
-        if (m_ResetTimer >= MaxEnvironmentSteps && MaxEnvironmentSteps > 0)
-        {            
-            m_AgentGroup.GroupEpisodeInterrupted();
-            ResetScene();
-        }
+    <span class="token keyword">void</span> <span class="token function">FixedUpdate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        m_ResetTimer <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 到时间了并到达最大训练步数就结束训练</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>m_ResetTimer <span class="token operator">>=</span> MaxEnvironmentSteps <span class="token operator">&amp;&amp;</span> MaxEnvironmentSteps <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>            
+            m_AgentGroup<span class="token punctuation">.</span><span class="token function">GroupEpisodeInterrupted</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">ResetScene</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-        // 存在惩罚
-        m_AgentGroup.AddGroupReward(-0.5f / MaxEnvironmentSteps);
-    }
+        <span class="token comment" spellcheck="true">// 存在惩罚</span>
+        m_AgentGroup<span class="token punctuation">.</span><span class="token function">AddGroupReward</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">0.5f</span> <span class="token operator">/</span> MaxEnvironmentSteps<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    //返回在场地内没物体的位置，同单智能体
-    public Vector3 GetRandomSpawnPos()
-    {
-        var foundNewSpawnLocation = false;
-        var randomSpawnPos = Vector3.zero;
-        while (foundNewSpawnLocation == false)
-        {
-            var randomPosX = Random.Range(-areaBounds.extents.x * m_PushBlockSettings.spawnAreaMarginMultiplier,
-                areaBounds.extents.x * m_PushBlockSettings.spawnAreaMarginMultiplier);
+    <span class="token comment" spellcheck="true">//返回在场地内没物体的位置，同单智能体</span>
+    <span class="token keyword">public</span> Vector3 <span class="token function">GetRandomSpawnPos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> foundNewSpawnLocation <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> randomSpawnPos <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>foundNewSpawnLocation <span class="token operator">==</span> <span class="token keyword">false</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">var</span> randomPosX <span class="token operator">=</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>areaBounds<span class="token punctuation">.</span>extents<span class="token punctuation">.</span>x <span class="token operator">*</span> m_PushBlockSettings<span class="token punctuation">.</span>spawnAreaMarginMultiplier<span class="token punctuation">,</span>
+                areaBounds<span class="token punctuation">.</span>extents<span class="token punctuation">.</span>x <span class="token operator">*</span> m_PushBlockSettings<span class="token punctuation">.</span>spawnAreaMarginMultiplier<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            var randomPosZ = Random.Range(-areaBounds.extents.z * m_PushBlockSettings.spawnAreaMarginMultiplier,
-                areaBounds.extents.z * m_PushBlockSettings.spawnAreaMarginMultiplier);
-            randomSpawnPos = ground.transform.position + new Vector3(randomPosX, 1f, randomPosZ);
-            if (Physics.CheckBox(randomSpawnPos, new Vector3(1.5f, 0.01f, 1.5f)) == false)
-            {
-                foundNewSpawnLocation = true;
-            }
-        }
-        return randomSpawnPos;
-    }
+            <span class="token keyword">var</span> randomPosZ <span class="token operator">=</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>areaBounds<span class="token punctuation">.</span>extents<span class="token punctuation">.</span>z <span class="token operator">*</span> m_PushBlockSettings<span class="token punctuation">.</span>spawnAreaMarginMultiplier<span class="token punctuation">,</span>
+                areaBounds<span class="token punctuation">.</span>extents<span class="token punctuation">.</span>z <span class="token operator">*</span> m_PushBlockSettings<span class="token punctuation">.</span>spawnAreaMarginMultiplier<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            randomSpawnPos <span class="token operator">=</span> ground<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">+</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>randomPosX<span class="token punctuation">,</span> <span class="token number">1f</span><span class="token punctuation">,</span> randomPosZ<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>Physics<span class="token punctuation">.</span><span class="token function">CheckBox</span><span class="token punctuation">(</span>randomSpawnPos<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">1.5f</span><span class="token punctuation">,</span> <span class="token number">0.01f</span><span class="token punctuation">,</span> <span class="token number">1.5f</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token keyword">false</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                foundNewSpawnLocation <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> randomSpawnPos<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    // 重置物块
-    void ResetBlock(BlockInfo block)
-    {
-        block.T.position = GetRandomSpawnPos();
-        block.Rb.velocity = Vector3.zero;
-        block.Rb.angularVelocity = Vector3.zero;
-    }
+    <span class="token comment" spellcheck="true">// 重置物块</span>
+    <span class="token keyword">void</span> <span class="token function">ResetBlock</span><span class="token punctuation">(</span>BlockInfo block<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        block<span class="token punctuation">.</span>T<span class="token punctuation">.</span>position <span class="token operator">=</span> <span class="token function">GetRandomSpawnPos</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        block<span class="token punctuation">.</span>Rb<span class="token punctuation">.</span>velocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+        block<span class="token punctuation">.</span>Rb<span class="token punctuation">.</span>angularVelocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    // 携程，任务完成时短暂切换地面材质
-    IEnumerator GoalScoredSwapGroundMaterial(Material mat, float time)
-    {
-        m_GroundRenderer.material = mat;
-        yield return new WaitForSeconds(time); // Wait for 2 sec
-        m_GroundRenderer.material = m_GroundMaterial;
-    }
+    <span class="token comment" spellcheck="true">// 携程，任务完成时短暂切换地面材质</span>
+    IEnumerator <span class="token function">GoalScoredSwapGroundMaterial</span><span class="token punctuation">(</span>Material mat<span class="token punctuation">,</span> <span class="token keyword">float</span> time<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        m_GroundRenderer<span class="token punctuation">.</span>material <span class="token operator">=</span> mat<span class="token punctuation">;</span>
+        <span class="token keyword">yield</span> <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">WaitForSeconds</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Wait for 2 sec</span>
+        m_GroundRenderer<span class="token punctuation">.</span>material <span class="token operator">=</span> m_GroundMaterial<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    // 当物块触碰到目标时，被物块脚本中的事件调用，上面已经解释过
-    public void ScoredAGoal(Collider col, float score)
-    {
-        print($"Scored {score} on {gameObject.name}");
-        m_NumberOfRemainingBlocks--;
-        bool done = m_NumberOfRemainingBlocks == 0;
-        col.gameObject.SetActive(false);
-        m_AgentGroup.AddGroupReward(score);
-        StartCoroutine(GoalScoredSwapGroundMaterial(m_PushBlockSettings.goalScoredMaterial, 0.5f));
-        if (done)
-        {
-            m_AgentGroup.EndGroupEpisode();
-            ResetScene();
-        }
-    }
-    // 返回任意的旋转四元数
-    Quaternion GetRandomRot()
-    {
-        return Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
-    }
+    <span class="token comment" spellcheck="true">// 当物块触碰到目标时，被物块脚本中的事件调用，上面已经解释过</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">ScoredAGoal</span><span class="token punctuation">(</span>Collider col<span class="token punctuation">,</span> <span class="token keyword">float</span> score<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">print</span><span class="token punctuation">(</span>$<span class="token string">"Scored {score} on {gameObject.name}"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        m_NumberOfRemainingBlocks<span class="token operator">--</span><span class="token punctuation">;</span>
+        <span class="token keyword">bool</span> done <span class="token operator">=</span> m_NumberOfRemainingBlocks <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        col<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        m_AgentGroup<span class="token punctuation">.</span><span class="token function">AddGroupReward</span><span class="token punctuation">(</span>score<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">StartCoroutine</span><span class="token punctuation">(</span><span class="token function">GoalScoredSwapGroundMaterial</span><span class="token punctuation">(</span>m_PushBlockSettings<span class="token punctuation">.</span>goalScoredMaterial<span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>done<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            m_AgentGroup<span class="token punctuation">.</span><span class="token function">EndGroupEpisode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">ResetScene</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 返回任意的旋转四元数</span>
+    Quaternion <span class="token function">GetRandomRot</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> Quaternion<span class="token punctuation">.</span><span class="token function">Euler</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">360.0f</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    // 重置场景
-    public void ResetScene()
-    {
-        m_ResetTimer = 0;
+    <span class="token comment" spellcheck="true">// 重置场景</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">ResetScene</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        m_ResetTimer <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 
-        // 场景四个角度任意旋转
-        var rotation = Random.Range(0, 4);
-        var rotationAngle = rotation * 90f;
-        area.transform.Rotate(new Vector3(0f, rotationAngle, 0f));
+        <span class="token comment" spellcheck="true">// 场景四个角度任意旋转</span>
+        <span class="token keyword">var</span> rotation <span class="token operator">=</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> rotationAngle <span class="token operator">=</span> rotation <span class="token operator">*</span> <span class="token number">90f</span><span class="token punctuation">;</span>
+        area<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">Rotate</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">,</span> rotationAngle<span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 重置智能体们
-        foreach (var item in AgentsList)
-        {
-            var pos = UseRandomAgentPosition ? GetRandomSpawnPos() : item.StartingPos;
-            var rot = UseRandomAgentRotation ? GetRandomRot() : item.StartingRot;
+        <span class="token comment" spellcheck="true">// 重置智能体们</span>
+        <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> item <span class="token keyword">in</span> AgentsList<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">var</span> pos <span class="token operator">=</span> UseRandomAgentPosition <span class="token operator">?</span> <span class="token function">GetRandomSpawnPos</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> item<span class="token punctuation">.</span>StartingPos<span class="token punctuation">;</span>
+            <span class="token keyword">var</span> rot <span class="token operator">=</span> UseRandomAgentRotation <span class="token operator">?</span> <span class="token function">GetRandomRot</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> item<span class="token punctuation">.</span>StartingRot<span class="token punctuation">;</span>
 
-            item.Agent.transform.SetPositionAndRotation(pos, rot);
-            item.Rb.velocity = Vector3.zero;
-            item.Rb.angularVelocity = Vector3.zero;
-        }
+            item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">SetPositionAndRotation</span><span class="token punctuation">(</span>pos<span class="token punctuation">,</span> rot<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            item<span class="token punctuation">.</span>Rb<span class="token punctuation">.</span>velocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+            item<span class="token punctuation">.</span>Rb<span class="token punctuation">.</span>angularVelocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-        // 重置物块们
-        foreach (var item in BlocksList)
-        {
-            var pos = UseRandomBlockPosition ? GetRandomSpawnPos() : item.StartingPos;
-            var rot = UseRandomBlockRotation ? GetRandomRot() : item.StartingRot;
+        <span class="token comment" spellcheck="true">// 重置物块们</span>
+        <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> item <span class="token keyword">in</span> BlocksList<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">var</span> pos <span class="token operator">=</span> UseRandomBlockPosition <span class="token operator">?</span> <span class="token function">GetRandomSpawnPos</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> item<span class="token punctuation">.</span>StartingPos<span class="token punctuation">;</span>
+            <span class="token keyword">var</span> rot <span class="token operator">=</span> UseRandomBlockRotation <span class="token operator">?</span> <span class="token function">GetRandomRot</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> item<span class="token punctuation">.</span>StartingRot<span class="token punctuation">;</span>
 
-            item.T.transform.SetPositionAndRotation(pos, rot);
-            item.Rb.velocity = Vector3.zero;
-            item.Rb.angularVelocity = Vector3.zero;
-            item.T.gameObject.SetActive(true);
-        }
+            item<span class="token punctuation">.</span>T<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">SetPositionAndRotation</span><span class="token punctuation">(</span>pos<span class="token punctuation">,</span> rot<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            item<span class="token punctuation">.</span>Rb<span class="token punctuation">.</span>velocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+            item<span class="token punctuation">.</span>Rb<span class="token punctuation">.</span>angularVelocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+            item<span class="token punctuation">.</span>T<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-        // 重置物块计数
-        m_NumberOfRemainingBlocks = BlocksList.Count;
-    }
-}
-</Rigidbody></Rigidbody></PushBlockSettings></Renderer></Collider></BlockInfo></BlockInfo></PlayerInfo></PlayerInfo></code></pre>
+        <span class="token comment" spellcheck="true">// 重置物块计数</span>
+        m_NumberOfRemainingBlocks <span class="token operator">=</span> BlocksList<span class="token punctuation">.</span>Count<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <h3 id="多智能体训练注意事项"><a href="#多智能体训练注意事项" class="headerlink" title="多智能体训练注意事项"></a>多智能体训练注意事项</h3><p>ML-Agents 中的协作行为可以通过实例化来启用<code>SimpleMultiAgentGroup</code>，通常在环境控制器或类似脚本中，并使用该RegisterAgent方法向其中添加智能体。请注意，添加到同一个的所有智能体<code>SimpleMultiAgentGroup</code> 必须在Behavior Parameters中具有相同的Behavior Name和参数。使用<code>SimpleMultiAgentGroup</code>使组内的智能体能够学习实现共同目标（最大化团体奖励），即使一个或多个组成员在episode结束之前被移除，也同样可以添加团体奖励，可以使用AddGroupReward()<code>，</code>SetGroupReward()<code>，</code>EndGroupEpisode()<code>，和 </code>GroupEpisodeInterrupted()`方法。</p>
 <p>这种多智能体的用法要与MA-POCA算法一起使用。</p>
 <ul>
@@ -1216,7 +1216,17 @@ public class PushBlockEnvController : MonoBehaviour
     <span class="token key atrule">max_steps</span><span class="token punctuation">:</span> <span class="token number">15000000</span>
     <span class="token key atrule">time_horizon</span><span class="token punctuation">:</span> <span class="token number">64</span>
     <span class="token key atrule">summary_freq</span><span class="token punctuation">:</span> <span class="token number">60000</span></code></pre>
-<h3 id="个人改进想法"><a href="#个人改进想法" class="headerlink" title="个人改进想法"></a>个人改进想法</h3><ol>
+<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><p>单人模式：</p>
+<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/9.gif" class>
+
+<p>多人模式：</p>
+<img src="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/10.gif" class>
+
+
+
+
+
+<h2 id="个人改进想法"><a href="#个人改进想法" class="headerlink" title="个人改进想法"></a>个人改进想法</h2><ol>
 <li>物块上可以加上一个物理材质，静摩擦力设置到合理水平，防止一个人就能稍微推动大的方块。</li>
 <li>可以加上个人奖励，方块到达终点时出力最多的加更多的分数。</li>
 <li>把稀疏奖励变得稠密，把方块和终点的距离作为奖励之一，同时只有推动方块的人才能获得个人奖励。</li>
@@ -1414,7 +1424,7 @@ public class PushBlockEnvController : MonoBehaviour
     <div id="rewardModal" class="modal">
         <div class="modal-content">
             <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <h4 class="reward-title">您的赏识是我前进的动力</h4>
             <div class="reward-content">
                 <div class="reward-tabs">
                     <ul class="tabs row">
@@ -1732,8 +1742,7 @@ public class PushBlockEnvController : MonoBehaviour
                 <a href="/2021/11/09/ml-agents-an-li-zhi-walljump/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="ML-Agents案例之WallJump">
+                        <img src="/images/WallJump.gif" class="responsive-img" alt="ML-Agents案例之WallJump">
                         
                         <span class="card-title">ML-Agents案例之WallJump</span>
                     </div>
@@ -1785,8 +1794,7 @@ public class PushBlockEnvController : MonoBehaviour
                 <a href="/2021/11/02/ml-agents-an-li-zhi-crawler/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="ML-Agents案例之Crawler">
+                        <img src="/images/Crawler.gif" class="responsive-img" alt="ML-Agents案例之Crawler">
                         
                         <span class="card-title">ML-Agents案例之Crawler</span>
                     </div>
@@ -2059,7 +2067,7 @@ public class PushBlockEnvController : MonoBehaviour
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">236.5k</span>&nbsp;字
+                class="white-color">241.3k</span>&nbsp;字
             
             
             
@@ -2129,6 +2137,10 @@ public class PushBlockEnvController : MonoBehaviour
         <div class="col s12 m4 l4 social-link social-statis">
 
 
+    <a href="mailto:1121452406@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
 
 
 
@@ -2142,6 +2154,10 @@ public class PushBlockEnvController : MonoBehaviour
 
 
 
+
+    <a href="https://blog.csdn.net/tianjuewudi" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://blog.csdn.net/tianjuewudi" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
 
 
 

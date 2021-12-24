@@ -17,7 +17,7 @@
 
 
     <title>自创强化学习环境之Unity3D插件ML-Agent的使用 | 微笑紫瞳星</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/MyLogo.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -53,7 +53,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/MyLogo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">微笑紫瞳星</span>
                 </a>
@@ -152,7 +152,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/MyLogo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">微笑紫瞳星</div>
         <div class="logo-desc">
@@ -479,7 +479,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-11-19
+                    2021-12-16
                 </div>
                 
 
@@ -645,121 +645,121 @@ conda config --set show_channel_urls yes#下载时显示文件来源</code></pre
 <p>如果我们想自己操作智能体，还需要定义一个<strong>Heuristic</strong>方法，这样游戏就会采集玩家的输出信息，可以学习玩家的思维，大大促进训练教程。</p>
 <p><strong>CollectDiscreteActionMasks</strong>方法，在特殊情况下屏蔽某些不需要的AI操作（如地图边界阻止）。</p>
 <p>接下来看看3D小球游戏的智能体代码：</p>
-<pre class=" language-c#"><code class="language-c#">using UnityEngine;
-using Unity.MLAgents;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Sensors;
-using Random = UnityEngine.Random;</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> UnityEngine<span class="token punctuation">;</span>
+<span class="token keyword">using</span> Unity<span class="token punctuation">.</span>MLAgents<span class="token punctuation">;</span>
+<span class="token keyword">using</span> Unity<span class="token punctuation">.</span>MLAgents<span class="token punctuation">.</span>Actuators<span class="token punctuation">;</span>
+<span class="token keyword">using</span> Unity<span class="token punctuation">.</span>MLAgents<span class="token punctuation">.</span>Sensors<span class="token punctuation">;</span>
+<span class="token keyword">using</span> Random <span class="token operator">=</span> UnityEngine<span class="token punctuation">.</span>Random<span class="token punctuation">;</span></code></pre>
 <p>类的成员变量：</p>
-<pre class=" language-c#"><code class="language-c#">[Header("Specific to Ball3D")]
-public GameObject ball;
-[Tooltip("Whether to use vector observation. This option should be checked " +
-         "in 3DBall scene, and unchecked in Visual3DBall scene. ")]
-public bool useVecObs;
-Rigidbody m_BallRb;
-EnvironmentParameters m_ResetParams;</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token punctuation">[</span><span class="token function">Header</span><span class="token punctuation">(</span><span class="token string">"Specific to Ball3D"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> GameObject ball<span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token function">Tooltip</span><span class="token punctuation">(</span><span class="token string">"Whether to use vector observation. This option should be checked "</span> <span class="token operator">+</span>
+         <span class="token string">"in 3DBall scene, and unchecked in Visual3DBall scene. "</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">bool</span> useVecObs<span class="token punctuation">;</span>
+Rigidbody m_BallRb<span class="token punctuation">;</span>
+EnvironmentParameters m_ResetParams<span class="token punctuation">;</span></code></pre>
 <p>Initialize方法：</p>
-<pre class=" language-c#"><code class="language-c#">public override void Initialize()
-{
-    m_BallRb = ball.GetComponent<Rigidbody>();
-    m_ResetParams = Academy.Instance.EnvironmentParameters;
-    SetResetParameters();
-}</Rigidbody></code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Initialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_BallRb <span class="token operator">=</span> ball<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Rigidbody<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_ResetParams <span class="token operator">=</span> Academy<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span>EnvironmentParameters<span class="token punctuation">;</span>
+    <span class="token function">SetResetParameters</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>CollectObservations方法：</p>
-<pre class=" language-c#"><code class="language-c#">public override void CollectObservations(VectorSensor sensor)
-{
-    if (useVecObs)
-    {
-        sensor.AddObservation(gameObject.transform.rotation.z);
-        sensor.AddObservation(gameObject.transform.rotation.x);
-        sensor.AddObservation(ball.transform.position - gameObject.transform.position);
-        sensor.AddObservation(m_BallRb.velocity);
-    }
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">CollectObservations</span><span class="token punctuation">(</span>VectorSensor sensor<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>useVecObs<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>ball<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">-</span> gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>m_BallRb<span class="token punctuation">.</span>velocity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>在hard版本的3DBall中，采用了另一种方式代替CollectObservations方法（输入维度为5，忽略小球速度）：</p>
-<pre class=" language-c#"><code class="language-c#">// 标记该变量可观察，观察状态的帧数为9
-[Observable(numStackedObservations: 9)]
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// 标记该变量可观察，观察状态的帧数为9</span>
+<span class="token punctuation">[</span><span class="token function">Observable</span><span class="token punctuation">(</span>numStackedObservations<span class="token punctuation">:</span> <span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
 Vector2 Rotation
-{
-    get
-    {
-        return new Vector2(gameObject.transform.rotation.z, gameObject.transform.rotation.x);
-    }
-}
+<span class="token punctuation">{</span>
+    <span class="token keyword">get</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Vector2</span><span class="token punctuation">(</span>gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">.</span>z<span class="token punctuation">,</span> gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-[Observable(numStackedObservations: 9)]
+<span class="token punctuation">[</span><span class="token function">Observable</span><span class="token punctuation">(</span>numStackedObservations<span class="token punctuation">:</span> <span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
 Vector3 PositionDelta
-{
-    get
-    {
-        return ball.transform.position - gameObject.transform.position;
-    }
-}</code></pre>
+<span class="token punctuation">{</span>
+    <span class="token keyword">get</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> ball<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">-</span> gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>第三种替代CollectObservations是加上相机脚本即Camera Sensor脚本，再把相机的预制体拖入其中，设置好参数，相机自己就会获取画面作为输入，但会大大增加训练时间。</p>
 <img src="/2021/10/29/zi-chuang-qiang-hua-xue-xi-huan-jing-zhi-unity3d-cha-jian-ml-agent-de-shi-yong/5.png" class>
 
 
 
 <p>OnActionReceived方法：</p>
-<pre class=" language-c#"><code class="language-c#">public override void OnActionReceived(ActionBuffers actionBuffers)
-{
-    var actionZ = 2f * Mathf.Clamp(actionBuffers.ContinuousActions[0], -1f, 1f);
-    var actionX = 2f * Mathf.Clamp(actionBuffers.ContinuousActions[1], -1f, 1f);
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnActionReceived</span><span class="token punctuation">(</span>ActionBuffers actionBuffers<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> actionZ <span class="token operator">=</span> <span class="token number">2f</span> <span class="token operator">*</span> Mathf<span class="token punctuation">.</span><span class="token function">Clamp</span><span class="token punctuation">(</span>actionBuffers<span class="token punctuation">.</span>ContinuousActions<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">,</span> <span class="token number">1f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> actionX <span class="token operator">=</span> <span class="token number">2f</span> <span class="token operator">*</span> Mathf<span class="token punctuation">.</span><span class="token function">Clamp</span><span class="token punctuation">(</span>actionBuffers<span class="token punctuation">.</span>ContinuousActions<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">,</span> <span class="token number">1f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    if ((gameObject.transform.rotation.z < 0.25f && actionZ > 0f) ||
-        (gameObject.transform.rotation.z > -0.25f && actionZ < 0f))
-    {
-        gameObject.transform.Rotate(new Vector3(0, 0, 1), actionZ);
-    }
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">.</span>z <span class="token operator">&lt;</span> <span class="token number">0.25f</span> <span class="token operator">&amp;&amp;</span> actionZ <span class="token operator">></span> <span class="token number">0f</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+        <span class="token punctuation">(</span>gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">.</span>z <span class="token operator">></span> <span class="token operator">-</span><span class="token number">0.25f</span> <span class="token operator">&amp;&amp;</span> actionZ <span class="token operator">&lt;</span> <span class="token number">0f</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">Rotate</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> actionZ<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    if ((gameObject.transform.rotation.x < 0.25f && actionX > 0f) ||
-        (gameObject.transform.rotation.x > -0.25f && actionX < 0f))
-    {
-        gameObject.transform.Rotate(new Vector3(1, 0, 0), actionX);
-    }
-    if ((ball.transform.position.y - gameObject.transform.position.y) < -2f ||
-        Mathf.Abs(ball.transform.position.x - gameObject.transform.position.x) > 3f ||
-        Mathf.Abs(ball.transform.position.z - gameObject.transform.position.z) > 3f)
-    {
-        SetReward(-1f);
-        EndEpisode();
-    }
-    else
-    {
-        SetReward(0.1f);
-    }
-}</code></pre>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">.</span>x <span class="token operator">&lt;</span> <span class="token number">0.25f</span> <span class="token operator">&amp;&amp;</span> actionX <span class="token operator">></span> <span class="token number">0f</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+        <span class="token punctuation">(</span>gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">.</span>x <span class="token operator">></span> <span class="token operator">-</span><span class="token number">0.25f</span> <span class="token operator">&amp;&amp;</span> actionX <span class="token operator">&lt;</span> <span class="token number">0f</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">Rotate</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> actionX<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>ball<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">.</span>y <span class="token operator">-</span> gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">.</span>y<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token operator">-</span><span class="token number">2f</span> <span class="token operator">||</span>
+        Mathf<span class="token punctuation">.</span><span class="token function">Abs</span><span class="token punctuation">(</span>ball<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">.</span>x <span class="token operator">-</span> gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">.</span>x<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">3f</span> <span class="token operator">||</span>
+        Mathf<span class="token punctuation">.</span><span class="token function">Abs</span><span class="token punctuation">(</span>ball<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">.</span>z <span class="token operator">-</span> gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">.</span>z<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">3f</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">SetReward</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">EndEpisode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">SetReward</span><span class="token punctuation">(</span><span class="token number">0.1f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>OnEpisodeBegin方法：</p>
-<pre class=" language-c#"><code class="language-c#">public override void OnEpisodeBegin()
-{
-    gameObject.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
-    gameObject.transform.Rotate(new Vector3(1, 0, 0), Random.Range(-10f, 10f));
-    gameObject.transform.Rotate(new Vector3(0, 0, 1), Random.Range(-10f, 10f));
-    m_BallRb.velocity = new Vector3(0f, 0f, 0f);
-    ball.transform.position = new Vector3(Random.Range(-1.5f, 1.5f), 4f, Random.Range(-1.5f, 1.5f))
-        + gameObject.transform.position;
-    //Reset the parameters when the Agent is reset.
-    SetResetParameters();
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnEpisodeBegin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Quaternion</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">Rotate</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">10f</span><span class="token punctuation">,</span> <span class="token number">10f</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">Rotate</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">10f</span><span class="token punctuation">,</span> <span class="token number">10f</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_BallRb<span class="token punctuation">.</span>velocity <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ball<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1.5f</span><span class="token punctuation">,</span> <span class="token number">1.5f</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">4f</span><span class="token punctuation">,</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1.5f</span><span class="token punctuation">,</span> <span class="token number">1.5f</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token operator">+</span> gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//Reset the parameters when the Agent is reset.</span>
+    <span class="token function">SetResetParameters</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>Heuristic方法：</p>
-<pre class=" language-c#"><code class="language-c#">public override void Heuristic(in ActionBuffers actionsOut)
-{
-    var continuousActionsOut = actionsOut.ContinuousActions;
-    continuousActionsOut[0] = -Input.GetAxis("Horizontal");
-    continuousActionsOut[1] = Input.GetAxis("Vertical");
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Heuristic</span><span class="token punctuation">(</span><span class="token keyword">in</span> ActionBuffers actionsOut<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> continuousActionsOut <span class="token operator">=</span> actionsOut<span class="token punctuation">.</span>ContinuousActions<span class="token punctuation">;</span>
+    continuousActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span>Input<span class="token punctuation">.</span><span class="token function">GetAxis</span><span class="token punctuation">(</span><span class="token string">"Horizontal"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    continuousActionsOut<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> Input<span class="token punctuation">.</span><span class="token function">GetAxis</span><span class="token punctuation">(</span><span class="token string">"Vertical"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>其他方法：</p>
-<pre class=" language-c#"><code class="language-c#">public void SetBall()
-{
-    //Set the attributes of the ball by fetching the information from the academy
-    m_BallRb.mass = m_ResetParams.GetWithDefault("mass", 1.0f);
-    var scale = m_ResetParams.GetWithDefault("scale", 1.0f);
-    ball.transform.localScale = new Vector3(scale, scale, scale);
-}
-public void SetResetParameters()
-{
-    SetBall();
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">SetBall</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//Set the attributes of the ball by fetching the information from the academy</span>
+    m_BallRb<span class="token punctuation">.</span>mass <span class="token operator">=</span> m_ResetParams<span class="token punctuation">.</span><span class="token function">GetWithDefault</span><span class="token punctuation">(</span><span class="token string">"mass"</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> scale <span class="token operator">=</span> m_ResetParams<span class="token punctuation">.</span><span class="token function">GetWithDefault</span><span class="token punctuation">(</span><span class="token string">"scale"</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ball<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>localScale <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>scale<span class="token punctuation">,</span> scale<span class="token punctuation">,</span> scale<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">SetResetParameters</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">SetBall</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>到这里智能体的脚本就写完了。接下来我们需要设置算法和参数。进入到config文件夹下，里面存放着算法的配置，对于单智能体强化学习，Unity官方提供了两种算法，PPO和SAC，这里我们使用PPO算法。进入PPO文件夹中，打开3DBall.yaml，通过修改其中的参数就能改变训练的配置，这需要对相应的强化学习算法有一定的了解。具体可以参考配置文档：<a target="_blank" rel="noopener" href="https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Training-Configuration-File.md">https://github.com/Unity-Technologies/ml-agents/blob/main/docs/Training-Configuration-File.md</a></p>
 <pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
   <span class="token key atrule">3DBall</span><span class="token punctuation">:</span>
@@ -995,7 +995,7 @@ public void SetResetParameters()
     <div id="rewardModal" class="modal">
         <div class="modal-content">
             <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <h4 class="reward-title">您的赏识是我前进的动力</h4>
             <div class="reward-content">
                 <div class="reward-tabs">
                     <ul class="tabs row">
@@ -1636,7 +1636,7 @@ public void SetResetParameters()
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">236.5k</span>&nbsp;字
+                class="white-color">241.3k</span>&nbsp;字
             
             
             
@@ -1706,6 +1706,10 @@ public void SetResetParameters()
         <div class="col s12 m4 l4 social-link social-statis">
 
 
+    <a href="mailto:1121452406@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
 
 
 
@@ -1719,6 +1723,10 @@ public void SetResetParameters()
 
 
 
+
+    <a href="https://blog.csdn.net/tianjuewudi" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://blog.csdn.net/tianjuewudi" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
 
 
 

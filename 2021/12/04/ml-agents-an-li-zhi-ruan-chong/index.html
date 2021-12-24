@@ -17,7 +17,7 @@
 
 
     <title>ML-Agents案例之蠕虫 | 微笑紫瞳星</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/MyLogo.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -53,7 +53,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/MyLogo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">微笑紫瞳星</span>
                 </a>
@@ -152,7 +152,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/MyLogo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">微笑紫瞳星</div>
         <div class="logo-desc">
@@ -479,7 +479,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-13
+                    2021-12-16
                 </div>
                 
 
@@ -529,20 +529,20 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121526192">Unity人工智能之不断自我进化的五人足球赛</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121623517">ML-Agents案例之地牢逃脱</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121692539">ML-Agents案例之金字塔</a></p>
-<img src="/2021/12/04/ml-agents-an-li-zhi-ruan-chong/1.png" class="">
+<img src="/2021/12/04/ml-agents-an-li-zhi-ruan-chong/1.png" class>
 
 
 
 <h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><p>本环境可以参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121234799">ML-Agents案例之Crawler</a>，两者的环境极其相似，都是仿生机器人，不同的只是仿生的对象不同，一个是蠕虫，一个是爬虫。奖励目标也是一致的，我们需要训练的是一个蠕虫形状的仿生机器人，让它自己学会蠕动前行，面向目标行走，最后吃到绿色的方块，并且这个过程越迅速越好。<br>首先我们来讲讲智能体本身的构造：</p>
-<img src="/2021/12/04/ml-agents-an-li-zhi-ruan-chong/2.png" class="">
+<img src="/2021/12/04/ml-agents-an-li-zhi-ruan-chong/2.png" class>
 
-<img src="/2021/12/04/ml-agents-an-li-zhi-ruan-chong/3.png" class="">
+<img src="/2021/12/04/ml-agents-an-li-zhi-ruan-chong/3.png" class>
 
 <p>如上图所示，蠕虫分为四个部分。分别是一个头部和三节身躯（可以自己拓展到任意节数），四个部分由三个关节连接而成，可以看到，第一节身躯是头部的子物体，第二节身躯是第一节身躯的子物体，第三节身躯是第二节的子物体。（这里我个人的想法是四个部分应该相互独立，而不是子物体关系，否则前面关节的移动将导致后面整体的移动，待验证，可以自己改一下看看能否训练起来）</p>
 <p>下面是第一个关节的设置：</p>
-<img src="/2021/12/04/ml-agents-an-li-zhi-ruan-chong/4.png" class="">
+<img src="/2021/12/04/ml-agents-an-li-zhi-ruan-chong/4.png" class>
 
-<img src="/2021/12/04/ml-agents-an-li-zhi-ruan-chong/5.png" class="">
+<img src="/2021/12/04/ml-agents-an-li-zhi-ruan-chong/5.png" class>
 
 <p>可以看到这个关节的位置移动是锁定的，对于角度移动锁定了z轴，对于x轴和y轴限制一定角度的移动，如上图所示，我们可以通过Edit Angular Limits可视化调节。第二第三个关节同理。</p>
 <p>想要控制各个关节的运动，我们需要在智能体上挂载一个JointDriveController.cs的脚本，这个脚本不会自己运作，只有在别的脚本的调用下才会起作用。关于这个脚本的代码说明参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121234799">ML-Agents案例之Crawler</a>。</p>
@@ -550,242 +550,242 @@
 <p>动作输出：三个关节，每个关节有x，y两个轴可以旋转，还需要输出关节转动的力度，一共有3  * 3共9维的连续输出。</p>
 <h2 id="代码讲解"><a href="#代码讲解" class="headerlink" title="代码讲解"></a>代码讲解</h2><p>我们直接看WormAgents.cs脚本：</p>
 <p>定义变量</p>
-<pre class=" language-c#"><code class="language-c#">const float m_MaxWalkingSpeed = 10; //最高行走速度
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">const</span> <span class="token keyword">float</span> m_MaxWalkingSpeed <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//最高行走速度</span>
 
-[Header("Target Prefabs")] public Transform TargetPrefab; // 目标方块
-private Transform m_Target; 
-// 智能体的四节躯体位置
-[Header("Body Parts")] public Transform bodySegment0;
-public Transform bodySegment1;
-public Transform bodySegment2;
-public Transform bodySegment3;
+<span class="token punctuation">[</span><span class="token function">Header</span><span class="token punctuation">(</span><span class="token string">"Target Prefabs"</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token keyword">public</span> Transform TargetPrefab<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 目标方块</span>
+<span class="token keyword">private</span> Transform m_Target<span class="token punctuation">;</span> 
+<span class="token comment" spellcheck="true">// 智能体的四节躯体位置</span>
+<span class="token punctuation">[</span><span class="token function">Header</span><span class="token punctuation">(</span><span class="token string">"Body Parts"</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token keyword">public</span> Transform bodySegment0<span class="token punctuation">;</span>
+<span class="token keyword">public</span> Transform bodySegment1<span class="token punctuation">;</span>
+<span class="token keyword">public</span> Transform bodySegment2<span class="token punctuation">;</span>
+<span class="token keyword">public</span> Transform bodySegment3<span class="token punctuation">;</span>
 
-//这个方块的设置为一个稳定的空间参考点，可以提高学习效果
-OrientationCubeController m_OrientationCube;
+<span class="token comment" spellcheck="true">//这个方块的设置为一个稳定的空间参考点，可以提高学习效果</span>
+OrientationCubeController m_OrientationCube<span class="token punctuation">;</span>
 
-// 箭头指示器的脚本
-DirectionIndicator m_DirectionIndicator;
-JointDriveController m_JdController;
+<span class="token comment" spellcheck="true">// 箭头指示器的脚本</span>
+DirectionIndicator m_DirectionIndicator<span class="token punctuation">;</span>
+JointDriveController m_JdController<span class="token punctuation">;</span>
 
-private Vector3 m_StartingPos; //starting position of the agent</code></pre>
+<span class="token keyword">private</span> Vector3 m_StartingPos<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//starting position of the agent</span></code></pre>
 <p>初始化方法Initialize()：</p>
-<pre class=" language-c#"><code class="language-c#">public override void Initialize()
-{
-    SpawnTarget(TargetPrefab, transform.position); // 生成目标方块
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Initialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">SpawnTarget</span><span class="token punctuation">(</span>TargetPrefab<span class="token punctuation">,</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 生成目标方块</span>
 
-    m_StartingPos = bodySegment0.position;    // 头部是整个身躯的父物体，代表整个身躯的初始位置
-    m_OrientationCube = GetComponentInChildren<OrientationCubeController>();
-    m_DirectionIndicator = GetComponentInChildren<DirectionIndicator>();
-    m_JdController = GetComponent<JointDriveController>();
-    // 更新自己身上的指向方块
-    UpdateOrientationObjects();
+    m_StartingPos <span class="token operator">=</span> bodySegment0<span class="token punctuation">.</span>position<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 头部是整个身躯的父物体，代表整个身躯的初始位置</span>
+    m_OrientationCube <span class="token operator">=</span> <span class="token generic-method function">GetComponentInChildren<span class="token punctuation">&lt;</span>OrientationCubeController<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_DirectionIndicator <span class="token operator">=</span> <span class="token generic-method function">GetComponentInChildren<span class="token punctuation">&lt;</span>DirectionIndicator<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_JdController <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>JointDriveController<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 更新自己身上的指向方块</span>
+    <span class="token function">UpdateOrientationObjects</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // 初始化各节身躯
-    m_JdController.SetupBodyPart(bodySegment0);
-    m_JdController.SetupBodyPart(bodySegment1);
-    m_JdController.SetupBodyPart(bodySegment2);
-    m_JdController.SetupBodyPart(bodySegment3);
-}
-// 生成目标方块
-void SpawnTarget(Transform prefab, Vector3 pos)
-{
-    m_Target = Instantiate(prefab, pos, Quaternion.identity, transform.parent);
-}
-// 更新自己身上的指向方块以及地上的指向箭头
-void UpdateOrientationObjects()
-{
-    // 更新指向箭头
-    m_OrientationCube.UpdateOrientation(bodySegment0, m_Target);
-    // 更新指向方块
-    if (m_DirectionIndicator)
-    {
-        m_DirectionIndicator.MatchOrientation(m_OrientationCube.transform);
-    }
-}</code></pre>
+    <span class="token comment" spellcheck="true">// 初始化各节身躯</span>
+    m_JdController<span class="token punctuation">.</span><span class="token function">SetupBodyPart</span><span class="token punctuation">(</span>bodySegment0<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_JdController<span class="token punctuation">.</span><span class="token function">SetupBodyPart</span><span class="token punctuation">(</span>bodySegment1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_JdController<span class="token punctuation">.</span><span class="token function">SetupBodyPart</span><span class="token punctuation">(</span>bodySegment2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_JdController<span class="token punctuation">.</span><span class="token function">SetupBodyPart</span><span class="token punctuation">(</span>bodySegment3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 生成目标方块</span>
+<span class="token keyword">void</span> <span class="token function">SpawnTarget</span><span class="token punctuation">(</span>Transform prefab<span class="token punctuation">,</span> Vector3 pos<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_Target <span class="token operator">=</span> <span class="token function">Instantiate</span><span class="token punctuation">(</span>prefab<span class="token punctuation">,</span> pos<span class="token punctuation">,</span> Quaternion<span class="token punctuation">.</span>identity<span class="token punctuation">,</span> transform<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 更新自己身上的指向方块以及地上的指向箭头</span>
+<span class="token keyword">void</span> <span class="token function">UpdateOrientationObjects</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 更新指向箭头</span>
+    m_OrientationCube<span class="token punctuation">.</span><span class="token function">UpdateOrientation</span><span class="token punctuation">(</span>bodySegment0<span class="token punctuation">,</span> m_Target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 更新指向方块</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>m_DirectionIndicator<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        m_DirectionIndicator<span class="token punctuation">.</span><span class="token function">MatchOrientation</span><span class="token punctuation">(</span>m_OrientationCube<span class="token punctuation">.</span>transform<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>在OrentationCubeController.cs中有：</p>
-<pre class=" language-c#"><code class="language-c#">public void UpdateOrientation(Transform rootBP, Transform target)
-{
-    var dirVector = target.position - transform.position;
-    dirVector.y = 0; //flatten dir on the y. this will only work on level, uneven surfaces
-    var lookRot =
-        dirVector == Vector3.zero
-        ? Quaternion.identity
-        : Quaternion.LookRotation(dirVector); //get our look rot to the target
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">UpdateOrientation</span><span class="token punctuation">(</span>Transform rootBP<span class="token punctuation">,</span> Transform target<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> dirVector <span class="token operator">=</span> target<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+    dirVector<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//flatten dir on the y. this will only work on level, uneven surfaces</span>
+    <span class="token keyword">var</span> lookRot <span class="token operator">=</span>
+        dirVector <span class="token operator">==</span> Vector3<span class="token punctuation">.</span>zero
+        <span class="token operator">?</span> Quaternion<span class="token punctuation">.</span>identity
+        <span class="token punctuation">:</span> Quaternion<span class="token punctuation">.</span><span class="token function">LookRotation</span><span class="token punctuation">(</span>dirVector<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//get our look rot to the target</span>
 
-    //UPDATE ORIENTATION CUBE POS & ROT
-    transform.SetPositionAndRotation(rootBP.position, lookRot);
-}</code></pre>
+    <span class="token comment" spellcheck="true">//UPDATE ORIENTATION CUBE POS &amp; ROT</span>
+    transform<span class="token punctuation">.</span><span class="token function">SetPositionAndRotation</span><span class="token punctuation">(</span>rootBP<span class="token punctuation">.</span>position<span class="token punctuation">,</span> lookRot<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>状态输入CollectObservations方法：</p>
-<pre class=" language-c#"><code class="language-c#">// 对于每节身躯的输入
-public void CollectObservationBodyPart(BodyPart bp, VectorSensor sensor)
-{
-    // 是否接触地面
-    sensor.AddObservation(bp.groundContact.touchingGround ? 1 : 0); 
-    // 相对于指向方块空间中的刚体速度和角速度，如果是输入是世界空间中的向量，效果会不好
-    sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(bp.rb.velocity));
-    sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(bp.rb.angularVelocity));
-    // 后面三节身躯相对于头部的位置和本地的空间旋转
-    if (bp.rb.transform != bodySegment0)
-    {
-        sensor.AddObservation(
-            m_OrientationCube.transform.InverseTransformDirection(bp.rb.position - bodySegment0.position));
-        sensor.AddObservation(bp.rb.transform.localRotation);
-    }
-    // 输入每个关节的控制力度
-    if (bp.joint)
-        sensor.AddObservation(bp.currentStrength / m_JdController.maxJointForceLimit);
-}
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// 对于每节身躯的输入</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">CollectObservationBodyPart</span><span class="token punctuation">(</span>BodyPart bp<span class="token punctuation">,</span> VectorSensor sensor<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 是否接触地面</span>
+    sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>bp<span class="token punctuation">.</span>groundContact<span class="token punctuation">.</span>touchingGround <span class="token operator">?</span> <span class="token number">1</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token comment" spellcheck="true">// 相对于指向方块空间中的刚体速度和角速度，如果是输入是世界空间中的向量，效果会不好</span>
+    sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>m_OrientationCube<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">InverseTransformDirection</span><span class="token punctuation">(</span>bp<span class="token punctuation">.</span>rb<span class="token punctuation">.</span>velocity<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>m_OrientationCube<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">InverseTransformDirection</span><span class="token punctuation">(</span>bp<span class="token punctuation">.</span>rb<span class="token punctuation">.</span>angularVelocity<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 后面三节身躯相对于头部的位置和本地的空间旋转</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>bp<span class="token punctuation">.</span>rb<span class="token punctuation">.</span>transform <span class="token operator">!=</span> bodySegment0<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>
+            m_OrientationCube<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">InverseTransformDirection</span><span class="token punctuation">(</span>bp<span class="token punctuation">.</span>rb<span class="token punctuation">.</span>position <span class="token operator">-</span> bodySegment0<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>bp<span class="token punctuation">.</span>rb<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>localRotation<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 输入每个关节的控制力度</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>bp<span class="token punctuation">.</span>joint<span class="token punctuation">)</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>bp<span class="token punctuation">.</span>currentStrength <span class="token operator">/</span> m_JdController<span class="token punctuation">.</span>maxJointForceLimit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-public override void CollectObservations(VectorSensor sensor)
-{
-    // 输入身躯与地面的距离
-    RaycastHit hit;
-    float maxDist = 10;
-    if (Physics.Raycast(bodySegment0.position, Vector3.down, out hit, maxDist))
-    {
-        sensor.AddObservation(hit.distance / maxDist);
-    }
-    else
-        sensor.AddObservation(1);
+<span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">CollectObservations</span><span class="token punctuation">(</span>VectorSensor sensor<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 输入身躯与地面的距离</span>
+    RaycastHit hit<span class="token punctuation">;</span>
+    <span class="token keyword">float</span> maxDist <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Physics<span class="token punctuation">.</span><span class="token function">Raycast</span><span class="token punctuation">(</span>bodySegment0<span class="token punctuation">.</span>position<span class="token punctuation">,</span> Vector3<span class="token punctuation">.</span>down<span class="token punctuation">,</span> <span class="token keyword">out</span> hit<span class="token punctuation">,</span> maxDist<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>hit<span class="token punctuation">.</span>distance <span class="token operator">/</span> maxDist<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    var cubeForward = m_OrientationCube.transform.forward;
-    var velGoal = cubeForward * m_MaxWalkingSpeed;
-    // 输入目标的移动速度（三维向量）
-    sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(velGoal));
-    // 输入现在的rotation和目标rotation的夹角
-    sensor.AddObservation(Quaternion.Angle(m_OrientationCube.transform.rotation,
-                                           m_JdController.bodyPartsDict[bodySegment0].rb.rotation) / 180);
-    // 输入现在的前进方向到目标前进方向的四元数
-    sensor.AddObservation(Quaternion.FromToRotation(bodySegment0.forward, cubeForward));
+    <span class="token keyword">var</span> cubeForward <span class="token operator">=</span> m_OrientationCube<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>forward<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> velGoal <span class="token operator">=</span> cubeForward <span class="token operator">*</span> m_MaxWalkingSpeed<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 输入目标的移动速度（三维向量）</span>
+    sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>m_OrientationCube<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">InverseTransformDirection</span><span class="token punctuation">(</span>velGoal<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 输入现在的rotation和目标rotation的夹角</span>
+    sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>Quaternion<span class="token punctuation">.</span><span class="token function">Angle</span><span class="token punctuation">(</span>m_OrientationCube<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">,</span>
+                                           m_JdController<span class="token punctuation">.</span>bodyPartsDict<span class="token punctuation">[</span>bodySegment0<span class="token punctuation">]</span><span class="token punctuation">.</span>rb<span class="token punctuation">.</span>rotation<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">180</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 输入现在的前进方向到目标前进方向的四元数</span>
+    sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>Quaternion<span class="token punctuation">.</span><span class="token function">FromToRotation</span><span class="token punctuation">(</span>bodySegment0<span class="token punctuation">.</span>forward<span class="token punctuation">,</span> cubeForward<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // 输入目标方块相对于自身的坐标
-    sensor.AddObservation(m_OrientationCube.transform.InverseTransformPoint(m_Target.transform.position));
-    // 每一节身躯的输入，详情看上面的CollectObservationBodyPart方法
-    foreach (var bodyPart in m_JdController.bodyPartsList)
-    {
-        CollectObservationBodyPart(bodyPart, sensor);
-    }
-}</code></pre>
+    <span class="token comment" spellcheck="true">// 输入目标方块相对于自身的坐标</span>
+    sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>m_OrientationCube<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">InverseTransformPoint</span><span class="token punctuation">(</span>m_Target<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 每一节身躯的输入，详情看上面的CollectObservationBodyPart方法</span>
+    <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> bodyPart <span class="token keyword">in</span> m_JdController<span class="token punctuation">.</span>bodyPartsList<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">CollectObservationBodyPart</span><span class="token punctuation">(</span>bodyPart<span class="token punctuation">,</span> sensor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>动作输出方法OnActionReceived：</p>
-<pre class=" language-c#"><code class="language-c#">public override void OnActionReceived(ActionBuffers actionBuffers)
-{
-    // 获取身躯的字典
-    var bpDict = m_JdController.bodyPartsDict;
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnActionReceived</span><span class="token punctuation">(</span>ActionBuffers actionBuffers<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 获取身躯的字典</span>
+    <span class="token keyword">var</span> bpDict <span class="token operator">=</span> m_JdController<span class="token punctuation">.</span>bodyPartsDict<span class="token punctuation">;</span>
 
-    var i = -1;
-    // 获取连续输入的列表
-    var continuousActions = actionBuffers.ContinuousActions;
-    // 输入三个关节的旋转
-    bpDict[bodySegment0].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
-    bpDict[bodySegment1].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
-    bpDict[bodySegment2].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
+    <span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 获取连续输入的列表</span>
+    <span class="token keyword">var</span> continuousActions <span class="token operator">=</span> actionBuffers<span class="token punctuation">.</span>ContinuousActions<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 输入三个关节的旋转</span>
+    bpDict<span class="token punctuation">[</span>bodySegment0<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">SetJointTargetRotation</span><span class="token punctuation">(</span>continuousActions<span class="token punctuation">[</span><span class="token operator">++</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> continuousActions<span class="token punctuation">[</span><span class="token operator">++</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    bpDict<span class="token punctuation">[</span>bodySegment1<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">SetJointTargetRotation</span><span class="token punctuation">(</span>continuousActions<span class="token punctuation">[</span><span class="token operator">++</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> continuousActions<span class="token punctuation">[</span><span class="token operator">++</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    bpDict<span class="token punctuation">[</span>bodySegment2<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">SetJointTargetRotation</span><span class="token punctuation">(</span>continuousActions<span class="token punctuation">[</span><span class="token operator">++</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> continuousActions<span class="token punctuation">[</span><span class="token operator">++</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // 输入关节的力度
-    bpDict[bodySegment0].SetJointStrength(continuousActions[++i]);
-    bpDict[bodySegment1].SetJointStrength(continuousActions[++i]);
-    bpDict[bodySegment2].SetJointStrength(continuousActions[++i]);
+    <span class="token comment" spellcheck="true">// 输入关节的力度</span>
+    bpDict<span class="token punctuation">[</span>bodySegment0<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">SetJointStrength</span><span class="token punctuation">(</span>continuousActions<span class="token punctuation">[</span><span class="token operator">++</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    bpDict<span class="token punctuation">[</span>bodySegment1<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">SetJointStrength</span><span class="token punctuation">(</span>continuousActions<span class="token punctuation">[</span><span class="token operator">++</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    bpDict<span class="token punctuation">[</span>bodySegment2<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">SetJointStrength</span><span class="token punctuation">(</span>continuousActions<span class="token punctuation">[</span><span class="token operator">++</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // 如果掉到地面的下方，结束游戏
-    if (bodySegment0.position.y < m_StartingPos.y - 2)
-    {
-        EndEpisode();
-    }
-}</code></pre>
+    <span class="token comment" spellcheck="true">// 如果掉到地面的下方，结束游戏</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>bodySegment0<span class="token punctuation">.</span>position<span class="token punctuation">.</span>y <span class="token operator">&lt;</span> m_StartingPos<span class="token punctuation">.</span>y <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">EndEpisode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>每一个episode（回合）开始时执行的方法OnEpisodeBegin：</p>
-<pre class=" language-c#"><code class="language-c#">public override void OnEpisodeBegin()
-{
-    // 重新初始化各个身躯的参数
-    foreach (var bodyPart in m_JdController.bodyPartsList)
-    {
-        bodyPart.Reset(bodyPart);
-    }
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnEpisodeBegin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 重新初始化各个身躯的参数</span>
+    <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> bodyPart <span class="token keyword">in</span> m_JdController<span class="token punctuation">.</span>bodyPartsList<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        bodyPart<span class="token punctuation">.</span><span class="token function">Reset</span><span class="token punctuation">(</span>bodyPart<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    // 随机旋转，使得智能体初始时面朝的方向随机
-    bodySegment0.rotation = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
-    // 更新指向方块和指向箭头
-    UpdateOrientationObjects();
-}</code></pre>
+    <span class="token comment" spellcheck="true">// 随机旋转，使得智能体初始时面朝的方向随机</span>
+    bodySegment0<span class="token punctuation">.</span>rotation <span class="token operator">=</span> Quaternion<span class="token punctuation">.</span><span class="token function">Euler</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">360.0f</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 更新指向方块和指向箭头</span>
+    <span class="token function">UpdateOrientationObjects</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>每0.02秒执行一次的FixedUpdate：</p>
-<pre class=" language-c#"><code class="language-c#">void FixedUpdate()
-{
-    // 更新指向方块和指向箭头
-    UpdateOrientationObjects();
-    // 当实际移动速度和目标速度越接近，获得的奖励越高
-    var velReward =
-        GetMatchingVelocityReward(m_OrientationCube.transform.forward * m_MaxWalkingSpeed,
-                                  m_JdController.bodyPartsDict[bodySegment0].rb.velocity);
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">FixedUpdate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 更新指向方块和指向箭头</span>
+    <span class="token function">UpdateOrientationObjects</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 当实际移动速度和目标速度越接近，获得的奖励越高</span>
+    <span class="token keyword">var</span> velReward <span class="token operator">=</span>
+        <span class="token function">GetMatchingVelocityReward</span><span class="token punctuation">(</span>m_OrientationCube<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>forward <span class="token operator">*</span> m_MaxWalkingSpeed<span class="token punctuation">,</span>
+                                  m_JdController<span class="token punctuation">.</span>bodyPartsDict<span class="token punctuation">[</span>bodySegment0<span class="token punctuation">]</span><span class="token punctuation">.</span>rb<span class="token punctuation">.</span>velocity<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // 指向方块的朝向和躯体朝向的夹角
-    var rotAngle = Quaternion.Angle(m_OrientationCube.transform.rotation,
-                                    m_JdController.bodyPartsDict[bodySegment0].rb.rotation);
+    <span class="token comment" spellcheck="true">// 指向方块的朝向和躯体朝向的夹角</span>
+    <span class="token keyword">var</span> rotAngle <span class="token operator">=</span> Quaternion<span class="token punctuation">.</span><span class="token function">Angle</span><span class="token punctuation">(</span>m_OrientationCube<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">,</span>
+                                    m_JdController<span class="token punctuation">.</span>bodyPartsDict<span class="token punctuation">[</span>bodySegment0<span class="token punctuation">]</span><span class="token punctuation">.</span>rb<span class="token punctuation">.</span>rotation<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    var facingRew = 0f;
-    // 当智能体面朝的方向和目标方向的夹角小于30度，给予一定的奖励
-    if (rotAngle < 30)
-    {
-        facingRew = 1 - (rotAngle / 180);
-    }
-    // 面朝奖励和移动奖励相乘得到实际奖励
-    AddReward(velReward * facingRew);
-}
-public float GetMatchingVelocityReward(Vector3 velocityGoal, Vector3 actualVelocity)
-{
-    var velDeltaMagnitude = Mathf.Clamp(Vector3.Distance(actualVelocity, velocityGoal), 0, m_MaxWalkingSpeed);
-    return Mathf.Pow(1 - Mathf.Pow(velDeltaMagnitude / m_MaxWalkingSpeed, 2), 2);
-}</code></pre>
+    <span class="token keyword">var</span> facingRew <span class="token operator">=</span> <span class="token number">0f</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 当智能体面朝的方向和目标方向的夹角小于30度，给予一定的奖励</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>rotAngle <span class="token operator">&lt;</span> <span class="token number">30</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        facingRew <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">-</span> <span class="token punctuation">(</span>rotAngle <span class="token operator">/</span> <span class="token number">180</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 面朝奖励和移动奖励相乘得到实际奖励</span>
+    <span class="token function">AddReward</span><span class="token punctuation">(</span>velReward <span class="token operator">*</span> facingRew<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token keyword">float</span> <span class="token function">GetMatchingVelocityReward</span><span class="token punctuation">(</span>Vector3 velocityGoal<span class="token punctuation">,</span> Vector3 actualVelocity<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> velDeltaMagnitude <span class="token operator">=</span> Mathf<span class="token punctuation">.</span><span class="token function">Clamp</span><span class="token punctuation">(</span>Vector3<span class="token punctuation">.</span><span class="token function">Distance</span><span class="token punctuation">(</span>actualVelocity<span class="token punctuation">,</span> velocityGoal<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> m_MaxWalkingSpeed<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> Mathf<span class="token punctuation">.</span><span class="token function">Pow</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> Mathf<span class="token punctuation">.</span><span class="token function">Pow</span><span class="token punctuation">(</span>velDeltaMagnitude <span class="token operator">/</span> m_MaxWalkingSpeed<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>本案例还给环境加上了一个AdjustTrainingTimescale的脚本：</p>
-<pre class=" language-c#"><code class="language-c#">using UnityEngine;
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> UnityEngine<span class="token punctuation">;</span>
 
-namespace MLAgentsExamples
-{
-    public class AdjustTrainingTimescale : MonoBehaviour
-    {
-        // Update is called once per frame
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                Time.timeScale = 1f;
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                Time.timeScale = 2f;
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                Time.timeScale = 3f;
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                Time.timeScale = 4f;
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                Time.timeScale = 5f;
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha6))
-            {
-                Time.timeScale = 6f;
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha7))
-            {
-                Time.timeScale = 7f;
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha8))
-            {
-                Time.timeScale = 8f;
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha9))
-            {
-                Time.timeScale = 9f;
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha0))
-            {
-                Time.timeScale *= 2f;
-            }
-        }
-    }
-}
+<span class="token keyword">namespace</span> MLAgentsExamples
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AdjustTrainingTimescale</span> <span class="token punctuation">:</span> MonoBehaviour
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// Update is called once per frame</span>
+        <span class="token keyword">void</span> <span class="token function">Update</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKeyDown</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>Alpha1<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                Time<span class="token punctuation">.</span>timeScale <span class="token operator">=</span> <span class="token number">1f</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKeyDown</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>Alpha2<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                Time<span class="token punctuation">.</span>timeScale <span class="token operator">=</span> <span class="token number">2f</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKeyDown</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>Alpha3<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                Time<span class="token punctuation">.</span>timeScale <span class="token operator">=</span> <span class="token number">3f</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKeyDown</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>Alpha4<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                Time<span class="token punctuation">.</span>timeScale <span class="token operator">=</span> <span class="token number">4f</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKeyDown</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>Alpha5<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                Time<span class="token punctuation">.</span>timeScale <span class="token operator">=</span> <span class="token number">5f</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKeyDown</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>Alpha6<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                Time<span class="token punctuation">.</span>timeScale <span class="token operator">=</span> <span class="token number">6f</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKeyDown</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>Alpha7<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                Time<span class="token punctuation">.</span>timeScale <span class="token operator">=</span> <span class="token number">7f</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKeyDown</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>Alpha8<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                Time<span class="token punctuation">.</span>timeScale <span class="token operator">=</span> <span class="token number">8f</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKeyDown</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>Alpha9<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                Time<span class="token punctuation">.</span>timeScale <span class="token operator">=</span> <span class="token number">9f</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKeyDown</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>Alpha0<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                Time<span class="token punctuation">.</span>timeScale <span class="token operator">*</span><span class="token operator">=</span> <span class="token number">2f</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>这个脚本可以通过按键盘上方的数字键自由调整游戏运行速率。</p>
 <h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>PPO算法：</p>
@@ -844,7 +844,7 @@ namespace MLAgentsExamples
     <span class="token key atrule">time_horizon</span><span class="token punctuation">:</span> <span class="token number">1000</span>
     <span class="token key atrule">summary_freq</span><span class="token punctuation">:</span> <span class="token number">30000</span>
 </code></pre>
-<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><img src="/2021/12/04/ml-agents-an-li-zhi-ruan-chong/6.gif" class="">
+<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><img src="/2021/12/04/ml-agents-an-li-zhi-ruan-chong/6.gif" class>
 
 
 
@@ -1041,7 +1041,7 @@ namespace MLAgentsExamples
     <div id="rewardModal" class="modal">
         <div class="modal-content">
             <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <h4 class="reward-title">您的赏识是我前进的动力</h4>
             <div class="reward-content">
                 <div class="reward-tabs">
                     <ul class="tabs row">
@@ -1681,7 +1681,7 @@ namespace MLAgentsExamples
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">236.5k</span>&nbsp;字
+                class="white-color">241.3k</span>&nbsp;字
             
             
             
@@ -1751,6 +1751,10 @@ namespace MLAgentsExamples
         <div class="col s12 m4 l4 social-link social-statis">
 
 
+    <a href="mailto:1121452406@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
 
 
 
@@ -1764,6 +1768,10 @@ namespace MLAgentsExamples
 
 
 
+
+    <a href="https://blog.csdn.net/tianjuewudi" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://blog.csdn.net/tianjuewudi" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
 
 
 

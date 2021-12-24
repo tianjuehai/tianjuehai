@@ -17,7 +17,7 @@
 
 
     <title>ML-Agents案例之金字塔 | 微笑紫瞳星</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/MyLogo.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -53,7 +53,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/MyLogo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">微笑紫瞳星</span>
                 </a>
@@ -152,7 +152,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/MyLogo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">微笑紫瞳星</div>
         <div class="logo-desc">
@@ -479,7 +479,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-13
+                    2021-12-16
                 </div>
                 
 
@@ -528,202 +528,202 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121383791">ML-Agents案例之双人足球</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121526192">Unity人工智能之不断自我进化的五人足球赛</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121623517">ML-Agents案例之地牢逃脱</a></p>
-<img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/1.png" class="">
+<img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/1.png" class>
 
 <h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><p>本案例的环境要比以往大了很多倍，智能体要在这个相当大的环境中去寻找一个绿色的方块，而方块位于一个金字塔的顶端，想要触碰这个方块必须要推倒金字塔，而金字塔和方块不是一开始就有的，必须要触碰按钮才会出现在随机地点，按钮会刷新在随机的位置。因此智能体想要完成任务，必须要经过寻找按钮–&gt;触碰按钮–&gt;寻找金字塔–&gt;推倒金字塔–&gt;触碰绿色方块，这几个步骤，步骤的复杂和环境的庞大对训练是一个相当大的挑战。</p>
 <p>由于奖励太过稀疏，这次的任务如果使用以往的寻常方法是几乎不可能得到一个好的结果的，因此这里我们需要应用到一个好奇心机制，（Curiosity），使得智能体在探索未知事物中得到奖励，才能有效推动训练的进展。</p>
 <p>状态输入：</p>
-<img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/2.png" class="">
+<img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/2.png" class>
 
 <p>可以看到，智能体采用了射线传感器Ray Perception Sensor 3D，并且使用了三个，以获得上中下的立体视角，上中下三层的每一层都有七条射线，总共有21条射线，每一条射线检测的标签有墙壁、目标金字塔的石头、普通金字塔的石头、目标方块、闭合的开关、断开的开关。参数见下图。关于该传感器的详细说明见<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121250025">ML-Agents案例之推箱子游戏</a>。三个传感器在参数上只有细微差别。</p>
-<img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/3.png" class="">
+<img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/3.png" class>
 
-<img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/4.png" class="">
+<img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/4.png" class>
 
-<img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/5.png" class="">
+<img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/5.png" class>
 
 <p>除了射线传感器的输入之外，代码中海油四个输入维度，分别是智能体的速度（三维，Local Space）,开关是否闭合。</p>
 <p>动作输出：</p>
 <p>输出只有一个离散的动作，包含五个值，分别是什么都不做，向前走，向后走，左转，右转。较少的输出会大大降低神经网络复杂度，减少训练时间。缺点是同一时间只能执行一个动作，降低智能体的灵活性，例如不能同时前进和旋转。</p>
-<img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/6.png" class="">
+<img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/6.png" class>
 
 
 
 <h2 id="代码讲解"><a href="#代码讲解" class="headerlink" title="代码讲解"></a>代码讲解</h2><p><strong>智能体代码PyramidAgent.cs：</strong></p>
 <p>初始化方法Initialize():</p>
-<pre class=" language-c#"><code class="language-c#">public override void Initialize()
-{
-    // 获取刚体
-    m_AgentRb = GetComponent<Rigidbody>();
-    // 获取控制整个环境的脚本
-    m_MyArea = area.GetComponent<PyramidArea>();
-    // 获取开关的脚本
-    m_SwitchLogic = areaSwitch.GetComponent<PyramidSwitch>();
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Initialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 获取刚体</span>
+    m_AgentRb <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Rigidbody<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 获取控制整个环境的脚本</span>
+    m_MyArea <span class="token operator">=</span> area<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>PyramidArea<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 获取开关的脚本</span>
+    m_SwitchLogic <span class="token operator">=</span> areaSwitch<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>PyramidSwitch<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>状态输入方法CollectObservations：</p>
-<pre class=" language-c#"><code class="language-c#">public override void CollectObservations(VectorSensor sensor)
-{
-    if (useVectorObs)
-    {
-        // 输入开关的状态
-        sensor.AddObservation(m_SwitchLogic.GetState());
-        // 输入智能体的速度向量
-        sensor.AddObservation(transform.InverseTransformDirection(m_AgentRb.velocity));
-    }
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">CollectObservations</span><span class="token punctuation">(</span>VectorSensor sensor<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>useVectorObs<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 输入开关的状态</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>m_SwitchLogic<span class="token punctuation">.</span><span class="token function">GetState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 输入智能体的速度向量</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>transform<span class="token punctuation">.</span><span class="token function">InverseTransformDirection</span><span class="token punctuation">(</span>m_AgentRb<span class="token punctuation">.</span>velocity<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>动作输出方法OnActionReceived：</p>
-<pre class=" language-c#"><code class="language-c#">public override void OnActionReceived(ActionBuffers actionBuffers)
-{
-    // 给予时间惩罚，鼓励快速结束游戏
-    AddReward(-1f / MaxStep);
-    MoveAgent(actionBuffers.DiscreteActions);
-}
-public void MoveAgent(ActionSegment<int> act)
-{
-    var dirToGo = Vector3.zero;
-    var rotateDir = Vector3.zero;
-    // 接收神经网络的输出
-    var action = act[0];
-    // 输出处理
-    switch (action)
-    {
-        case 1:
-            dirToGo = transform.forward * 1f;
-            break;
-        case 2:
-            dirToGo = transform.forward * -1f;
-            break;
-        case 3:
-            rotateDir = transform.up * 1f;
-            break;
-        case 4:
-            rotateDir = transform.up * -1f;
-            break;
-    }
-    // 执行输出
-    transform.Rotate(rotateDir, Time.deltaTime * 200f);
-    m_AgentRb.AddForce(dirToGo * 2f, ForceMode.VelocityChange);
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnActionReceived</span><span class="token punctuation">(</span>ActionBuffers actionBuffers<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 给予时间惩罚，鼓励快速结束游戏</span>
+    <span class="token function">AddReward</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1f</span> <span class="token operator">/</span> MaxStep<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">MoveAgent</span><span class="token punctuation">(</span>actionBuffers<span class="token punctuation">.</span>DiscreteActions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">MoveAgent</span><span class="token punctuation">(</span>ActionSegment<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> act<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> dirToGo <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> rotateDir <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 接收神经网络的输出</span>
+    <span class="token keyword">var</span> action <span class="token operator">=</span> act<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 输出处理</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>action<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> <span class="token number">1</span><span class="token punctuation">:</span>
+            dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>forward <span class="token operator">*</span> <span class="token number">1f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">2</span><span class="token punctuation">:</span>
+            dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>forward <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">3</span><span class="token punctuation">:</span>
+            rotateDir <span class="token operator">=</span> transform<span class="token punctuation">.</span>up <span class="token operator">*</span> <span class="token number">1f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">4</span><span class="token punctuation">:</span>
+            rotateDir <span class="token operator">=</span> transform<span class="token punctuation">.</span>up <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 执行输出</span>
+    transform<span class="token punctuation">.</span><span class="token function">Rotate</span><span class="token punctuation">(</span>rotateDir<span class="token punctuation">,</span> Time<span class="token punctuation">.</span>deltaTime <span class="token operator">*</span> <span class="token number">200f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_AgentRb<span class="token punctuation">.</span><span class="token function">AddForce</span><span class="token punctuation">(</span>dirToGo <span class="token operator">*</span> <span class="token number">2f</span><span class="token punctuation">,</span> ForceMode<span class="token punctuation">.</span>VelocityChange<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>在一个episode开始时执行方法OnEpisodeBegin()：</p>
-<pre class=" language-c#"><code class="language-c#">// 相比以前需要加上这句
-using System.Linq;
-public override void OnEpisodeBegin()
-{
-    // 取0-9并打乱顺序
-    var enumerable = Enumerable.Range(0, 9).OrderBy(x => Guid.NewGuid()).Take(9);
-    var items = enumerable.ToArray();
-    // 清理区域，销毁场景中所有金字塔（包括真*金字塔）
-    m_MyArea.CleanPyramidArea();
-    // 智能体速度归零
-    m_AgentRb.velocity = Vector3.zero;
-    // 把自己的位置放到items[0]的区域
-    m_MyArea.PlaceObject(gameObject, items[0]);
-    // 随机自己的旋转rotation
-    transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
-    // 重置按钮（回到未触发状态，位置随机）
-    m_SwitchLogic.ResetSwitch(items[1], items[2]);
-    // 生成六个石头金字塔
-    m_MyArea.CreateStonePyramid(1, items[3]);
-    m_MyArea.CreateStonePyramid(1, items[4]);
-    m_MyArea.CreateStonePyramid(1, items[5]);
-    m_MyArea.CreateStonePyramid(1, items[6]);
-    m_MyArea.CreateStonePyramid(1, items[7]);
-    m_MyArea.CreateStonePyramid(1, items[8]);
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// 相比以前需要加上这句</span>
+<span class="token keyword">using</span> System<span class="token punctuation">.</span>Linq<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnEpisodeBegin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 取0-9并打乱顺序</span>
+    <span class="token keyword">var</span> enumerable <span class="token operator">=</span> Enumerable<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">OrderBy</span><span class="token punctuation">(</span>x <span class="token operator">=</span><span class="token operator">></span> Guid<span class="token punctuation">.</span><span class="token function">NewGuid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Take</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> items <span class="token operator">=</span> enumerable<span class="token punctuation">.</span><span class="token function">ToArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 清理区域，销毁场景中所有金字塔（包括真*金字塔）</span>
+    m_MyArea<span class="token punctuation">.</span><span class="token function">CleanPyramidArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 智能体速度归零</span>
+    m_AgentRb<span class="token punctuation">.</span>velocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 把自己的位置放到items[0]的区域</span>
+    m_MyArea<span class="token punctuation">.</span><span class="token function">PlaceObject</span><span class="token punctuation">(</span>gameObject<span class="token punctuation">,</span> items<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 随机自己的旋转rotation</span>
+    transform<span class="token punctuation">.</span>rotation <span class="token operator">=</span> Quaternion<span class="token punctuation">.</span><span class="token function">Euler</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">,</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">360</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 重置按钮（回到未触发状态，位置随机）</span>
+    m_SwitchLogic<span class="token punctuation">.</span><span class="token function">ResetSwitch</span><span class="token punctuation">(</span>items<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> items<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 生成六个石头金字塔</span>
+    m_MyArea<span class="token punctuation">.</span><span class="token function">CreateStonePyramid</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> items<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_MyArea<span class="token punctuation">.</span><span class="token function">CreateStonePyramid</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> items<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_MyArea<span class="token punctuation">.</span><span class="token function">CreateStonePyramid</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> items<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_MyArea<span class="token punctuation">.</span><span class="token function">CreateStonePyramid</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> items<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_MyArea<span class="token punctuation">.</span><span class="token function">CreateStonePyramid</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> items<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_MyArea<span class="token punctuation">.</span><span class="token function">CreateStonePyramid</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> items<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>碰撞检测OnCollisionEnter方法：</p>
-<pre class=" language-c#"><code class="language-c#">void OnCollisionEnter(Collision collision)
-{
-    // 如果碰到目标方块，那么游戏结束，加2分
-    if (collision.gameObject.CompareTag("goal"))
-    {
-        SetReward(2f);
-        EndEpisode();
-    }
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">OnCollisionEnter</span><span class="token punctuation">(</span>Collision collision<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 如果碰到目标方块，那么游戏结束，加2分</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>collision<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"goal"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">SetReward</span><span class="token punctuation">(</span><span class="token number">2f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">EndEpisode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p><strong>挂在开关下的脚本PyramidSwitch.cs：</strong></p>
-<pre class=" language-c#"><code class="language-c#">// 初始化，获取父物体中的脚本
-void Start()
-{
-    m_Area = gameObject.transform.parent.gameObject;
-    m_AreaComponent = m_Area.GetComponent<PyramidArea>();
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// 初始化，获取父物体中的脚本</span>
+<span class="token keyword">void</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_Area <span class="token operator">=</span> gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>gameObject<span class="token punctuation">;</span>
+    m_AreaComponent <span class="token operator">=</span> m_Area<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>PyramidArea<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>重置开关方法：</p>
-<pre class=" language-c#"><code class="language-c#">public void ResetSwitch(int spawnAreaIndex, int pyramidSpawnIndex)
-{
-    // 把开关放置到指定位置
-    m_AreaComponent.PlaceObject(gameObject, spawnAreaIndex);
-    // 设定开关状态为断开
-    m_State = false;
-    m_PyramidIndex = pyramidSpawnIndex;
-    tag = "switchOff";
-    // 旋转归零
-    transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-    // 材质变成未触发的状态
-    myButton.GetComponent<Renderer>().material = offMaterial;
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">ResetSwitch</span><span class="token punctuation">(</span><span class="token keyword">int</span> spawnAreaIndex<span class="token punctuation">,</span> <span class="token keyword">int</span> pyramidSpawnIndex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 把开关放置到指定位置</span>
+    m_AreaComponent<span class="token punctuation">.</span><span class="token function">PlaceObject</span><span class="token punctuation">(</span>gameObject<span class="token punctuation">,</span> spawnAreaIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 设定开关状态为断开</span>
+    m_State <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+    m_PyramidIndex <span class="token operator">=</span> pyramidSpawnIndex<span class="token punctuation">;</span>
+    tag <span class="token operator">=</span> <span class="token string">"switchOff"</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 旋转归零</span>
+    transform<span class="token punctuation">.</span>rotation <span class="token operator">=</span> Quaternion<span class="token punctuation">.</span><span class="token function">Euler</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 材质变成未触发的状态</span>
+    myButton<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Renderer<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>material <span class="token operator">=</span> offMaterial<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>碰撞检测：</p>
-<pre class=" language-c#"><code class="language-c#">void OnCollisionEnter(Collision other)
-{
-    // 当碰到未打开的开关，开关变为打开状态，并创造一个金字塔
-    if (other.gameObject.CompareTag("agent") && m_State == false)
-    {
-        myButton.GetComponent<Renderer>().material = onMaterial;
-        m_State = true;
-        // 生成真*金字塔
-        m_AreaComponent.CreatePyramid(1, m_PyramidIndex);
-        tag = "switchOn";
-    }
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">OnCollisionEnter</span><span class="token punctuation">(</span>Collision other<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 当碰到未打开的开关，开关变为打开状态，并创造一个金字塔</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>other<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"agent"</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> m_State <span class="token operator">==</span> <span class="token keyword">false</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        myButton<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Renderer<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>material <span class="token operator">=</span> onMaterial<span class="token punctuation">;</span>
+        m_State <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 生成真*金字塔</span>
+        m_AreaComponent<span class="token punctuation">.</span><span class="token function">CreatePyramid</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> m_PyramidIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        tag <span class="token operator">=</span> <span class="token string">"switchOn"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p><strong>整个环境的控制脚本PyramidArea.cs：</strong></p>
 <p>参数设置（可以在Unity编辑器中自由更改）：</p>
-<pre class=" language-c#"><code class="language-c#">public GameObject pyramid;
-public GameObject stonePyramid;
-// 生成区域数组
-public GameObject[] spawnAreas;
-public int numPyra;
-public float range;</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> GameObject pyramid<span class="token punctuation">;</span>
+<span class="token keyword">public</span> GameObject stonePyramid<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 生成区域数组</span>
+<span class="token keyword">public</span> GameObject<span class="token punctuation">[</span><span class="token punctuation">]</span> spawnAreas<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">int</span> numPyra<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">float</span> range<span class="token punctuation">;</span></code></pre>
 <p>生成两种金字塔的方法：</p>
-<pre class=" language-c#"><code class="language-c#">public void CreatePyramid(int numObjects, int spawnAreaIndex)
-{
-    CreateObject(numObjects, pyramid, spawnAreaIndex);
-}
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">CreatePyramid</span><span class="token punctuation">(</span><span class="token keyword">int</span> numObjects<span class="token punctuation">,</span> <span class="token keyword">int</span> spawnAreaIndex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">CreateObject</span><span class="token punctuation">(</span>numObjects<span class="token punctuation">,</span> pyramid<span class="token punctuation">,</span> spawnAreaIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-public void CreateStonePyramid(int numObjects, int spawnAreaIndex)
-{
-    CreateObject(numObjects, stonePyramid, spawnAreaIndex);
-}
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">CreateStonePyramid</span><span class="token punctuation">(</span><span class="token keyword">int</span> numObjects<span class="token punctuation">,</span> <span class="token keyword">int</span> spawnAreaIndex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">CreateObject</span><span class="token punctuation">(</span>numObjects<span class="token punctuation">,</span> stonePyramid<span class="token punctuation">,</span> spawnAreaIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-void CreateObject(int numObjects, GameObject desiredObject, int spawnAreaIndex)
-{
-    for (var i = 0; i < numObjects; i++)
-    {
-        // 生成金字塔，并且作为本物体的子物体
-        var newObject = Instantiate(desiredObject, Vector3.zero,
-                                    Quaternion.Euler(0f, 0f, 0f), transform);
-        // 移动金字塔到指定位置
-        PlaceObject(newObject, spawnAreaIndex);
-    }
-}</code></pre>
+<span class="token keyword">void</span> <span class="token function">CreateObject</span><span class="token punctuation">(</span><span class="token keyword">int</span> numObjects<span class="token punctuation">,</span> GameObject desiredObject<span class="token punctuation">,</span> <span class="token keyword">int</span> spawnAreaIndex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> numObjects<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 生成金字塔，并且作为本物体的子物体</span>
+        <span class="token keyword">var</span> newObject <span class="token operator">=</span> <span class="token function">Instantiate</span><span class="token punctuation">(</span>desiredObject<span class="token punctuation">,</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">,</span>
+                                    Quaternion<span class="token punctuation">.</span><span class="token function">Euler</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">)</span><span class="token punctuation">,</span> transform<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 移动金字塔到指定位置</span>
+        <span class="token function">PlaceObject</span><span class="token punctuation">(</span>newObject<span class="token punctuation">,</span> spawnAreaIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>移动金字塔：</p>
-<pre class=" language-c#"><code class="language-c#">public void PlaceObject(GameObject objectToPlace, int spawnAreaIndex)
-{
-    // 生成区域的位置
-    var spawnTransform = spawnAreas[spawnAreaIndex].transform;
-    var xRange = spawnTransform.localScale.x / 2.1f;
-    var zRange = spawnTransform.localScale.z / 2.1f;
-    // 位置在范围内做一定的随机
-    objectToPlace.transform.position = new Vector3(Random.Range(-xRange, xRange), 2f, Random.Range(-zRange, zRange))
-        + spawnTransform.position;
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">PlaceObject</span><span class="token punctuation">(</span>GameObject objectToPlace<span class="token punctuation">,</span> <span class="token keyword">int</span> spawnAreaIndex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 生成区域的位置</span>
+    <span class="token keyword">var</span> spawnTransform <span class="token operator">=</span> spawnAreas<span class="token punctuation">[</span>spawnAreaIndex<span class="token punctuation">]</span><span class="token punctuation">.</span>transform<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> xRange <span class="token operator">=</span> spawnTransform<span class="token punctuation">.</span>localScale<span class="token punctuation">.</span>x <span class="token operator">/</span> <span class="token number">2.1f</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> zRange <span class="token operator">=</span> spawnTransform<span class="token punctuation">.</span>localScale<span class="token punctuation">.</span>z <span class="token operator">/</span> <span class="token number">2.1f</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 位置在范围内做一定的随机</span>
+    objectToPlace<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>xRange<span class="token punctuation">,</span> xRange<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2f</span><span class="token punctuation">,</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>zRange<span class="token punctuation">,</span> zRange<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token operator">+</span> spawnTransform<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>销毁所有的金字塔：</p>
-<pre class=" language-c#"><code class="language-c#">public void CleanPyramidArea()
-{
-    foreach (Transform child in transform)
-        if (child.CompareTag("pyramid"))
-        {
-            Destroy(child.gameObject);
-        }
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">CleanPyramidArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">foreach</span> <span class="token punctuation">(</span>Transform child <span class="token keyword">in</span> transform<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>child<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"pyramid"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">Destroy</span><span class="token punctuation">(</span>child<span class="token punctuation">.</span>gameObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>配置1：</p>
 <pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
   <span class="token key atrule">Pyramids</span><span class="token punctuation">:</span>
@@ -767,7 +767,7 @@ void CreateObject(int numObjects, GameObject desiredObject, int spawnAreaIndex)
 <p>strength：好奇心模块产生的奖励大小，应该设得足够大使其不被环境的奖励淹没，但也不能设得过大反过来淹没环境的奖励。推荐：0.001-0.1。默认为1。</p>
 <p>hidden_units：好奇心网络的隐藏层节点个数。</p>
 <p>learning_rate：学习率，用于更新好奇心模块，如果训练不稳定，应当减小。推荐：1e-5 - 1e-3。</p>
-<img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/8.png" class="">
+<img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/8.png" class>
 
 <p>对于Curiosity的具体讲解请查看：</p>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1UE411G78S?p=10">李宏毅强化学习课程</a></p>
@@ -817,12 +817,12 @@ void CreateObject(int numObjects, GameObject desiredObject, int spawnAreaIndex)
 <p>其中参数的配置和Curiosity一致，多出一个可以调节的网络层数num_layers。</p>
 <p>它和Curiosity一样，属于智能体自身的内部奖励，鼓励智能体积极探索。</p>
 <p>运行效果：在100万个step过后智能体能够达到平均1.5以上的奖励。比Curiosity的训练速度要快很多。</p>
-<img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/9.png" class="">
+<img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/9.png" class>
 
 <p>详细信息请查看：</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45443931/article/details/98869614">强化学习中的好奇心驱动学习算法：随机网络精馏探索技术</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/blog-hfg/articles/10452552.html">exploration by random network distillation</a></p>
-<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/7.gif" class="">
+<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><img src="/2021/11/30/ml-agents-an-li-zhi-jin-zi-ta/7.gif" class>
 
 
 
@@ -1020,7 +1020,7 @@ void CreateObject(int numObjects, GameObject desiredObject, int spawnAreaIndex)
     <div id="rewardModal" class="modal">
         <div class="modal-content">
             <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <h4 class="reward-title">您的赏识是我前进的动力</h4>
             <div class="reward-content">
                 <div class="reward-tabs">
                     <ul class="tabs row">
@@ -1660,7 +1660,7 @@ void CreateObject(int numObjects, GameObject desiredObject, int spawnAreaIndex)
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">236.5k</span>&nbsp;字
+                class="white-color">241.3k</span>&nbsp;字
             
             
             
@@ -1730,6 +1730,10 @@ void CreateObject(int numObjects, GameObject desiredObject, int spawnAreaIndex)
         <div class="col s12 m4 l4 social-link social-statis">
 
 
+    <a href="mailto:1121452406@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
 
 
 
@@ -1743,6 +1747,10 @@ void CreateObject(int numObjects, GameObject desiredObject, int spawnAreaIndex)
 
 
 
+
+    <a href="https://blog.csdn.net/tianjuewudi" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://blog.csdn.net/tianjuewudi" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
 
 
 

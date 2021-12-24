@@ -17,7 +17,7 @@
 
 
     <title>ML-Agents案例之WallJump | 微笑紫瞳星</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/MyLogo.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -53,7 +53,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/MyLogo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">微笑紫瞳星</span>
                 </a>
@@ -152,7 +152,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/MyLogo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">微笑紫瞳星</div>
         <div class="logo-desc">
@@ -322,7 +322,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/WallJump.gif')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -479,7 +479,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-11-11
+                    2021-12-16
                 </div>
                 
 
@@ -522,372 +522,381 @@
 <p>  本文基于我前面发的两篇文章，需要对ML-Agents有一定的了解，详情请见：<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121115480">Unity强化学习之ML-Agents的使用</a>、<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121116043">ML-Agents命令及配置大全</a>。</p>
 <p>本文主要的知识点是课程学习（Curriculum Learning）以及Model Override脚本的使用。</p>
 <p>参考资料：<a target="_blank" rel="noopener" href="https://developer.unity.cn/projects/5eb2b98dedbc2a1a2b7c1ea6">ML-Agents（九）Wall Jump</a></p>
-<img src="/2021/11/09/ml-agents-an-li-zhi-walljump/1.png" class="">
+<img src="/2021/11/09/ml-agents-an-li-zhi-walljump/1.png" class>
 
 <h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><p>​       本案例环境较为简单，智能体的目标是到达绿色的目标点，但是中间会有堵墙相隔，墙的高度随机，当墙较矮时，智能体可以直接跳跃快速到达目标点，但是当墙体较高时，需要先推动方块进行垫脚，然后再跳过墙体。</p>
-<img src="/2021/11/09/ml-agents-an-li-zhi-walljump/2.png" class="">
+<img src="/2021/11/09/ml-agents-an-li-zhi-walljump/2.png" class>
 
 <p>​      和推箱子的案例类似，跳墙案例智能体的输入使用了射线传感器包括十四根射线，射线的作用在这里不再说明。</p>
 <p>​      详情参考我前面的文章<a href="https://tianjuewudi.gitee.io/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/">ML-Agents案例之推箱子游戏</a>的单人模式。</p>
 <p>​      除了使用传感器之外，agent脚本中还包含了目标到智能体的向量，和是否接触地面，这里有四维。</p>
 <p>​      智能体的输出包含4个离散输出，第一个决定往前走，往后走，什么都不做。第二个决定往左走，在右走，什么都不做。第三个决定顺时针旋转，逆时针旋转，什么都不做。第四个决定了跳跃和什么都不做。</p>
 <p>​      智能体脚本设定如下：</p>
-<img src="/2021/11/09/ml-agents-an-li-zhi-walljump/3.png" class="">
+<img src="/2021/11/09/ml-agents-an-li-zhi-walljump/3.png" class>
 
-<img src="/2021/11/09/ml-agents-an-li-zhi-walljump/4.png" class="">
+<img src="/2021/11/09/ml-agents-an-li-zhi-walljump/4.png" class>
 
 <p>射线传感器检测的标签有三个：墙，方块，目标点。</p>
-<img src="/2021/11/09/ml-agents-an-li-zhi-walljump/5.png" class="">
+<img src="/2021/11/09/ml-agents-an-li-zhi-walljump/5.png" class>
 
 
 
 <h2 id="脚本代码"><a href="#脚本代码" class="headerlink" title="脚本代码"></a>脚本代码</h2><p>本项目较简单，只有一个主要的agent脚本需要查看：</p>
 <p>WallJumpAgent.cs</p>
-<pre class=" language-c#"><code class="language-c#">using System.Collections;
-using UnityEngine;
-using Unity.MLAgents;
-using Unity.Barracuda;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgentsExamples;
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> System<span class="token punctuation">.</span>Collections<span class="token punctuation">;</span>
+<span class="token keyword">using</span> UnityEngine<span class="token punctuation">;</span>
+<span class="token keyword">using</span> Unity<span class="token punctuation">.</span>MLAgents<span class="token punctuation">;</span>
+<span class="token keyword">using</span> Unity<span class="token punctuation">.</span>Barracuda<span class="token punctuation">;</span>
+<span class="token keyword">using</span> Unity<span class="token punctuation">.</span>MLAgents<span class="token punctuation">.</span>Actuators<span class="token punctuation">;</span>
+<span class="token keyword">using</span> Unity<span class="token punctuation">.</span>MLAgents<span class="token punctuation">.</span>Sensors<span class="token punctuation">;</span>
+<span class="token keyword">using</span> Unity<span class="token punctuation">.</span>MLAgentsExamples<span class="token punctuation">;</span>
 
-public class WallJumpAgent : Agent
-{
-    // Depending on this value, the wall will have different height
-    int m_Configuration;
-    // 三个模型应用在三个不同情况
-    // Brain to use when no wall is present
-    public NNModel noWallBrain;
-    // Brain to use when a jumpable wall is present
-    public NNModel smallWallBrain;
-    // Brain to use when a wall requiring a block to jump over is present
-    public NNModel bigWallBrain;
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">WallJumpAgent</span> <span class="token punctuation">:</span> Agent
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Depending on this value, the wall will have different height</span>
+    <span class="token keyword">int</span> m_Configuration<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 三个模型应用在三个不同情况</span>
+    <span class="token comment" spellcheck="true">// Brain to use when no wall is present</span>
+    <span class="token keyword">public</span> NNModel noWallBrain<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// Brain to use when a jumpable wall is present</span>
+    <span class="token keyword">public</span> NNModel smallWallBrain<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// Brain to use when a wall requiring a block to jump over is present</span>
+    <span class="token keyword">public</span> NNModel bigWallBrain<span class="token punctuation">;</span>
 
-    public GameObject ground;
-    public GameObject spawnArea;
-    Bounds m_SpawnAreaBounds;
+    <span class="token keyword">public</span> GameObject ground<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> GameObject spawnArea<span class="token punctuation">;</span>
+    Bounds m_SpawnAreaBounds<span class="token punctuation">;</span>
 
 
-    public GameObject goal;
-    public GameObject shortBlock;
-    public GameObject wall;
-    Rigidbody m_ShortBlockRb;
-    Rigidbody m_AgentRb;
-    Material m_GroundMaterial;
-    Renderer m_GroundRenderer;
-    WallJumpSettings m_WallJumpSettings;
+    <span class="token keyword">public</span> GameObject goal<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> GameObject shortBlock<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> GameObject wall<span class="token punctuation">;</span>
+    Rigidbody m_ShortBlockRb<span class="token punctuation">;</span>
+    Rigidbody m_AgentRb<span class="token punctuation">;</span>
+    Material m_GroundMaterial<span class="token punctuation">;</span>
+    Renderer m_GroundRenderer<span class="token punctuation">;</span>
+    WallJumpSettings m_WallJumpSettings<span class="token punctuation">;</span>
 
-    public float jumpingTime;
-    public float jumpTime;
-    // This is a downward force applied when falling to make jumps look
-    // less floaty
-    public float fallingForce;
-    // Use to check the coliding objects
-    public Collider[] hitGroundColliders = new Collider[3];
-    Vector3 m_JumpTargetPos;
-    Vector3 m_JumpStartingPos;
+    <span class="token keyword">public</span> <span class="token keyword">float</span> jumpingTime<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">float</span> jumpTime<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// This is a downward force applied when falling to make jumps look</span>
+    <span class="token comment" spellcheck="true">// less floaty</span>
+    <span class="token keyword">public</span> <span class="token keyword">float</span> fallingForce<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// Use to check the coliding objects</span>
+    <span class="token keyword">public</span> Collider<span class="token punctuation">[</span><span class="token punctuation">]</span> hitGroundColliders <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Collider</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    Vector3 m_JumpTargetPos<span class="token punctuation">;</span>
+    Vector3 m_JumpStartingPos<span class="token punctuation">;</span>
 
-    // 配置文件中设定的三个模型名字，实际这里只设定两个
-    string m_NoWallBehaviorName = "SmallWallJump";
-    string m_SmallWallBehaviorName = "SmallWallJump";
-    string m_BigWallBehaviorName = "BigWallJump";
+    <span class="token comment" spellcheck="true">// 配置文件中设定的三个模型名字，实际这里只设定两个</span>
+    <span class="token keyword">string</span> m_NoWallBehaviorName <span class="token operator">=</span> <span class="token string">"SmallWallJump"</span><span class="token punctuation">;</span>
+    <span class="token keyword">string</span> m_SmallWallBehaviorName <span class="token operator">=</span> <span class="token string">"SmallWallJump"</span><span class="token punctuation">;</span>
+    <span class="token keyword">string</span> m_BigWallBehaviorName <span class="token operator">=</span> <span class="token string">"BigWallJump"</span><span class="token punctuation">;</span>
 
-    EnvironmentParameters m_ResetParams;
-    // 初始化
-    public override void Initialize()
-    {
-        // 寻找设定参数的脚本
-        m_WallJumpSettings = FindObjectOfType<walljumpsettings>();
-        // 随机墙的高度
-        m_Configuration = Random.Range(0, 5);
-       // 获取物体中的各种组件
-        m_AgentRb = GetComponent<rigidbody>();
-        m_ShortBlockRb = shortBlock.GetComponent<rigidbody>();
-        m_SpawnAreaBounds = spawnArea.GetComponent<collider>().bounds;
-        m_GroundRenderer = ground.GetComponent<renderer>();
-        m_GroundMaterial = m_GroundRenderer.material;
-        // 使生成区域不可见
-        spawnArea.SetActive(false);
-        // 获取配置参数
-        m_ResetParams = Academy.Instance.EnvironmentParameters;
+    EnvironmentParameters m_ResetParams<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 初始化</span>
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Initialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 寻找设定参数的脚本</span>
+        m_WallJumpSettings <span class="token operator">=</span> <span class="token generic-method function">FindObjectOfType<span class="token punctuation">&lt;</span>WallJumpSettings<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 随机墙的高度</span>
+        m_Configuration <span class="token operator">=</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token comment" spellcheck="true">// 获取物体中的各种组件</span>
+        m_AgentRb <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Rigidbody<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        m_ShortBlockRb <span class="token operator">=</span> shortBlock<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Rigidbody<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        m_SpawnAreaBounds <span class="token operator">=</span> spawnArea<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Collider<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>bounds<span class="token punctuation">;</span>
+        m_GroundRenderer <span class="token operator">=</span> ground<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Renderer<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        m_GroundMaterial <span class="token operator">=</span> m_GroundRenderer<span class="token punctuation">.</span>material<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 使生成区域不可见</span>
+        spawnArea<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 获取配置参数</span>
+        m_ResetParams <span class="token operator">=</span> Academy<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span>EnvironmentParameters<span class="token punctuation">;</span>
 
-        // Update model references if we're overriding
-        var modelOverrider = GetComponent<modeloverrider>();
-        // 导入三个模型，采用配置文件的参数
-        if (modelOverrider.HasOverrides)
-        {
-            noWallBrain = modelOverrider.GetModelForBehaviorName(m_NoWallBehaviorName);
-            m_NoWallBehaviorName = ModelOverrider.GetOverrideBehaviorName(m_NoWallBehaviorName);
+        <span class="token comment" spellcheck="true">// Update model references if we're overriding</span>
+        <span class="token keyword">var</span> modelOverrider <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>ModelOverrider<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 导入三个模型，采用配置文件的参数</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>modelOverrider<span class="token punctuation">.</span>HasOverrides<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            noWallBrain <span class="token operator">=</span> modelOverrider<span class="token punctuation">.</span><span class="token function">GetModelForBehaviorName</span><span class="token punctuation">(</span>m_NoWallBehaviorName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            m_NoWallBehaviorName <span class="token operator">=</span> ModelOverrider<span class="token punctuation">.</span><span class="token function">GetOverrideBehaviorName</span><span class="token punctuation">(</span>m_NoWallBehaviorName<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            smallWallBrain = modelOverrider.GetModelForBehaviorName(m_SmallWallBehaviorName);
-            m_SmallWallBehaviorName = ModelOverrider.GetOverrideBehaviorName(m_SmallWallBehaviorName);
+            smallWallBrain <span class="token operator">=</span> modelOverrider<span class="token punctuation">.</span><span class="token function">GetModelForBehaviorName</span><span class="token punctuation">(</span>m_SmallWallBehaviorName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            m_SmallWallBehaviorName <span class="token operator">=</span> ModelOverrider<span class="token punctuation">.</span><span class="token function">GetOverrideBehaviorName</span><span class="token punctuation">(</span>m_SmallWallBehaviorName<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            bigWallBrain = modelOverrider.GetModelForBehaviorName(m_BigWallBehaviorName);
-            m_BigWallBehaviorName = ModelOverrider.GetOverrideBehaviorName(m_BigWallBehaviorName);
-        }
-    }
+            bigWallBrain <span class="token operator">=</span> modelOverrider<span class="token punctuation">.</span><span class="token function">GetModelForBehaviorName</span><span class="token punctuation">(</span>m_BigWallBehaviorName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            m_BigWallBehaviorName <span class="token operator">=</span> ModelOverrider<span class="token punctuation">.</span><span class="token function">GetOverrideBehaviorName</span><span class="token punctuation">(</span>m_BigWallBehaviorName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    // 设定跳跃参数
-    public void Jump()
-    {
-        jumpingTime = 0.2f;
-        m_JumpStartingPos = m_AgentRb.position;
-    }
-    // 判断是否接触地面，里面包含两种方式
-    public bool DoGroundCheck(bool smallCheck)
-    {
-        if (!smallCheck)
-        {
-            hitGroundColliders = new Collider[3];
-            var o = gameObject;
-            // 这里给智能体设定一个盒子碰撞体，找到与其碰撞的碰撞体，返回
-            // 参数分别是碰撞体中心，碰撞体每个维度的大小，返回的碰撞体，盒子的旋转。
-            Physics.OverlapBoxNonAlloc(
-                o.transform.position + new Vector3(0, -0.05f, 0),
-                new Vector3(0.95f / 2f, 0.5f, 0.95f / 2f),
-                hitGroundColliders,
-                o.transform.rotation);
-            var grounded = false;
-            //如果检测到对应标签，则判断触地
-            foreach (var col in hitGroundColliders)
-            {
-                if (col != null &amp;&amp; col.transform != transform &amp;&amp;
-                    (col.CompareTag("walkableSurface") ||
-                     col.CompareTag("block") ||
-                     col.CompareTag("wall")))
-                {
-                    grounded = true; //then we're grounded
-                    break;
-                }
-            }
-            return grounded;
-        }
-        else
-        {
-            // 射线检测方式检测触地
-            RaycastHit hit;
-            // 智能体往正下方发生射线,没有完全触地时会判断触
-            Physics.Raycast(transform.position + new Vector3(0, -0.05f, 0), -Vector3.up, out hit,
-                1f);
-           // 射线检测到对应标签的物体代表触地
-            if (hit.collider != null &amp;&amp;
-                (hit.collider.CompareTag("walkableSurface") ||
-                 hit.collider.CompareTag("block") ||
-                 hit.collider.CompareTag("wall"))
-                &amp;&amp; hit.normal.y &gt; 0.95f)
-            {
-                return true;
-            }
+    <span class="token comment" spellcheck="true">// 设定跳跃参数</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Jump</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        jumpingTime <span class="token operator">=</span> <span class="token number">0.2f</span><span class="token punctuation">;</span>
+        m_JumpStartingPos <span class="token operator">=</span> m_AgentRb<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 判断是否接触地面，里面包含两种方式</span>
+    <span class="token keyword">public</span> <span class="token keyword">bool</span> <span class="token function">DoGroundCheck</span><span class="token punctuation">(</span><span class="token keyword">bool</span> smallCheck<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>smallCheck<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            hitGroundColliders <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Collider</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">var</span> o <span class="token operator">=</span> gameObject<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 这里给智能体设定一个盒子碰撞体，找到与其碰撞的碰撞体，返回</span>
+            <span class="token comment" spellcheck="true">// 参数分别是碰撞体中心，碰撞体每个维度的大小，返回的碰撞体，盒子的旋转。</span>
+            Physics<span class="token punctuation">.</span><span class="token function">OverlapBoxNonAlloc</span><span class="token punctuation">(</span>
+                o<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">+</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.05f</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0.95f</span> <span class="token operator">/</span> <span class="token number">2f</span><span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.95f</span> <span class="token operator">/</span> <span class="token number">2f</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                hitGroundColliders<span class="token punctuation">,</span>
+                o<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">var</span> grounded <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//如果检测到对应标签，则判断触地</span>
+            <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> col <span class="token keyword">in</span> hitGroundColliders<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>col <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> col<span class="token punctuation">.</span>transform <span class="token operator">!=</span> transform <span class="token operator">&amp;&amp;</span>
+                    <span class="token punctuation">(</span>col<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"walkableSurface"</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+                     col<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"block"</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+                     col<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"wall"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    grounded <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//then we're grounded</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> grounded<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 射线检测方式检测触地</span>
+            RaycastHit hit<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 智能体往正下方发生射线,没有完全触地时会判断触</span>
+            Physics<span class="token punctuation">.</span><span class="token function">Raycast</span><span class="token punctuation">(</span>transform<span class="token punctuation">.</span>position <span class="token operator">+</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.05f</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span>Vector3<span class="token punctuation">.</span>up<span class="token punctuation">,</span> <span class="token keyword">out</span> hit<span class="token punctuation">,</span>
+                <span class="token number">1f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token comment" spellcheck="true">// 射线检测到对应标签的物体代表触地</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>hit<span class="token punctuation">.</span>collider <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span>
+                <span class="token punctuation">(</span>hit<span class="token punctuation">.</span>collider<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"walkableSurface"</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+                 hit<span class="token punctuation">.</span>collider<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"block"</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+                 hit<span class="token punctuation">.</span>collider<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"wall"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token operator">&amp;&amp;</span> hit<span class="token punctuation">.</span>normal<span class="token punctuation">.</span>y <span class="token operator">></span> <span class="token number">0.95f</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
 
-            return false;
-        }
-    }
+            <span class="token keyword">return</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    // 顺滑地移动物体
-    // 参数代表：终点，刚体，目标速度，最大速度
-    void MoveTowards(Vector3 targetPos, Rigidbody rb, float targetVel, float maxVel)
-    {
-        var moveToPos = targetPos - rb.worldCenterOfMass;
-        var velocityTarget = Time.fixedDeltaTime * targetVel * moveToPos;
-        if (float.IsNaN(velocityTarget.x) == false)
-        {
-            // 在现在值和目标值中间选择一个值，不高于maxVel
-            rb.velocity = Vector3.MoveTowards(rb.velocity, velocityTarget, maxVel);
-        }
-    }
-    // 输入设定
-    public override void CollectObservations(VectorSensor sensor)
-    {
-        var agentPos = m_AgentRb.position - ground.transform.position;
-        // 输入目标到智能体的向量
-        sensor.AddObservation(agentPos / 20f);
-        // 输入是否触地
-        sensor.AddObservation(DoGroundCheck(true) ? 1 : 0);
-    }
+    <span class="token comment" spellcheck="true">// 顺滑地移动物体</span>
+    <span class="token comment" spellcheck="true">// 参数代表：终点，刚体，目标速度，最大速度</span>
+    <span class="token keyword">void</span> <span class="token function">MoveTowards</span><span class="token punctuation">(</span>Vector3 targetPos<span class="token punctuation">,</span> Rigidbody rb<span class="token punctuation">,</span> <span class="token keyword">float</span> targetVel<span class="token punctuation">,</span> <span class="token keyword">float</span> maxVel<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> moveToPos <span class="token operator">=</span> targetPos <span class="token operator">-</span> rb<span class="token punctuation">.</span>worldCenterOfMass<span class="token punctuation">;</span>
+        <span class="token keyword">var</span> velocityTarget <span class="token operator">=</span> Time<span class="token punctuation">.</span>fixedDeltaTime <span class="token operator">*</span> targetVel <span class="token operator">*</span> moveToPos<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">.</span><span class="token function">IsNaN</span><span class="token punctuation">(</span>velocityTarget<span class="token punctuation">.</span>x<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token keyword">false</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 在现在值和目标值中间选择一个值，不高于maxVel</span>
+            rb<span class="token punctuation">.</span>velocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span><span class="token function">MoveTowards</span><span class="token punctuation">(</span>rb<span class="token punctuation">.</span>velocity<span class="token punctuation">,</span> velocityTarget<span class="token punctuation">,</span> maxVel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 输入设定</span>
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">CollectObservations</span><span class="token punctuation">(</span>VectorSensor sensor<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> agentPos <span class="token operator">=</span> m_AgentRb<span class="token punctuation">.</span>position <span class="token operator">-</span> ground<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 输入目标到智能体的向量</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>agentPos <span class="token operator">/</span> <span class="token number">20f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 输入是否触地</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token function">DoGroundCheck</span><span class="token punctuation">(</span><span class="token keyword">true</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    // 在生成区域旋转一个位置生成方块
-    public Vector3 GetRandomSpawnPos()
-    {
-        var randomPosX = Random.Range(-m_SpawnAreaBounds.extents.x,
-            m_SpawnAreaBounds.extents.x);
-        var randomPosZ = Random.Range(-m_SpawnAreaBounds.extents.z,
-            m_SpawnAreaBounds.extents.z);
+    <span class="token comment" spellcheck="true">// 在生成区域旋转一个位置生成方块</span>
+    <span class="token keyword">public</span> Vector3 <span class="token function">GetRandomSpawnPos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> randomPosX <span class="token operator">=</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>m_SpawnAreaBounds<span class="token punctuation">.</span>extents<span class="token punctuation">.</span>x<span class="token punctuation">,</span>
+            m_SpawnAreaBounds<span class="token punctuation">.</span>extents<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> randomPosZ <span class="token operator">=</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>m_SpawnAreaBounds<span class="token punctuation">.</span>extents<span class="token punctuation">.</span>z<span class="token punctuation">,</span>
+            m_SpawnAreaBounds<span class="token punctuation">.</span>extents<span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        var randomSpawnPos = spawnArea.transform.position +
-            new Vector3(randomPosX, 0.45f, randomPosZ);
-        return randomSpawnPos;
-    }
+        <span class="token keyword">var</span> randomSpawnPos <span class="token operator">=</span> spawnArea<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">+</span>
+            <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>randomPosX<span class="token punctuation">,</span> <span class="token number">0.45f</span><span class="token punctuation">,</span> randomPosZ<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> randomSpawnPos<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    // 转换材质
-    IEnumerator GoalScoredSwapGroundMaterial(Material mat, float time)
-    {
-        m_GroundRenderer.material = mat;
-        yield return new WaitForSeconds(time); //wait for 2 sec
-        m_GroundRenderer.material = m_GroundMaterial;
-    }
+    <span class="token comment" spellcheck="true">// 转换材质</span>
+    IEnumerator <span class="token function">GoalScoredSwapGroundMaterial</span><span class="token punctuation">(</span>Material mat<span class="token punctuation">,</span> <span class="token keyword">float</span> time<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        m_GroundRenderer<span class="token punctuation">.</span>material <span class="token operator">=</span> mat<span class="token punctuation">;</span>
+        <span class="token keyword">yield</span> <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">WaitForSeconds</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//wait for 2 sec</span>
+        m_GroundRenderer<span class="token punctuation">.</span>material <span class="token operator">=</span> m_GroundMaterial<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    // 根据输出的值确定移动方式
-    public void MoveAgent(ActionSegment<int> act)
-    {
-        AddReward(-0.0005f);
-        // 两种不同的检查方式（完全触地或离地较低）
-        var smallGrounded = DoGroundCheck(true);
-        var largeGrounded = DoGroundCheck(false);
+    <span class="token comment" spellcheck="true">// 根据输出的值确定移动方式</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">MoveAgent</span><span class="token punctuation">(</span>ActionSegment<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> act<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">AddReward</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">0.0005f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 两种不同的检查方式（完全触地或离地较低）</span>
+        <span class="token keyword">var</span> smallGrounded <span class="token operator">=</span> <span class="token function">DoGroundCheck</span><span class="token punctuation">(</span><span class="token keyword">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> largeGrounded <span class="token operator">=</span> <span class="token function">DoGroundCheck</span><span class="token punctuation">(</span><span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        var dirToGo = Vector3.zero;
-        var rotateDir = Vector3.zero;
-        // 四个离散输出的赋值
-        var dirToGoForwardAction = act[0];
-        var rotateDirAction = act[1];
-        var dirToGoSideAction = act[2];
-        var jumpAction = act[3];
-        // 根据离散输出计算响应的动作
-        if (dirToGoForwardAction == 1)
-            dirToGo = (largeGrounded ? 1f : 0.5f) * 1f * transform.forward;
-        else if (dirToGoForwardAction == 2)
-            dirToGo = (largeGrounded ? 1f : 0.5f) * -1f * transform.forward;
-        if (rotateDirAction == 1)
-            rotateDir = transform.up * -1f;
-        else if (rotateDirAction == 2)
-            rotateDir = transform.up * 1f;
-        if (dirToGoSideAction == 1)
-            dirToGo = (largeGrounded ? 1f : 0.5f) * -0.6f * transform.right;
-        else if (dirToGoSideAction == 2)
-            dirToGo = (largeGrounded ? 1f : 0.5f) * 0.6f * transform.right;
-        if (jumpAction == 1)
-            if ((jumpingTime &lt;= 0f) &amp;&amp; smallgrounded) { jump(); } 执行动作 transform.rotate(rotatedir, time.fixeddeltatime * 300f); m_agentrb.addforce(dirtogo m_walljumpsettings.agentrunspeed, forcemode.velocitychange); 跳跃尚未结束，往最高点移动 if (jumpingtime&gt; 0f)
-        {
-            m_JumpTargetPos =
-                new Vector3(m_AgentRb.position.x,
-                    m_JumpStartingPos.y + m_WallJumpSettings.agentJumpHeight,
-                    m_AgentRb.position.z) + dirToGo;
-            MoveTowards(m_JumpTargetPos, m_AgentRb, m_WallJumpSettings.agentJumpVelocity,
-                m_WallJumpSettings.agentJumpVelocityMaxChange);
-        }
-        // 在空中下坠时添加一个下坠的力
-        if (!(jumpingTime &gt; 0f) &amp;&amp; !largeGrounded)
-        {
-            m_AgentRb.AddForce(
-                Vector3.down * fallingForce, ForceMode.Acceleration);
-        }
-        jumpingTime -= Time.fixedDeltaTime;
-    }
+        <span class="token keyword">var</span> dirToGo <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+        <span class="token keyword">var</span> rotateDir <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 四个离散输出的赋值</span>
+        <span class="token keyword">var</span> dirToGoForwardAction <span class="token operator">=</span> act<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> rotateDirAction <span class="token operator">=</span> act<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> dirToGoSideAction <span class="token operator">=</span> act<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> jumpAction <span class="token operator">=</span> act<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 根据离散输出计算响应的动作</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>dirToGoForwardAction <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            dirToGo <span class="token operator">=</span> <span class="token punctuation">(</span>largeGrounded <span class="token operator">?</span> <span class="token number">1f</span> <span class="token punctuation">:</span> <span class="token number">0.5f</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">1f</span> <span class="token operator">*</span> transform<span class="token punctuation">.</span>forward<span class="token punctuation">;</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>dirToGoForwardAction <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span>
+            dirToGo <span class="token operator">=</span> <span class="token punctuation">(</span>largeGrounded <span class="token operator">?</span> <span class="token number">1f</span> <span class="token punctuation">:</span> <span class="token number">0.5f</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">1f</span> <span class="token operator">*</span> transform<span class="token punctuation">.</span>forward<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>rotateDirAction <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            rotateDir <span class="token operator">=</span> transform<span class="token punctuation">.</span>up <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>rotateDirAction <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span>
+            rotateDir <span class="token operator">=</span> transform<span class="token punctuation">.</span>up <span class="token operator">*</span> <span class="token number">1f</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>dirToGoSideAction <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            dirToGo <span class="token operator">=</span> <span class="token punctuation">(</span>largeGrounded <span class="token operator">?</span> <span class="token number">1f</span> <span class="token punctuation">:</span> <span class="token number">0.5f</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">0.6f</span> <span class="token operator">*</span> transform<span class="token punctuation">.</span>right<span class="token punctuation">;</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>dirToGoSideAction <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span>
+            dirToGo <span class="token operator">=</span> <span class="token punctuation">(</span>largeGrounded <span class="token operator">?</span> <span class="token number">1f</span> <span class="token punctuation">:</span> <span class="token number">0.5f</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">0.6f</span> <span class="token operator">*</span> transform<span class="token punctuation">.</span>right<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>jumpAction <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>jumpingTime <span class="token operator">&lt;=</span> <span class="token number">0f</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> smallGrounded<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">Jump</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">// 执行动作</span>
+        transform<span class="token punctuation">.</span><span class="token function">Rotate</span><span class="token punctuation">(</span>rotateDir<span class="token punctuation">,</span> Time<span class="token punctuation">.</span>fixedDeltaTime <span class="token operator">*</span> <span class="token number">300f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        m_AgentRb<span class="token punctuation">.</span><span class="token function">AddForce</span><span class="token punctuation">(</span>dirToGo <span class="token operator">*</span> m_WallJumpSettings<span class="token punctuation">.</span>agentRunSpeed<span class="token punctuation">,</span>
+            ForceMode<span class="token punctuation">.</span>VelocityChange<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 跳跃尚未结束，往最高点移动</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>jumpingTime <span class="token operator">></span> <span class="token number">0f</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            m_JumpTargetPos <span class="token operator">=</span>
+                <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>m_AgentRb<span class="token punctuation">.</span>position<span class="token punctuation">.</span>x<span class="token punctuation">,</span>
+                    m_JumpStartingPos<span class="token punctuation">.</span>y <span class="token operator">+</span> m_WallJumpSettings<span class="token punctuation">.</span>agentJumpHeight<span class="token punctuation">,</span>
+                    m_AgentRb<span class="token punctuation">.</span>position<span class="token punctuation">.</span>z<span class="token punctuation">)</span> <span class="token operator">+</span> dirToGo<span class="token punctuation">;</span>
+            <span class="token function">MoveTowards</span><span class="token punctuation">(</span>m_JumpTargetPos<span class="token punctuation">,</span> m_AgentRb<span class="token punctuation">,</span> m_WallJumpSettings<span class="token punctuation">.</span>agentJumpVelocity<span class="token punctuation">,</span>
+                m_WallJumpSettings<span class="token punctuation">.</span>agentJumpVelocityMaxChange<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">// 在空中下坠时添加一个下坠的力</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>jumpingTime <span class="token operator">></span> <span class="token number">0f</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>largeGrounded<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            m_AgentRb<span class="token punctuation">.</span><span class="token function">AddForce</span><span class="token punctuation">(</span>
+                Vector3<span class="token punctuation">.</span>down <span class="token operator">*</span> fallingForce<span class="token punctuation">,</span> ForceMode<span class="token punctuation">.</span>Acceleration<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        jumpingTime <span class="token operator">-</span><span class="token operator">=</span> Time<span class="token punctuation">.</span>fixedDeltaTime<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public override void OnActionReceived(ActionBuffers actionBuffers)
-    {
-        MoveAgent(actionBuffers.DiscreteActions);
-        // 智能体或方块掉下平台，扣分，重开
-        if ((!Physics.Raycast(m_AgentRb.position, Vector3.down, 20))
-            || (!Physics.Raycast(m_ShortBlockRb.position, Vector3.down, 20)))
-        {
-            SetReward(-1f);
-            EndEpisode();
-            ResetBlock(m_ShortBlockRb);
-            StartCoroutine(
-                GoalScoredSwapGroundMaterial(m_WallJumpSettings.failMaterial, .5f));
-        }
-    }
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnActionReceived</span><span class="token punctuation">(</span>ActionBuffers actionBuffers<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">MoveAgent</span><span class="token punctuation">(</span>actionBuffers<span class="token punctuation">.</span>DiscreteActions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 智能体或方块掉下平台，扣分，重开</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">!</span>Physics<span class="token punctuation">.</span><span class="token function">Raycast</span><span class="token punctuation">(</span>m_AgentRb<span class="token punctuation">.</span>position<span class="token punctuation">,</span> Vector3<span class="token punctuation">.</span>down<span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token operator">!</span>Physics<span class="token punctuation">.</span><span class="token function">Raycast</span><span class="token punctuation">(</span>m_ShortBlockRb<span class="token punctuation">.</span>position<span class="token punctuation">,</span> Vector3<span class="token punctuation">.</span>down<span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">SetReward</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">EndEpisode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">ResetBlock</span><span class="token punctuation">(</span>m_ShortBlockRb<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">StartCoroutine</span><span class="token punctuation">(</span>
+                <span class="token function">GoalScoredSwapGroundMaterial</span><span class="token punctuation">(</span>m_WallJumpSettings<span class="token punctuation">.</span>failMaterial<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token number">5f</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    public override void Heuristic(in ActionBuffers actionsOut)
-    {
-        var discreteActionsOut = actionsOut.DiscreteActions;
-        if (Input.GetKey(KeyCode.D))
-        {
-            discreteActionsOut[1] = 2;
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            discreteActionsOut[0] = 1;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            discreteActionsOut[1] = 1;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            discreteActionsOut[0] = 2;
-        }
-        discreteActionsOut[3] = Input.GetKey(KeyCode.Space) ? 1 : 0;
-    }
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Heuristic</span><span class="token punctuation">(</span><span class="token keyword">in</span> ActionBuffers actionsOut<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> discreteActionsOut <span class="token operator">=</span> actionsOut<span class="token punctuation">.</span>DiscreteActions<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>D<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            discreteActionsOut<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>W<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            discreteActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>A<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            discreteActionsOut<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>S<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            discreteActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        discreteActionsOut<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>Space<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    // 接触到目标点，加分，重开
-    void OnTriggerStay(Collider col)
-    {
-        if (col.gameObject.CompareTag("goal") &amp;&amp; DoGroundCheck(true))
-        {
-            SetReward(1f);
-            EndEpisode();
-            StartCoroutine(
-                GoalScoredSwapGroundMaterial(m_WallJumpSettings.goalScoredMaterial, 2));
-        }
-    }
+    <span class="token comment" spellcheck="true">// 接触到目标点，加分，重开</span>
+    <span class="token keyword">void</span> <span class="token function">OnTriggerStay</span><span class="token punctuation">(</span>Collider col<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>col<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"goal"</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">DoGroundCheck</span><span class="token punctuation">(</span><span class="token keyword">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">SetReward</span><span class="token punctuation">(</span><span class="token number">1f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">EndEpisode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">StartCoroutine</span><span class="token punctuation">(</span>
+                <span class="token function">GoalScoredSwapGroundMaterial</span><span class="token punctuation">(</span>m_WallJumpSettings<span class="token punctuation">.</span>goalScoredMaterial<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    // 重置物块
-    void ResetBlock(Rigidbody blockRb)
-    {
-        blockRb.transform.position = GetRandomSpawnPos();
-        blockRb.velocity = Vector3.zero;
-        blockRb.angularVelocity = Vector3.zero;
-    }
+    <span class="token comment" spellcheck="true">// 重置物块</span>
+    <span class="token keyword">void</span> <span class="token function">ResetBlock</span><span class="token punctuation">(</span>Rigidbody blockRb<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        blockRb<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">=</span> <span class="token function">GetRandomSpawnPos</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        blockRb<span class="token punctuation">.</span>velocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+        blockRb<span class="token punctuation">.</span>angularVelocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    // 游戏开始时重置物块和智能体的位置
-    public override void OnEpisodeBegin()
-    {
-        ResetBlock(m_ShortBlockRb);
-        transform.localPosition = new Vector3(
-            18 * (Random.value - 0.5f), 1, -12);
-        m_Configuration = Random.Range(0, 5);
-        m_AgentRb.velocity = default(Vector3);
-    }
+    <span class="token comment" spellcheck="true">// 游戏开始时重置物块和智能体的位置</span>
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnEpisodeBegin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">ResetBlock</span><span class="token punctuation">(</span>m_ShortBlockRb<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        transform<span class="token punctuation">.</span>localPosition <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>
+            <span class="token number">18</span> <span class="token operator">*</span> <span class="token punctuation">(</span>Random<span class="token punctuation">.</span><span class="token keyword">value</span> <span class="token operator">-</span> <span class="token number">0.5f</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        m_Configuration <span class="token operator">=</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        m_AgentRb<span class="token punctuation">.</span>velocity <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">(</span>Vector3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    void FixedUpdate()
-    {
-        // 每个episode设定一次墙高度
-        if (m_Configuration != -1)
-        {
-            ConfigureAgent(m_Configuration);
-            m_Configuration = -1;
-        }
-    }
+    <span class="token keyword">void</span> <span class="token function">FixedUpdate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 每个episode设定一次墙高度</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>m_Configuration <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">ConfigureAgent</span><span class="token punctuation">(</span>m_Configuration<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            m_Configuration <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    // 设定墙高度，根据高度设定不同的模型
-    void ConfigureAgent(int config)
-    {
-        var localScale = wall.transform.localScale;
-        if (config == 0)
-        {
-            localScale = new Vector3(
-                localScale.x,
-                m_ResetParams.GetWithDefault("no_wall_height", 0),
-                localScale.z);
-            wall.transform.localScale = localScale;
-            // 设定对应配置文件的Behavior Name以及对应模型
-            SetModel(m_NoWallBehaviorName, noWallBrain);
-        }
-        else if (config == 1)
-        {
-            // 在没有课程训练（Curriculum Learning）的配置下，值默认为4
-            // 在有课程训练的配置下，墙的高度直接设为配置中的值，而这个值会随着训练而改变
-            localScale = new Vector3(
-                localScale.x,
-                m_ResetParams.GetWithDefault("small_wall_height", 4),
-                localScale.z);
-            wall.transform.localScale = localScale;
-            SetModel(m_SmallWallBehaviorName, smallWallBrain);
-        }
-        else
-        {
-            var height = m_ResetParams.GetWithDefault("big_wall_height", 8);
-            localScale = new Vector3(
-                localScale.x,
-                height,
-                localScale.z);
-            wall.transform.localScale = localScale;
-            SetModel(m_BigWallBehaviorName, bigWallBrain);
-        }
-    }
-}
-<!--=--></int></modeloverrider></renderer></collider></rigidbody></rigidbody></walljumpsettings></code></pre>
+    <span class="token comment" spellcheck="true">// 设定墙高度，根据高度设定不同的模型</span>
+    <span class="token keyword">void</span> <span class="token function">ConfigureAgent</span><span class="token punctuation">(</span><span class="token keyword">int</span> config<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> localScale <span class="token operator">=</span> wall<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>localScale<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>config <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            localScale <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>
+                localScale<span class="token punctuation">.</span>x<span class="token punctuation">,</span>
+                m_ResetParams<span class="token punctuation">.</span><span class="token function">GetWithDefault</span><span class="token punctuation">(</span><span class="token string">"no_wall_height"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                localScale<span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            wall<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>localScale <span class="token operator">=</span> localScale<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 设定对应配置文件的Behavior Name以及对应模型</span>
+            <span class="token function">SetModel</span><span class="token punctuation">(</span>m_NoWallBehaviorName<span class="token punctuation">,</span> noWallBrain<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>config <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 在没有课程训练（Curriculum Learning）的配置下，值默认为4</span>
+            <span class="token comment" spellcheck="true">// 在有课程训练的配置下，墙的高度直接设为配置中的值，而这个值会随着训练而改变</span>
+            localScale <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>
+                localScale<span class="token punctuation">.</span>x<span class="token punctuation">,</span>
+                m_ResetParams<span class="token punctuation">.</span><span class="token function">GetWithDefault</span><span class="token punctuation">(</span><span class="token string">"small_wall_height"</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                localScale<span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            wall<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>localScale <span class="token operator">=</span> localScale<span class="token punctuation">;</span>
+            <span class="token function">SetModel</span><span class="token punctuation">(</span>m_SmallWallBehaviorName<span class="token punctuation">,</span> smallWallBrain<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">var</span> height <span class="token operator">=</span> m_ResetParams<span class="token punctuation">.</span><span class="token function">GetWithDefault</span><span class="token punctuation">(</span><span class="token string">"big_wall_height"</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            localScale <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>
+                localScale<span class="token punctuation">.</span>x<span class="token punctuation">,</span>
+                height<span class="token punctuation">,</span>
+                localScale<span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            wall<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>localScale <span class="token operator">=</span> localScale<span class="token punctuation">;</span>
+            <span class="token function">SetModel</span><span class="token punctuation">(</span>m_BigWallBehaviorName<span class="token punctuation">,</span> bigWallBrain<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>注意这个案例终于用到了Override这个脚本，它的作用是在训练中也能通过SetModel(m_BigWallBehaviorName, bigWallBrain)替换模型，其中第一个参数是配置文件中的Behavior Name，第二个就是对应的模型文件。这样我们就能在不同的情况采用不同的模型了。</p>
 <h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>配置文件1：PPO算法，于以往不同，可以看到我们配置了两个神经网络，一个名字是BigWallJump，一个是SmallWallJump。这是因为我们的环境需要给智能体配置两个神经网络，根据不同的情况调用不同的神经网络分别进行学习。因为一个神经网络如果要做的事情太多往往需要的训练时间很长，很可能train不起来。如果分成几个任务，适时调用不同的神经网络，不仅可以加快训练速度，还能达到更好的效果。</p>
 <p>亲测这种算法在高墙时无法收敛，没办法利用方块，平均得分-0.6。</p>
@@ -1149,6 +1158,10 @@ public class WallJumpAgent : Agent
 <p>亲测这种算法最终平均得分0.7，存在少量完不成任务的情况，但效果比上面两种要好得多，可以再对课程进行细分来提高得分。</p>
 <p>训练命令：</p>
 <pre class=" language-cmd"><code class="language-cmd">mlagents-learn config/ppo/WallJump.yaml --run-id=WallJump --force</code></pre>
+<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><img src="/2021/11/09/ml-agents-an-li-zhi-walljump/6.gif" class>
+
+
+
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>相对于以前的案例，这个案例的新颖之处在于：</p>
 <ol>
 <li>跳跃的控制，设定了两个触地判定，在下落时给加速度（我的预想是跳跃时给一个向上速度，然后交给物理引擎）</li>
@@ -1346,7 +1359,7 @@ public class WallJumpAgent : Agent
     <div id="rewardModal" class="modal">
         <div class="modal-content">
             <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <h4 class="reward-title">您的赏识是我前进的动力</h4>
             <div class="reward-content">
                 <div class="reward-tabs">
                     <ul class="tabs row">
@@ -1664,8 +1677,7 @@ public class WallJumpAgent : Agent
                 <a href="/2021/11/12/ml-agents-an-li-zhi-shi-wu-shou-ji-zhe/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="ML-Agents案例之食物收集者">
+                        <img src="/images/FoodCollector.gif" class="responsive-img" alt="ML-Agents案例之食物收集者">
                         
                         <span class="card-title">ML-Agents案例之食物收集者</span>
                     </div>
@@ -1717,8 +1729,7 @@ public class WallJumpAgent : Agent
                 <a href="/2021/11/05/ml-agents-an-li-zhi-tui-xiang-zi-you-xi/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="ML-Agents案例之推箱子游戏">
+                        <img src="/images/PushBlockCollab.gif" class="responsive-img" alt="ML-Agents案例之推箱子游戏">
                         
                         <span class="card-title">ML-Agents案例之推箱子游戏</span>
                     </div>
@@ -1991,7 +2002,7 @@ public class WallJumpAgent : Agent
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">236.5k</span>&nbsp;字
+                class="white-color">241.3k</span>&nbsp;字
             
             
             
@@ -2061,6 +2072,10 @@ public class WallJumpAgent : Agent
         <div class="col s12 m4 l4 social-link social-statis">
 
 
+    <a href="mailto:1121452406@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
 
 
 
@@ -2074,6 +2089,10 @@ public class WallJumpAgent : Agent
 
 
 
+
+    <a href="https://blog.csdn.net/tianjuewudi" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://blog.csdn.net/tianjuewudi" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
 
 
 

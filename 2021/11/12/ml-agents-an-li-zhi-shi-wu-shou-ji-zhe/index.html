@@ -17,7 +17,7 @@
 
 
     <title>ML-Agents案例之食物收集者 | 微笑紫瞳星</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/MyLogo.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -53,7 +53,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/MyLogo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">微笑紫瞳星</span>
                 </a>
@@ -152,7 +152,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/MyLogo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">微笑紫瞳星</div>
         <div class="logo-desc">
@@ -322,7 +322,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/FoodCollector.gif')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -479,7 +479,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-11-13
+                    2021-12-16
                 </div>
                 
 
@@ -524,334 +524,334 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121234799">ML-Agents案例之Crawler</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121250025">ML-Agents案例之推箱子游戏</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121269518">ML-Agents案例之跳墙游戏</a></p>
-<h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><img src="/2021/11/12/ml-agents-an-li-zhi-shi-wu-shou-ji-zhe/1.png" class="">
+<h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><img src="/2021/11/12/ml-agents-an-li-zhi-shi-wu-shou-ji-zhe/1.png" class>
 
 <p>环境中存在有多个智能体，他们的任务是收集尽可能多的绿色食物球，并避免碰到红色球：碰到绿色球奖励+1，碰到红色球-1，此外，智能体之间可以通过发射射线冻结其他智能体，以让自己吃到更多的食物球，达到增加自己分数的目的。</p>
 <p>观察空间：使用了网格传感器（Grid Sensor），这个传感器具体说明参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121250025">ML-Agents案例之推箱子游戏</a></p>
 <p>在本案例中传感器直接挂载在智能体本身，z轴（前后方向）网格数为40，x轴（左右方向）网格数为40，y轴（上下方向）网格数为1，检测的标签有，食物，坏食物，其他智能体，被冻结的智能体，墙壁，加上什么都没观测到，维度为40 * 40 * 6 = 960个观察维度。</p>
-<img src="/2021/11/12/ml-agents-an-li-zhi-shi-wu-shou-ji-zhe/2.png" class="">
+<img src="/2021/11/12/ml-agents-an-li-zhi-shi-wu-shou-ji-zhe/2.png" class>
 
-<img src="/2021/11/12/ml-agents-an-li-zhi-shi-wu-shou-ji-zhe/3.png" class="">
+<img src="/2021/11/12/ml-agents-an-li-zhi-shi-wu-shou-ji-zhe/3.png" class>
 
 <p>动作空间：3个连续动作输出，对应于前后运动，左右运动和旋转。1个离散输出，对应于是否发生激光。</p>
 <h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><h3 id="食物生成"><a href="#食物生成" class="headerlink" title="食物生成"></a>食物生成</h3><p>控制食物生成的脚本，挂载在空物体上，这个脚本不会自己运作，需要在智能体挂载的脚本上调用。</p>
-<pre class=" language-c#"><code class="language-c#">using UnityEngine;
-using Unity.MLAgentsExamples;
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> UnityEngine<span class="token punctuation">;</span>
+<span class="token keyword">using</span> Unity<span class="token punctuation">.</span>MLAgentsExamples<span class="token punctuation">;</span>
 
-public class FoodCollectorArea : Area
-{
-    public GameObject food;
-    public GameObject badFood;
-    public int numFood;
-    public int numBadFood;
-    public bool respawnFood;
-    public float range;
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FoodCollectorArea</span> <span class="token punctuation">:</span> Area
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> GameObject food<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> GameObject badFood<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> numFood<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> numBadFood<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">bool</span> respawnFood<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">float</span> range<span class="token punctuation">;</span>
 
-    // 生成食物
-    void CreateFood(int num, GameObject type)
-    {
-        for (int i = 0; i &lt; num; i++)
-        {
-            GameObject f = Instantiate(type, new Vector3(Random.Range(-range, range), 1f,
-                Random.Range(-range, range)) + transform.position,
-                Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 90f)));
-            f.GetComponent<foodlogic>().respawn = respawnFood;
-            f.GetComponent<foodlogic>().myArea = this;
-        }
-    }
-    // 重置区域，随机化智能体们的位置，并生成两种食物
-    public void ResetFoodArea(GameObject[] agents)
-    {
-        foreach (GameObject agent in agents)
-        {
-            if (agent.transform.parent == gameObject.transform)
-            {
-                agent.transform.position = new Vector3(Random.Range(-range, range), 2f,
-                    Random.Range(-range, range))
-                    + transform.position;
-                agent.transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
-            }
-        }
+    <span class="token comment" spellcheck="true">// 生成食物</span>
+    <span class="token keyword">void</span> <span class="token function">CreateFood</span><span class="token punctuation">(</span><span class="token keyword">int</span> num<span class="token punctuation">,</span> GameObject type<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> num<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            GameObject f <span class="token operator">=</span> <span class="token function">Instantiate</span><span class="token punctuation">(</span>type<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>range<span class="token punctuation">,</span> range<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1f</span><span class="token punctuation">,</span>
+                Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>range<span class="token punctuation">,</span> range<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">,</span>
+                Quaternion<span class="token punctuation">.</span><span class="token function">Euler</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">,</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">,</span> <span class="token number">360f</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">90f</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            f<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>FoodLogic<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>respawn <span class="token operator">=</span> respawnFood<span class="token punctuation">;</span>
+            f<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>FoodLogic<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>myArea <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 重置区域，随机化智能体们的位置，并生成两种食物</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">ResetFoodArea</span><span class="token punctuation">(</span>GameObject<span class="token punctuation">[</span><span class="token punctuation">]</span> agents<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">foreach</span> <span class="token punctuation">(</span>GameObject agent <span class="token keyword">in</span> agents<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>parent <span class="token operator">==</span> gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>range<span class="token punctuation">,</span> range<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2f</span><span class="token punctuation">,</span>
+                    Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>range<span class="token punctuation">,</span> range<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token operator">+</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+                agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation <span class="token operator">=</span> Quaternion<span class="token punctuation">.</span><span class="token function">Euler</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">,</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">360</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
 
-        CreateFood(numFood, food);
-        CreateFood(numBadFood, badFood);
-    }
+        <span class="token function">CreateFood</span><span class="token punctuation">(</span>numFood<span class="token punctuation">,</span> food<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">CreateFood</span><span class="token punctuation">(</span>numBadFood<span class="token punctuation">,</span> badFood<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public override void ResetArea()
-    {
-    }
-}
-</foodlogic></foodlogic></code></pre>
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">ResetArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <h3 id="食物被吃掉的处理"><a href="#食物被吃掉的处理" class="headerlink" title="食物被吃掉的处理"></a>食物被吃掉的处理</h3><p>挂载在食物上的脚本，同样需要调用才能起作用：</p>
-<pre class=" language-c#"><code class="language-c#">using UnityEngine;
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> UnityEngine<span class="token punctuation">;</span>
 
-public class FoodLogic : MonoBehaviour
-{
-    public bool respawn;
-    public FoodCollectorArea myArea;
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FoodLogic</span> <span class="token punctuation">:</span> MonoBehaviour
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">bool</span> respawn<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> FoodCollectorArea myArea<span class="token punctuation">;</span>
 
-    // 被吃掉后的两种选择，一个是重新随机位置，一个是直接销毁
-    public void OnEaten()
-    {
-        if (respawn)
-        {
-            transform.position = new Vector3(Random.Range(-myArea.range, myArea.range),
-                3f,
-                Random.Range(-myArea.range, myArea.range)) + myArea.transform.position;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-}</code></pre>
+    <span class="token comment" spellcheck="true">// 被吃掉后的两种选择，一个是重新随机位置，一个是直接销毁</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">OnEaten</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>respawn<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            transform<span class="token punctuation">.</span>position <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>myArea<span class="token punctuation">.</span>range<span class="token punctuation">,</span> myArea<span class="token punctuation">.</span>range<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token number">3f</span><span class="token punctuation">,</span>
+                Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>myArea<span class="token punctuation">.</span>range<span class="token punctuation">,</span> myArea<span class="token punctuation">.</span>range<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> myArea<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">Destroy</span><span class="token punctuation">(</span>gameObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <h3 id="智能体主文件FoodCollectorAgent-cs："><a href="#智能体主文件FoodCollectorAgent-cs：" class="headerlink" title="智能体主文件FoodCollectorAgent.cs："></a>智能体主文件FoodCollectorAgent.cs：</h3><p>初始化：</p>
-<pre class=" language-c#"><code class="language-c#">public override void Initialize()
-{
-    m_AgentRb = GetComponent<rigidbody>();
-    m_MyArea = area.GetComponent<foodcollectorarea>();
-    m_FoodCollecterSettings = FindObjectOfType<foodcollectorsettings>();
-    // 从配置文件中获取参数
-    m_ResetParams = Academy.Instance.EnvironmentParameters;
-    // 设置参数
-    SetResetParameters();
-}
-// 激光长度
-public void SetLaserLengths()
-{
-    m_LaserLength = m_ResetParams.GetWithDefault("laser_length", 1.0f);
-}
-// 设置智能体体积大小
-public void SetAgentScale()
-{
-    float agentScale = m_ResetParams.GetWithDefault("agent_scale", 1.0f);
-    gameObject.transform.localScale = new Vector3(agentScale, agentScale, agentScale);
-}
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Initialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_AgentRb <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Rigidbody<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_MyArea <span class="token operator">=</span> area<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>FoodCollectorArea<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_FoodCollecterSettings <span class="token operator">=</span> <span class="token generic-method function">FindObjectOfType<span class="token punctuation">&lt;</span>FoodCollectorSettings<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 从配置文件中获取参数</span>
+    m_ResetParams <span class="token operator">=</span> Academy<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span>EnvironmentParameters<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 设置参数</span>
+    <span class="token function">SetResetParameters</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 激光长度</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">SetLaserLengths</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_LaserLength <span class="token operator">=</span> m_ResetParams<span class="token punctuation">.</span><span class="token function">GetWithDefault</span><span class="token punctuation">(</span><span class="token string">"laser_length"</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 设置智能体体积大小</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">SetAgentScale</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> agentScale <span class="token operator">=</span> m_ResetParams<span class="token punctuation">.</span><span class="token function">GetWithDefault</span><span class="token punctuation">(</span><span class="token string">"agent_scale"</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>localScale <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>agentScale<span class="token punctuation">,</span> agentScale<span class="token punctuation">,</span> agentScale<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-public void SetResetParameters()
-{
-    SetLaserLengths();
-    SetAgentScale();
-}</foodcollectorsettings></foodcollectorarea></rigidbody></code></pre>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">SetResetParameters</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">SetLaserLengths</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">SetAgentScale</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>观察输入（可以通过设置useVectorObs和useVectorFrozenFlag）来配置是否输入，在案例中没有选择开启这两项输入：</p>
-<pre class=" language-c#"><code class="language-c#">public override void CollectObservations(VectorSensor sensor)
-{
-    if (useVectorObs)
-    {
-        var localVelocity = transform.InverseTransformDirection(m_AgentRb.velocity);
-        // 输入水平方向的两个速度
-        sensor.AddObservation(localVelocity.x);
-        sensor.AddObservation(localVelocity.z);
-        // 输入是否冻结和是否发射
-        sensor.AddObservation(m_Frozen);
-        sensor.AddObservation(m_Shoot);
-    }
-    else if (useVectorFrozenFlag)
-    {
-        // 输入是否冻结和是否发射
-        sensor.AddObservation(m_Frozen);
-    }
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">CollectObservations</span><span class="token punctuation">(</span>VectorSensor sensor<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>useVectorObs<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> localVelocity <span class="token operator">=</span> transform<span class="token punctuation">.</span><span class="token function">InverseTransformDirection</span><span class="token punctuation">(</span>m_AgentRb<span class="token punctuation">.</span>velocity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 输入水平方向的两个速度</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>localVelocity<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>localVelocity<span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 输入是否冻结和是否发射</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>m_Frozen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>m_Shoot<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>useVectorFrozenFlag<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 输入是否冻结和是否发射</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>m_Frozen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>动作输出：</p>
-<pre class=" language-c#"><code class="language-c#">// 执行输出的主函数，里面的内容都封装到MoveAgent了
-public override void OnActionReceived(ActionBuffers actionBuffers)
-{
-    MoveAgent(actionBuffers);
-}
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// 执行输出的主函数，里面的内容都封装到MoveAgent了</span>
+<span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnActionReceived</span><span class="token punctuation">(</span>ActionBuffers actionBuffers<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">MoveAgent</span><span class="token punctuation">(</span>actionBuffers<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-public void MoveAgent(ActionBuffers actionBuffers)
-{
-    m_Shoot = false;
-    // 超过冻结时间，解冻
-    if (Time.time &gt; m_FrozenTime + 4f &amp;&amp; m_Frozen)
-    {
-        Unfreeze();
-    }
-    // 超过被毒时间，解除毒素；超过满意时间，变为正常状态
-    if (Time.time &gt; m_EffectTime + 0.5f)
-    {
-        if (m_Poisoned)
-        {
-            Unpoison();
-        }
-        if (m_Satiated)
-        {
-            Unsatiate();
-        }
-    }
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">MoveAgent</span><span class="token punctuation">(</span>ActionBuffers actionBuffers<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_Shoot <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 超过冻结时间，解冻</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Time<span class="token punctuation">.</span>time <span class="token operator">></span> m_FrozenTime <span class="token operator">+</span> <span class="token number">4f</span> <span class="token operator">&amp;&amp;</span> m_Frozen<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">Unfreeze</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 超过被毒时间，解除毒素；超过满意时间，变为正常状态</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Time<span class="token punctuation">.</span>time <span class="token operator">></span> m_EffectTime <span class="token operator">+</span> <span class="token number">0.5f</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>m_Poisoned<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">Unpoison</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>m_Satiated<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">Unsatiate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    var dirToGo = Vector3.zero;
-    var rotateDir = Vector3.zero;
+    <span class="token keyword">var</span> dirToGo <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> rotateDir <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
 
-    var continuousActions = actionBuffers.ContinuousActions;
-    var discreteActions = actionBuffers.DiscreteActions;
+    <span class="token keyword">var</span> continuousActions <span class="token operator">=</span> actionBuffers<span class="token punctuation">.</span>ContinuousActions<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> discreteActions <span class="token operator">=</span> actionBuffers<span class="token punctuation">.</span>DiscreteActions<span class="token punctuation">;</span>
 
-    // 没有冻结的时候才能执行动作
-    if (!m_Frozen)
-    {
-        // 获取三个连续输出
-        var forward = Mathf.Clamp(continuousActions[0], -1f, 1f);
-        var right = Mathf.Clamp(continuousActions[1], -1f, 1f);
-        var rotate = Mathf.Clamp(continuousActions[2], -1f, 1f);
+    <span class="token comment" spellcheck="true">// 没有冻结的时候才能执行动作</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>m_Frozen<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 获取三个连续输出</span>
+        <span class="token keyword">var</span> forward <span class="token operator">=</span> Mathf<span class="token punctuation">.</span><span class="token function">Clamp</span><span class="token punctuation">(</span>continuousActions<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">,</span> <span class="token number">1f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> right <span class="token operator">=</span> Mathf<span class="token punctuation">.</span><span class="token function">Clamp</span><span class="token punctuation">(</span>continuousActions<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">,</span> <span class="token number">1f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> rotate <span class="token operator">=</span> Mathf<span class="token punctuation">.</span><span class="token function">Clamp</span><span class="token punctuation">(</span>continuousActions<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">,</span> <span class="token number">1f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        dirToGo = transform.forward * forward;
-        dirToGo += transform.right * right;
-        rotateDir = -transform.up * rotate;
+        dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>forward <span class="token operator">*</span> forward<span class="token punctuation">;</span>
+        dirToGo <span class="token operator">+</span><span class="token operator">=</span> transform<span class="token punctuation">.</span>right <span class="token operator">*</span> right<span class="token punctuation">;</span>
+        rotateDir <span class="token operator">=</span> <span class="token operator">-</span>transform<span class="token punctuation">.</span>up <span class="token operator">*</span> rotate<span class="token punctuation">;</span>
 
-        // 获取一个离散输出
-        var shootCommand = discreteActions[0] &gt; 0;
-        if (shootCommand)
-        {
-            // 射击时减速
-            m_Shoot = true;
-            dirToGo *= 0.5f;
-            m_AgentRb.velocity *= 0.75f;
-        }
-        // 执行移动
-        m_AgentRb.AddForce(dirToGo * moveSpeed, ForceMode.VelocityChange);
-        transform.Rotate(rotateDir, Time.fixedDeltaTime * turnSpeed);
-    }
+        <span class="token comment" spellcheck="true">// 获取一个离散输出</span>
+        <span class="token keyword">var</span> shootCommand <span class="token operator">=</span> discreteActions<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>shootCommand<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 射击时减速</span>
+            m_Shoot <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+            dirToGo <span class="token operator">*</span><span class="token operator">=</span> <span class="token number">0.5f</span><span class="token punctuation">;</span>
+            m_AgentRb<span class="token punctuation">.</span>velocity <span class="token operator">*</span><span class="token operator">=</span> <span class="token number">0.75f</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">// 执行移动</span>
+        m_AgentRb<span class="token punctuation">.</span><span class="token function">AddForce</span><span class="token punctuation">(</span>dirToGo <span class="token operator">*</span> moveSpeed<span class="token punctuation">,</span> ForceMode<span class="token punctuation">.</span>VelocityChange<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        transform<span class="token punctuation">.</span><span class="token function">Rotate</span><span class="token punctuation">(</span>rotateDir<span class="token punctuation">,</span> Time<span class="token punctuation">.</span>fixedDeltaTime <span class="token operator">*</span> turnSpeed<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    // 超过一定速度需要减速
-    if (m_AgentRb.velocity.sqrMagnitude &gt; 25f) // slow it down
-    {
-        m_AgentRb.velocity *= 0.95f;
-    }
+    <span class="token comment" spellcheck="true">// 超过一定速度需要减速</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>m_AgentRb<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>sqrMagnitude <span class="token operator">></span> <span class="token number">25f</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// slow it down</span>
+    <span class="token punctuation">{</span>
+        m_AgentRb<span class="token punctuation">.</span>velocity <span class="token operator">*</span><span class="token operator">=</span> <span class="token number">0.95f</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    // 执行射击逻辑
-    if (m_Shoot)
-    {
-        var myTransform = transform;
-        myLaser.transform.localScale = new Vector3(1f, 1f, m_LaserLength);
-        var rayDir = 25.0f * myTransform.forward;
-        // 绘制射线，参数为起始位置，长度向量，颜色，持续时间，能否被遮挡
-        Debug.DrawRay(myTransform.position, rayDir, Color.red, 0f, true);
-        RaycastHit hit;
-        // 发出球状射线，参数为起始位置，球半径，距离，碰撞到的物体，距离
-        if (Physics.SphereCast(transform.position, 2f, rayDir, out hit, 25f))
-        {
-            // 射线碰到其他智能体，其他智能体会被冻结
-            if (hit.collider.gameObject.CompareTag("agent"))
-            {
-                hit.collider.gameObject.GetComponent<foodcollectoragent>().Freeze();
-            }
-        }
-    }
-    else
-    {
-        myLaser.transform.localScale = new Vector3(0f, 0f, 0f);
-    }
-}
-// 被冻结的逻辑，修改标签，计算时间，替换材质
-void Freeze()
-{
-    gameObject.tag = "frozenAgent";
-    m_Frozen = true;
-    m_FrozenTime = Time.time;
-    gameObject.GetComponentInChildren<renderer>().material = frozenMaterial;
-}
-// 解冻的逻辑
-void Unfreeze()
-{
-    m_Frozen = false;
-    gameObject.tag = "agent";
-    gameObject.GetComponentInChildren<renderer>().material = normalMaterial;
-}
+    <span class="token comment" spellcheck="true">// 执行射击逻辑</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>m_Shoot<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> myTransform <span class="token operator">=</span> transform<span class="token punctuation">;</span>
+        myLaser<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>localScale <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">1f</span><span class="token punctuation">,</span> <span class="token number">1f</span><span class="token punctuation">,</span> m_LaserLength<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> rayDir <span class="token operator">=</span> <span class="token number">25.0f</span> <span class="token operator">*</span> myTransform<span class="token punctuation">.</span>forward<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 绘制射线，参数为起始位置，长度向量，颜色，持续时间，能否被遮挡</span>
+        Debug<span class="token punctuation">.</span><span class="token function">DrawRay</span><span class="token punctuation">(</span>myTransform<span class="token punctuation">.</span>position<span class="token punctuation">,</span> rayDir<span class="token punctuation">,</span> Color<span class="token punctuation">.</span>red<span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">,</span> <span class="token keyword">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        RaycastHit hit<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 发出球状射线，参数为起始位置，球半径，距离，碰撞到的物体，距离</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>Physics<span class="token punctuation">.</span><span class="token function">SphereCast</span><span class="token punctuation">(</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">,</span> <span class="token number">2f</span><span class="token punctuation">,</span> rayDir<span class="token punctuation">,</span> <span class="token keyword">out</span> hit<span class="token punctuation">,</span> <span class="token number">25f</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 射线碰到其他智能体，其他智能体会被冻结</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>hit<span class="token punctuation">.</span>collider<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"agent"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                hit<span class="token punctuation">.</span>collider<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>FoodCollectorAgent<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Freeze</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        myLaser<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>localScale <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 被冻结的逻辑，修改标签，计算时间，替换材质</span>
+<span class="token keyword">void</span> <span class="token function">Freeze</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    gameObject<span class="token punctuation">.</span>tag <span class="token operator">=</span> <span class="token string">"frozenAgent"</span><span class="token punctuation">;</span>
+    m_Frozen <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+    m_FrozenTime <span class="token operator">=</span> Time<span class="token punctuation">.</span>time<span class="token punctuation">;</span>
+    gameObject<span class="token punctuation">.</span><span class="token generic-method function">GetComponentInChildren<span class="token punctuation">&lt;</span>Renderer<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>material <span class="token operator">=</span> frozenMaterial<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 解冻的逻辑</span>
+<span class="token keyword">void</span> <span class="token function">Unfreeze</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_Frozen <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+    gameObject<span class="token punctuation">.</span>tag <span class="token operator">=</span> <span class="token string">"agent"</span><span class="token punctuation">;</span>
+    gameObject<span class="token punctuation">.</span><span class="token generic-method function">GetComponentInChildren<span class="token punctuation">&lt;</span>Renderer<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>material <span class="token operator">=</span> normalMaterial<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-// 吃到坏食物的状态
-void Poison()
-{
-    m_Poisoned = true;
-    m_EffectTime = Time.time;
-    gameObject.GetComponentInChildren<renderer>().material = badMaterial;
-}
-// 解毒
-void Unpoison()
-{
-    m_Poisoned = false;
-    gameObject.GetComponentInChildren<renderer>().material = normalMaterial;
-}
-// 吃到好食物的状态
-void Satiate()
-{
-    m_Satiated = true;
-    m_EffectTime = Time.time;
-    gameObject.GetComponentInChildren<renderer>().material = goodMaterial;
-}
-// 好状态消失
-void Unsatiate()
-{
-    m_Satiated = false;
-    gameObject.GetComponentInChildren<renderer>().material = normalMaterial;
-}</renderer></renderer></renderer></renderer></renderer></renderer></foodcollectoragent></code></pre>
+<span class="token comment" spellcheck="true">// 吃到坏食物的状态</span>
+<span class="token keyword">void</span> <span class="token function">Poison</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_Poisoned <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+    m_EffectTime <span class="token operator">=</span> Time<span class="token punctuation">.</span>time<span class="token punctuation">;</span>
+    gameObject<span class="token punctuation">.</span><span class="token generic-method function">GetComponentInChildren<span class="token punctuation">&lt;</span>Renderer<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>material <span class="token operator">=</span> badMaterial<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 解毒</span>
+<span class="token keyword">void</span> <span class="token function">Unpoison</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_Poisoned <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+    gameObject<span class="token punctuation">.</span><span class="token generic-method function">GetComponentInChildren<span class="token punctuation">&lt;</span>Renderer<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>material <span class="token operator">=</span> normalMaterial<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 吃到好食物的状态</span>
+<span class="token keyword">void</span> <span class="token function">Satiate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_Satiated <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+    m_EffectTime <span class="token operator">=</span> Time<span class="token punctuation">.</span>time<span class="token punctuation">;</span>
+    gameObject<span class="token punctuation">.</span><span class="token generic-method function">GetComponentInChildren<span class="token punctuation">&lt;</span>Renderer<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>material <span class="token operator">=</span> goodMaterial<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 好状态消失</span>
+<span class="token keyword">void</span> <span class="token function">Unsatiate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_Satiated <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+    gameObject<span class="token punctuation">.</span><span class="token generic-method function">GetComponentInChildren<span class="token punctuation">&lt;</span>Renderer<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>material <span class="token operator">=</span> normalMaterial<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>和食物碰撞的逻辑：</p>
-<pre class=" language-c#"><code class="language-c#">void OnCollisionEnter(Collision collision)
-{
-    // 吃到好食物，奖励一分，进入满意状态
-    if (collision.gameObject.CompareTag("food"))
-    {
-        Satiate();
-        collision.gameObject.GetComponent<foodlogic>().OnEaten();
-        AddReward(1f);
-        if (contribute)
-        {
-            m_FoodCollecterSettings.totalScore += 1;
-        }
-    }
-    // 吃到坏食物，扣除1分，进入中毒状态
-    if (collision.gameObject.CompareTag("badFood"))
-    {
-        Poison();
-        collision.gameObject.GetComponent<foodlogic>().OnEaten();
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">OnCollisionEnter</span><span class="token punctuation">(</span>Collision collision<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 吃到好食物，奖励一分，进入满意状态</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>collision<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"food"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">Satiate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        collision<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>FoodLogic<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">OnEaten</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">AddReward</span><span class="token punctuation">(</span><span class="token number">1f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>contribute<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            m_FoodCollecterSettings<span class="token punctuation">.</span>totalScore <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 吃到坏食物，扣除1分，进入中毒状态</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>collision<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"badFood"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">Poison</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        collision<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>FoodLogic<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">OnEaten</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        AddReward(-1f);
-        if (contribute)
-        {
-            m_FoodCollecterSettings.totalScore -= 1;
-        }
-    }
-}</foodlogic></foodlogic></code></pre>
+        <span class="token function">AddReward</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>contribute<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            m_FoodCollecterSettings<span class="token punctuation">.</span>totalScore <span class="token operator">-</span><span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>一轮游戏开始执行的逻辑：</p>
-<pre class=" language-c#"><code class="language-c#">public override void OnEpisodeBegin()
-{
-    // 消除所有异常状态
-    Unfreeze();
-    Unpoison();
-    Unsatiate();
-    m_Shoot = false;
-    // 速度位置都归零
-    m_AgentRb.velocity = Vector3.zero;
-    myLaser.transform.localScale = new Vector3(0f, 0f, 0f);
-    transform.position = new Vector3(Random.Range(-m_MyArea.range, m_MyArea.range),
-                                     2f, Random.Range(-m_MyArea.range, m_MyArea.range))
-        + area.transform.position;
-    transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
-    // 重新设置参数，包括激光长短，智能体大小
-    SetResetParameters();
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnEpisodeBegin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 消除所有异常状态</span>
+    <span class="token function">Unfreeze</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">Unpoison</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">Unsatiate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_Shoot <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 速度位置都归零</span>
+    m_AgentRb<span class="token punctuation">.</span>velocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+    myLaser<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>localScale <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    transform<span class="token punctuation">.</span>position <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>m_MyArea<span class="token punctuation">.</span>range<span class="token punctuation">,</span> m_MyArea<span class="token punctuation">.</span>range<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                     <span class="token number">2f</span><span class="token punctuation">,</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>m_MyArea<span class="token punctuation">.</span>range<span class="token punctuation">,</span> m_MyArea<span class="token punctuation">.</span>range<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token operator">+</span> area<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+    transform<span class="token punctuation">.</span>rotation <span class="token operator">=</span> Quaternion<span class="token punctuation">.</span><span class="token function">Euler</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">,</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">360</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 重新设置参数，包括激光长短，智能体大小</span>
+    <span class="token function">SetResetParameters</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>可以通过以下代码自己控制智能体的输出：</p>
-<pre class=" language-c#"><code class="language-c#"> public override void Heuristic(in ActionBuffers actionsOut)
- {
-     var continuousActionsOut = actionsOut.ContinuousActions;
-     if (Input.GetKey(KeyCode.D))
-     {
-         continuousActionsOut[2] = 1;
-     }
-     if (Input.GetKey(KeyCode.W))
-     {
-         continuousActionsOut[0] = 1;
-     }
-     if (Input.GetKey(KeyCode.A))
-     {
-         continuousActionsOut[2] = -1;
-     }
-     if (Input.GetKey(KeyCode.S))
-     {
-         continuousActionsOut[0] = -1;
-     }
-     var discreteActionsOut = actionsOut.DiscreteActions;
-     discreteActionsOut[0] = Input.GetKey(KeyCode.Space) ? 1 : 0;
- }</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"> <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Heuristic</span><span class="token punctuation">(</span><span class="token keyword">in</span> ActionBuffers actionsOut<span class="token punctuation">)</span>
+ <span class="token punctuation">{</span>
+     <span class="token keyword">var</span> continuousActionsOut <span class="token operator">=</span> actionsOut<span class="token punctuation">.</span>ContinuousActions<span class="token punctuation">;</span>
+     <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>D<span class="token punctuation">)</span><span class="token punctuation">)</span>
+     <span class="token punctuation">{</span>
+         continuousActionsOut<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+     <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>W<span class="token punctuation">)</span><span class="token punctuation">)</span>
+     <span class="token punctuation">{</span>
+         continuousActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+     <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>A<span class="token punctuation">)</span><span class="token punctuation">)</span>
+     <span class="token punctuation">{</span>
+         continuousActionsOut<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+     <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>S<span class="token punctuation">)</span><span class="token punctuation">)</span>
+     <span class="token punctuation">{</span>
+         continuousActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+     <span class="token keyword">var</span> discreteActionsOut <span class="token operator">=</span> actionsOut<span class="token punctuation">.</span>DiscreteActions<span class="token punctuation">;</span>
+     discreteActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>Space<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span></code></pre>
 <h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>配置文件是普通的PPO和SAC配置：</p>
 <pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
   <span class="token key atrule">GridFoodCollector</span><span class="token punctuation">:</span>
@@ -907,6 +907,12 @@ void Unsatiate()
     <span class="token key atrule">time_horizon</span><span class="token punctuation">:</span> <span class="token number">64</span>
     <span class="token key atrule">summary_freq</span><span class="token punctuation">:</span> <span class="token number">60000</span>
     <span class="token key atrule">threaded</span><span class="token punctuation">:</span> <span class="token boolean important">false</span></code></pre>
+<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><img src="/2021/11/12/ml-agents-an-li-zhi-shi-wu-shou-ji-zhe/4.gif" class>
+
+
+
+
+
 <h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>本案例虽然场景中存在多个智能体，但它们彼此竞争，所以是单智能体案例。相比于前面的案例，新颖之处在于拥有攻击手段，能够发射射线干扰对手，如何利用攻击手段也称为了智能体进化的课题。</p>
 
                 
@@ -1099,7 +1105,7 @@ void Unsatiate()
     <div id="rewardModal" class="modal">
         <div class="modal-content">
             <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <h4 class="reward-title">您的赏识是我前进的动力</h4>
             <div class="reward-content">
                 <div class="reward-tabs">
                     <ul class="tabs row">
@@ -1469,8 +1475,7 @@ void Unsatiate()
                 <a href="/2021/11/09/ml-agents-an-li-zhi-walljump/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="ML-Agents案例之WallJump">
+                        <img src="/images/WallJump.gif" class="responsive-img" alt="ML-Agents案例之WallJump">
                         
                         <span class="card-title">ML-Agents案例之WallJump</span>
                     </div>
@@ -1743,7 +1748,7 @@ void Unsatiate()
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">236.5k</span>&nbsp;字
+                class="white-color">241.3k</span>&nbsp;字
             
             
             
@@ -1813,6 +1818,10 @@ void Unsatiate()
         <div class="col s12 m4 l4 social-link social-statis">
 
 
+    <a href="mailto:1121452406@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
 
 
 
@@ -1826,6 +1835,10 @@ void Unsatiate()
 
 
 
+
+    <a href="https://blog.csdn.net/tianjuewudi" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://blog.csdn.net/tianjuewudi" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
 
 
 

@@ -17,7 +17,7 @@
 
 
     <title>ML-Agents命令及配置大全 | 微笑紫瞳星</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/MyLogo.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -53,7 +53,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/MyLogo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">微笑紫瞳星</span>
                 </a>
@@ -152,7 +152,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/MyLogo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">微笑紫瞳星</div>
         <div class="logo-desc">
@@ -479,21 +479,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-11-19
+                    2021-12-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5.7k
+                    6.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    21 分
+                    23 分
                 </div>
                 
 
@@ -786,7 +786,7 @@
 <h2 id="环境参数"><a href="#环境参数" class="headerlink" title="环境参数"></a>环境参数</h2><p>为了<strong>控制环境参数</strong>，可以在下方再加上一段配置：</p>
 <pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
   <span class="token key atrule">BehaviorY</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># &lt; Same as above ></span>
+    <span class="token comment" spellcheck="true"># &lt; Same as above &gt;</span>
 
 <span class="token comment" spellcheck="true"># Add this section</span>
 <span class="token key atrule">environment_parameters</span><span class="token punctuation">:</span>
@@ -796,7 +796,7 @@
 <p>为了使<strong>参数随机</strong>，我们可以不直接提供数值，而是让它自己采样，下面是包含三个环境参数的示例：</p>
 <pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
   <span class="token key atrule">BehaviorY</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># &lt; Same as above ></span>
+    <span class="token comment" spellcheck="true"># &lt; Same as above &gt;</span>
 
 <span class="token comment" spellcheck="true"># Add this section</span>
 <span class="token key atrule">environment_parameters</span><span class="token punctuation">:</span>
@@ -824,7 +824,7 @@
 <h2 id="Curriculum-Learning"><a href="#Curriculum-Learning" class="headerlink" title="Curriculum Learning"></a><em>Curriculum Learning</em></h2><p>如果想启用<strong>课程学习</strong>，需要添加一段配置：</p>
 <pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">ehaviors</span><span class="token punctuation">:</span>
   <span class="token key atrule">BehaviorY</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># &lt; Same as above ></span>
+    <span class="token comment" spellcheck="true"># &lt; Same as above &gt;</span>
 
 <span class="token comment" spellcheck="true"># Add this section</span>
 <span class="token key atrule">environment_parameters</span><span class="token punctuation">:</span>
@@ -863,6 +863,21 @@
 <p>require_reset决定更改课程是否需要重置环境（默认：false）。</p>
 <p>一旦我们指定了我们的元课程和课程，我们就可以启动 <code>mlagents-learn</code>指向包含我们课程的配置文件，PPO 将使用课程学习进行训练。例如，要通过课程学习在 Wall Jump 环境中训练智能体，我们可以运行：</p>
 <pre class=" language-yaml"><code class="language-yaml">mlagents<span class="token punctuation">-</span>learn config/ppo/WallJump_curriculum.yaml <span class="token punctuation">-</span><span class="token punctuation">-</span>run<span class="token punctuation">-</span>id=wall<span class="token punctuation">-</span>jump<span class="token punctuation">-</span>curriculum</code></pre>
+<h2 id="Behavioral-Cloning"><a href="#Behavioral-Cloning" class="headerlink" title="Behavioral Cloning"></a>Behavioral Cloning</h2><p>Behavior Cloning（行为克隆），简称BC。它的思想较为简单，就是把智能体的策略网络训练得和人类的演示数据的行为模式越接近越好，也就是说，输入相同的状态s，应当有相近的输出a。这单纯就是一个Supervised Learning，每一个状态相当于输入的特征，专家输出的动作相当于Label（标签），我们只需要让模型的输出接近我们的Label即可。</p>
+<p>在这里BC通常用作预训练。</p>
+<p>现在我们看看配置文件中的参数是怎么设定的。</p>
+<pre class=" language-yaml"><code class="language-yaml">    <span class="token key atrule">behavioral_cloning</span><span class="token punctuation">:</span>
+      <span class="token key atrule">demo_path</span><span class="token punctuation">:</span> Project/Assets/ML<span class="token punctuation">-</span>Agents/Examples/PushBlock/Demos/ExpertPushBlock.demo
+      <span class="token key atrule">steps</span><span class="token punctuation">:</span> <span class="token number">50000</span>
+      <span class="token key atrule">strength</span><span class="token punctuation">:</span> <span class="token number">1.0</span>
+      <span class="token key atrule">samples_per_update</span><span class="token punctuation">:</span> <span class="token number">0</span></code></pre>
+<p>在使用BC之前，应当确保自己已经录制了演示文件（后面会讲怎么录制演示），其中的参数含义如下：</p>
+<p>demo_path：演示文件的路径。</p>
+<p>strength：默认为1。表示模仿学习相对于PPO算法的学习率，表示了BC改变策略的强度。.</p>
+<p>steps：通常BC应当在模仿学习进行到智能体能够获取奖励时停止，从而正式进入强化学习。当运行的步数大于steps的时候，模仿学习的学习率将为0，也就是不再起作用。如果设为0，那么将会在整个过程中持续进行BC。</p>
+<p>batch_size：默认为强化学习使用的batch_size。表示一次性使用多少条数据进行梯度递减。推荐：512-5120</p>
+<p>num_epoch：默认为PPO设定。梯度下降期间需要从经验池中抽取多少次。推荐：512-5120</p>
+<p>samples_per_update：默认为0。每次更新期间使用的最大样本数，0表示每次拿所有演示数据进行训练。如果演示数据非常大，应当降低此值防止过拟合。</p>
 <hr>
 <h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>对于上面的命令不理解的不用着急，ML-Agents提供了一系列实例来演示大部分的功能，后面会一一开文章进行讲解。</p>
 
@@ -1056,7 +1071,7 @@
     <div id="rewardModal" class="modal">
         <div class="modal-content">
             <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <h4 class="reward-title">您的赏识是我前进的动力</h4>
             <div class="reward-content">
                 <div class="reward-tabs">
                     <ul class="tabs row">
@@ -1374,8 +1389,7 @@
                 <a href="/2021/11/02/ml-agents-an-li-zhi-crawler/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="ML-Agents案例之Crawler">
+                        <img src="/images/Crawler.gif" class="responsive-img" alt="ML-Agents案例之Crawler">
                         
                         <span class="card-title">ML-Agents案例之Crawler</span>
                     </div>
@@ -1701,7 +1715,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">236.5k</span>&nbsp;字
+                class="white-color">241.3k</span>&nbsp;字
             
             
             
@@ -1771,6 +1785,10 @@
         <div class="col s12 m4 l4 social-link social-statis">
 
 
+    <a href="mailto:1121452406@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
 
 
 
@@ -1784,6 +1802,10 @@
 
 
 
+
+    <a href="https://blog.csdn.net/tianjuewudi" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://blog.csdn.net/tianjuewudi" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
 
 
 

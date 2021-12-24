@@ -17,7 +17,7 @@
 
 
     <title>Unity人工智能之不断自我进化的五人足球赛 | 微笑紫瞳星</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/MyLogo.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -53,7 +53,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/MyLogo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">微笑紫瞳星</span>
                 </a>
@@ -152,7 +152,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/MyLogo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">微笑紫瞳星</div>
         <div class="logo-desc">
@@ -479,21 +479,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-13
+                    2021-12-16
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    9 分
                 </div>
                 
 
@@ -527,7 +527,7 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121383791">ML-Agents案例之双人足球</a></p>
 <p>本案例为本文根据双人足球基础之上尝试改进的五人足球。</p>
 <p>先放上效果：</p>
-<img src="/2021/11/16/unity-ren-gong-zhi-neng-zhi-bu-duan-zi-wo-jin-hua-de-wu-ren-zu-qiu-sai/1.gif" class="">
+<img src="/2021/11/16/unity-ren-gong-zhi-neng-zhi-bu-duan-zi-wo-jin-hua-de-wu-ren-zu-qiu-sai/1.gif" class>
 
 <p>在本案例中每一队分为前锋Striker、后卫Guard、守门员Goalie三个职业。其中前锋两人、后卫两人，守门员一人，比起原来的双人足球，需要训练的模型多出来两个，并且人数上多出来三个，训练难度大大提高。</p>
 <h2 id="模型输入"><a href="#模型输入" class="headerlink" title="模型输入"></a>模型输入</h2><p>对于模型的输出，我这里仍然采取离散输出的形式，对于模型输入，就有大大的讲究了。</p>
@@ -535,77 +535,77 @@
 <p>我这里尝试了多种输入：</p>
 <ol>
 <li><p>首先是没有使用任何传感器，全部使用数据输入。</p>
-<pre class=" language-c#"><code class="language-c#">public override void CollectObservations(VectorSensor sensor)
-{
-    if (useVecObs)
-    {
-        sensor.AddObservation(transform.rotation.y);
-        sensor.AddObservation((ball.position - transform.position).x);
-        sensor.AddObservation((ball.position - transform.position).z);
-        sensor.AddObservation(ballRigdbody.velocity.x);
-        sensor.AddObservation(ballRigdbody.velocity.z);
-        if (team == Team.Blue)
-        {
-            sensor.AddObservation((GoalBlue.position - transform.position).x);
-            sensor.AddObservation((GoalBlue.position - transform.position).z);
-            sensor.AddObservation((GoalPurple.position - transform.position).x);
-            sensor.AddObservation((GoalPurple.position - transform.position).z);
-        }
-        else
-        {
-            sensor.AddObservation((GoalPurple.position - transform.position).x);
-            sensor.AddObservation((GoalPurple.position - transform.position).z);
-            sensor.AddObservation((GoalBlue.position - transform.position).x);
-            sensor.AddObservation((GoalBlue.position - transform.position).z);
-        }
-        // 添加每个智能体相对自己的位置信息，要求：列表中两队内部的排列顺序须一致
-        // 添加自己队伍的四个
-        foreach (var agentInfo in envController.AgentsList)
-        {
-            if(agentInfo.Agent != this)
-            {
-                if (team == Team.Blue)
-                {
-                    if (agentInfo.Agent.team == Team.Blue)
-                    {
-                        sensor.AddObservation((agentInfo.Agent.transform.position - transform.position).x);
-                        sensor.AddObservation((agentInfo.Agent.transform.position - transform.position).z);
-                    }
-                }
-                else
-                {
-                    if (agentInfo.Agent.team == Team.Purple)
-                    {
-                        sensor.AddObservation((agentInfo.Agent.transform.position - transform.position).x);
-                        sensor.AddObservation((agentInfo.Agent.transform.position - transform.position).z);
-                    }
-                }
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">CollectObservations</span><span class="token punctuation">(</span>VectorSensor sensor<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>useVecObs<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>ball<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>ball<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>ballRigdbody<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>ballRigdbody<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>team <span class="token operator">==</span> Team<span class="token punctuation">.</span>Blue<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>GoalBlue<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>GoalBlue<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>GoalPurple<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>GoalPurple<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>GoalPurple<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>GoalPurple<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>GoalBlue<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>GoalBlue<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">// 添加每个智能体相对自己的位置信息，要求：列表中两队内部的排列顺序须一致</span>
+        <span class="token comment" spellcheck="true">// 添加自己队伍的四个</span>
+        <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> agentInfo <span class="token keyword">in</span> envController<span class="token punctuation">.</span>AgentsList<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>agentInfo<span class="token punctuation">.</span>Agent <span class="token operator">!=</span> <span class="token keyword">this</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>team <span class="token operator">==</span> Team<span class="token punctuation">.</span>Blue<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>agentInfo<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>team <span class="token operator">==</span> Team<span class="token punctuation">.</span>Blue<span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>agentInfo<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>agentInfo<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>agentInfo<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>team <span class="token operator">==</span> Team<span class="token punctuation">.</span>Purple<span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>agentInfo<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>agentInfo<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
 
-            }
-        }
-        // 添加对手队伍的五个
-        foreach (var agentInfo in envController.AgentsList)
-        {             
-            if (team == Team.Blue)
-            {
-                if (agentInfo.Agent.team == Team.Purple)
-                {
-                    sensor.AddObservation((agentInfo.Agent.transform.position - transform.position).x);
-                    sensor.AddObservation((agentInfo.Agent.transform.position - transform.position).z);
-                }
-            }
-            else
-            {
-                if (agentInfo.Agent.team == Team.Blue)
-                {
-                    sensor.AddObservation((agentInfo.Agent.transform.position - transform.position).x);
-                    sensor.AddObservation((agentInfo.Agent.transform.position - transform.position).z);
-                }
-            }
-        }
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">// 添加对手队伍的五个</span>
+        <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> agentInfo <span class="token keyword">in</span> envController<span class="token punctuation">.</span>AgentsList<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>             
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>team <span class="token operator">==</span> Team<span class="token punctuation">.</span>Blue<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>agentInfo<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>team <span class="token operator">==</span> Team<span class="token punctuation">.</span>Purple<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>agentInfo<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>agentInfo<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>agentInfo<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>team <span class="token operator">==</span> Team<span class="token punctuation">.</span>Blue<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>agentInfo<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span><span class="token punctuation">(</span>agentInfo<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
 
-    }
-}</code></pre>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>相比于传感器的输入，这种输入方法的输入维度较少，所以网络规模也较小，缺点是难以训练，过于全面的数据在完全随机的网络参数的情况下反而难以找到重点，导致很长时间都Train不起来，但是一旦随机得好，智能体的上限是最高的。需要注意的点是由于双方使用的是同样的神经网络，所以我们在配置输入的时候需要根据队伍的不同有不同的配置，例如对于蓝方来说先输入蓝方球门位置，后输入紫方球门位置，对于紫方则需要先输入紫方球门位置，后输入蓝方球门位置。</p>
 </li>
 <li><p>使用Grid Sensor：</p>
@@ -627,83 +627,83 @@
 <li>首先对于前锋Striker，我们应当鼓励其进行进攻，因此每当球更加接近敌方球门，应当给予其奖励，当相反球接近我方球门时，应当给予惩罚。</li>
 <li>对于守门员这种非常有别于其他智能体的行动模式，应当设立更加特别的奖励函数。我们不鼓励守门员离球门过远，因此当智能体离球门超过一定距离时，给予惩罚，离得越远惩罚越高。并且我们鼓励守门员能很好防守接近球门的每一球，因此当球远离球门时应当给予加分，相反靠近球门给予减分。</li>
 </ol>
-<pre class=" language-c#"><code class="language-c#">void GiveReward()
-{
-    switch (position)
-    {
-        case Position.Striker:
-            if (team == Team.Blue && Vector3.Distance(GoalPurple.position, ball.position) < halfRewardDistance)
-            {
-                AddReward(0.002f);
-            }
-            else if (team == Team.Purple && Vector3.Distance(GoalBlue.position, ball.position) < halfRewardDistance)
-            {
-                AddReward(0.002f);
-            }
-            else if (team == Team.Blue && Vector3.Distance(GoalBlue.position, ball.position) < halfRewardDistance)
-            {
-                AddReward(-0.002f);
-            }
-            else if (team == Team.Purple && Vector3.Distance(GoalPurple.position, ball.position) < halfRewardDistance)
-            {
-                AddReward(-0.002f);
-            }
-            break;
-        case Position.Goalie:
-            if(team == Team.Blue)
-            {
-                if (Vector3.Distance(transform.position, GoalBlue.position) >= goalieRewardDstance)
-                {
-                    AddReward(-(Vector3.Distance(transform.position, GoalBlue.position) - goalieRewardDstance) / 500f);
-                }
-                else if (Vector3.Distance(ball.position, GoalBlue.position) <= goalieRewardDstance * 0.7)
-                {
-                    Vector3 blueGoalToBall = ball.position - GoalBlue.position;
-                    blueGoalToBall.y = 0;
-                    var r = Vector3.Dot(ballRigdbody.velocity, blueGoalToBall) / 500;                      
-                    AddReward(r);
-                }
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">GiveReward</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>position<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> Position<span class="token punctuation">.</span>Striker<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>team <span class="token operator">==</span> Team<span class="token punctuation">.</span>Blue <span class="token operator">&amp;&amp;</span> Vector3<span class="token punctuation">.</span><span class="token function">Distance</span><span class="token punctuation">(</span>GoalPurple<span class="token punctuation">.</span>position<span class="token punctuation">,</span> ball<span class="token punctuation">.</span>position<span class="token punctuation">)</span> <span class="token operator">&lt;</span> halfRewardDistance<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">AddReward</span><span class="token punctuation">(</span><span class="token number">0.002f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>team <span class="token operator">==</span> Team<span class="token punctuation">.</span>Purple <span class="token operator">&amp;&amp;</span> Vector3<span class="token punctuation">.</span><span class="token function">Distance</span><span class="token punctuation">(</span>GoalBlue<span class="token punctuation">.</span>position<span class="token punctuation">,</span> ball<span class="token punctuation">.</span>position<span class="token punctuation">)</span> <span class="token operator">&lt;</span> halfRewardDistance<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">AddReward</span><span class="token punctuation">(</span><span class="token number">0.002f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>team <span class="token operator">==</span> Team<span class="token punctuation">.</span>Blue <span class="token operator">&amp;&amp;</span> Vector3<span class="token punctuation">.</span><span class="token function">Distance</span><span class="token punctuation">(</span>GoalBlue<span class="token punctuation">.</span>position<span class="token punctuation">,</span> ball<span class="token punctuation">.</span>position<span class="token punctuation">)</span> <span class="token operator">&lt;</span> halfRewardDistance<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">AddReward</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">0.002f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>team <span class="token operator">==</span> Team<span class="token punctuation">.</span>Purple <span class="token operator">&amp;&amp;</span> Vector3<span class="token punctuation">.</span><span class="token function">Distance</span><span class="token punctuation">(</span>GoalPurple<span class="token punctuation">.</span>position<span class="token punctuation">,</span> ball<span class="token punctuation">.</span>position<span class="token punctuation">)</span> <span class="token operator">&lt;</span> halfRewardDistance<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">AddReward</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">0.002f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> Position<span class="token punctuation">.</span>Goalie<span class="token punctuation">:</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>team <span class="token operator">==</span> Team<span class="token punctuation">.</span>Blue<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>Vector3<span class="token punctuation">.</span><span class="token function">Distance</span><span class="token punctuation">(</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">,</span> GoalBlue<span class="token punctuation">.</span>position<span class="token punctuation">)</span> <span class="token operator">>=</span> goalieRewardDstance<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token function">AddReward</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token punctuation">(</span>Vector3<span class="token punctuation">.</span><span class="token function">Distance</span><span class="token punctuation">(</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">,</span> GoalBlue<span class="token punctuation">.</span>position<span class="token punctuation">)</span> <span class="token operator">-</span> goalieRewardDstance<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">500f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>Vector3<span class="token punctuation">.</span><span class="token function">Distance</span><span class="token punctuation">(</span>ball<span class="token punctuation">.</span>position<span class="token punctuation">,</span> GoalBlue<span class="token punctuation">.</span>position<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> goalieRewardDstance <span class="token operator">*</span> <span class="token number">0.7</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    Vector3 blueGoalToBall <span class="token operator">=</span> ball<span class="token punctuation">.</span>position <span class="token operator">-</span> GoalBlue<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+                    blueGoalToBall<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                    <span class="token keyword">var</span> r <span class="token operator">=</span> Vector3<span class="token punctuation">.</span><span class="token function">Dot</span><span class="token punctuation">(</span>ballRigdbody<span class="token punctuation">.</span>velocity<span class="token punctuation">,</span> blueGoalToBall<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">500</span><span class="token punctuation">;</span>                      
+                    <span class="token function">AddReward</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
 
-            }
-            else if (team == Team.Purple)
-            {
-                if (Vector3.Distance(transform.position, GoalPurple.position) >= goalieRewardDstance)
-                {
-                    AddReward(-(Vector3.Distance(transform.position, GoalPurple.position) - goalieRewardDstance) / 500f);
-                }
-                else if (Vector3.Distance(ball.position, GoalPurple.position) <= goalieRewardDstance * 0.7)
-                {
-                    Vector3 blueGoalToBall = ball.position - GoalPurple.position;
-                    blueGoalToBall.y = 0;
-                    var r = Vector3.Dot(ballRigdbody.velocity, blueGoalToBall) / 500;
-                    if (r < 0)
-                    {
-                        r = r * 0.7f;
-                    }
-                    AddReward(r);
-                }
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>team <span class="token operator">==</span> Team<span class="token punctuation">.</span>Purple<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>Vector3<span class="token punctuation">.</span><span class="token function">Distance</span><span class="token punctuation">(</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">,</span> GoalPurple<span class="token punctuation">.</span>position<span class="token punctuation">)</span> <span class="token operator">>=</span> goalieRewardDstance<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token function">AddReward</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token punctuation">(</span>Vector3<span class="token punctuation">.</span><span class="token function">Distance</span><span class="token punctuation">(</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">,</span> GoalPurple<span class="token punctuation">.</span>position<span class="token punctuation">)</span> <span class="token operator">-</span> goalieRewardDstance<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">500f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>Vector3<span class="token punctuation">.</span><span class="token function">Distance</span><span class="token punctuation">(</span>ball<span class="token punctuation">.</span>position<span class="token punctuation">,</span> GoalPurple<span class="token punctuation">.</span>position<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> goalieRewardDstance <span class="token operator">*</span> <span class="token number">0.7</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    Vector3 blueGoalToBall <span class="token operator">=</span> ball<span class="token punctuation">.</span>position <span class="token operator">-</span> GoalPurple<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+                    blueGoalToBall<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                    <span class="token keyword">var</span> r <span class="token operator">=</span> Vector3<span class="token punctuation">.</span><span class="token function">Dot</span><span class="token punctuation">(</span>ballRigdbody<span class="token punctuation">.</span>velocity<span class="token punctuation">,</span> blueGoalToBall<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">500</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>r <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        r <span class="token operator">=</span> r <span class="token operator">*</span> <span class="token number">0.7f</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token function">AddReward</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
 
-            }
-            break;
-        case Position.Generic:
-            break;
-    }
-}</code></pre>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> Position<span class="token punctuation">.</span>Generic<span class="token punctuation">:</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>对于集体奖励，在原有的进球得分的基础上，我们加上球往敌方球门方向移动得分，往己方球门移动减分的奖励函数，来使奖励变得更加稠密。添加此函数并在FixedUpdate中调用（前面需要获取球的刚体和双方球门的Transform）：</p>
-<pre class=" language-c#"><code class="language-c#">void GiveReward()
-{
-    var ballVelocity = ballRb.velocity;
-    ballVelocity.y = 0;
-    var ballToBlueGoalDir = GoalBlue.position - ball.transform.position;
-    var ballToPurpleGoalDir = GoalPurple.position - ball.transform.position;
-    ballToBlueGoalDir.y = 0;
-    ballToPurpleGoalDir.y = 0;
-    ballToBlueGoalDir = ballToBlueGoalDir.normalized;
-    ballToPurpleGoalDir = ballToPurpleGoalDir.normalized;
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">GiveReward</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> ballVelocity <span class="token operator">=</span> ballRb<span class="token punctuation">.</span>velocity<span class="token punctuation">;</span>
+    ballVelocity<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> ballToBlueGoalDir <span class="token operator">=</span> GoalBlue<span class="token punctuation">.</span>position <span class="token operator">-</span> ball<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> ballToPurpleGoalDir <span class="token operator">=</span> GoalPurple<span class="token punctuation">.</span>position <span class="token operator">-</span> ball<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+    ballToBlueGoalDir<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    ballToPurpleGoalDir<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    ballToBlueGoalDir <span class="token operator">=</span> ballToBlueGoalDir<span class="token punctuation">.</span>normalized<span class="token punctuation">;</span>
+    ballToPurpleGoalDir <span class="token operator">=</span> ballToPurpleGoalDir<span class="token punctuation">.</span>normalized<span class="token punctuation">;</span>
 
-    m_PurpleAgentGroup.AddGroupReward(Vector3.Dot(ballVelocity, ballToBlueGoalDir) / 1000);
-    m_BlueAgentGroup.AddGroupReward(Vector3.Dot(ballVelocity, ballToPurpleGoalDir) / 1000);
-}</code></pre>
+    m_PurpleAgentGroup<span class="token punctuation">.</span><span class="token function">AddGroupReward</span><span class="token punctuation">(</span>Vector3<span class="token punctuation">.</span><span class="token function">Dot</span><span class="token punctuation">(</span>ballVelocity<span class="token punctuation">,</span> ballToBlueGoalDir<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_BlueAgentGroup<span class="token punctuation">.</span><span class="token function">AddGroupReward</span><span class="token punctuation">(</span>Vector3<span class="token punctuation">.</span><span class="token function">Dot</span><span class="token punctuation">(</span>ballVelocity<span class="token punctuation">,</span> ballToPurpleGoalDir<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <h2 id="训练参数设置"><a href="#训练参数设置" class="headerlink" title="训练参数设置"></a>训练参数设置</h2><p>同样的，训练使用了MA-POCA算法，并且在这种对称性博弈的环境中我们使用了self-play，并且我们应当使用课程学习来使训练更加平滑，在训练前期我们可以设置更大的碰球奖励来时智能体积极与球进行互动，在后期减少其奖励来使策略变得更加多元化。</p>
 <p>我们需要配置前锋，后卫，守门员三种智能体的训练参数，以及课程各个阶段的参数。</p>
 <pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
@@ -1016,7 +1016,7 @@
     <div id="rewardModal" class="modal">
         <div class="modal-content">
             <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <h4 class="reward-title">您的赏识是我前进的动力</h4>
             <div class="reward-content">
                 <div class="reward-tabs">
                     <ul class="tabs row">
@@ -1659,7 +1659,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">236.5k</span>&nbsp;字
+                class="white-color">241.3k</span>&nbsp;字
             
             
             
@@ -1729,6 +1729,10 @@
         <div class="col s12 m4 l4 social-link social-statis">
 
 
+    <a href="mailto:1121452406@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
 
 
 
@@ -1742,6 +1746,10 @@
 
 
 
+
+    <a href="https://blog.csdn.net/tianjuewudi" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://blog.csdn.net/tianjuewudi" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
 
 
 

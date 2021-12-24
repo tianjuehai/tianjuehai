@@ -17,7 +17,7 @@
 
 
     <title>ML-Agents案例之地牢逃脱 | 微笑紫瞳星</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/MyLogo.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -53,7 +53,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/MyLogo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">微笑紫瞳星</span>
                 </a>
@@ -152,7 +152,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/MyLogo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">微笑紫瞳星</div>
         <div class="logo-desc">
@@ -479,7 +479,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-13
+                    2021-12-16
                 </div>
                 
 
@@ -527,7 +527,7 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121350822">ML-Agents案例之食物收集者</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121383791">ML-Agents案例之双人足球</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121526192">Unity人工智能之不断自我进化的五人足球赛</a></p>
-<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/1.png" class="">
+<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/1.png" class>
 
 <h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><ul>
 <li><p>设置：特工被困在一个有龙的地牢中，必须共同努力才能逃脱。为了取回钥匙，其中一名特工必须找到并杀死龙，为此牺牲自己。龙会掉落一把钥匙供其他人使用。然后其他特工可以拿起这把钥匙并打开地牢门。如果特工花费的时间过长，龙将通过传送门逃跑并且环境会重置。</p>
@@ -539,14 +539,14 @@
 <li><p>此项目的训练难点在于，智能体为了团队奖励，必须学会牺牲自己。</p>
 </li>
 <li><p>输入：智能体的输入包含一个射线传感器RayPerceptionSensor3D，识别的标签分别为墙，队友，龙，钥匙，门锁，龙的洞穴。共15根射线，参数见下方图片。关于该传感器的详细说明见<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/121250025">ML-Agents案例之推箱子游戏</a>。</p>
-<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/2.png" class="">
+<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/2.png" class>
 
-<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/3.png" class="">
+<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/3.png" class>
 
 <p>除了传感器之外，程序中还加入了一项检测智能体身上是否有钥匙的输入。</p>
 </li>
 <li><p>输出：智能体只采取了一项的离散输出，其中这个离散输出包含七个只，代表什么都不做、前进、后退、向左走、向右转、向左转、向右转。较少的输出会大大降低神经网络复杂度，减少训练时间。缺点是同一时间只能执行一个动作，降低智能体的灵活性，例如不能同时前进和旋转，也不能前进和向右转等。</p>
-<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/4.png" class="">
+<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/4.png" class>
 
 
 
@@ -555,445 +555,445 @@
 <h2 id="代码讲解"><a href="#代码讲解" class="headerlink" title="代码讲解"></a>代码讲解</h2><p>首先是标准的三件套Behavior Parameters、Decision Requester 、Model Overrider。其中只有Behavior Parameters需要调参数，设置见上图。以前已详细讲解了各自的作用，这里不再讲解。</p>
 <p><strong>现在看看主要的智能体代码PushAgentEscape.cs</strong>：</p>
 <p>初始化方法Initialize()：</p>
-<pre class=" language-c#"><code class="language-c#">public override void Initialize()
-{
-    // 获取组件
-    m_GameController = GetComponentInParent<DungeonEscapeEnvController>();
-    m_AgentRb = GetComponent<Rigidbody>();
-    m_PushBlockSettings = FindObjectOfType<PushBlockSettings>();
-    // 默认没有钥匙
-    MyKey.SetActive(false);
-    IHaveAKey = false;
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Initialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 获取组件</span>
+    m_GameController <span class="token operator">=</span> <span class="token generic-method function">GetComponentInParent<span class="token punctuation">&lt;</span>DungeonEscapeEnvController<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_AgentRb <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Rigidbody<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_PushBlockSettings <span class="token operator">=</span> <span class="token generic-method function">FindObjectOfType<span class="token punctuation">&lt;</span>PushBlockSettings<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 默认没有钥匙</span>
+    MyKey<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    IHaveAKey <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>每一个episode开始时的处理OnEpisodeBegin()方法：</p>
-<pre class=" language-c#"><code class="language-c#">public override void OnEpisodeBegin()
-{
-    MyKey.SetActive(false);
-    IHaveAKey = false;
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnEpisodeBegin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    MyKey<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    IHaveAKey <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>状态输入CollectObservations方法：</p>
-<pre class=" language-c#"><code class="language-c#">public override void CollectObservations(VectorSensor sensor)
-{
-    sensor.AddObservation(IHaveAKey);
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">CollectObservations</span><span class="token punctuation">(</span>VectorSensor sensor<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    sensor<span class="token punctuation">.</span><span class="token function">AddObservation</span><span class="token punctuation">(</span>IHaveAKey<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>可以看到除了传感器的输入之外，这里只有是否拥有钥匙一个输入。</p>
 <p>动作输出OnActionReceived方法：</p>
-<pre class=" language-c#"><code class="language-c#">public override void OnActionReceived(ActionBuffers actionBuffers)
-{
-    MoveAgent(actionBuffers.DiscreteActions);
-}
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnActionReceived</span><span class="token punctuation">(</span>ActionBuffers actionBuffers<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">MoveAgent</span><span class="token punctuation">(</span>actionBuffers<span class="token punctuation">.</span>DiscreteActions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-public void MoveAgent(ActionSegment<int> act)
-{
-    var dirToGo = Vector3.zero;
-    var rotateDir = Vector3.zero;
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">MoveAgent</span><span class="token punctuation">(</span>ActionSegment<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> act<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> dirToGo <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> rotateDir <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
 
-    var action = act[0];
+    <span class="token keyword">var</span> action <span class="token operator">=</span> act<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-    switch (action)
-    {
-        case 1:
-            dirToGo = transform.forward * 1f;
-            break;
-        case 2:
-            dirToGo = transform.forward * -1f;
-            break;
-        case 3:
-            rotateDir = transform.up * 1f;
-            break;
-        case 4:
-            rotateDir = transform.up * -1f;
-            break;
-        case 5:
-            dirToGo = transform.right * -0.75f;
-            break;
-        case 6:
-            dirToGo = transform.right * 0.75f;
-            break;
-    }
-    // 执行旋转
-    transform.Rotate(rotateDir, Time.fixedDeltaTime * 200f);
-    // 给刚体施加力，执行移动
-    m_AgentRb.AddForce(dirToGo * m_PushBlockSettings.agentRunSpeed,
-                       ForceMode.VelocityChange);
-}
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>action<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> <span class="token number">1</span><span class="token punctuation">:</span>
+            dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>forward <span class="token operator">*</span> <span class="token number">1f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">2</span><span class="token punctuation">:</span>
+            dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>forward <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">3</span><span class="token punctuation">:</span>
+            rotateDir <span class="token operator">=</span> transform<span class="token punctuation">.</span>up <span class="token operator">*</span> <span class="token number">1f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">4</span><span class="token punctuation">:</span>
+            rotateDir <span class="token operator">=</span> transform<span class="token punctuation">.</span>up <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">1f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">5</span><span class="token punctuation">:</span>
+            dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>right <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">0.75f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">6</span><span class="token punctuation">:</span>
+            dirToGo <span class="token operator">=</span> transform<span class="token punctuation">.</span>right <span class="token operator">*</span> <span class="token number">0.75f</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 执行旋转</span>
+    transform<span class="token punctuation">.</span><span class="token function">Rotate</span><span class="token punctuation">(</span>rotateDir<span class="token punctuation">,</span> Time<span class="token punctuation">.</span>fixedDeltaTime <span class="token operator">*</span> <span class="token number">200f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 给刚体施加力，执行移动</span>
+    m_AgentRb<span class="token punctuation">.</span><span class="token function">AddForce</span><span class="token punctuation">(</span>dirToGo <span class="token operator">*</span> m_PushBlockSettings<span class="token punctuation">.</span>agentRunSpeed<span class="token punctuation">,</span>
+                       ForceMode<span class="token punctuation">.</span>VelocityChange<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>可以看到这里只有一个离散输出，包含0-6七个值，其中0为什么都不做。</p>
 <p>碰撞检测：</p>
 <p>碰撞检测分为两个部分，其中洞穴，龙，门锁是碰撞体，调用的是OnCollisionEnter方法：</p>
-<pre class=" language-c#"><code class="language-c#">void OnCollisionEnter(Collision col)
-{
-     // 当身上有钥匙，碰到锁，那么门打开，同时消耗钥匙，调用UnlockDoor方法
-    if (col.transform.CompareTag("lock"))
-    {       
-        if (IHaveAKey)
-        {
-            MyKey.SetActive(false);
-            IHaveAKey = false;
-            m_GameController.UnlockDoor();
-        }
-    }
-    // 当碰到龙时，销毁身上的钥匙（实际上身上此时不可能有钥匙，为了逻辑完整这样写），并且调用KilledByBaddie方法
-    if (col.transform.CompareTag("dragon"))
-    {
-        m_GameController.KilledByBaddie(this, col);
-        MyKey.SetActive(false);
-        IHaveAKey = false;
-    }
-    // 当碰到洞穴时，调用TouchedHazard方法
-    if (col.transform.CompareTag("portal"))
-    {
-        m_GameController.TouchedHazard(this);
-    }
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">OnCollisionEnter</span><span class="token punctuation">(</span>Collision col<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+     <span class="token comment" spellcheck="true">// 当身上有钥匙，碰到锁，那么门打开，同时消耗钥匙，调用UnlockDoor方法</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>col<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"lock"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>       
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>IHaveAKey<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            MyKey<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            IHaveAKey <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+            m_GameController<span class="token punctuation">.</span><span class="token function">UnlockDoor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 当碰到龙时，销毁身上的钥匙（实际上身上此时不可能有钥匙，为了逻辑完整这样写），并且调用KilledByBaddie方法</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>col<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"dragon"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        m_GameController<span class="token punctuation">.</span><span class="token function">KilledByBaddie</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> col<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        MyKey<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        IHaveAKey <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 当碰到洞穴时，调用TouchedHazard方法</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>col<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"portal"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        m_GameController<span class="token punctuation">.</span><span class="token function">TouchedHazard</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>另一部分是钥匙，它被设定为触发器而非碰撞体，调用的是OnTriggerEnter方法：</p>
-<pre class=" language-c#"><code class="language-c#">void OnTriggerEnter(Collider col)
-{
-    // 如果钥匙是和智能体在同一个父物体下并且智能体为激活状态
-    // 那么取消激活钥匙并激活身上的子物体钥匙，所以看起来像捡起来钥匙一样
-    if (col.transform.CompareTag("key") && col.transform.parent == transform.parent &&                                          gameObject.activeInHierarchy)
-    {
-        print("Picked up key");
-        MyKey.SetActive(true);
-        IHaveAKey = true;
-        col.gameObject.SetActive(false);
-    }
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">OnTriggerEnter</span><span class="token punctuation">(</span>Collider col<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 如果钥匙是和智能体在同一个父物体下并且智能体为激活状态</span>
+    <span class="token comment" spellcheck="true">// 那么取消激活钥匙并激活身上的子物体钥匙，所以看起来像捡起来钥匙一样</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>col<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span><span class="token string">"key"</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> col<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>parent <span class="token operator">==</span> transform<span class="token punctuation">.</span>parent <span class="token operator">&amp;&amp;</span>                                          gameObject<span class="token punctuation">.</span>activeInHierarchy<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Picked up key"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        MyKey<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        IHaveAKey <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+        col<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>如果玩家想手动操控其中一个智能体，则需要在智能体没有模型的情况下重写Heuristic方法：</p>
-<pre class=" language-c#"><code class="language-c#">public override void Heuristic(in ActionBuffers actionsOut)
-{
-    var discreteActionsOut = actionsOut.DiscreteActions;
-    if (Input.GetKey(KeyCode.D))
-    {
-        discreteActionsOut[0] = 3;
-    }
-    else if (Input.GetKey(KeyCode.W))
-    {
-        discreteActionsOut[0] = 1;
-    }
-    else if (Input.GetKey(KeyCode.A))
-    {
-        discreteActionsOut[0] = 4;
-    }
-    else if (Input.GetKey(KeyCode.S))
-    {
-        discreteActionsOut[0] = 2;
-    }
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Heuristic</span><span class="token punctuation">(</span><span class="token keyword">in</span> ActionBuffers actionsOut<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> discreteActionsOut <span class="token operator">=</span> actionsOut<span class="token punctuation">.</span>DiscreteActions<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>D<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        discreteActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>W<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        discreteActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>A<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        discreteActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>S<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        discreteActionsOut<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <hr>
 <p><strong>下面讲解控制整个环境的脚本DungeonEscapeEnvController.cs</strong>：</p>
 <p>脚本先定义了智能体和恶龙所拥有的信息类，把关键信息封装起来便于调用，使得代码更加简洁美观：</p>
-<pre class=" language-c#"><code class="language-c#">// 定义智能体信息类
-public class PlayerInfo
-{
-    // 智能体脚本
-    public PushAgentEscape Agent;
-    // 智能体起始位置
-    public Vector3 StartingPos;
-    // 智能体起始旋转向量
-    public Quaternion StartingRot;
-    // 智能体刚体
-    public Rigidbody Rb;
-    // 智能体碰撞体
-    public Collider Col;
-}
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// 定义智能体信息类</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PlayerInfo</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 智能体脚本</span>
+    <span class="token keyword">public</span> PushAgentEscape Agent<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 智能体起始位置</span>
+    <span class="token keyword">public</span> Vector3 StartingPos<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 智能体起始旋转向量</span>
+    <span class="token keyword">public</span> Quaternion StartingRot<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 智能体刚体</span>
+    <span class="token keyword">public</span> Rigidbody Rb<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 智能体碰撞体</span>
+    <span class="token keyword">public</span> Collider Col<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-// 定义龙信息类
-public class DragonInfo
-{
-    // 龙的脚本
-    public SimpleNPC Agent;
-    // 龙的起始位置
-    public Vector3 StartingPos;
-    // 龙的其实旋转向量
-    public Quaternion StartingRot;
-    // 龙的刚体
-    public Rigidbody Rb;
-    // 龙的碰撞体
-    public Collider Col;
-    // 起始的Transform
-    public Transform T;
-    // 是否死亡
-    public bool IsDead;
-}</code></pre>
+<span class="token comment" spellcheck="true">// 定义龙信息类</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DragonInfo</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 龙的脚本</span>
+    <span class="token keyword">public</span> SimpleNPC Agent<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 龙的起始位置</span>
+    <span class="token keyword">public</span> Vector3 StartingPos<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 龙的其实旋转向量</span>
+    <span class="token keyword">public</span> Quaternion StartingRot<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 龙的刚体</span>
+    <span class="token keyword">public</span> Rigidbody Rb<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 龙的碰撞体</span>
+    <span class="token keyword">public</span> Collider Col<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 起始的Transform</span>
+    <span class="token keyword">public</span> Transform T<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 是否死亡</span>
+    <span class="token keyword">public</span> <span class="token keyword">bool</span> IsDead<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>然后定义了一系列的变量：</p>
-<pre class=" language-c#"><code class="language-c#">// 每一个episode的最大步数和最大时间，超过两者环境会重置
-[Header("Max Environment Steps")] public int MaxEnvironmentSteps = 25000;
-private int m_ResetTimer;
-// 区域大小
-public Bounds areaBounds;
-// 地面
-public GameObject ground;
-// 地面材质
-Material m_GroundMaterial; 
-// 地面渲染
-Renderer m_GroundRenderer;
-// 智能体信息列表
-public List<PlayerInfo> AgentsList = new List<PlayerInfo>();
-// 龙的信息列表
-public List<DragonInfo> DragonsList = new List<DragonInfo>();
-// 建立一个字典，键为智能体脚本，值为智能体信息
-private Dictionary<PushAgentEscape, PlayerInfo> m_PlayerDict = new Dictionary<PushAgentEscape, PlayerInfo>();
-// 是否随机智能体的位置和旋转
-public bool UseRandomAgentRotation = true;
-public bool UseRandomAgentPosition = true;
-// 把推方块的脚本拿过来复用了，名字都没改
-PushBlockSettings m_PushBlockSettings;
-// 存货的智能体数量
-private int m_NumberOfRemainingPlayers;
-// 钥匙
-public GameObject Key;
-// 墓碑
-public GameObject Tombstone;
-// 智能体组（重中之重）
-private SimpleMultiAgentGroup m_AgentGroup;</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// 每一个episode的最大步数和最大时间，超过两者环境会重置</span>
+<span class="token punctuation">[</span><span class="token function">Header</span><span class="token punctuation">(</span><span class="token string">"Max Environment Steps"</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token keyword">public</span> <span class="token keyword">int</span> MaxEnvironmentSteps <span class="token operator">=</span> <span class="token number">25000</span><span class="token punctuation">;</span>
+<span class="token keyword">private</span> <span class="token keyword">int</span> m_ResetTimer<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 区域大小</span>
+<span class="token keyword">public</span> Bounds areaBounds<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 地面</span>
+<span class="token keyword">public</span> GameObject ground<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 地面材质</span>
+Material m_GroundMaterial<span class="token punctuation">;</span> 
+<span class="token comment" spellcheck="true">// 地面渲染</span>
+Renderer m_GroundRenderer<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 智能体信息列表</span>
+<span class="token keyword">public</span> List<span class="token operator">&lt;</span>PlayerInfo<span class="token operator">></span> AgentsList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span>PlayerInfo<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 龙的信息列表</span>
+<span class="token keyword">public</span> List<span class="token operator">&lt;</span>DragonInfo<span class="token operator">></span> DragonsList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span>DragonInfo<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 建立一个字典，键为智能体脚本，值为智能体信息</span>
+<span class="token keyword">private</span> Dictionary<span class="token operator">&lt;</span>PushAgentEscape<span class="token punctuation">,</span> PlayerInfo<span class="token operator">></span> m_PlayerDict <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Dictionary</span><span class="token operator">&lt;</span>PushAgentEscape<span class="token punctuation">,</span> PlayerInfo<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 是否随机智能体的位置和旋转</span>
+<span class="token keyword">public</span> <span class="token keyword">bool</span> UseRandomAgentRotation <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">bool</span> UseRandomAgentPosition <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 把推方块的脚本拿过来复用了，名字都没改</span>
+PushBlockSettings m_PushBlockSettings<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 存货的智能体数量</span>
+<span class="token keyword">private</span> <span class="token keyword">int</span> m_NumberOfRemainingPlayers<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 钥匙</span>
+<span class="token keyword">public</span> GameObject Key<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 墓碑</span>
+<span class="token keyword">public</span> GameObject Tombstone<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 智能体组（重中之重）</span>
+<span class="token keyword">private</span> SimpleMultiAgentGroup m_AgentGroup<span class="token punctuation">;</span></code></pre>
 <p>然后就是对场景初始化，调用的Start方法：</p>
-<pre class=" language-c#"><code class="language-c#">void Start()
-{
-    // 获取地面界限
-    areaBounds = ground.GetComponent<Collider>().bounds;
-    // 获取地面渲染，方便改变材质
-    m_GroundRenderer = ground.GetComponent<Renderer>();
-    // 初始材质
-    m_GroundMaterial = m_GroundRenderer.material;
-    // 获取全局设定脚本
-    m_PushBlockSettings = FindObjectOfType<PushBlockSettings>();
-    // 重新计算场上存在的智能体
-    m_NumberOfRemainingPlayers = AgentsList.Count;
-    // 隐藏钥匙
-    Key.SetActive(false);
-    // 给列表中的智能体添加上对应的信息，并把智能体添加到组中，同一组的智能体会相互合作
-    m_AgentGroup = new SimpleMultiAgentGroup();
-    foreach (var item in AgentsList)
-    {
-        item.StartingPos = item.Agent.transform.position;
-        item.StartingRot = item.Agent.transform.rotation;
-        item.Rb = item.Agent.GetComponent<Rigidbody>();
-        item.Col = item.Agent.GetComponent<Collider>();
-        // 添加到组
-        m_AgentGroup.RegisterAgent(item.Agent);
-    }
-    // 给龙列表中的龙添加信息
-    foreach (var item in DragonsList)
-    {
-        item.StartingPos = item.Agent.transform.position;
-        item.StartingRot = item.Agent.transform.rotation;
-        item.T = item.Agent.transform;
-        item.Col = item.Agent.GetComponent<Collider>();
-    }
-    // 重置场景
-    ResetScene();
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 获取地面界限</span>
+    areaBounds <span class="token operator">=</span> ground<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Collider<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>bounds<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 获取地面渲染，方便改变材质</span>
+    m_GroundRenderer <span class="token operator">=</span> ground<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Renderer<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 初始材质</span>
+    m_GroundMaterial <span class="token operator">=</span> m_GroundRenderer<span class="token punctuation">.</span>material<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 获取全局设定脚本</span>
+    m_PushBlockSettings <span class="token operator">=</span> <span class="token generic-method function">FindObjectOfType<span class="token punctuation">&lt;</span>PushBlockSettings<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 重新计算场上存在的智能体</span>
+    m_NumberOfRemainingPlayers <span class="token operator">=</span> AgentsList<span class="token punctuation">.</span>Count<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 隐藏钥匙</span>
+    Key<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 给列表中的智能体添加上对应的信息，并把智能体添加到组中，同一组的智能体会相互合作</span>
+    m_AgentGroup <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SimpleMultiAgentGroup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> item <span class="token keyword">in</span> AgentsList<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        item<span class="token punctuation">.</span>StartingPos <span class="token operator">=</span> item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+        item<span class="token punctuation">.</span>StartingRot <span class="token operator">=</span> item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">;</span>
+        item<span class="token punctuation">.</span>Rb <span class="token operator">=</span> item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Rigidbody<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        item<span class="token punctuation">.</span>Col <span class="token operator">=</span> item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Collider<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 添加到组</span>
+        m_AgentGroup<span class="token punctuation">.</span><span class="token function">RegisterAgent</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>Agent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 给龙列表中的龙添加信息</span>
+    <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> item <span class="token keyword">in</span> DragonsList<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        item<span class="token punctuation">.</span>StartingPos <span class="token operator">=</span> item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+        item<span class="token punctuation">.</span>StartingRot <span class="token operator">=</span> item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">;</span>
+        item<span class="token punctuation">.</span>T <span class="token operator">=</span> item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">;</span>
+        item<span class="token punctuation">.</span>Col <span class="token operator">=</span> item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span><span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Collider<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 重置场景</span>
+    <span class="token function">ResetScene</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>在ResetScene中：</p>
-<pre class=" language-c#"><code class="language-c#"> void ResetScene()
- {
-     // 重置计时
-     m_ResetTimer = 0;
-     // 重置生存的智能体数量
-     m_NumberOfRemainingPlayers = AgentsList.Count;
-    // 四个方向任意旋转场景，可以防止过拟合在一个位置上
-     var rotation = Random.Range(0, 4);
-     var rotationAngle = rotation * 90f;
-     transform.Rotate(new Vector3(0f, rotationAngle, 0f));
+<pre class=" language-csharp"><code class="language-csharp"> <span class="token keyword">void</span> <span class="token function">ResetScene</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token punctuation">{</span>
+     <span class="token comment" spellcheck="true">// 重置计时</span>
+     m_ResetTimer <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+     <span class="token comment" spellcheck="true">// 重置生存的智能体数量</span>
+     m_NumberOfRemainingPlayers <span class="token operator">=</span> AgentsList<span class="token punctuation">.</span>Count<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 四个方向任意旋转场景，可以防止过拟合在一个位置上</span>
+     <span class="token keyword">var</span> rotation <span class="token operator">=</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">var</span> rotationAngle <span class="token operator">=</span> rotation <span class="token operator">*</span> <span class="token number">90f</span><span class="token punctuation">;</span>
+     transform<span class="token punctuation">.</span><span class="token function">Rotate</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">,</span> rotationAngle<span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-     // 重置列表中的每个智能体
-     foreach (var item in AgentsList)
-     {
-         // 如果设定了随机，在场景中随机一个位置，没有就固定位置
-         var pos = UseRandomAgentPosition ? GetRandomSpawnPos() : item.StartingPos;
-         var rot = UseRandomAgentRotation ? GetRandomRot() : item.StartingRot;        
-         item.Agent.transform.SetPositionAndRotation(pos, rot);
-         // 状态都清零
-         item.Rb.velocity = Vector3.zero;
-         item.Rb.angularVelocity = Vector3.zero;
-         item.Agent.MyKey.SetActive(false);
-         item.Agent.IHaveAKey = false;
-         item.Agent.gameObject.SetActive(true);
-         // 这一行我认为可以去掉，无需再次添加
-         m_AgentGroup.RegisterAgent(item.Agent);
-     }
-     // 重置钥匙
-     Key.SetActive(false);
+     <span class="token comment" spellcheck="true">// 重置列表中的每个智能体</span>
+     <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> item <span class="token keyword">in</span> AgentsList<span class="token punctuation">)</span>
+     <span class="token punctuation">{</span>
+         <span class="token comment" spellcheck="true">// 如果设定了随机，在场景中随机一个位置，没有就固定位置</span>
+         <span class="token keyword">var</span> pos <span class="token operator">=</span> UseRandomAgentPosition <span class="token operator">?</span> <span class="token function">GetRandomSpawnPos</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> item<span class="token punctuation">.</span>StartingPos<span class="token punctuation">;</span>
+         <span class="token keyword">var</span> rot <span class="token operator">=</span> UseRandomAgentRotation <span class="token operator">?</span> <span class="token function">GetRandomRot</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> item<span class="token punctuation">.</span>StartingRot<span class="token punctuation">;</span>        
+         item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">SetPositionAndRotation</span><span class="token punctuation">(</span>pos<span class="token punctuation">,</span> rot<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token comment" spellcheck="true">// 状态都清零</span>
+         item<span class="token punctuation">.</span>Rb<span class="token punctuation">.</span>velocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+         item<span class="token punctuation">.</span>Rb<span class="token punctuation">.</span>angularVelocity <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+         item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>MyKey<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>IHaveAKey <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+         item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token comment" spellcheck="true">// 这一行我认为可以去掉，无需再次添加</span>
+         m_AgentGroup<span class="token punctuation">.</span><span class="token function">RegisterAgent</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>Agent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+     <span class="token comment" spellcheck="true">// 重置钥匙</span>
+     Key<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-     // 重置墓碑
-     Tombstone.SetActive(false);
+     <span class="token comment" spellcheck="true">// 重置墓碑</span>
+     Tombstone<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-     // 重置列表中的每一只龙
-     foreach (var item in DragonsList)
-     {
-         if (!item.Agent)
-         {
-             return;
-         }
-         // 设定固定的起始位置
-         item.Agent.transform.SetPositionAndRotation(item.StartingPos, item.StartingRot);
-         // 设定随机的行走速度
-         item.Agent.SetRandomWalkSpeed();
-         // 激活智能体
-         item.Agent.gameObject.SetActive(true);
-     }
- }</code></pre>
+     <span class="token comment" spellcheck="true">// 重置列表中的每一只龙</span>
+     <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> item <span class="token keyword">in</span> DragonsList<span class="token punctuation">)</span>
+     <span class="token punctuation">{</span>
+         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>item<span class="token punctuation">.</span>Agent<span class="token punctuation">)</span>
+         <span class="token punctuation">{</span>
+             <span class="token keyword">return</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span>
+         <span class="token comment" spellcheck="true">// 设定固定的起始位置</span>
+         item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">SetPositionAndRotation</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>StartingPos<span class="token punctuation">,</span> item<span class="token punctuation">.</span>StartingRot<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token comment" spellcheck="true">// 设定随机的行走速度</span>
+         item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span><span class="token function">SetRandomWalkSpeed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token comment" spellcheck="true">// 激活智能体</span>
+         item<span class="token punctuation">.</span>Agent<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span></code></pre>
 <p>在获取任意场景中位置的时候，调用的是GetRandomSpawnPos，<strong>这段代码可复用很强</strong>。</p>
-<pre class=" language-c#"><code class="language-c#">public Vector3 GetRandomSpawnPos()
-{
-    var foundNewSpawnLocation = false;
-    var randomSpawnPos = Vector3.zero;
-    while (foundNewSpawnLocation == false)
-    {
-        var randomPosX = Random.Range(-areaBounds.extents.x * m_PushBlockSettings.spawnAreaMarginMultiplier,
-                                      areaBounds.extents.x * m_PushBlockSettings.spawnAreaMarginMultiplier);
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> Vector3 <span class="token function">GetRandomSpawnPos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> foundNewSpawnLocation <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> randomSpawnPos <span class="token operator">=</span> Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>foundNewSpawnLocation <span class="token operator">==</span> <span class="token keyword">false</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> randomPosX <span class="token operator">=</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>areaBounds<span class="token punctuation">.</span>extents<span class="token punctuation">.</span>x <span class="token operator">*</span> m_PushBlockSettings<span class="token punctuation">.</span>spawnAreaMarginMultiplier<span class="token punctuation">,</span>
+                                      areaBounds<span class="token punctuation">.</span>extents<span class="token punctuation">.</span>x <span class="token operator">*</span> m_PushBlockSettings<span class="token punctuation">.</span>spawnAreaMarginMultiplier<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        var randomPosZ = Random.Range(-areaBounds.extents.z * m_PushBlockSettings.spawnAreaMarginMultiplier,
-                                      areaBounds.extents.z * m_PushBlockSettings.spawnAreaMarginMultiplier);
-        randomSpawnPos = ground.transform.position + new Vector3(randomPosX, 1f, randomPosZ);
-        // 检查生成的位置有没有碰撞体，有的话就重新生成，没有就退出循环
-        if (Physics.CheckBox(randomSpawnPos, new Vector3(2.5f, 0.01f, 2.5f)) == false)
-        {
-            foundNewSpawnLocation = true;
-        }
-    }
-    return randomSpawnPos;
-}</code></pre>
+        <span class="token keyword">var</span> randomPosZ <span class="token operator">=</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token operator">-</span>areaBounds<span class="token punctuation">.</span>extents<span class="token punctuation">.</span>z <span class="token operator">*</span> m_PushBlockSettings<span class="token punctuation">.</span>spawnAreaMarginMultiplier<span class="token punctuation">,</span>
+                                      areaBounds<span class="token punctuation">.</span>extents<span class="token punctuation">.</span>z <span class="token operator">*</span> m_PushBlockSettings<span class="token punctuation">.</span>spawnAreaMarginMultiplier<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        randomSpawnPos <span class="token operator">=</span> ground<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position <span class="token operator">+</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>randomPosX<span class="token punctuation">,</span> <span class="token number">1f</span><span class="token punctuation">,</span> randomPosZ<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 检查生成的位置有没有碰撞体，有的话就重新生成，没有就退出循环</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>Physics<span class="token punctuation">.</span><span class="token function">CheckBox</span><span class="token punctuation">(</span>randomSpawnPos<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">2.5f</span><span class="token punctuation">,</span> <span class="token number">0.01f</span><span class="token punctuation">,</span> <span class="token number">2.5f</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token keyword">false</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            foundNewSpawnLocation <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> randomSpawnPos<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>接下来是每0.02秒都执行一次的FixedUpdate方法：</p>
 <p>这里主要检测一个episode是否已经到达了设定的时间和最大步数，满足两者则环境重置。</p>
-<pre class=" language-c#"><code class="language-c#">void FixedUpdate()
-{
-    m_ResetTimer += 1;
-    if (m_ResetTimer >= MaxEnvironmentSteps && MaxEnvironmentSteps > 0)
-    {
-        m_AgentGroup.GroupEpisodeInterrupted();
-        ResetScene();
-    }
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">FixedUpdate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_ResetTimer <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>m_ResetTimer <span class="token operator">>=</span> MaxEnvironmentSteps <span class="token operator">&amp;&amp;</span> MaxEnvironmentSteps <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        m_AgentGroup<span class="token punctuation">.</span><span class="token function">GroupEpisodeInterrupted</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">ResetScene</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>接下来定义了三个对应接触龙，接触洞穴，接触门锁的方法：</p>
 <p>当智能体接触洞穴时：</p>
-<pre class=" language-c#"><code class="language-c#">public void TouchedHazard(PushAgentEscape agent)
-{
-    // 智能体死亡，数量-1，数量为0时重置环境
-    m_NumberOfRemainingPlayers--;
-    if (m_NumberOfRemainingPlayers == 0 || agent.IHaveAKey)
-    {
-        m_AgentGroup.EndGroupEpisode();
-        ResetScene();
-    }
-    else
-    {
-        agent.gameObject.SetActive(false);
-    }
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">TouchedHazard</span><span class="token punctuation">(</span>PushAgentEscape agent<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 智能体死亡，数量-1，数量为0时重置环境</span>
+    m_NumberOfRemainingPlayers<span class="token operator">--</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>m_NumberOfRemainingPlayers <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> agent<span class="token punctuation">.</span>IHaveAKey<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        m_AgentGroup<span class="token punctuation">.</span><span class="token function">EndGroupEpisode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">ResetScene</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        agent<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>当智能体接触门锁时：</p>
-<pre class=" language-c#"><code class="language-c#">public void UnlockDoor()
-{
-    // 获得集体奖励
-    m_AgentGroup.AddGroupReward(1f);
-   // 改变地面材质0.5秒
-    StartCoroutine(GoalScoredSwapGroundMaterial(m_PushBlockSettings.goalScoredMaterial, 0.5f));
-    print("Unlocked Door");
-    // 结束游戏
-    m_AgentGroup.EndGroupEpisode();
-    // 重置场景
-    ResetScene();
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">UnlockDoor</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 获得集体奖励</span>
+    m_AgentGroup<span class="token punctuation">.</span><span class="token function">AddGroupReward</span><span class="token punctuation">(</span><span class="token number">1f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token comment" spellcheck="true">// 改变地面材质0.5秒</span>
+    <span class="token function">StartCoroutine</span><span class="token punctuation">(</span><span class="token function">GoalScoredSwapGroundMaterial</span><span class="token punctuation">(</span>m_PushBlockSettings<span class="token punctuation">.</span>goalScoredMaterial<span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Unlocked Door"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 结束游戏</span>
+    m_AgentGroup<span class="token punctuation">.</span><span class="token function">EndGroupEpisode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 重置场景</span>
+    <span class="token function">ResetScene</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>当智能体接触龙时：</p>
-<pre class=" language-c#"><code class="language-c#">public void KilledByBaddie(PushAgentEscape agent, Collision baddieCol)
-{
-    // 龙被杀死，隐藏
-    baddieCol.gameObject.SetActive(false);
-    // 一个智能体死亡，隐藏
-    m_NumberOfRemainingPlayers--;
-    agent.gameObject.SetActive(false);
-    print($"{baddieCol.gameObject.name} ate {agent.transform.name}");
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">KilledByBaddie</span><span class="token punctuation">(</span>PushAgentEscape agent<span class="token punctuation">,</span> Collision baddieCol<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 龙被杀死，隐藏</span>
+    baddieCol<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 一个智能体死亡，隐藏</span>
+    m_NumberOfRemainingPlayers<span class="token operator">--</span><span class="token punctuation">;</span>
+    agent<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span>$<span class="token string">"{baddieCol.gameObject.name} ate {agent.transform.name}"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // 激活墓碑
-    Tombstone.transform.SetPositionAndRotation(agent.transform.position, agent.transform.rotation);
-    Tombstone.SetActive(true);
+    <span class="token comment" spellcheck="true">// 激活墓碑</span>
+    Tombstone<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">SetPositionAndRotation</span><span class="token punctuation">(</span>agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">,</span> agent<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Tombstone<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // 激活钥匙
-    Key.transform.SetPositionAndRotation(baddieCol.collider.transform.position, baddieCol.collider.transform.rotation);
-    Key.SetActive(true);
-}</code></pre>
+    <span class="token comment" spellcheck="true">// 激活钥匙</span>
+    Key<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">SetPositionAndRotation</span><span class="token punctuation">(</span>baddieCol<span class="token punctuation">.</span>collider<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">,</span> baddieCol<span class="token punctuation">.</span>collider<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>rotation<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Key<span class="token punctuation">.</span><span class="token function">SetActive</span><span class="token punctuation">(</span><span class="token keyword">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>此处可以试试扣除接触龙智能体本身的分数，看看智能体是否舍己为人，牺牲自己的分数换取团队的收益。</p>
 <p>改变地面材质的携程：</p>
-<pre class=" language-c#"><code class="language-c#">IEnumerator GoalScoredSwapGroundMaterial(Material mat, float time)
-{
-    m_GroundRenderer.material = mat;
-    yield return new WaitForSeconds(time); // Wait for 2 sec
-    m_GroundRenderer.material = m_GroundMaterial;
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp">IEnumerator <span class="token function">GoalScoredSwapGroundMaterial</span><span class="token punctuation">(</span>Material mat<span class="token punctuation">,</span> <span class="token keyword">float</span> time<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_GroundRenderer<span class="token punctuation">.</span>material <span class="token operator">=</span> mat<span class="token punctuation">;</span>
+    <span class="token keyword">yield</span> <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">WaitForSeconds</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Wait for 2 sec</span>
+    m_GroundRenderer<span class="token punctuation">.</span>material <span class="token operator">=</span> m_GroundMaterial<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <hr>
 <p>以下是NPC龙的代码，很简单，只有移动的逻辑：</p>
-<pre class=" language-c#"><code class="language-c#">using UnityEngine;
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> UnityEngine<span class="token punctuation">;</span>
 
-public class SimpleNPC : MonoBehaviour
-{
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SimpleNPC</span> <span class="token punctuation">:</span> MonoBehaviour
+<span class="token punctuation">{</span>
 
-    public Transform target;
-    private Rigidbody rb;
-    public float walkSpeed = 1;
-    private Vector3 dirToGo;
-    // 比Start更早执行
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
-    void Update()
-    {
-    }
-    // 每0.02秒执行一次
-    void FixedUpdate()
-    {
-        dirToGo = target.position - transform.position;
-        dirToGo.y = 0;
-        rb.rotation = Quaternion.LookRotation(dirToGo);
-        // 执行移动
-        rb.MovePosition(transform.position + transform.forward * walkSpeed * Time.deltaTime);
-    }
-    // 设置一个随机速度
-    public void SetRandomWalkSpeed()
-    {
-        walkSpeed = Random.Range(1f, 7f);
-    }
-}
+    <span class="token keyword">public</span> Transform target<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> Rigidbody rb<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">float</span> walkSpeed <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> Vector3 dirToGo<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 比Start更早执行</span>
+    <span class="token keyword">void</span> <span class="token function">Awake</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        rb <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Rigidbody<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">Update</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 每0.02秒执行一次</span>
+    <span class="token keyword">void</span> <span class="token function">FixedUpdate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        dirToGo <span class="token operator">=</span> target<span class="token punctuation">.</span>position <span class="token operator">-</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">;</span>
+        dirToGo<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        rb<span class="token punctuation">.</span>rotation <span class="token operator">=</span> Quaternion<span class="token punctuation">.</span><span class="token function">LookRotation</span><span class="token punctuation">(</span>dirToGo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 执行移动</span>
+        rb<span class="token punctuation">.</span><span class="token function">MovePosition</span><span class="token punctuation">(</span>transform<span class="token punctuation">.</span>position <span class="token operator">+</span> transform<span class="token punctuation">.</span>forward <span class="token operator">*</span> walkSpeed <span class="token operator">*</span> Time<span class="token punctuation">.</span>deltaTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 设置一个随机速度</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">SetRandomWalkSpeed</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        walkSpeed <span class="token operator">=</span> Random<span class="token punctuation">.</span><span class="token function">Range</span><span class="token punctuation">(</span><span class="token number">1f</span><span class="token punctuation">,</span> <span class="token number">7f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <hr>
 <p>在龙下还挂着一个脚本，用来检测龙是否接触到洞穴：</p>
-<pre class=" language-c#"><code class="language-c#">using UnityEngine;
-using UnityEngine.Events;
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> UnityEngine<span class="token punctuation">;</span>
+<span class="token keyword">using</span> UnityEngine<span class="token punctuation">.</span>Events<span class="token punctuation">;</span>
 
-namespace Unity.MLAgentsExamples
-{
+<span class="token keyword">namespace</span> Unity<span class="token punctuation">.</span>MLAgentsExamples
+<span class="token punctuation">{</span>
 
-    public class CollisionCallbacks : MonoBehaviour
-    {
-         // 以下定义了多个事件，需要在Unity编辑器中订阅它们
-        [System.Serializable]
-        public class TriggerEvent : UnityEvent<Collider>
-        {
-        }
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CollisionCallbacks</span> <span class="token punctuation">:</span> MonoBehaviour
+    <span class="token punctuation">{</span>
+         <span class="token comment" spellcheck="true">// 以下定义了多个事件，需要在Unity编辑器中订阅它们</span>
+        <span class="token punctuation">[</span>System<span class="token punctuation">.</span>Serializable<span class="token punctuation">]</span>
+        <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TriggerEvent</span> <span class="token punctuation">:</span> UnityEvent<span class="token operator">&lt;</span>Collider<span class="token operator">></span>
+        <span class="token punctuation">{</span>
+        <span class="token punctuation">}</span>
 
-        [Header("Trigger Callbacks")]
-        public TriggerEvent onTriggerEnterEvent = new TriggerEvent();
+        <span class="token punctuation">[</span><span class="token function">Header</span><span class="token punctuation">(</span><span class="token string">"Trigger Callbacks"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token keyword">public</span> TriggerEvent onTriggerEnterEvent <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TriggerEvent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-         // 这个案例只用到了这个方法，其他方法都没有订阅
-        private void OnCollisionEnter(Collision col)
-        {
-            if (col.transform.CompareTag(tagToDetect))
-            {
-                onCollisionEnterEvent.Invoke(col, transform);
-        }      
-    }
-}
+         <span class="token comment" spellcheck="true">// 这个案例只用到了这个方法，其他方法都没有订阅</span>
+        <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">OnCollisionEnter</span><span class="token punctuation">(</span>Collision col<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>col<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">CompareTag</span><span class="token punctuation">(</span>tagToDetect<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                onCollisionEnterEvent<span class="token punctuation">.</span><span class="token function">Invoke</span><span class="token punctuation">(</span>col<span class="token punctuation">,</span> transform<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>      
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>订阅事件：</p>
-<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/5.png" class="">
+<img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/5.png" class>
 
 <p>其中执行的方法如下：</p>
-<pre class=" language-c#"><code class="language-c#">public void BaddieTouchedBlock()
-{
-    m_AgentGroup.EndGroupEpisode();
-    StartCoroutine(GoalScoredSwapGroundMaterial(m_PushBlockSettings.failMaterial, 0.5f));
-    ResetScene();
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">BaddieTouchedBlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_AgentGroup<span class="token punctuation">.</span><span class="token function">EndGroupEpisode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">StartCoroutine</span><span class="token punctuation">(</span><span class="token function">GoalScoredSwapGroundMaterial</span><span class="token punctuation">(</span>m_PushBlockSettings<span class="token punctuation">.</span>failMaterial<span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">ResetScene</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>最简单的配置：</p>
 <pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">behaviors</span><span class="token punctuation">:</span>
   <span class="token key atrule">DungeonEscape</span><span class="token punctuation">:</span>
@@ -1021,7 +1021,7 @@ namespace Unity.MLAgentsExamples
     <span class="token key atrule">time_horizon</span><span class="token punctuation">:</span> <span class="token number">64</span>
     <span class="token key atrule">summary_freq</span><span class="token punctuation">:</span> <span class="token number">60000</span>
 </code></pre>
-<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/6.gif" class="">
+<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><img src="/2021/11/27/ml-agents-an-li-zhi-di-lao-tao-tuo/6.gif" class>
 
 
 
@@ -1217,7 +1217,7 @@ namespace Unity.MLAgentsExamples
     <div id="rewardModal" class="modal">
         <div class="modal-content">
             <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <h4 class="reward-title">您的赏识是我前进的动力</h4>
             <div class="reward-content">
                 <div class="reward-tabs">
                     <ul class="tabs row">
@@ -1860,7 +1860,7 @@ namespace Unity.MLAgentsExamples
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">236.5k</span>&nbsp;字
+                class="white-color">241.3k</span>&nbsp;字
             
             
             
@@ -1930,6 +1930,10 @@ namespace Unity.MLAgentsExamples
         <div class="col s12 m4 l4 social-link social-statis">
 
 
+    <a href="mailto:1121452406@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
 
 
 
@@ -1943,6 +1947,10 @@ namespace Unity.MLAgentsExamples
 
 
 
+
+    <a href="https://blog.csdn.net/tianjuewudi" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://blog.csdn.net/tianjuewudi" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
 
 
 
