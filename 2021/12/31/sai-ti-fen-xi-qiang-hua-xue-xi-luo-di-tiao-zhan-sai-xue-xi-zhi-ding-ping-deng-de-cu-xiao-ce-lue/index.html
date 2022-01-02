@@ -1,0 +1,1958 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="博客制作,个人经验分享,Unity,人工智能等">
+    <meta name="description" content="本站记录本人各种学习的旅途，用于巩固自我并启发后来人">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>微笑紫瞳星</title>
+    <link rel="icon" type="image/png" href="/MyLogo.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/MyLogo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">微笑紫瞳星</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/MyLogo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">微笑紫瞳星</div>
+        <div class="logo-desc">
+            
+            本站记录本人各种学习的旅途，用于巩固自我并启发后来人
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title"></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">强化学习</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%AF%94%E8%B5%9B/">
+                                <span class="chip bg-color">强化学习比赛</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%AF%94%E8%B5%9B/" class="post-category">
+                                强化学习比赛
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-12-31
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-01-02
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.6k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    18 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p> 赛事官方入口：<a target="_blank" rel="noopener" href="https://codalab.lisn.upsaclay.fr/competitions/823#learn_the_details-overview">https://codalab.lisn.upsaclay.fr/competitions/823#learn_the_details-overview</a></p>
+<p>深度强化实验室的中文说明：</p>
+<p><a target="_blank" rel="noopener" href="http://deeprl.neurondance.com/d/583-ai">http://deeprl.neurondance.com/d/583-ai</a></p>
+<p><a target="_blank" rel="noopener" href="http://deeprl.neurondance.com/d/584-ai">http://deeprl.neurondance.com/d/584-ai</a></p>
+<h1 id="赛题说明"><a href="#赛题说明" class="headerlink" title="赛题说明"></a>赛题说明</h1><p>现在商家想要将促销策略从个性化促销转换为平等化促销，执行的方式是发放优惠券，我们可以通过控制优惠券的数量和折扣来达成目标，通过对不同的消费者投放不同数量不同折扣的消费券来达成目的。</p>
+<p>对于非平等化促销策略，它输入单个用户状态，输出给单个用户发放的促销动作，因此每个人的促销动作可以各不相同。要学习一个平等化促销策略，它输入的是全体用户的状态，输出一个给全体用户发放相同的促销动作。</p>
+<img src="/2021/12/31/sai-ti-fen-xi-qiang-hua-xue-xi-luo-di-tiao-zhan-sai-xue-xi-zhi-ding-ping-deng-de-cu-xiao-ce-lue/1.png" class="">
+
+<p>如图所示，由于用户的个体间存在的差异，用户对于促销策略的反应也不相同，反应这些用户差异的信息我们称为<strong>用户状态</strong>，我们的网络模型接收这个用户的状态，然后输出对应的促销动作，<strong>如何优化这个策略网络使得促销效果最好是我们本次比赛的任务</strong>。当用户接收了我们的促销动作之后，就会输出对应的动作：即用户当天订单数以及订单的平均金额，这时候用户的状态也会随着更新而改变。也就是说，用户相当于强化学习的环境本身，环境的输入是用户前一天的状态以及促销的动作，环境的输出为用户今天的状态以及用户对应的动作，用户的动作可以视作环境的奖励。</p>
+<p><strong>下面我们来看看官方提供的数据：</strong></p>
+<p>官方初赛的数据是一个csv文件，里面包含了1000个用户60天内的数据，总共有6000条数据。</p>
+<img src="/2021/12/31/sai-ti-fen-xi-qiang-hua-xue-xi-luo-di-tiao-zhan-sai-xue-xi-zhi-ding-ping-deng-de-cu-xiao-ce-lue/2.png" class="">
+
+<p>每一列代表的含义是：</p>
+<p>index：用户ID。<br>day_deliver_coupon_num：营销平台当天发放的优惠券张数。注意，每张优惠券的有效期为当日。<br>coupon_discount：营销平台当天发放的优惠券折扣。<br>day_order_num：用户当天订单次数。优惠券默认会随着订单使用，直到优惠券用完。<br>day_average_order_fee：用户当天所有订单折扣前的平均金额。<br>step：天数，范围0-59。<br>date：日期，范围为2021/03/19到2021/05/17。</p>
+<p> 我们需要自行定义用户的状态输入来对我们的策略网络进行训练，定义一个合理的状态输入对策略有着至关重要的影响。</p>
+<p><strong>评分规则：</strong></p>
+<p>目标：在Total_ROI&gt;=6.5的前提下，最大化<strong>Total_GMV</strong>。</p>
+<p>定义优惠订单数（coupon_order_num）为：<br>$$<br>coupon_order_num = min(day_deliver_coupon_num , day_order_num)<br>$$<br>定义成本（coupon_order_fee）为：<br>$$<br>coupon_order_fee = coupon_order_num * day_average_order_fee * (1-coupon_discount)<br>$$<br>定义单人应收（Per_GMV）为：<br>$$<br>Per_GMV = day_order_num * day_average_order_fee - coupon_order_fee<br>$$<br>总营收（Total_GMV）：<br>$$<br>Total_GMV = \sum Per_GMV<br>$$<br>总成本（Total_Cost）:<br>$$<br>Total_Cost = \sum coupon_order_fee<br>$$<br>总盈利率（Total_ROI）：<br>$$<br>Total_ROI = Total_GMV \ / \ max(Total_Cost,1)<br>$$</p>
+<hr>
+<p>因此，用户输出的动作决定了我们强化学习的奖励，若Total_ROI&lt;6.5，得分为0。也就是说我们训练的策略网络决不能让用户的动作去越过这条红线。在此基础上，得分为Total_GMV，也就是说<strong>满足一定利率的情况下，尽最大可能提高应收总额</strong>。</p>
+<h1 id="提交方式"><a href="#提交方式" class="headerlink" title="提交方式"></a>提交方式</h1><p> 参赛者基于大赛提供的接口，上传测评代码以及相关模型压缩文件, 解压后项目最外层目录定义好入口文件policy_validation.py, 并根据我们提供的模板，实现抽象类PolicyValidation，完成policy_validation.py。</p>
+<p><strong>policy_validation.py内容如下</strong>，参赛者主要需实现:</p>
+<pre class=" language-python"><code class="language-python">get_next_states <span class="token punctuation">(</span>cur_states<span class="token punctuation">,</span> coupon_action<span class="token punctuation">,</span> user_actions<span class="token punctuation">)</span></code></pre>
+<p>输入当天所有用户的动作，输出由参赛者自行定义的次日用户状态。注意这里和一般强化学习不同的地方在于，下一个状态是需要自己定义的，环境负责输出的是一个用户的动作，这个用户的动作包含了奖励以及下一个状态的信息，如何运用这个用户的动作及其它数据来构成下一个状态是一个值得研究的课题。</p>
+<pre class=" language-python"><code class="language-python">get_action_from_policy <span class="token punctuation">(</span>user_states<span class="token punctuation">)</span></code></pre>
+<p>输入当天用户状态，由参赛者策略输出当天所有用户的促销动作。这个就是我们需要训练的策略网络模型。</p>
+<p>下面是一个模板：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">PolicyValidation</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""定义评测程序所需接口的虚拟类。
+    """</span>
+
+    <span class="token triple-quoted-string string">"""initial_states 是参赛者根据离线数据定义的评测第一天（自5月18日开始）的用户状态。
+    """</span>
+    initial_states<span class="token punctuation">:</span> Any <span class="token operator">=</span> None
+
+    @abstractmethod
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""根据自身需求初始化模型所需变量。参赛者可以为此构造函数提供一些形参，
+        但必须在 get_pv_instance() 函数中自行填充策略类所需的实参。
+        """</span> 
+
+    @abstractmethod
+    <span class="token keyword">def</span> <span class="token function">get_next_states</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> cur_states<span class="token punctuation">:</span> Any<span class="token punctuation">,</span> coupon_action<span class="token punctuation">:</span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">,</span> user_actions<span class="token punctuation">:</span> List<span class="token punctuation">[</span>np<span class="token punctuation">.</span>ndarray<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> Any<span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""基于当天全体用户状态、当天的发券动作、与当天响应的用户动作, 生成次日用户状态。
+
+        Args:
+            cur_states (Any): 当天全体用户状态，具体形式由参赛者定义。
+            coupon_action (np.ndarray): 当天发券动作。
+                example: np.array([2.0, 0.70]), 即当天给所有用户发2张7折优惠券。
+            user_actions (List[np.ndarray]): 环境返回的当天所有用户动作, 具体形式和离线数据中一致。
+                example: [np.array([1.0, 22.34]), np.array([0, 0]), ... , np.array([2.0, 54.21])], 列表大小
+                    和离线数据中用户数一致, 且按顺序一一对应，即 user_actions[0] 对应离线数据中 index 为0的用户。
+
+        Return:
+            next_states (Any): 次日全体用户状态，具体形式由参赛者定义。
+        """</span>
+
+    @abstractmethod
+    <span class="token keyword">def</span> <span class="token function">get_action_from_policy</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> user_states<span class="token punctuation">:</span> Any<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""基于当天全体用户状态输出当天发券动作
+
+        Args:
+            user_states (Any): 当天全体用户状态，具体形式由参赛者定义。
+
+        Return:
+            coupon_action (np.ndarray): 当天由参赛者策略给出的发券动作(所有用户相同), 具体形式和离线数据保持一致。
+                example: np.array([2.0, 0.70]), 即当天给所有用户发两张7折优惠券。
+        """</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">MyPolicyValidation</span><span class="token punctuation">(</span>PolicyValidation<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""在此继承 PolicyValidation 接口类，实现参赛者自己的策略模型。
+    """</span>
+    <span class="token keyword">pass</span>
+
+
+<span class="token keyword">def</span> <span class="token function">get_pv_instance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> PolicyValidation<span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""返回一个符合 PolicyValidation 接口类的实例。该函数会被评测程序调用，用于获取参赛者的策略实现。"""</span>
+    <span class="token keyword">return</span> MyPolicyValidation<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<h1 id="策略评估"><a href="#策略评估" class="headerlink" title="策略评估"></a>策略评估</h1><p>平台的策略测试评估核心代码如下：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">validate</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> pv<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""在平台真实环境中评估策略性能
+
+    Args:
+        pv (PolicyValidation): 参赛者实现的类型为PolicyValidation的实例化对象
+    Return:
+        Total_ROI, Total_GMV: 参赛者的策略在测试期的总ROI和总GMV
+    """</span>
+    Total_GMV <span class="token operator">=</span> <span class="token number">0.0</span>
+    Total_Cost <span class="token operator">=</span> <span class="token number">0.0</span>
+    user_states <span class="token operator">=</span> pv<span class="token punctuation">.</span>initial_states
+    <span class="token keyword">for</span> day_index <span class="token keyword">in</span> range<span class="token punctuation">(</span>self<span class="token punctuation">.</span>validation_length<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Day'</span><span class="token punctuation">,</span> day_index<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>reset<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        coupon_action <span class="token operator">=</span> pv<span class="token punctuation">.</span>get_action_from_policy<span class="token punctuation">(</span>user_states<span class="token punctuation">)</span>
+        Cost<span class="token punctuation">,</span> GMV<span class="token punctuation">,</span> user_actions <span class="token operator">=</span> self<span class="token punctuation">.</span>step<span class="token punctuation">(</span>coupon_action<span class="token punctuation">)</span>
+        user_states <span class="token operator">=</span> pv<span class="token punctuation">.</span>get_next_states<span class="token punctuation">(</span>user_states<span class="token punctuation">,</span> coupon_action<span class="token punctuation">,</span> user_actions<span class="token punctuation">)</span>
+        Total_GMV <span class="token operator">+=</span> GMV
+        Total_Cost <span class="token operator">+=</span> Cost
+
+    Total_ROI <span class="token operator">=</span> Total_GMV <span class="token operator">/</span> max<span class="token punctuation">(</span>Total_Cost<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> Total_ROI<span class="token punctuation">,</span> Total_GMV</code></pre>
+<p>如此，在函数的输出Total_ROI不小于6.5下，Total_GMV就代表了最终的分数。</p>
+<h1 id="baseline提交与代码讲解"><a href="#baseline提交与代码讲解" class="headerlink" title="baseline提交与代码讲解"></a>baseline提交与代码讲解</h1><h2 id="定义单个用户状态"><a href="#定义单个用户状态" class="headerlink" title="定义单个用户状态"></a>定义单个用户状态</h2><p>为了学习用户模型，我们首先需要定义用户状态（即用户画像）。作为baseline，我们采取最简单(而非最好)的方式来定义每个用户的状态。</p>
+<p>比赛数据提供了历史60天的促销动作和用户动作，每一个用户收到的促销动作每天各不相同。我们仅取60天中的前30天数据去定义用户的初始状态，后30天的数据将用于学习用户模型。</p>
+<p>我们定义了如下表所示的<strong>三维特征</strong>，来表示每一个用户的初始状态。值得注意的是，表1所定义的用户状态是最简单的一种方式，参赛者为了获得更好的效果需要自定义更复杂的用户状态。</p>
+<table>
+<thead>
+<tr>
+<th>特征名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>total_num</td>
+<td>用户历史总订单数</td>
+</tr>
+<tr>
+<td>average_num</td>
+<td>用户历史单日订单数的平均（不考虑为0的天）</td>
+</tr>
+<tr>
+<td>average_fee</td>
+<td>用户历史单日订单均价的平均（不考虑为0的天）</td>
+</tr>
+</tbody></table>
+<p>上面的三个数构成的三维向量代表了<strong>用户的状态</strong>，根据这个状态，我们需要训练一个策略网络，输入该状态，输出需要发放的<strong>优惠券的数量和折扣</strong>。当用户得到了优惠券的数量和折扣后，就会输出一个<strong>用户的动作</strong>，即<strong>当天的订单数以及订单的平均金额</strong>。这是由环境决定的，属于不可控因素的一部分，但我们可以另外训练一个环境的模型来拟合用户的行为。</p>
+<p>注意：用户的状态可能还与促销的动作相关，但在baseline中没有把这个因素考虑进去。</p>
+<p>当得到用户当前的状态和用户采取的动作之后，我们可以定义用户的下一个状态：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+
+next_state <span class="token operator">=</span> np<span class="token punctuation">.</span>empty<span class="token punctuation">(</span>state<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+size <span class="token operator">=</span> <span class="token punctuation">(</span>state<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">/</span> state<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">if</span> state<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">0</span> <span class="token keyword">else</span> <span class="token number">0</span>
+next_state<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> state<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> act<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+next_state<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> state<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">/</span> <span class="token punctuation">(</span>size <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>act<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">-</span> state<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">*</span> float<span class="token punctuation">(</span>act<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">0.0</span><span class="token punctuation">)</span>
+next_state<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> state<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">/</span> <span class="token punctuation">(</span>size <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>act<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> state<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">*</span> float<span class="token punctuation">(</span>act<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">0.0</span><span class="token punctuation">)</span></code></pre>
+<p>我们把前30天的用户数据作为第31天的用户状态，我们可以通过第31天~第60天的用户动作，我们就可以去生成第32天到第61天的用户状态。</p>
+<img src="/2021/12/31/sai-ti-fen-xi-qiang-hua-xue-xi-luo-di-tiao-zhan-sai-xue-xi-zhi-ding-ping-deng-de-cu-xiao-ce-lue/3.png" class="">
+
+<h2 id="Revive-SDK-工具"><a href="#Revive-SDK-工具" class="headerlink" title="Revive SDK 工具"></a>Revive SDK 工具</h2><p><code>Revive SDK</code>支持通过编写yaml文件来描述决策流程。</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">graph</span><span class="token punctuation">:</span>
+    <span class="token key atrule">action_1</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> state
+    <span class="token key atrule">action_2</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> state
+    <span class="token punctuation">-</span> action_1
+    <span class="token key atrule">next_state</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> action_2
+    <span class="token punctuation">-</span> state
+  <span class="token key atrule">columns</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">total_num</span><span class="token punctuation">:</span>
+      <span class="token key atrule">dim</span><span class="token punctuation">:</span> state
+      <span class="token key atrule">type</span><span class="token punctuation">:</span> discrete
+      <span class="token key atrule">max</span><span class="token punctuation">:</span> <span class="token number">199</span>
+      <span class="token key atrule">min</span><span class="token punctuation">:</span> <span class="token number">0</span>
+      <span class="token key atrule">num</span><span class="token punctuation">:</span> <span class="token number">200</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">average_num</span><span class="token punctuation">:</span>
+      <span class="token key atrule">dim</span><span class="token punctuation">:</span> state
+      <span class="token key atrule">type</span><span class="token punctuation">:</span> continuous
+  <span class="token punctuation">-</span> <span class="token key atrule">average_fee</span><span class="token punctuation">:</span>
+      <span class="token key atrule">dim</span><span class="token punctuation">:</span> state
+      <span class="token key atrule">type</span><span class="token punctuation">:</span> continuous
+  <span class="token punctuation">-</span> <span class="token key atrule">day_deliver_coupon_num</span><span class="token punctuation">:</span>
+      <span class="token key atrule">dim</span><span class="token punctuation">:</span> action_1
+      <span class="token key atrule">type</span><span class="token punctuation">:</span> discrete
+      <span class="token key atrule">max</span><span class="token punctuation">:</span> <span class="token number">5</span>
+      <span class="token key atrule">min</span><span class="token punctuation">:</span> <span class="token number">0</span>
+      <span class="token key atrule">num</span><span class="token punctuation">:</span> <span class="token number">6</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">coupon_discount</span><span class="token punctuation">:</span>
+      <span class="token key atrule">dim</span><span class="token punctuation">:</span> action_1
+      <span class="token key atrule">type</span><span class="token punctuation">:</span> discrete
+      <span class="token key atrule">max</span><span class="token punctuation">:</span> <span class="token number">0.95</span>
+      <span class="token key atrule">min</span><span class="token punctuation">:</span> <span class="token number">0.6</span>
+      <span class="token key atrule">num</span><span class="token punctuation">:</span> <span class="token number">8</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">day_order_num</span><span class="token punctuation">:</span>
+      <span class="token key atrule">dim</span><span class="token punctuation">:</span> action_2
+      <span class="token key atrule">type</span><span class="token punctuation">:</span> discrete
+      <span class="token key atrule">max</span><span class="token punctuation">:</span> <span class="token number">99</span>
+      <span class="token key atrule">min</span><span class="token punctuation">:</span> <span class="token number">0</span>
+      <span class="token key atrule">num</span><span class="token punctuation">:</span> <span class="token number">100</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">day_average_order_fee</span><span class="token punctuation">:</span>
+      <span class="token key atrule">dim</span><span class="token punctuation">:</span> action_2
+      <span class="token key atrule">type</span><span class="token punctuation">:</span> continuous
+</code></pre>
+<p>以graph开头的部分负责描述决策流程。其中<code>state</code>、<code>action_1</code>、<code>action_2</code>、<code>next_state</code>是自定义的变量名，在此处分别代表<code>当天用户状态</code>、<code>促销动作</code>、<code>用户动作</code>和<code>次日用户状态</code>。从yaml文件我们可以看出<code>action_1</code>的结果受<code>state</code>影响，对应决策图就是<code>当天用户状态</code>指向<code>促销动作</code>,也可以理解为<code>action_1</code>是输出，<code>state</code>是对应的输入。同理，<code>action_2</code>的结果受<code>state</code>、<code>action_1</code>影响，<code>next_state</code>的结果受<code>state</code>和<code>action_2</code>的影响。</p>
+<p>在graph的下方就是定义<code>state</code>、<code>action_1</code>、<code>action_2</code>各个维度的含义，其中<code>state</code>包含三个维度，其中，一个离散变量0到199的总订单数total_num，一个连续变量历史单日订单数的平均average_num，一个连续变量历史单日订单均价的平均average_fee。<code>action_1</code>包含两个维度，其中，一个0到5的离散变量表示当日发放优惠券数day_deliver_coupon_num，一个0.6到0.95的离散变量表示优惠券折扣coupon_discount。<code>action_2</code>格子包含两个离散变量，其中，一个离散变量表示用户当天的订单数day_order_num，一个连续变量表示用户当天的平均订单花费day_average_order_fee。</p>
+<p>定义好yaml文件后，配置好有关训练数据和训练参数就可以调用算法包开始训练，训练完成后我们可以得到我们需要的用户策略模型<code>venv_model</code>，<code>venv_model</code>模型的使用方式是:</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+
+<span class="token keyword">def</span> <span class="token function">venv_model_use_demo</span><span class="token punctuation">(</span>states<span class="token punctuation">,</span> coupon_actions<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""调用用户策略模型
+    Args:
+        states(np.array):用户状态
+        coupon_actions(np.array):发券动作
+    Return:
+        user_actions(np.array):用户动作
+    """</span>
+    out <span class="token operator">=</span> venv_model<span class="token punctuation">.</span>infer_one_step<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">'state'</span><span class="token punctuation">:</span>states<span class="token punctuation">,</span> <span class="token string">'action_1'</span><span class="token punctuation">:</span>coupon_actions<span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> out<span class="token punctuation">[</span><span class="token string">'action_2'</span><span class="token punctuation">]</span></code></pre>
+<hr>
+<h2 id="基于虚拟环境的平等化促销策略学习"><a href="#基于虚拟环境的平等化促销策略学习" class="headerlink" title="基于虚拟环境的平等化促销策略学习"></a>基于虚拟环境的平等化促销策略学习</h2><p>对于非平等化促销策略，它输入单个用户状态，输出给单个用户发放的促销动作，因此每个人的促销动作可以各不相同。要学习一个平等化促销策略，它输入的是全体用户的状态，输出一个给全体用户发放相同的促销动作。全体用户的状态如果直接拼接成一维数组，是一个非常高维的输入，所以在输入平等化促销策略前，需要降维处理。这里我们采用最简单的方式，去计算当天全体用户状态每一维的统计量，并额外引入了两维实时统计量，实现代码如下：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+
+<span class="token keyword">def</span> <span class="token function">_states_to_obs</span><span class="token punctuation">(</span>states<span class="token punctuation">:</span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">,</span> day_total_order_num<span class="token punctuation">:</span> int<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> day_roi<span class="token punctuation">:</span> float<span class="token operator">=</span><span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""将所有用户状态的二维数组降维为一维的用户群体的状态
+        Args:
+            states(np.ndarray): 包含每个用户各自状态的二维数组
+            day_total_order_num(int): 全体用户前一天的总订单数，如果是初始第一天，默认为0
+            day_roi(float): 全体用户前一天的ROI，如果是初始第一天，默认为0.0
+        Return:
+            用户群体的状态(np.array)
+        """</span>
+    <span class="token keyword">assert</span> len<span class="token punctuation">(</span>states<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">2</span>
+    mean_obs <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>states<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+    std_obs <span class="token operator">=</span> np<span class="token punctuation">.</span>std<span class="token punctuation">(</span>states<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+    max_obs <span class="token operator">=</span> np<span class="token punctuation">.</span>max<span class="token punctuation">(</span>states<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+    min_obs <span class="token operator">=</span> np<span class="token punctuation">.</span>min<span class="token punctuation">(</span>states<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+    day_total_order_num<span class="token punctuation">,</span> day_roi <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>day_total_order_num<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>day_roi<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> np<span class="token punctuation">.</span>concatenate<span class="token punctuation">(</span><span class="token punctuation">[</span>mean_obs<span class="token punctuation">,</span> std_obs<span class="token punctuation">,</span> max_obs<span class="token punctuation">,</span> min_obs<span class="token punctuation">,</span> day_total_order_num<span class="token punctuation">,</span> day_roi<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span></code></pre>
+<p>降维之后得到的的用户群体的状态是平等化促销策略的真正输入，策略的动作空间则和比赛数据中保持一致。我们可以通过以下的方式定义奖励函数：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> gym <span class="token keyword">import</span> Env
+
+<span class="token keyword">class</span> <span class="token class-name">VirtualMarketEnv</span><span class="token punctuation">(</span>Env<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    MAX_ENV_STEP <span class="token operator">=</span> <span class="token number">14</span> <span class="token comment" spellcheck="true"># 评估天数，作为环境的步长, 初赛14, 复赛30</span>
+    ROI_THRESHOLD <span class="token operator">=</span> <span class="token number">7.5</span> <span class="token comment" spellcheck="true"># 考虑虚拟环境误差, 评估的总ROI阈值取7.5, 比实际线上6.5要高1.0</span>
+    ZERO_GMV <span class="token operator">=</span> <span class="token number">81840.0763705537</span> <span class="token comment" spellcheck="true">#在评估环境中, 在评估天数里, 不发券带来的总GMV</span>
+    <span class="token comment" spellcheck="true"># self.total_gmv: 评估期间总的GMV, self.total_cost: 评估期间总的成本</span>
+    <span class="token keyword">def</span> <span class="token function">step</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> action<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+        <span class="token comment" spellcheck="true"># 稀疏reward, 评估最后一天返回最终的reward, 前面的天reward都是0</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>current_env_step<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> VirtualMarketEnv<span class="token punctuation">.</span>MAX_ENV_STEP<span class="token punctuation">:</span>
+            reward <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            total_roi <span class="token operator">=</span> self<span class="token punctuation">.</span>total_gmv <span class="token operator">/</span> self<span class="token punctuation">.</span>total_cost
+            <span class="token keyword">if</span> total_roi <span class="token operator">>=</span> VirtualMarketEnv<span class="token punctuation">.</span>ROI_THRESHOLD<span class="token punctuation">:</span> 
+                <span class="token comment" spellcheck="true"># 超过ROI阈值, (总GMV/基线总GMV)作为回报</span>
+                reward <span class="token operator">=</span> self<span class="token punctuation">.</span>total_gmv <span class="token operator">/</span> VirtualMarketEnv<span class="token punctuation">.</span>ZERO_GMV
+            <span class="token keyword">else</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true"># 未超过ROI阈值, (总ROI - ROI阈值)作为回报</span>
+                reward <span class="token operator">=</span> total_roi <span class="token operator">-</span> VirtualMarketEnv<span class="token punctuation">.</span>ROI_THRESHOLD</code></pre>
+<p>确定好整个问题的MDP后，可以使用任何可行的强化学习算法，Baseline中直接使用了<code>Proximal Policy Optimization（PPO）</code>来训练最终的平等化促销策略。需要注意PPO训练的是随机策略，如果直接提交随机策略，有可能造成每次评估的结果有随机扰动。</p>
+<h2 id="策略提交"><a href="#策略提交" class="headerlink" title="策略提交"></a>策略提交</h2><p>训练好平等化促销策略后，需要上传策略进行在线评估。上传的策略是一个打包好的zip文件，其中以<code>policy_validation.py</code>作为入口点，并通过<code>metadata</code>文件指定线上评估所需要的环境（我们支持：<code>pytorch-1.8</code>, <code>pytorch-1.9</code>, <code>pytorch-1.10</code>）。</p>
+<p>在<code>policy_validation.py</code>中，有一个<code>PolicyValidation</code>接口类，以及一个调用后返回一个<code>PolicyValidation</code>实例的<code>get_pv_instance()</code>函数。提交策略后，线上环境会调用<code>get_pv_instance()</code>，并根据<code>PolicyValidation</code>定义好的接口规范对选手的策略进行评估。选手则需要继承<code>PolicyValidation</code>接口类，实现需要的抽象方法与成员，并在<code>get_pv_instance()</code>的实现中返回自己继承的子类实例。</p>
+<p><code>PolicyValidation</code>类需要实现：</p>
+<p>* 以第61天的用户状态数据，初始化<code>PolicyValidation</code>类的全体用户的初始状态（对应评估的第一天的用户状态）。<br>* 根据当天全体用户的状态、促销动作和当天响应的用户动作，返回次日全体用户的状态。<br>* 据当天全体用户的状态，返回当天的促销动作。</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> os
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">from</span> abc <span class="token keyword">import</span> abstractmethod
+<span class="token keyword">from</span> typing <span class="token keyword">import</span> Any<span class="token punctuation">,</span> List
+
+<span class="token comment" spellcheck="true"># 抽象类</span>
+<span class="token keyword">class</span> <span class="token class-name">PolicyValidation</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 初始化的用户状态由我们之前训练的60天的数据得到</span>
+    initial_states<span class="token punctuation">:</span> Any <span class="token operator">=</span> None
+
+    @abstractmethod
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""可以定义你自己的参数以及初始化网络模型等
+        但必须自己在 get_pv_instance 函数中填写参数。 
+        """</span>
+
+    @abstractmethod
+    <span class="token keyword">def</span> <span class="token function">get_next_states</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> cur_states<span class="token punctuation">:</span> Any<span class="token punctuation">,</span> coupon_action<span class="token punctuation">:</span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">,</span> user_actions<span class="token punctuation">:</span> List<span class="token punctuation">[</span>np<span class="token punctuation">.</span>ndarray<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> Any<span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""利用今日的用户状态，用户的动作，优惠券的动作，返回次日的用户状态."""</span>
+
+    @abstractmethod
+    <span class="token keyword">def</span> <span class="token function">get_action_from_policy</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> user_states<span class="token punctuation">:</span> Any<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""利用今日用户的状态，返回优惠券动作"""</span>
+
+
+<span class="token keyword">def</span> <span class="token function">get_pv_instance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> PolicyValidation<span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""该函数由评估方运行，返回一个策略验证类，用来评估参与者策略效果
+    """</span>
+    <span class="token keyword">from</span> baseline_policy_validation <span class="token keyword">import</span> BaselinePolicyValidation
+    <span class="token comment" spellcheck="true"># os.path.split返回路径和文件名，os.path.abspath(__file__)获取当前脚本的完整路径</span>
+    submission_dir<span class="token punctuation">,</span> _ <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>split<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>abspath<span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> BaselinePolicyValidation<span class="token punctuation">(</span>f<span class="token string">"{submission_dir}/data/evaluation_start_states.npy"</span><span class="token punctuation">,</span> f<span class="token string">"{submission_dir}/data/rl_model.zip"</span><span class="token punctuation">)</span></code></pre>
+<p>接下来看看继承这个抽象类的BaselinePolicyValidation是怎么实现的：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token comment" spellcheck="true"># 通过typing引入注解类型，就能标注函数的返回类型和参数类型了</span>
+<span class="token keyword">from</span> typing <span class="token keyword">import</span> List<span class="token punctuation">,</span> Optional
+<span class="token keyword">from</span> stable_baselines3 <span class="token keyword">import</span> PPO
+<span class="token keyword">from</span> policy_validation <span class="token keyword">import</span> PolicyValidation
+
+
+<span class="token keyword">class</span> <span class="token class-name">BaselinePolicyValidation</span><span class="token punctuation">(</span>PolicyValidation<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 初始化</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> initial_states_path<span class="token punctuation">,</span> policy_model_path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 导入初始用户状态</span>
+        self<span class="token punctuation">.</span>initial_states <span class="token operator">=</span> np<span class="token punctuation">.</span>load<span class="token punctuation">(</span>initial_states_path<span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># 导入训练模型</span>
+        self<span class="token punctuation">.</span>policy_model <span class="token operator">=</span> PPO<span class="token punctuation">.</span>load<span class="token punctuation">(</span>policy_model_path<span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># 数据清零</span>
+        self<span class="token punctuation">.</span>cur_day_total_order_num <span class="token operator">=</span> <span class="token number">0</span>
+        self<span class="token punctuation">.</span>cur_day_roi <span class="token operator">=</span> <span class="token number">0.0</span>
+    <span class="token comment" spellcheck="true"># 对用户的状态进行整体的降维</span>
+    <span class="token keyword">def</span> <span class="token function">_states_to_obs</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> states<span class="token punctuation">:</span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">assert</span> len<span class="token punctuation">(</span>states<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">2</span>
+        mean_obs <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>states<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+        std_obs <span class="token operator">=</span> np<span class="token punctuation">.</span>std<span class="token punctuation">(</span>states<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+        max_obs <span class="token operator">=</span> np<span class="token punctuation">.</span>max<span class="token punctuation">(</span>states<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+        min_obs <span class="token operator">=</span> np<span class="token punctuation">.</span>min<span class="token punctuation">(</span>states<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+        day_total_order_num<span class="token punctuation">,</span> day_roi <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>self<span class="token punctuation">.</span>cur_day_total_order_num<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>self<span class="token punctuation">.</span>cur_day_roi<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> np<span class="token punctuation">.</span>concatenate<span class="token punctuation">(</span><span class="token punctuation">[</span>mean_obs<span class="token punctuation">,</span> std_obs<span class="token punctuation">,</span> max_obs<span class="token punctuation">,</span> min_obs<span class="token punctuation">,</span> day_total_order_num<span class="token punctuation">,</span> day_roi<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 计算用户的下一个状态</span>
+    <span class="token keyword">def</span> <span class="token function">get_next_states</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> cur_states<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span>List<span class="token punctuation">[</span>np<span class="token punctuation">.</span>ndarray<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> coupon_action<span class="token punctuation">:</span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">,</span> user_actions<span class="token punctuation">:</span> List<span class="token punctuation">[</span>np<span class="token punctuation">.</span>ndarray<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 获取相应的数据</span>
+        user_actions_array <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>user_actions<span class="token punctuation">)</span>
+        day_order_num<span class="token punctuation">,</span> day_avg_fee <span class="token operator">=</span> user_actions_array<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> user_actions_array<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+        coupon_num<span class="token punctuation">,</span> discount <span class="token operator">=</span> coupon_action<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> coupon_action<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+        <span class="token comment" spellcheck="true"># 下面几行是由一维数组拓展成二维数组的下一个状态计算方式</span>
+        next_states <span class="token operator">=</span> np<span class="token punctuation">.</span>empty<span class="token punctuation">(</span>cur_states<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+        size_array <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span>x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">/</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token keyword">if</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">0</span> <span class="token keyword">else</span> <span class="token number">0</span><span class="token punctuation">]</span> <span class="token keyword">for</span> i<span class="token punctuation">,</span> x <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>cur_states<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        next_states<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> cur_states<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">+</span> day_order_num
+        next_states<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> cur_states<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">/</span> <span class="token punctuation">(</span>size_array <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>day_order_num <span class="token operator">-</span> cur_states<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>day_order_num <span class="token operator">></span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span>np<span class="token punctuation">.</span>float32<span class="token punctuation">)</span>
+        next_states<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> cur_states<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">/</span> <span class="token punctuation">(</span>size_array <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>day_avg_fee <span class="token operator">-</span> cur_states<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>day_avg_fee <span class="token operator">></span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span>np<span class="token punctuation">.</span>float32<span class="token punctuation">)</span>
+
+        self<span class="token punctuation">.</span>cur_day_total_order_num <span class="token operator">=</span> np<span class="token punctuation">.</span>sum<span class="token punctuation">(</span>day_order_num<span class="token punctuation">)</span>
+        day_coupon_used_num <span class="token operator">=</span> np<span class="token punctuation">.</span>min<span class="token punctuation">(</span>np<span class="token punctuation">.</span>concatenate<span class="token punctuation">(</span><span class="token punctuation">[</span>day_order_num<span class="token punctuation">,</span> coupon_num <span class="token operator">*</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span>day_order_num<span class="token punctuation">.</span>shape<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> keepdims<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+        cost_array <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> discount<span class="token punctuation">)</span> <span class="token operator">*</span> day_coupon_used_num <span class="token operator">*</span> day_avg_fee
+        gmv_array <span class="token operator">=</span> day_avg_fee <span class="token operator">*</span> day_order_num <span class="token operator">-</span> cost_array
+        self<span class="token punctuation">.</span>cur_day_roi <span class="token operator">=</span> np<span class="token punctuation">.</span>sum<span class="token punctuation">(</span>gmv_array<span class="token punctuation">)</span> <span class="token operator">/</span> max<span class="token punctuation">(</span>np<span class="token punctuation">.</span>sum<span class="token punctuation">(</span>cost_array<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> next_states
+
+    <span class="token keyword">def</span> <span class="token function">get_action_from_policy</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> user_states<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span>List<span class="token punctuation">[</span>np<span class="token punctuation">.</span>ndarray<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 获取所有用户状态降维后得到的神经网络的输入</span>
+        obs <span class="token operator">=</span> self<span class="token punctuation">.</span>_states_to_obs<span class="token punctuation">(</span>user_states<span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># 通过我们训练的模型得到我们的优惠券动作</span>
+        action<span class="token punctuation">,</span> _ <span class="token operator">=</span> self<span class="token punctuation">.</span>policy_model<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>obs<span class="token punctuation">,</span> deterministic<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+        action <span class="token operator">=</span> action<span class="token punctuation">.</span>astype<span class="token punctuation">(</span>np<span class="token punctuation">.</span>float32<span class="token punctuation">)</span>
+        action<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0.95</span> <span class="token operator">-</span> <span class="token number">0.05</span> <span class="token operator">*</span> action<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+
+        <span class="token keyword">return</span> action</code></pre>
+<hr>
+<hr>
+<p><strong>赛题本身的内容和baseline提交方式讲解完毕，后面我会讲解详细的训练过程，以及尝试更好的方案，敬请期待！</strong></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">微笑紫瞳星</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://tianjuewudi.gitee.io/2021/12/31/sai-ti-fen-xi-qiang-hua-xue-xi-luo-di-tiao-zhan-sai-xue-xi-zhi-ding-ping-deng-de-cu-xiao-ce-lue/">https://tianjuewudi.gitee.io/2021/12/31/sai-ti-fen-xi-qiang-hua-xue-xi-luo-di-tiao-zhan-sai-xue-xi-zhi-ding-ping-deng-de-cu-xiao-ce-lue/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">微笑紫瞳星</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">强化学习</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%AF%94%E8%B5%9B/">
+                                    <span class="chip bg-color">强化学习比赛</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">您的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'bpzS5Q9Q9zMl4doyyDGqIqqq-gzGzoHsz',
+        appKey: 'M0IfLJW2G1dCMyLTb90tFxT8',
+        notify: 'true' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '请畅所欲言'
+    });
+</script>
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2021/12/31/sai-ti-fen-xi-qiang-hua-xue-xi-luo-di-tiao-zhan-sai-xue-xi-zhi-ding-ping-deng-de-cu-xiao-ce-lue/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        
+                        <span class="card-title"></span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-31
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%AF%94%E8%B5%9B/" class="post-category">
+                                    强化学习比赛
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">强化学习</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%AF%94%E8%B5%9B/">
+                        <span class="chip bg-color">强化学习比赛</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/12/29/duo-zhi-neng-ti-qiang-hua-xue-xi-suan-fa-ma-poca/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="多智能体强化学习算法MA-POCA">
+                        
+                        <span class="card-title">多智能体强化学习算法MA-POCA</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    强化学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">强化学习</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('50')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 微笑紫瞳星<br />'
+            + '文章作者: 微笑紫瞳星<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处，谢谢啦~';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="tencent"
+                   type="playlist"
+                   id="8075110837"
+                   fixed='true'
+                   autoplay='true'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.35'
+                   list-folded='false'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">微笑紫瞳星</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">247.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2021";
+                    var startMonth = "1";
+                    var startDate = "9";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "11";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:1121452406@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1121452406" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1121452406" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://blog.csdn.net/tianjuewudi" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://blog.csdn.net/tianjuewudi" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false});</script></body>
+
+</html>
