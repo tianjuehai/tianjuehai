@@ -475,14 +475,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-01-22
+                    2022-02-23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    1.5k
                 </div>
                 
 
@@ -567,6 +567,11 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted 
 <p>就能激活对应环境。然后我们就可以通过：</p>
 <pre class=" language-powershell"><code class="language-powershell">pip install 包名</code></pre>
 <p>来安装任意想要的包。</p>
+<p>同时我们也可以使用conda来安装环境，我们可以先下载一个miniconda，然后执行命令直接创建一个cuda环境：</p>
+<pre class=" language-powershell"><code class="language-powershell">conda create <span class="token operator">-</span>n gym_learning python=3<span class="token punctuation">.</span>8 cudatoolkit=11<span class="token punctuation">.</span>3</code></pre>
+<p>我们可以通过以下命令来激活gym_learning环境。</p>
+<pre class=" language-powershell"><code class="language-powershell">conda activate gym_learning</code></pre>
+<p>安装包通过conda install即可。</p>
 <p>如果包下载失败出现timeout的错误，那么需要换源，在 ~ 下找到一个名为.pip的文件夹，如果没有就创建一个：</p>
 <pre class=" language-powershell"><code class="language-powershell">mkdir <span class="token punctuation">.</span>pip</code></pre>
 <p>创建完成后，在里面创建一个pip.conf的文件，填上以下内容并保存就能配置好镜像了：</p>
@@ -594,7 +599,7 @@ trusted-host=mirrors.aliyun.com</code></pre>
 <li>sudo dpkg -i ，然后把文件拖到后面形成路径，执行命令。</li>
 </ol>
 <h3 id="释放内存"><a href="#释放内存" class="headerlink" title="释放内存"></a>释放内存</h3><p>WSL2经常性不释放内存，导致电脑死机，所以我们需要手动释放，执行命令（管理员权限下）：</p>
-<pre class=" language-powershell"><code class="language-powershell"> <span class="token function">echo</span> 3 &gt; <span class="token operator">/</span>proc<span class="token operator">/</span>sys<span class="token operator">/</span>vm<span class="token operator">/</span>drop_caches</code></pre>
+<pre class=" language-powershell"><code class="language-powershell"> <span class="token function">echo</span> 3 > <span class="token operator">/</span>proc<span class="token operator">/</span>sys<span class="token operator">/</span>vm<span class="token operator">/</span>drop_caches</code></pre>
 
                 
             </div>
@@ -1416,7 +1421,7 @@ trusted-host=mirrors.aliyun.com</code></pre>
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">258.1k</span>&nbsp;字
+                class="white-color">282.4k</span>&nbsp;字
             
             
             

@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tianjuewudi.gitee.io/2022/01/06/xun-lian-liu-cheng-qiang-hua-xue-xi-luo-di-tiao-zhan-sai-xue-xi-zhi-ding-ping-deng-de-cu-xiao-ce-lue/</loc>
-    <lastmod>2022-02-18</lastmod>
+    <loc>https://tianjuewudi.gitee.io/2022/02/17/ai-qiu-qiu-da-zuo-zhan-go-bigger-duo-zhi-neng-ti-jue-ce-zhi-neng-tiao-zhan-sai-sai-ti-fen-xi/</loc>
+    <lastmod>2022-03-14</lastmod>
   </url>
   <url>
-    <loc>https://tianjuewudi.gitee.io/2022/02/17/ai-qiu-qiu-da-zuo-zhan-go-bigger-duo-zhi-neng-ti-jue-ce-zhi-neng-tiao-zhan-sai-sai-ti-fen-xi/</loc>
-    <lastmod>2022-02-17</lastmod>
+    <loc>https://tianjuewudi.gitee.io/2022/02/19/qiang-hua-xue-xi-zhi-stable-baseline3-de-shi-yong/</loc>
+    <lastmod>2022-02-23</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2022/01/17/win10-xia-shi-yong-wsl2-an-zhuang-linux-ji-pei-zhi-python-huan-jing/</loc>
+    <lastmod>2022-02-23</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuewudi.gitee.io/2022/01/06/xun-lian-liu-cheng-qiang-hua-xue-xi-luo-di-tiao-zhan-sai-xue-xi-zhi-ding-ping-deng-de-cu-xiao-ce-lue/</loc>
+    <lastmod>2022-02-18</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/12/31/sai-ti-fen-xi-qiang-hua-xue-xi-luo-di-tiao-zhan-sai-xue-xi-zhi-ding-ping-deng-de-cu-xiao-ce-lue/</loc>
@@ -19,10 +27,6 @@
   <url>
     <loc>https://tianjuewudi.gitee.io/2022/01/22/wsl2-duan-pei-zhi-pytorch-gpu-jia-su-huan-jing/</loc>
     <lastmod>2022-01-25</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuewudi.gitee.io/2022/01/17/win10-xia-shi-yong-wsl2-an-zhuang-linux-ji-pei-zhi-python-huan-jing/</loc>
-    <lastmod>2022-01-22</lastmod>
   </url>
   <url>
     <loc>https://tianjuewudi.gitee.io/2021/12/29/duo-zhi-neng-ti-qiang-hua-xue-xi-suan-fa-ma-poca/</loc>
