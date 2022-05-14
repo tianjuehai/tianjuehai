@@ -479,21 +479,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-03-14
+                    2022-03-15
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    13.4k
+                    13.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    68 分
+                    69 分
                 </div>
                 
 
@@ -521,9 +521,9 @@
                 <p>比赛网页：<a target="_blank" rel="noopener" href="https://www.datafountain.cn/competitions/549">https://www.datafountain.cn/competitions/549</a></p>
 <p>repo：<a target="_blank" rel="noopener" href="https://github.com/opendilab/Gobigger-Explore/">https://github.com/opendilab/Gobigger-Explore/</a></p>
 <h1 id="入门篇"><a href="#入门篇" class="headerlink" title="入门篇"></a>入门篇</h1><h2 id="赛题说明"><a href="#赛题说明" class="headerlink" title="赛题说明"></a>赛题说明</h2><p>本次竞赛采用 <a target="_blank" rel="noopener" href="https://github.com/opendilab/GoBigger">Go-Bigger</a> 作为游戏环境。Go-Bigger 是一款多人组队竞技游戏。更多细节请参考 Go-Bigger 文档。在游戏中，每支竞赛参赛队伍控制游戏中一支队伍（每支队伍由多个玩家组成）。竞赛参赛队伍需要通过提交智能体的方式，来对游戏中的某个队伍及其所包含的玩家进行控制，通过团队配合来获取更高的分数，从而在游戏中取得更高的排名。</p>
-<h3 id="游戏细节"><a href="#游戏细节" class="headerlink" title="游戏细节"></a>游戏细节</h3><img src="/2022/02/17/ai-qiu-qiu-da-zuo-zhan-go-bigger-duo-zhi-neng-ti-jue-ce-zhi-neng-tiao-zhan-sai-sai-ti-fen-xi/1.gif" class="">
+<h3 id="游戏细节"><a href="#游戏细节" class="headerlink" title="游戏细节"></a>游戏细节</h3><img src="/2022/02/17/ai-qiu-qiu-da-zuo-zhan-go-bigger-duo-zhi-neng-ti-jue-ce-zhi-neng-tiao-zhan-sai-sai-ti-fen-xi/1.gif" class>
 
-<img src="/2022/02/17/ai-qiu-qiu-da-zuo-zhan-go-bigger-duo-zhi-neng-ti-jue-ce-zhi-neng-tiao-zhan-sai-sai-ti-fen-xi/2.png" class="">
+<img src="/2022/02/17/ai-qiu-qiu-da-zuo-zhan-go-bigger-duo-zhi-neng-ti-jue-ce-zhi-neng-tiao-zhan-sai-sai-ti-fen-xi/2.png" class>
 
 <p>在本次大赛中，对于一局游戏，参赛队伍将控制游戏中的一支队伍，并以此对抗游戏中的其余三支队伍。参赛队伍的目标是吃掉其他单位并获得更大的体积。只要在球比敌方大的时候和敌方进行碰撞，就能把敌方吃掉，获得更大的体积，但是，更大的体积意味着更慢的移动速度，我们需要在平衡两者的基础上进行决策。有以下几点需要注意：</p>
 <ol>
@@ -659,7 +659,7 @@
 <h3 id="奖励函数"><a href="#奖励函数" class="headerlink" title="奖励函数"></a>奖励函数</h3><p>这个环境比拼的就是谁的队伍总体积/总体量/总重量更大，因此我们可以将整个队伍相邻两帧之间的大小差作为队伍的整体奖励。我们可以直接使用每一个step相加的奖励作为一个episode的奖励，一个episode奖励最大的队伍会获得胜利。我们还需要处理一下奖励函数的范围以防止它过大。</p>
 <h3 id="算法选择"><a href="#算法选择" class="headerlink" title="算法选择"></a>算法选择</h3><p>由于动作空间被我们改造成离散的了，所以可以通过最经典的DQN算法 + 多模态编码器神经网络来训练我们的智能体。</p>
 <h3 id="网络模型选择"><a href="#网络模型选择" class="headerlink" title="网络模型选择"></a>网络模型选择</h3><p>第一，我们可以把2D图像输入到模型中，经过几层网络变成一个特征向量。第二，我们需要建模各个单位之间的联系，每个单位是一个向量表示，那就可以复用Transformer中的编码器结构，并将编码器的输出在单位维度进行平均，获得最终的单位特征向量。第三，全局信息，就是一个非常常见的长向量，使用由全连接层构成的多层感知机即可。这三个部分，拼接在一起，可以构成长向量，然后通过一系列的全连接层，Dueling DQN和Double DQN也添加到了算法中。</p>
-<img src="/2022/02/17/ai-qiu-qiu-da-zuo-zhan-go-bigger-duo-zhi-neng-ti-jue-ce-zhi-neng-tiao-zhan-sai-sai-ti-fen-xi/3.png" class="">
+<img src="/2022/02/17/ai-qiu-qiu-da-zuo-zhan-go-bigger-duo-zhi-neng-ti-jue-ce-zhi-neng-tiao-zhan-sai-sai-ti-fen-xi/3.png" class>
 
 
 
@@ -2494,6 +2494,61 @@ logging<span class="token punctuation">.</span>basicConfig<span class="token pun
 <pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> collections <span class="token keyword">import</span> OrderedDict</code></pre>
 <p>在config文件中加上对应的属性，policy属性中加上pretrain = True,pretrain_path = “start.pth.tar”。</p>
 <p>然后运行gobigger_vsbot_explore_main.py即可读取模仿学习的模型文件进行强化学习。</p>
+<hr>
+<p>提交之前：</p>
+<p>在我们使用gobigger_vsbot_explore_main.py后需要更改my_submission.py：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> random
+<span class="token keyword">import</span> os
+<span class="token keyword">import</span> gym
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> copy
+<span class="token keyword">import</span> torch
+<span class="token keyword">import</span> time
+
+<span class="token keyword">from</span> ding<span class="token punctuation">.</span>config <span class="token keyword">import</span> compile_config
+<span class="token keyword">from</span> <span class="token punctuation">.</span>policy<span class="token punctuation">.</span>gobigger_policy <span class="token keyword">import</span> DQNPolicy
+<span class="token keyword">from</span> <span class="token punctuation">.</span>envs <span class="token keyword">import</span> GoBiggerExploreEnv
+<span class="token keyword">from</span> <span class="token punctuation">.</span>model <span class="token keyword">import</span> GoBiggerHybridActionSimpleV3
+<span class="token comment" spellcheck="true">#from .config.gobigger_no_spatial_config import main_config</span>
+<span class="token keyword">from</span> <span class="token punctuation">.</span>go_explore<span class="token punctuation">.</span>config <span class="token keyword">import</span> main_config
+
+<span class="token keyword">class</span> <span class="token class-name">BaseSubmission</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> team_name<span class="token punctuation">,</span> player_names<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>team_name <span class="token operator">=</span> team_name
+        self<span class="token punctuation">.</span>player_names <span class="token operator">=</span> player_names
+
+    <span class="token keyword">def</span> <span class="token function">get_actions</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">raise</span> NotImplementedError
+
+<span class="token keyword">class</span> <span class="token class-name">MySubmission</span><span class="token punctuation">(</span>BaseSubmission<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> team_name<span class="token punctuation">,</span> player_names<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        super<span class="token punctuation">(</span>MySubmission<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span>team_name<span class="token punctuation">,</span> player_names<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>cfg <span class="token operator">=</span> copy<span class="token punctuation">.</span>deepcopy<span class="token punctuation">(</span>main_config<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>cfg <span class="token operator">=</span> compile_config<span class="token punctuation">(</span>
+            self<span class="token punctuation">.</span>cfg<span class="token punctuation">,</span>
+            policy<span class="token operator">=</span>DQNPolicy<span class="token punctuation">,</span>
+            save_cfg<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>cfg<span class="token punctuation">.</span>env<span class="token punctuation">.</span>train <span class="token operator">=</span> <span class="token boolean">False</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>cfg<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>root_path <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>abspath<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>dirname<span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>model <span class="token operator">=</span> GoBiggerHybridActionSimpleV3<span class="token punctuation">(</span><span class="token operator">**</span>self<span class="token punctuation">.</span>cfg<span class="token punctuation">.</span>policy<span class="token punctuation">.</span>model<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>model<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>self<span class="token punctuation">.</span>root_path<span class="token punctuation">,</span> <span class="token string">'supplements'</span><span class="token punctuation">,</span> <span class="token string">'ckpt_best.pth.tar'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> map_location<span class="token operator">=</span><span class="token string">'cpu'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'model'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>policy <span class="token operator">=</span> DQNPolicy<span class="token punctuation">(</span>self<span class="token punctuation">.</span>cfg<span class="token punctuation">.</span>policy<span class="token punctuation">,</span> model<span class="token operator">=</span>self<span class="token punctuation">.</span>model<span class="token punctuation">)</span><span class="token punctuation">.</span>eval_mode
+        self<span class="token punctuation">.</span>env <span class="token operator">=</span> GoBiggerExploreEnv<span class="token punctuation">(</span>self<span class="token punctuation">.</span>cfg<span class="token punctuation">.</span>env<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">get_actions</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        obs_transform <span class="token operator">=</span> self<span class="token punctuation">.</span>env<span class="token punctuation">.</span>_obs_transform_eval<span class="token punctuation">(</span>obs<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        obs_transform <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">:</span> obs_transform<span class="token punctuation">}</span>
+        raw_actions <span class="token operator">=</span> self<span class="token punctuation">.</span>policy<span class="token punctuation">.</span>forward<span class="token punctuation">(</span>obs_transform<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'action'</span><span class="token punctuation">]</span>
+        raw_actions <span class="token operator">=</span> raw_actions<span class="token punctuation">.</span>tolist<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        actions <span class="token operator">=</span> <span class="token punctuation">{</span>n<span class="token punctuation">:</span> GoBiggerExploreEnv<span class="token punctuation">.</span>_to_raw_action<span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token keyword">for</span> n<span class="token punctuation">,</span> a <span class="token keyword">in</span> zip<span class="token punctuation">(</span>obs<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> raw_actions<span class="token punctuation">)</span><span class="token punctuation">}</span>
+        <span class="token keyword">return</span> actions</code></pre>
+<p>我们需要把go-explore文件夹改为go_explore，否则头文件导入不了。</p>
+<p>同时我们还需要给GoBiggerExploreEnv加上_obs_transform_eval函数，从GoBiggerSimpleEnv幅值过来即可。</p>
+<p>复制一个训练好的模型到根目录下supplements文件夹改名为ckpt_best.pth.tar。</p>
+<p>用test函数检查通过，就可以提交了。</p>
 <h2 id="方法改进"><a href="#方法改进" class="headerlink" title="方法改进"></a>方法改进</h2><p>在本次比赛中，为了得到更好的效果，可以在baseline的基础上进行以下改进：</p>
 <p>1、写一个更强的硬编码游戏AI，就能得到更好的模仿学习模型，从而使得强化学习的起点和上限更高。</p>
 <p>2、改进强化学习的神经网络模型，其中包括考虑提取什么样的特征作为神经网络的输入更为有效，采取连续还是离散的输出更为有效，隐藏层的结构等等，这部分通常比较复杂。</p>
@@ -3332,7 +3387,7 @@ logging<span class="token punctuation">.</span>basicConfig<span class="token pun
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">282.4k</span>&nbsp;字
+                class="white-color">285.5k</span>&nbsp;字
             
             
             
