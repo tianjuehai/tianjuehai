@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>SCI写作指南</title>
+      <link href="2022/07/19/sci-xie-zuo-zhi-nan/"/>
+      <url>2022/07/19/sci-xie-zuo-zhi-nan/</url>
+      
+        <content type="html"><![CDATA[<p>参考链接：<a href="https://space.bilibili.com/230105574/channel/seriesdetail?sid=1569600">期刊审稿人手把手教你写一篇SCI</a><br>我的相关文章：<a href="https://blog.csdn.net/tianjuewudi/article/details/112503959">科研方法笔记</a></p><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本人为学术菜鸟，这篇文章是我初入学术圈，收集网上的资料，归纳总结而来，请各位大佬多多指教。</p><h2 id="研究前"><a href="#研究前" class="headerlink" title="研究前"></a>研究前</h2><p>确定研究方向。<br>大量阅读论文。<br>阅读时做一个word文档，五列的表格。<br>第一列，文献标题。第二列，期刊名称。第三列，研究对象、问题。第四列，研究方法、理论、视角。第五列，数据来源。</p><h2 id="论文写作"><a href="#论文写作" class="headerlink" title="论文写作"></a>论文写作</h2><p>首先，要明白一篇论文由几个部分构成，首先是标题（Title），然后是摘要（Abstract），然后是引言或文献综述（Introduction），研究方法（method），结果和讨论（result/discussion），结论（conclusion），参考文献（reference）。<br>其中题目和摘要是浓缩的精华,需要以简洁明了的语言在很短的篇幅介绍文章的内容，而引言和文献综述的目的在于讲别人的故事想办法引出自己的故事。研究方法里包含你的实验，你的公式，你的算法。结果和讨论是论文中的重头戏，通过现象看本质，通过实验结果得出有意义的东西。最后是结论，用来阐述文章的贡献。结论后面会附上参考文献，是我们对于前人和同行的致敬。<br>写作顺序：首先，我们应该从<strong>研究方法</strong>开始写起。当得到一个问题时，我们应该去分析和解决它，得出结论以后，再进入<strong>结果和讨论</strong>的写作部分。然后自然而然地过渡到<strong>结论</strong>部分。在这过程中需要自始至终保持<strong>文献</strong>的阅读量，和别人的工作对比，找到自己工作的独创性。然后把这些形成<strong>引言和文献综述</strong>部分。最后在提交之前精雕细琢写<strong>标题和摘要</strong>。</p><h3 id="引言（Introduction）"><a href="#引言（Introduction）" class="headerlink" title="引言（Introduction）"></a>引言（Introduction）</h3><p>引言的部分应该回答两个问题：</p><ol><li>研究内容是什么？</li><li>研究动机是什么？</li></ol><p>第二个问题要给第一个问题作出合理的解释，能够自圆其说，带领读者走入到作者的逻辑体系。应当包含三个内容：</p><ol><li>背景信息</li><li>文献</li><li>课题陈述</li></ol><p>其中前两项解决动机问题，引出后一项的课题陈述。<br>在<strong>背景信息</strong>中，我们可以从一个宽泛的话题入手，逐步走入到我们的研究当中，这当中有数据，有陈述，有现象。具体来说，我们可以在第一段先大范围地阐述本领域的现状，然后第二段缩小范围到我们的研究领域中，反映出我们研究的重要性，突出目前领域的现状和存在的一些缺陷，而我们的研究内容是对解决这个缺陷有帮助的。<br>然后进入到<strong>文献</strong>部分，目的是通过别人的成果引出本领域的一个空白，而我们研究正好填补了这个空白（句式：先陈述别人的成果，Howerver，还有某些缺陷，而本技术应用不广）<br>然后可以介绍我们的技术了，首先介绍其在其他领域中的应用，取得了哪些不错的成果等等。<br>最后进入<strong>课题陈述</strong>，句式如下：本文研究了…..。并提出了…方法，进行了…实验。本文的结构如下：第二部分…，第三部分…. 。</p><p>注意：</p><ol><li>最好引用的是5年以内的文献，也可以有一些十年内的。</li><li>选取核实的文献，能够引导读者进入本文的逻辑观。</li><li>尽量加一张好看的图或表在中间。</li><li>篇幅大约占全文10%</li></ol><h3 id="研究方法（method）"><a href="#研究方法（method）" class="headerlink" title="研究方法（method）"></a>研究方法（method）</h3><p>这部分内容是研究是一开始就能动笔的，也是最好写的部分。好写在于这部分内容最能体现本文做了哪些工作，言之有物，从写作的角度可以视为记流水账。而这部分难点不在于写，而在于写的内容。<br>不同的文章类型在写这部分内容的时候会有较大差别。例如：理论型的文章需要写推导过程，而实证类的文章需要写调查方法（实验过程），数据处理。</p><p><strong>目的</strong>：向读者解释作者是如何得到结果的。在条件允许下，读者应当可以重现结果。<br><strong>要求</strong>：需要提供<strong>足够的、准确的技术细节</strong>，包含假设、数学推导、验证、实验设备。表达逻辑应当是简洁清晰的。<br><strong>具体做法</strong>：参考本领域已经发表的不错的论文照猫画虎。例如控制领域中，有的论文以数学模型作为第二章，控制器建立作为第三章，稳定性分析作为第四章，实验设备作为第五章。这四章都是研究方法的范畴。<br><strong>注意事项</strong>：</p><ol><li>符号命名的一致性。当文章中存在很多符号的时候容易造成混乱，我们需要在文章一开始建立一个表格，当符号第一次出现的时候要对其进行描述。 <img src="/2022/07/19/sci-xie-zuo-zhi-nan/1.png" class><img src="/2022/07/19/sci-xie-zuo-zhi-nan/2.png" class></li><li>强烈建议用Latex编辑你的论文，否则要尤其注意公式的编号问题。</li><li>不要灌水，不要写无关的公式和背景，无关的意思是对后面的推断等内容没有帮助，这时应当考虑把其放到引言部分。</li></ol><h2 id="结果（result）"><a href="#结果（result）" class="headerlink" title="结果（result）"></a>结果（result）</h2><p>这部分内容真正体现了作者的学术水平。对于一个看起来很简单的东西，学术大牛往往能点石成金，妙笔生花，但这种文学功底是通过大量的科研、阅读、写作训练出来的，没有捷径可走。<br>但是，对于一个刚刚接触论文写作的人来说，这里可以有一套入门级的模板可供参考。这里用的是结果+讨论的写作模式，可分为三步：</p><ol><li><strong>描述结果</strong>。视觉描述：一般是描述图和表（重要），还有一种是语言描述，可以进行定性和定理的描述。</li><li><strong>分析结果</strong>。通常用的有论证的方法和对比的方法。</li><li><strong>讨论结果</strong>。可以包含三个层面，第一个层面是意义，结果是如何验证你论文的贡献的（例如实验结果验证了算法的可行性）。 第二个层面是展望，这个成果可以如何得到扩展等。第三个层面是猜想和假设。面对结果不那么符合预期的内容不要回避 ，应当给出自己的猜想，自圆其说。</li></ol><p>我们可以重复上面的三步分析多个结果，要注意详略得当，重要的结果篇幅应当大一些。</p><img src="/2022/07/19/sci-xie-zuo-zhi-nan/3.png" class><img src="/2022/07/19/sci-xie-zuo-zhi-nan/4.png" class><img src="/2022/07/19/sci-xie-zuo-zhi-nan/5.png" class> <p>因为<strong>图表</strong>是审稿人第一时间浏览并对文章作出判断的部分，关系到文章的第一印象，务必重视。<br>注意：</p><ol><li>参考期刊的要求，标题和序号注意规范。</li><li>所有的图表必须在文章中有所提及。</li><li>提及图表要引用图表的编号（According to Fig.5），不能是（The above figure…）</li><li>图表中的表达方式和论文中要保持一致。重点检查符号，单位。</li><li>图表标题清晰、准确、完整，不要担心过长。 </li><li>用颜色和图例区分多个数据，避免过多的数据，图片要清晰可读，重复考虑到黑白打印后的效果。</li><li>当我们需要做对比的时候，需要把几幅图放在一起凑成一幅图，因此需要在每一幅图下放副标题。<img src="/2022/07/19/sci-xie-zuo-zhi-nan/6.png" class> </li><li>杜绝一图多投，每一个图投不同的杂志一定要经过修改。就算要用同样的，也要加上引用。</li><li>保留各种原始数据，以应对审稿人提出的各种问题。</li></ol><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>结论是对结果与讨论（result）的总结，一般是一到两段。 开头需要用一句话来概括文章的主要研究方法和主题。注意不要重复结果部分，要改写。可以写成发现，扩展，未来方案三个部分。可以用同义词替换等等方法改写，分享一个同义词改写的网站：<a href="http://www.thesaurus.com./">www.thesaurus.com。</a><br>结论部分需要强调你的贡献，和引言部分形成对应。</p><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>含义：摘取每个部分的要点。<br>要求：在写这一段之前需要完成正文所有的其他部分，才能摘取关键信息<br>要点：</p><ol><li>在摘取引言部分：我们可以从引言的三个部分各摘一句话，形成三句话（背景、文献、课题），这三句话的目的是强调文章的重要性。</li><li>摘取研究方法：用一到两句话简练地介绍研究方法。</li><li>摘取结果部分：只选取最重要的几个结果，如果有数据，只列最重要的数据。</li><li> 摘取结论，改写一下，强调文章的贡献。</li></ol><p>这四个部分中，2、3解释做了什么，1、4描述了文章的贡献和重要性。</p><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>一般包含研究对象和研究方法，可以隐喻研究结果（Improvment、Reduce）。需要包含所有的关键词。<br>例子：</p><ol><li>Designing an Input-Linearized_Adaptive Sliding Mode Coupled Nonlinear Integral controller，Designing是研究方法，后面是研究内容，其中研究内容包含了所有关键词。</li><li>Distributed Hammerstein modeling for crosscoupling effect of muti-axis piezoelectric micropositioning stages。其中Distributed Hammerstein modeling是研究方法，后面是研究内容。</li></ol><h2 id="如何恢复审稿人的意见"><a href="#如何恢复审稿人的意见" class="headerlink" title="如何恢复审稿人的意见"></a>如何恢复审稿人的意见</h2><p>1.调整心态，休息一天。当等待几个月的审稿意见到手后，可能你辛辛苦苦写出来的文章会遭遇尖锐的批评，为了避免情绪化的行为，我们需要休息一天再处理问题。审稿人是你的朋友，不是你的敌人，能够帮你把跟随你一生的论文中的隐患排除掉。<br>2. 一定要认真，逐一回答审稿人的每一条问题。<br>3. 要在文章中清晰直接地标明所有的修改。每一处的修改都与需要修改的问题对应，高亮标出。<br>4. 要礼貌，客气。同行评审没有报酬（SCI中），要懂得感激编委和评审的时间（The co-authers and I would like thank you for the time and efford spent in reviewing the manuscript），对相应的意见表示赞同（The authers would like to thank the reviewer’s comment on this problem），感激要发自内心，不用每个问题都表示感激。不同意也要委婉表达（The reviewer’s statement is correct in that…Howerver，the authors wish to.. corresponding work in the near future and will publish it at a later time.The reviewer’s comment is very useful and profound.However,the current effort…）<br>5. 当审稿人提出图表文字格式问题时，检查是否还有类似问题，不要说一个地方，改一个地方。<br>6. 当审稿人要求加引用文献，提出忽略了比较重要的工作时，慎重对待，这表示，审稿人对该领域非常熟悉，要浏览他们提到的文章，加入与放入参考文献相关的讨论。如果是要求引用非常多无关领域的文章，可以拒绝。<br>7. 最难回答的问题是创新性相关的问题，需要回顾自己的研究结论并发掘价值，价值不够可能需要做其他实验去补充。对于有些领域最难的是加补实验，如果不能完成，尽量设计其他方案提供其他结果解释审稿人的问题，并说明实验的困难，并找一些其他文章的证据证明观点。<br>8. 回复reviewer的时间在不需要补充实验的情况下是一到两周。如果部分研究工作需要大修，则需要一个月甚至更长。<br>9. 审稿人必问：文章背景相关，贡献，与重要的文献的关系和比较。<br>10. 会被直接拒掉的文章：明显的数学，工程常识错误，图标潦草，错字错词过多，图片信息量不足（灌水）。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 论文写作 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 论文写作 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MMDetection简要教程</title>
+      <link href="2022/05/17/mmdetection-jian-yao-jiao-cheng/"/>
+      <url>2022/05/17/mmdetection-jian-yao-jiao-cheng/</url>
+      
+        <content type="html"><![CDATA[<p> 参考链接：</p><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 机器学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 机器学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>强化学习库PARL的使用</title>
       <link href="2022/03/20/qiang-hua-xue-xi-ku-parl-de-shi-yong/"/>
       <url>2022/03/20/qiang-hua-xue-xi-ku-parl-de-shi-yong/</url>
