@@ -1,3 +1,6 @@
+https://tianjuewudi.gitee.io/2022/09/26/unity-you-xi-kai-fa-ji-chu-zhi-shi-zhi-unity-bu-fen/
+https://tianjuewudi.gitee.io/2022/09/21/unity-you-xi-kai-fa-ji-chu-zhi-shi/
+https://tianjuewudi.gitee.io/2022/08/18/qiang-hua-xue-xi-de-tan-suo-xing-lun-wen-zhun-bei/
 https://tianjuewudi.gitee.io/2022/07/21/qiang-hua-xue-xi-ling-yu-fang-xiang-de-qi-kan-hui-yi-niu-ren-tui-jian/
 https://tianjuewudi.gitee.io/2022/07/19/sci-xie-zuo-zhi-nan/
 https://tianjuewudi.gitee.io/2022/05/17/mmdetection-jian-yao-jiao-cheng/
@@ -95,4 +98,3 @@ https://tianjuewudi.gitee.io/2021/01/13/python-bian-cheng-cong-ru-men-dao-shi-ji
 https://tianjuewudi.gitee.io/2021/01/12/pycharm-pei-zhi-he-shi-yong-jiao-cheng/
 https://tianjuewudi.gitee.io/2021/01/12/pycharm-an-zhuang-ji-po-jie-fang-fa/
 https://tianjuewudi.gitee.io/2021/01/11/zen-me-yang-wan-zhuan-xin-xi-yan-jiu-fang-fa-zhi-nan-xue-xi-bi-ji/
-https://tianjuewudi.gitee.io/2021/01/10/ge-ren-jian-li-hexo-bo-ke-matery-zhu-ti-de-guo-cheng-xin-de/
