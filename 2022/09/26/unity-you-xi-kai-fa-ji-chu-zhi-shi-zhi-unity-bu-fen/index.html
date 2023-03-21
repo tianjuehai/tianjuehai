@@ -475,21 +475,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-09-26
+                    2022-09-30
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    6.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    26 分
                 </div>
                 
 
@@ -514,7 +514,538 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="Unity2D"><a href="#Unity2D" class="headerlink" title="Unity2D"></a>Unity2D</h2><p>相机调整：Projection设置为Orthographic。也就是正交模式，忽视距离。<br><strong>资源：</strong><br>Sprite：一种游戏资源，在2D游戏中表示角色场景的图片资源<br>SpriteSheet：切割一张图片为多个Sprite<br>在Sprite Editor中可以切割图片，要在Package Manager中下载2D Sprite包。<br>图片可以更改中心点（拖动中间的圆圈），也可以设置Custom Pivot。这决定了图片怎么显示。<br>SpriteRenderer组件参数设置：<br>  Sprite：设置图片<br>  Color：给图片叠加颜色<br>  Flip：翻转<br>  SortingLayer：排序层<br>  OrderinLayer：排序值，当排序层相同时由这个值决定层级顺序</p>
+<p><strong>物理系统：</strong><br>我们可以在Project Settings中的Physics 2D来进行相关的设置，例如Gravity可以设置重力加速度的大小和方向。<br>首先，我们需要在物体上挂载Rigidbody2D的组件。设置参数如下<br>  BodyType:<br>    Dynamic：动态，最仿真的。<br>    Kinematic：运动，由代码控制。<br>    Static：静态，不是为了移动设计的。<br>  Simulated：是否模拟，不模拟没有重力碰撞等。<br>  Mass:质量。<br>  Linear Drag：位置移动的阻力系数。<br>  Angular Drag：旋转移动的阻力系数<br>  Is Kinermatic：如果只让代码控制物体而不是真实的物理模拟，勾选此项<br>  Gravity Scale：重力系数<br>  Collision Detection：定义如何检测2D物体之间的碰撞。<br>  Constraints：定义对2D刚体运动的任何限制。<br>  Material：物理材质，可以弄一个物理材质球来进行赋值，可以设置弹性和摩擦系数。</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">private</span> Rigidbody2D rigidbody2D <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Rigidbody2D<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+rigidbody2D<span class="token punctuation">.</span>velocity <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector2</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//改变速度</span>
+rigidbody2D<span class="token punctuation">.</span><span class="token function">AddForce</span><span class="token punctuation">(</span>Vector2<span class="token punctuation">.</span>up<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// 施加力</span></code></pre>
+<p>如果不仅需要重力，还需要与其他物体发生碰撞，就需要加碰撞体组件。碰撞事件至少需要有一方有刚体。<br>可以点击Edit Collider直接可视化编辑碰撞体尺寸。<br>而碰撞的检测主要靠代码完成：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// 碰撞进入</span>
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">OnCollisionEnter2D</span><span class="token punctuation">(</span>Collision2D col<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>col<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span>tag <span class="token operator">==</span> <span class="token string">"Bullet"</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"子弹击中"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">Destroy</span><span class="token punctuation">(</span>collision<span class="token punctuation">.</span>gameObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 碰撞中</span>
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">OnCollisionStay2D</span><span class="token punctuation">(</span>Collision2D col<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 碰撞退出</span>
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">OnCollisionExit2D</span><span class="token punctuation">(</span>Collision2D col<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<p>触发器和碰撞器同理，区别是触发器不会阻挡物体，只负责检测碰撞,只需要把碰撞器组件的is Trigger勾选上就变成触发器了，代码如下：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">OnTriggerEnter2D</span><span class="token punctuation">(</span>Collision2D col<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>col<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span>tag <span class="token operator">==</span> <span class="token string">"Bullet"</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"子弹击中"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">Destroy</span><span class="token punctuation">(</span>collision<span class="token punctuation">.</span>gameObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 应用这个需要把Rigidbody2D中的Sleeping Mode改为Never Sleep，否则会休眠</span>
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">OnTriggerStay2D</span><span class="token punctuation">(</span>Collision2D col<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">OnTriggerExit2D</span><span class="token punctuation">(</span>Collision2D col<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<h2 id="游戏输入介绍"><a href="#游戏输入介绍" class="headerlink" title="游戏输入介绍"></a>游戏输入介绍</h2><p>主要有：键盘，鼠标，摇杆，手机触摸屏。</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// 按键按下，持续按，弹起</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKeyDown</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 按下A瞬间发生的事</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKey</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 持续按A的过程中发生的事</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKeyUp</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 弹起A瞬间发生的事</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetMouseButtonDown</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 按下鼠标左键瞬间</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetMouseButton</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 持续按鼠标左键</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetMouseButtonUp</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 弹起鼠标右键瞬间</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token function">print</span><span class="token punctuation">(</span>Input<span class="token punctuation">.</span>mousePosition<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 输出鼠标位置，三维但第三维是0，其他两维越往左下角越小</span></code></pre>
+<p>在Edit -&gt; ProjectSettings -&gt; InputManager中可以设置输入按键。</p>
+<img src="/2022/09/26/unity-you-xi-kai-fa-ji-chu-zhi-shi-zhi-unity-bu-fen/1.png" class="">
+<p>用法：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// 好处是会在-1到1中平滑过度</span>
+<span class="token keyword">float</span> h <span class="token operator">=</span> Input<span class="token punctuation">.</span><span class="token function">GetAxis</span><span class="token punctuation">(</span><span class="token string">"Horizontal"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 没有过度的用法</span>
+<span class="token keyword">float</span> c <span class="token operator">=</span> Input<span class="token punctuation">.</span><span class="token function">GetAxisRaw</span><span class="token punctuation">(</span><span class="token string">"Horizontal"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 鼠标滚轮,向上和向下为0.1和--0.1固定值</span>
+<span class="token keyword">float</span> v <span class="token operator">=</span> Input<span class="token punctuation">.</span><span class="token function">GetAxis</span><span class="token punctuation">(</span><span class="token string">"Mouse ScrollWheel"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+</code></pre>
+<h2 id="UI部分"><a href="#UI部分" class="headerlink" title="UI部分"></a>UI部分</h2><p>Unity2D在于SpriteRenender和2D物理系统的组成，而UI在于由Canvas以及各种UI组件组成，始终附着于屏幕上，不轻易移动。<br>创建方法：层级面板右键菜单，里面的UI的子菜单有各种UI可以创建。<br>所有的UI默认都会在一个画布Canvas上创建。并且自带一个EventSystem，让我们按钮等功能可以互动。下面说一下各种组件：</p>
+<h3 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h3><pre><code>Image：图片组件，属性如下
+  SourceImage：源图片，脚本中叫Sprite。注意在使用之前需要按Unity2D的方法对图片进行处理(切片等)
+  Color：图片的叠加色
+  RaycastTarget:是否可以作为射线目标，后续的点击拖拽需要使用。
+  Set Native Size：恢复图片的原始尺寸。
+  ImageType:显示模式
+    Simple：普通模式
+    Sliced：切片
+    Tiled：平铺
+    Filled：填充，血条进度条等使用。</code></pre>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> UnityEngine<span class="token punctuation">;</span>
+<span class="token keyword">using</span> UnityEngine<span class="token punctuation">.</span>UI<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Demo_Image</span><span class="token punctuation">:</span>MonoBehaviour<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> Image image<span class="token punctuation">;</span>
+  <span class="token keyword">void</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    image <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Image<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    image<span class="token punctuation">.</span>color <span class="token operator">=</span> Color<span class="token punctuation">.</span>black<span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<h3 id="Text"><a href="#Text" class="headerlink" title="Text"></a>Text</h3><pre><code>Text:文本组件
+  Text:文本内容
+  Font：字体
+  Font Style：字体样式，主要是加粗、斜体
+  Font Size：字体大小
+  Line Spacing：字间距
+  RichText：富文本，有Html相关经验可以使用，否则无视
+  Color：字体颜色
+  Raycast Target：是否可以作为射线检测目标，可以进行点击拖动等。</code></pre>
+<h3 id="Button"><a href="#Button" class="headerlink" title="Button"></a>Button</h3><pre><code>Button：按钮组件，由Image和Text以及Button功能组成。
+  Image：Button物体本身的组件，使用方法同上
+  Text：Button物体的子物体，使用方法同上
+  Button：Button物体的组件
+    Interactable：可交互，决定按钮是否有效。
+    Transition：过渡方式，一般选择Color Tint改变颜色。选择Sprite Swap改变的是图片。
+      Target Graphic：改变的Image。
+      Normal Color：正常颜色
+      Highlighted Color：鼠标放在上面的颜色
+      Pressed Color：鼠标按下去的颜色
+      Selected Color：鼠标按下去松开之后的颜色
+      Dsabled Color:按钮不可交互的颜色
+    Navigation：使玩家可以通过wsad和方向键来选择按钮。
+    OnClick()：按钮的交互事件，把需要执行的脚本挂载到物体上，把物体拖过来选择相应的方法即可。为了方便我们可以用代码进行操作。</code></pre>
+<pre class=" language-csharp"><code class="language-csharp">Using UnityEngine<span class="token punctuation">;</span>
+Using UnityEngine<span class="token punctuation">.</span>UI<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Button_Click</span><span class="token punctuation">:</span>MonoBehaviour<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  Button button<span class="token punctuation">;</span>
+  <span class="token keyword">void</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    button <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Button<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    button<span class="token punctuation">.</span>OnClick<span class="token punctuation">.</span><span class="token function">AddListener</span><span class="token punctuation">(</span>ButtonClick<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//代码监听事件，不用在Unity编辑器中拖拽物体了</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">ButtonClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"Button Click"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="InputField"><a href="#InputField" class="headerlink" title="InputField"></a>InputField</h3><pre><code>InputField：输入框组件
+  Image：InputField挂载的组件，用于显示背景图片。
+  Placeholder：InputField的子物体，挂载text脚本，用于玩家没有输入时的文本。
+  Text：InputField的子物体，挂载text脚本，接受玩家输入。
+  Input Field：InputField本身的组件，部分于Button一致
+    Text Component：接收输入的文本组件
+    Placeholder：显示默认输入的文本组件
+    Content Type：约束输入的内容
+    On Value Changed：输入值改变的事件，与按钮同理
+    On End Edit：输入结束时的事件</code></pre>
+<pre class=" language-csharp"><code class="language-csharp">Using UnityEngine<span class="token punctuation">;</span>
+Using UnityEngine<span class="token punctuation">.</span>UI<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Button_Click</span><span class="token punctuation">:</span>MonoBehaviour<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  InputField inputField<span class="token punctuation">;</span>
+  <span class="token keyword">void</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    inputField <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>InputField<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    inputField<span class="token punctuation">.</span>onValueChanged<span class="token punctuation">.</span><span class="token function">AddListener</span><span class="token punctuation">(</span>OnValueChanged<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    inputField<span class="token punctuation">.</span>onValueChanged<span class="token punctuation">.</span><span class="token function">AddListener</span><span class="token punctuation">(</span>OnEndEdit<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">OnValueChanged</span><span class="token punctuation">(</span><span class="token keyword">string</span> <span class="token keyword">value</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token keyword">value</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">OnEndEdit</span><span class="token punctuation">(</span><span class="token keyword">string</span> <span class="token keyword">value</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token keyword">value</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<h3 id="Toggle"><a href="#Toggle" class="headerlink" title="Toggle"></a>Toggle</h3><pre><code>Toggle：切换组件，由一个文本和一个选择框构成
+  Background：Toggle的子物体，挂载Image组件决定选择框背景
+    Checkmark：Background的子物体，挂载Image组件决定选中后的选择框图片（打勾）
+  Label：Toggle的子物体，挂载Text组件显示文本
+  Toggle：Toggle本身挂载的组件，上面的部分属性和Button相同
+    isOn：是否被勾选上
+    Group：重要功能，我们需要多选一时，把多个Toggle放到一个父物体下，父物体挂载ToogleGroup组件，然后拖拽父物体到这里就能实现。
+</code></pre>
+<pre class=" language-csharp"><code class="language-csharp">Using UnityEngine<span class="token punctuation">;</span>
+Using UnityEngine<span class="token punctuation">.</span>UI<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Button_Click</span><span class="token punctuation">:</span>MonoBehaviour<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  Toggle toggle<span class="token punctuation">;</span>
+  <span class="token keyword">void</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    toggle <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Toggle<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    toggle<span class="token punctuation">.</span>onValueChanged<span class="token punctuation">.</span><span class="token function">AddListener</span><span class="token punctuation">(</span>OnValueChanged<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">OnValueChanged</span><span class="token punctuation">(</span><span class="token keyword">bool</span> <span class="token keyword">value</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token keyword">value</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<h3 id="Slider"><a href="#Slider" class="headerlink" title="Slider"></a>Slider</h3><pre><code>Slider：滑块组件
+  Background：Slider的子物体，挂载Image组件决定了滑块的背景图片。
+  Fill Area：Slider的子物体
+    Fill：Fill Area的子物体，挂载Image滑块填充物的图片
+  Handle Silde Area：Slider的子物体
+    Handle：Handle Silde Area的子物体，挂载Image用于滑块的图片
+  Slider：Slider本身的组件，部分参数和Button相同
+    Direction：决定了滑块的方向
+    Min Value：最小值
+    Max Value：最大值
+    Whole Numbers：数值是否为整数
+    On Value Change：值改变时发生的事件
+</code></pre>
+<pre class=" language-csharp"><code class="language-csharp">Using UnityEngine<span class="token punctuation">;</span>
+Using UnityEngine<span class="token punctuation">.</span>UI<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SliderDemo</span><span class="token punctuation">:</span>MonoBehaviour<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  Slider slider<span class="token punctuation">;</span>
+  <span class="token keyword">void</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    slider <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Slider<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    slider<span class="token punctuation">.</span>onValueChanged<span class="token punctuation">.</span><span class="token function">AddListener</span><span class="token punctuation">(</span>OnValueChanged<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">OnValueChanged</span><span class="token punctuation">(</span><span class="token keyword">float</span> <span class="token keyword">value</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token keyword">value</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<h3 id="Scrollbar"><a href="#Scrollbar" class="headerlink" title="Scrollbar"></a>Scrollbar</h3><pre><code>Scrollbar：滚动条组件，和滑块类似，但只有背景色没有填充色，且数值范围固定为0到1
+  Scrollbar：本身的组件，和Slider相比只有一个不同
+    Number of Steps：滚动条有多少个可以选择的值</code></pre>
+<h3 id="DropDown"><a href="#DropDown" class="headerlink" title="DropDown"></a>DropDown</h3><pre><code>DropDown：下拉菜单组件
+  Image：挂载在DropDown本身，背景图片
+  Dropdown：挂载在DropDown本身，部分和Button相同
+    Caption Image：所需要改变的图片
+    Options：选项文本和图片
+    Value：现在的值，0为第一个，1为第二个，以此类推
+    Alpha Fade Speed：菜单的显现速度
+    On Value Changed：事件
+  Label：DropDown子物体，挂载Text用于调整文本
+  Arrow：DropDown子物体，挂载Image用于下拉箭头
+  Template：菜单模板
+    Viewport：遮罩
+      Content：
+        item：挂载toggle
+          item Background：挂载Image，下拉菜单背景图
+          item Checkmark：挂载Image，下拉菜单前面的勾
+          item Label：挂载Text，决定文本</code></pre>
+<pre class=" language-csharp"><code class="language-csharp">Using UnityEngine<span class="token punctuation">;</span>
+Using UnityEngine<span class="token punctuation">.</span>UI<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DropDownDemo</span><span class="token punctuation">:</span>MonoBehaviour<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  DropDown dropdown<span class="token punctuation">;</span>
+  <span class="token keyword">void</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    dropdown <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>DropDown<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    dropdown<span class="token punctuation">.</span>onValueChanged<span class="token punctuation">.</span><span class="token function">AddListener</span><span class="token punctuation">(</span>OnValueChanged<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">OnValueChanged</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token keyword">value</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token keyword">value</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<h3 id="Scroll-View"><a href="#Scroll-View" class="headerlink" title="Scroll View"></a>Scroll View</h3><p>遮罩组件Mask：当一个物体（例如Image)有这个组件的时候，它的子物体只有在它的范围内才可见，其他部分隐藏，相当于一个显示特定范围的窗口。</p>
+<pre><code>Scroll View：滚动视图
+  Image：挂载在ScrollView本身，用于显示背景
+  ScrollRect：本身的组件
+    Horizontal：能否横向移动
+    Verical：能否纵向移动
+    Movement Type：决定如何移动
+    Scroll Sensitivity：鼠标滚轮的灵敏度
+    Horizontal Scrollbr:
+      Visibility：是否隐藏
+    Verical Scrollbr:
+      Visibility：是否隐藏
+    OnValueChange：事件，传过去的是Vector2的值
+  Viewport：有个遮罩组件
+    Content：展现内容
+  Scrollbar Horizontal：横的滚动条
+  Scrollbar Vertical：竖的滚动条
+</code></pre>
+<pre class=" language-csharp"><code class="language-csharp">Using UnityEngine<span class="token punctuation">;</span>
+Using UnityEngine<span class="token punctuation">.</span>UI<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ScrollViewDemo</span><span class="token punctuation">:</span>MonoBehaviour<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  ScrollRect scrollRect<span class="token punctuation">;</span>
+  <span class="token keyword">void</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    scrollRect <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>ScrollRect<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    scrollRect<span class="token punctuation">.</span>onValueChanged<span class="token punctuation">.</span><span class="token function">AddListener</span><span class="token punctuation">(</span>OnValueChanged<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">OnValueChanged</span><span class="token punctuation">(</span>Vector2 <span class="token keyword">value</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token keyword">value</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<h3 id="Grid-Layout-Group"><a href="#Grid-Layout-Group" class="headerlink" title="Grid Layout Group"></a>Grid Layout Group</h3><p>类似背包这种想要排列整齐的时候一般使用这个组件，会自动管理其下方所在其他UI元素的大小、位置等信息，层级面板不能直接创建这个组件，需要创建空物体（可以创建Image作为背景），手动添加这个组件。</p>
+<pre><code>Grid Layout Group：表格布局组件
+  Image：可以在这个组件的子物体下挂载多个Image，会自动排列整齐，也可以排其他UI
+  Grid Layout Group属性：
+    Pedding：边距
+      Left、Right、Top、Botton。
+    Cell Size：格子大小
+    Spacing：格子间距
+    Start Corner：从哪个角开始排列</code></pre>
+<h3 id="Rect-Transform"><a href="#Rect-Transform" class="headerlink" title="Rect Transform"></a>Rect Transform</h3><p>一个UI元素在Canvas下时，属性不是Transform而是Rect Transform。属性如下：</p>
+<ol>
+<li>PosX，PosY，PosX：中心点的位置，z一般为0</li>
+<li>width，height：宽高</li>
+<li>Pivot：UI上中心点的位置，XY轴的范围都为0-1，旋转移动都围绕中心点进行</li>
+<li>anchors：左上角图标，相对于父物体的定位，可以弹性布局，重要</li>
+</ol>
+<h3 id="Canvas"><a href="#Canvas" class="headerlink" title="Canvas"></a>Canvas</h3><p>场景中的画布是可以存在很多个的。有三个组件构成：</p>
+<pre><code>Canvas：画布
+  Render Mode：Screen Space-Overlay表示始终位于屏幕最上层。Screen Space-Camera表示将Canvas位于相机前方，中间的2D/3D物体可以显示在UI上，可以用来展示模型。World Space表示Canvas作为一个游戏对象显示在3D场景中
+Canvas Scaler：画布比例
+  UI Scale Mode：Constant Pixel Size为固定像素，不随屏幕尺寸发生变化。Scale With Screen Size适应屏幕大小。
+Graphic Raycaster：射线检测</code></pre>
+<h3 id="UI事件"><a href="#UI事件" class="headerlink" title="UI事件"></a>UI事件</h3><p>脚本需要继承事件接口，实现对应方法：<br>IpointerClickHandler：鼠标点击<br>IPointerDownHandler：鼠标按下<br>IPointerUpHandler：鼠标弹起<br>IPointerEnterHandler：鼠标进入<br>IPointerExitHandler：鼠标退出<br>IBeginDragHandler：开始拖拽<br>IDragHandler：拖拽中<br>IEndDragHandler：停止拖拽</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> UnityEngine<span class="token punctuation">;</span>
+<span class="token keyword">using</span> UnigtyEngine<span class="token punctuation">.</span>EventSystems<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UIEvent</span><span class="token punctuation">:</span>MonoBehaviour<span class="token punctuation">,</span>IPointerClickHandler<span class="token punctuation">,</span>IPointerDownHandler<span class="token punctuation">,</span>IPointerUpHandler<span class="token punctuation">,</span>IPointerEnterHandler<span class="token punctuation">,</span>IPointerExitHandler
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">OnPointerClick</span><span class="token punctuation">(</span>PointerEventData eventData<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"good"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">OnPointerDown</span><span class="token punctuation">(</span>PointerEventData eventData<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"good"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">OnPointerUp</span><span class="token punctuation">(</span>PointerEventData eventData<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"good"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">OnPointerEnter</span><span class="token punctuation">(</span>PointerEventData eventData<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"good"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">OnPointerExit</span><span class="token punctuation">(</span>PointerEventData eventData<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"good"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="Unity3D"><a href="#Unity3D" class="headerlink" title="Unity3D"></a>Unity3D</h2><p>3D和2D同理，只是多了一个z轴而已，2D中讲过的知识不再赘述。<br>相机调整：如果我们想将相机移动到窗口中的视角，可以选中相机后，点击GameObject-&gt;Align With View。</p>
+<h3 id="物理射线"><a href="#物理射线" class="headerlink" title="物理射线"></a>物理射线</h3><p>用于判断是否命中，点击地面，建造物等功能。</p>
+<pre class=" language-csharp"><code class="language-csharp">Using UnityEngine<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RayDemo</span><span class="token punctuation">:</span>MonoBehaviour<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">void</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">void</span> <span class="token function">Update</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    Ray ray <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Ray</span><span class="token punctuation">(</span>Vector3<span class="token punctuation">.</span>zero<span class="token punctuation">,</span><span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//起点终点定义一条射线</span>
+    Ray ray2 <span class="token operator">=</span> Camera<span class="token punctuation">.</span>main<span class="token punctuation">.</span><span class="token function">ScreenPointToRay</span><span class="token punctuation">(</span>Input<span class="token punctuation">.</span>mousePotition<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//鼠标点击的射线</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>Physics<span class="token punctuation">.</span><span class="token function">Raycast</span><span class="token punctuation">(</span>ray<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"碰撞到物体了"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>Physics<span class="token punctuation">.</span><span class="token function">Raycast</span><span class="token punctuation">(</span>ray<span class="token punctuation">,</span><span class="token keyword">out</span> RaycastHit hitinfo<span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//第二个参数是碰撞信息，第三个是距离</span>
+      Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token keyword">string</span><span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">"碰撞到物体&amp;#123;0&amp;#125;,在&amp;#123;1&amp;#125;位置"</span><span class="token punctuation">,</span>hitinfo<span class="token punctuation">.</span>collider<span class="token punctuation">.</span>gameObject<span class="token punctuation">.</span>name<span class="token punctuation">,</span>hitinfo<span class="token punctuation">.</span>point<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      Debug<span class="token punctuation">.</span><span class="token function">DrawLine</span><span class="token punctuation">(</span>ray<span class="token punctuation">.</span>origin<span class="token punctuation">,</span>hitinfo<span class="token punctuation">.</span>point<span class="token punctuation">,</span>Color<span class="token punctuation">.</span>Red<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//绘制射线</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+</code></pre>
+<h3 id="Rigidbody"><a href="#Rigidbody" class="headerlink" title="Rigidbody"></a>Rigidbody</h3><p>刚体移动：<br>Rigibody.MovePosition(Vector3 target);<br>target是一个具体要到达的位置</p>
+<pre class=" language-csharp"><code class="language-csharp">Using UnityEngine<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RigidbodyMoveDemo</span><span class="token punctuation">:</span>MonoBehaviour<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> Rigidbody rb<span class="token punctuation">;</span>
+  <span class="token keyword">void</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    rb <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Rigidbody<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token keyword">void</span> <span class="token function">FixUpdate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token function">Move</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token keyword">void</span> <span class="token function">Move</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> h <span class="token operator">=</span> Input<span class="token punctuation">.</span><span class="token function">GetAxis</span><span class="token punctuation">(</span><span class="token string">"Horizontal"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> v <span class="token operator">=</span> Input<span class="token punctuation">.</span><span class="token function">GetAxis</span><span class="token punctuation">(</span><span class="token string">"Verical"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Vector3 offset <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span>h<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>v<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">0.02f</span><span class="token punctuation">;</span>
+    rb<span class="token punctuation">.</span><span class="token function">MovePosition</span><span class="token punctuation">(</span>offset <span class="token operator">+</span> transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="预制体的实例化"><a href="#预制体的实例化" class="headerlink" title="预制体的实例化"></a>预制体的实例化</h3><p>需求：用预制体在游戏中生成很多相同的物体，例如怪物，小兵等</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> UnityEngine<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GenerateCube</span><span class="token punctuation">:</span>Monobehaviour<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">public</span> GameObject prefab_cube<span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">Update</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    Ray ray <span class="token operator">=</span> Camera<span class="token punctuation">.</span>main<span class="token punctuation">.</span><span class="token function">ScreenPointToRay</span><span class="token punctuation">(</span>Input<span class="token punctuation">.</span>mousePosition<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 鼠标点击的地方生成物体</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetMouseButtonDown</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> Physics<span class="token punctuation">.</span><span class="token function">Raycast</span><span class="token punctuation">(</span>ray<span class="token punctuation">,</span><span class="token keyword">out</span> RaycastHit hitinfo<span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      GameObject cube <span class="token operator">=</span> GameObject<span class="token punctuation">.</span><span class="token function">Instantiate</span><span class="token punctuation">(</span>prefab_cube<span class="token punctuation">,</span>hitinfo<span class="token punctuation">.</span>point<span class="token punctuation">,</span>Quaternion<span class="token punctuation">.</span>identity<span class="token punctuation">,</span>transform<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="Unity渲染基础"><a href="#Unity渲染基础" class="headerlink" title="Unity渲染基础"></a>Unity渲染基础</h2><h3 id="相机"><a href="#相机" class="headerlink" title="相机"></a>相机</h3><p>Unity中的相机负责将游戏画面投放到玩家屏幕上，刚开始系统会默认存在一个Main Camera来显示画面。相机也是一个物体，它的移动导致画面的改变。<br>属性设置：<br><strong>Clear Flags</strong>：没有物体时显示的背景，默认为Skybox（天空盒），还可以是Solid Color（纯色）。Depth Only，Don’t Clear用于多个相机同时工作。<br><strong>Culling Mask</strong>：决定相机能看到哪些层<br><strong>Field of View</strong>：视野大小<br><strong>Clipping Planes</strong>：设置最远能看到的距离，无法观察到的贴身距离</p>
+<h3 id="灯光"><a href="#灯光" class="headerlink" title="灯光"></a>灯光</h3><p>灯光主要影响明暗程度以及阴影。Unity能模拟不同的光源如：太阳，手电筒，电灯，萤火虫等。<br>灯光也是一个组件，我们可以创建空物体，并添加Light来实现。也能通过右键菜单的light来实现，光源种类有：<br><strong>Directional Light</strong>：平行光，一般为太阳光，全局都能照到，通过旋转能实现昼夜交替的效果。<br><strong>Point Light</strong>：点光源，最常用<br><strong>Spotlight</strong>：聚光灯<br><strong>AreaLight</strong>：面积光，需要进行烘焙，对静态物体有用</p>
+<p>灯光一般可以调节颜色，范围，强度，实时或者烘焙或者混合，灯光反射<br>光源可以分为实时的和烘焙的，实时的只对非静态的移动物体有效，烘焙的只对静态物体有效。<br><strong>灯光烘焙</strong>：<br>  Window-&gt;Rendering-&gt;Lighting Settings进入<br> Skybox Material：可以设置天空盒的材质<br> 在最下方的Generate Lighting按钮可以进行烘焙</p>
+<h3 id="Shader"><a href="#Shader" class="headerlink" title="Shader"></a>Shader</h3><p>渲染管线主要分类：</p>
+<ul>
+<li>Build-in Render Pipeline（内置渲染管线）：默认的渲染管线</li>
+<li>Universal Render Pipline（通用渲染管线）：性能较好</li>
+<li>HD Render Pipline（高清渲染管线）：以画面为主，偏向高端机器和影视的渲染管线</li>
+</ul>
+<p>Shader是渲染管线的算法片段，用于告诉图形硬件如何计算和输出图像。Shader的制作基于某个渲染管线，不具备通用性，可以让模型展现出不同的效果，比如风格化等。这不是入行的必备知识，知道其作用和使用方式即可。</p>
+<p>使用方式：将shader附加给材质球，材质球附加给网格渲染器。</p>
+<h3 id="粒子系统"><a href="#粒子系统" class="headerlink" title="粒子系统"></a>粒子系统</h3><p>游戏中的下雨、下雪、法球和一些技能特效都是基于粒子完成，制作由特效师完成，我们只需要使用即可。<br>右键菜单Effects-&gt;Particle System可以创建一个基础的粒子特效<br>我们只需要学习基础的Particle System的属性使用就可以了<br>Duration：持续事件，多少秒后不再发射粒子<br>Looping：是否循环播放<br>Start Lifetime：粒子发射出去后多少秒消失<br>Play On Awake：是否立刻播放粒子<br>Stop Action：是否在播放结束时销毁自己</p>
+<h2 id="动画系统"><a href="#动画系统" class="headerlink" title="动画系统"></a>动画系统</h2><p>游戏动画一般指模型的动作，我们只需知道动画的运行原理，不是动画设计师的我们不会过于深入动作本身的设计。我们的学习重点是给角色配置动作、切换动作、代码控制动作等。<br>想要让一个角色拥有动画，需要几个步骤：</p>
+<ol>
+<li>挂载Animator组件</li>
+<li>给Animator组件配置Controller，我们需要右键菜单创建一个，赋值给它</li>
+<li>双击Controller可以打开Animator窗口，我们需要在这里配置动画</li>
+<li>我们可以把动画的片段拖动进来，通过配置各种状态转换的关系达到目的，右键菜单创建的Animation可以创建动画片段（一般由美术提供）</li>
+</ol>
+<p>简要动画制作：</p>
+<ol>
+<li>双击动画片段可以打开Animation窗口，可以在这里编辑具体的动画</li>
+<li>Preview可以查看Animator拥有的动画片段</li>
+<li>点击红色圈可以开始录制动画，我们可以随意拖动物体到我们想要的姿势，再次点击红圈结束录制，点击播放按钮后动画会以平滑的方式完成转变。</li>
+</ol>
+<h3 id="Animator-Controller"><a href="#Animator-Controller" class="headerlink" title="Animator Controller"></a>Animator Controller</h3><p>配置动画片段：单击Animation片段，可以看到有几个属性可以设置，Loop Time代表动画是否循环播放，Loop Pose让收尾连接更平滑。</p>
+<ol>
+<li>首先Animator默认有三个状态，Entry是起始点，Any State是指任何状态，方便我们进行一些转换操作，Exit指退出，不再执行动画。</li>
+<li>对着拖进来的动画片段点击右键，Make Transition可以设置连接关系，Set as Layer Default State可以设置默认状态。</li>
+<li>点击连接Animation的箭头，一般我们用代码控制特定变量的改变，然后就能在Conditions里设置转换条件，我们可以在Animator窗口的Parameters中设置特定变量</li>
+<li>Has Exit Time代表是否播放完动画再转换状态</li>
+<li>Settings中的Fixed Duration代表是否有动画过渡，并可以设定过渡时间</li>
+<li>单击动画片段块，我们可以设置属性，Speed代表动画播放速度。下面的Transitions可以设置转换的哪个状态单独有效（solo），或者哪个无效（Mute）</li>
+</ol>
+<p>代码控制：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> UnityEngine<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AnimatorDemo</span>：MonoBehaviour<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">private</span> Animator animator<span class="token punctuation">;</span>
+  <span class="token keyword">void</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    animator <span class="token operator">=</span> <span class="token generic-method function">GetComponent<span class="token punctuation">&lt;</span>Animator<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token keyword">void</span> <span class="token function">Update</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKeyDown</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>Space<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      animator<span class="token punctuation">.</span><span class="token function">SetTrigger</span><span class="token punctuation">(</span><span class="token string">"跳一跳"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//改变Int，float，bool值同理</span>
+
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<p>注意：需要在Parameters中设置以“跳一跳”为名的Trigger变量，然后在转换箭头中设置好transition。</p>
+<p>人性角色的骨骼结构是一致的，我们需要有Avatar映射文件，可以让动作复用。</p>
+<h3 id="动画事件"><a href="#动画事件" class="headerlink" title="动画事件"></a>动画事件</h3><p>在Animation窗口中，我们选中一个动画，选中一帧，然后点击Add event（一个白色柱状下方一个小尖的标志），这样就可以在这一帧添加一个事件，我们可以在这里执行想要的方法，可以从该物体挂载的脚本下选择。<br>注意：如果是导入的模型，可能无法在animation界面添加事件，我们需要找到对应的动画模型，点击Inspector中的Animation，下方有一个Event的属性，可以进行设置。但不支持两个及以上的事件。</p>
+<h3 id="角色控制器组件"><a href="#角色控制器组件" class="headerlink" title="角色控制器组件"></a>角色控制器组件</h3><p>首先，我们给需要控制的物体挂载Character Controller组件。设置参数：</p>
+<ul>
+<li>Slope Limit：最大爬坡的角度，45指最大能爬45度的坡</li>
+<li>Step Offset：最高能无视多少高度的阶梯</li>
+<li>skin Width：皮肤厚度，相当于一个隔空的碰撞器</li>
+<li>Min Move Distance：最小的移动距离，小于该值不会移动</li>
+<li>Center：碰撞器的中心</li>
+<li>Radius：碰撞器半径</li>
+<li>Heiget：碰撞器高度<br>注意：角色控制器所在的游戏物体不需要碰撞体和刚体<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> UnityEngine<span class="token punctuation">;</span>
+</code></pre>
+</li>
+</ul>
+<p>public class CCDemo:Monobehaviour{<br>  private CharacterController characterController;<br>  void Start(){<br>    characterController = GetComponent<charactercontroller>();<br>  }<br>  void Update(){<br>    Debug.Log(characterController.isGrounded);<br>    float h = Input.GetAxis(“Horizontal”);<br>    float v = Input.GetAxis(“Verical”);<br>    //Vector3 dir = new Vector3(h,-9.8f,v); //-9.8模拟重力<br>    //characterController.Move(dir * Time.DeltaTime * 10);</charactercontroller></p>
+<pre><code>characterController.SimpleMove(dir * 10)；//传入速度，并且不会被帧率影响，并且包含重力</code></pre>
+<p>  }</p>
+<p>}</p>
+<pre><code>
+## 导航系统
+功能需求：我们点击地图上得某个位置，角色需要自动跑到这个位置，并且还具有规避障碍物的功能。
+以上的功能叫导航，也叫寻路，用到的组件是NavMeshAgent。
+在导航之前，我们需要确定哪些地方是能去的，哪些是不能去的：
+1. 我们把所有不能动的物体全部勾上static
+2. Window-&gt;AI-&gt;Navigation-&gt;Bake-&gt;Bake
+3. 烘焙之后场景中蓝色的部分就是角色可以去的地方
+
+然后我们就可以在角色上挂载并设置NavMeshAgent组件了：
+Base Offset：导航组件碰撞体的高度
+Speed：导航速度
+Angular：导航旋转速度
+Acceleration：导航加速度
+Stopping Distance：判定到达终点的停止距离
+Auto Braking：到达终点自动停止
+Radius：导航碰撞体半径
+Height：导航碰撞体高度
+Quality：质量越高越智能
+
+使用方法：
+```csharp
+using UnityEngine.AI;
+using UntiyEngine;
+
+public class NavDemo:MonoBehaviour{
+  public NavMeshAgent agent;
+  public Transform target;
+
+  void Start(){
+    agent = GetComponent&lt;NavMeshAgent&gt;();
+  }
+  void Update(){
+    agent.SetDestination(target.position);
+    if(Input.GetKeyDown(KeyCode.Space){
+      agent.isStopped =  !agent.isStopped;
+    })
+  }
+
+}
+</code></pre>
+<h3 id="Navigation面板"><a href="#Navigation面板" class="headerlink" title="Navigation面板"></a>Navigation面板</h3><p>Window-&gt;AI-&gt;Navigation进入面板，上面使用的是烘焙(bake)功能。<br>Agents面板不常用，不作讲解，在多个导航网格对应不同的agent类型使用，有需要可以查阅官方资料。<br>Areas面板用来区分区域，不同的区域行走代价不同，陆地比沼泽走得更快，导航会选择行走代价低的地方进行。但是，这并不会影响到实际的行走速度，行走速度由代码控制，这里只是另外设定的一个代价值而已。<br>Object面板，点击一个静态物体后，上面有一个Navigation Area的选项，可以选择Areas面板的设定值，决定在上面行走的行走代价。</p>
+<h3 id="NavMeshObstacle"><a href="#NavMeshObstacle" class="headerlink" title="NavMeshObstacle"></a>NavMeshObstacle</h3><p>有的时候，我们需要动态生产障碍物（例如释放阻拦型技能），我们也需要把它放进导航的考量范围内。我们只需要给生成的障碍物添加NavMeshObstacle组件即可。正常设置障碍物的导航碰撞体形状即可，勾上属性Carve后即可把障碍物考虑在内。</p>
+<h2 id="资源管理"><a href="#资源管理" class="headerlink" title="资源管理"></a>资源管理</h2><h3 id="资源导出"><a href="#资源导出" class="headerlink" title="资源导出"></a>资源导出</h3><p>当我们想把某些游戏资源打包发给别人的时候，我们选中资源-&gt;右键菜单-&gt;Export Package<br>注意：资源上的材质球等信息如果不和预制体一起导出，会导致预制体材质球丢失，其他同理。导入时直接拖拽即可</p>
+<h3 id="Resource资源加载"><a href="#Resource资源加载" class="headerlink" title="Resource资源加载"></a>Resource资源加载</h3><p>当我们需要把资源动态地加载近游戏中，我们需要创建一个Resources文件夹,在什么地方都可以，多个Resources文件夹路径会合并。<br>代码加载：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">private</span> GameObject prefab_cube<span class="token punctuation">;</span>
+prefab_cube <span class="token operator">=</span> Resources<span class="token punctuation">.</span><span class="token generic-method function">Load<span class="token punctuation">&lt;</span>GameObject<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token string">"Prefabs/Cube"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//参数传入Resources文件夹下的路径</span></code></pre>
+<h3 id="数据存档"><a href="#数据存档" class="headerlink" title="数据存档"></a>数据存档</h3><p>单机游戏的数据存放在本地，网络游戏重要数据存放在服务端的数据库，不关键的数据存放在本地。PlayerPrefs是Unity为我们提供的方式。<br>数据储存在注册表HKEY_CURRENT_USER/Software[company name][product name]下<br>打开方式cmd中regedit.exe</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// 储存数据</span>
+PlayerPrefs<span class="token punctuation">.</span><span class="token function">SetString</span><span class="token punctuation">(</span><span class="token string">"PlayerName"</span><span class="token punctuation">,</span><span class="token string">"Xiaoxing"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+PlayerPrefs<span class="token punctuation">.</span><span class="token function">SetFloat</span><span class="token punctuation">(</span><span class="token string">"Distance"</span><span class="token punctuation">,</span><span class="token number">2.2f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+PlayerPrefs<span class="token punctuation">.</span><span class="token function">SetInt</span><span class="token punctuation">(</span><span class="token string">"Age"</span><span class="token punctuation">,</span><span class="token number">24</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 获取数据</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>PlayerPrefs<span class="token punctuation">.</span><span class="token function">HasKey</span><span class="token punctuation">(</span><span class="token string">"Age"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> Age <span class="token operator">=</span> PlayerPrefs<span class="token punctuation">.</span><span class="token function">GetInt</span><span class="token punctuation">(</span><span class="token string">"Age"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>PlayerPrefs<span class="token punctuation">.</span><span class="token function">HasKey</span><span class="token punctuation">(</span><span class="token string">"PlayerName"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">string</span> playerName <span class="token operator">=</span> PlayerPrefs<span class="token punctuation">.</span><span class="token function">GetString</span><span class="token punctuation">(</span><span class="token string">"PlayerName"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+
+<span class="token comment" spellcheck="true">// 删除数据</span>
+PlayerPrefs<span class="token punctuation">.</span><span class="token function">DeleteAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment" spellcheck="true">//全部数据</span>
+PlayerPrefs<span class="token punctuation">.</span><span class="token function">DeleteKey</span><span class="token punctuation">(</span><span class="token string">"Name"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//指定数据</span></code></pre>
+<h3 id="游戏场景加载"><a href="#游戏场景加载" class="headerlink" title="游戏场景加载"></a>游戏场景加载</h3><p>很多时候，我们不能在一个场景中完成所有的事情，需要根据功能划分场景，例如：登录场景，游戏大厅，战斗场景等</p>
+<h4 id="场景切换"><a href="#场景切换" class="headerlink" title="场景切换"></a>场景切换</h4><p>前提：场景必须被打包，在File-&gt;Build Setting中把场景拖拽金Scenes In Build，排序第一的作为开场场景。</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> UnityEngine<span class="token punctuation">;</span>
+<span class="token keyword">using</span> UnityEngine<span class="token punctuation">.</span>SceneManagement<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SceneDemo</span><span class="token punctuation">:</span>MonoBehaviour<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">void</span> <span class="token function">Update</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>Input<span class="token punctuation">.</span><span class="token function">GetKeyDown</span><span class="token punctuation">(</span>KeyCode<span class="token punctuation">.</span>A<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      SceneManager<span class="token punctuation">.</span><span class="token function">LoadScene</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//加载第二个场景</span>
+      SceneManager<span class="token punctuation">.</span><span class="token function">LoadScene</span><span class="token punctuation">(</span><span class="token string">"Scene"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//加载对应名称的场景</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<h4 id="数据保留"><a href="#数据保留" class="headerlink" title="数据保留"></a>数据保留</h4><p>加载场景默认销毁上一个场景所有物体，如果想保留部分物体：</p>
+<pre class=" language-csharp"><code class="language-csharp">GameObject<span class="token punctuation">.</span><span class="token function">DontDestroyOnLoad</span><span class="token punctuation">(</span>gameObject<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 保留自身</span></code></pre>
+<h3 id="声音系统"><a href="#声音系统" class="headerlink" title="声音系统"></a>声音系统</h3><p>在相机上有一个AudioListener组件，没有它玩家听不到声音。这个东西相当于声音接收器，声源近则声音大，并且有左右声道。<br>相对地，发出声音的物体身上挂载的是AudioSource组件。<br>AudioClip：声音片段<br>Mute：是否静音<br>Play On Awake：生成游戏物体时立刻播放音频<br>Loop：循环播放<br>Volumn：音量<br>Pitch：音调，默认为1，值越大，速度越快，音调越高<br>Stereo Pan：声道占比</p>
+<pre class=" language-csharp"><code class="language-csharp">AudioSource audiosoruce<span class="token punctuation">;</span>
+<span class="token keyword">public</span> AudioClip clip<span class="token punctuation">;</span>
+audioSource<span class="token punctuation">.</span>clip <span class="token operator">=</span> clip<span class="token punctuation">;</span>
+audioSource<span class="token punctuation">.</span><span class="token function">Play</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+audioSource<span class="token punctuation">.</span><span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>audioSource<span class="token punctuation">.</span>isPlaying<span class="token punctuation">)</span>
+  audioSource<span class="token punctuation">.</span><span class="token function">Pause</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+audioSource<span class="token punctuation">.</span><span class="token function">UnPause</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+audioSource<span class="token punctuation">.</span><span class="token function">PlayOneShot</span><span class="token punctuation">(</span>clip<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//播放一次，可以叠加</span></code></pre>
+<h3 id="Windows打包发布"><a href="#Windows打包发布" class="headerlink" title="Windows打包发布"></a>Windows打包发布</h3><p>把Unity的工程项目变成玩家可以打开的exe文件<br>File-&gt;Build Setting-&gt;Player Setting<br>这里可以设置公司名称，产品名称版本等信息<br>Default Cursor：有两张图片，第一张设定游戏图标，第二张设置鼠标指针图标<br>Resolution and Presentation：<br>  Fullscreen：窗口还是全屏运行<br>  Default is Native Resolution：打勾代表自动设置分辨率，否则要手动设置</p>
+<p>一切设定玩了后可以点击Build，选择路径，游戏就能顺利导出到对应路径啦！</p>
+
                 
             </div>
             <hr/>
@@ -1012,18 +1543,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/09/26/unity-you-xi-kai-fa-ji-chu-zhi-shi-zhi-unity-bu-fen/">
+                <a href="/2022/09/30/unity-you-xi-kai-fa-zhong-ji-shi-zhan-zhi-mmorpg/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Unity游戏开发基础知识之Unity部分">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Unity游戏开发终极实战之MMORPG">
                         
-                        <span class="card-title">Unity游戏开发基础知识之Unity部分</span>
+                        <span class="card-title">Unity游戏开发终极实战之MMORPG</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1033,9 +1563,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-26
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-09-30
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1048,7 +1578,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1331,7 +1860,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021-2022</span>
+                <span id="year">2021-2023</span>
             
             <span id="year">2021</span>
             <a href="/about" target="_blank">微笑紫瞳星</a>
@@ -1340,7 +1869,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">293.7k</span>&nbsp;字
+                class="white-color">347.3k</span>&nbsp;字
             
             
             

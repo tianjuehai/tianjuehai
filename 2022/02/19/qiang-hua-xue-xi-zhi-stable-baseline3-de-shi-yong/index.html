@@ -2259,4 +2259,1265 @@ model <span class="token operator">=</span> SAC<span class="token punctuation">(
 
     <span class="token keyword">def</span> <span class="token function">_on_step</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> bool<span class="token punctuation">:</span>
         <span class="token keyword">if</span> self<span class="token punctuation">.</span>n_calls <span class="token operator">%</span> self<span class="token punctuation">.</span>_log_freq <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
-            self<span class="token punctuation">.</span>tb_formatter<span class="token punctuation">.</span>writer<spa
+            self<span class="token punctuation">.</span>tb_formatter<span class="token punctuation">.</span>writer<span class="token punctuation">.</span>add_text<span class="token punctuation">(</span><span class="token string">"direct_access"</span><span class="token punctuation">,</span> <span class="token string">"this is a value"</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>num_timesteps<span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>tb_formatter<span class="token punctuation">.</span>writer<span class="token punctuation">.</span>flush<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+model<span class="token punctuation">.</span>learn<span class="token punctuation">(</span><span class="token number">50000</span><span class="token punctuation">,</span> callback<span class="token operator">=</span>SummaryWriterCallback<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<h2 id="模仿学习"><a href="#模仿学习" class="headerlink" title="模仿学习"></a>模仿学习</h2><p>Imitation库在SB3基础上实现了模仿学习算法，其中包含四个算法：</p>
+<ul>
+<li>Behavioral Cloning</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1011.0686">DAgger</a> with synthetic examples</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1710.11248">Adversarial Inverse Reinforcement Learning</a> (AIRL)</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1606.03476">Generative Adversarial Imitation Learning</a> (GAIL)</li>
+</ul>
+<p>安装：</p>
+<pre class=" language-powershell"><code class="language-powershell">pip install imitation</code></pre>
+<p>简单使用：</p>
+<pre class=" language-powershell"><code class="language-powershell"><span class="token comment" spellcheck="true"># Train PPO agent on cartpole and collect expert demonstrations</span>
+python <span class="token operator">-</span>m imitation<span class="token punctuation">.</span>scripts<span class="token punctuation">.</span>expert_demos with fast cartpole log_dir=quickstart
+
+<span class="token comment" spellcheck="true"># Train GAIL from demonstrations</span>
+python <span class="token operator">-</span>m imitation<span class="token punctuation">.</span>scripts<span class="token punctuation">.</span>train_adversarial with fast gail cartpole rollout_path=quickstart<span class="token operator">/</span>rollouts<span class="token operator">/</span>final<span class="token punctuation">.</span>pkl
+
+<span class="token comment" spellcheck="true"># Train AIRL from demonstrations</span>
+python <span class="token operator">-</span>m imitation<span class="token punctuation">.</span>scripts<span class="token punctuation">.</span>train_adversarial with fast airl cartpole rollout_path=quickstart<span class="token operator">/</span>rollouts<span class="token operator">/</span>final<span class="token punctuation">.</span>pkl</code></pre>
+<p>案例：</p>
+<pre class=" language-python"><code class="language-python"><span class="token triple-quoted-string string">"""Trains BC, GAIL and AIRL models on saved CartPole-v1 demonstrations."""</span>
+
+<span class="token keyword">import</span> pathlib
+<span class="token keyword">import</span> pickle
+<span class="token keyword">import</span> tempfile
+
+<span class="token keyword">import</span> seals  <span class="token comment" spellcheck="true"># noqa: F401</span>
+<span class="token keyword">import</span> stable_baselines3 <span class="token keyword">as</span> sb3
+
+<span class="token keyword">from</span> imitation<span class="token punctuation">.</span>algorithms <span class="token keyword">import</span> bc
+<span class="token keyword">from</span> imitation<span class="token punctuation">.</span>algorithms<span class="token punctuation">.</span>adversarial <span class="token keyword">import</span> airl<span class="token punctuation">,</span> gail
+<span class="token keyword">from</span> imitation<span class="token punctuation">.</span>data <span class="token keyword">import</span> rollout
+<span class="token keyword">from</span> imitation<span class="token punctuation">.</span>rewards <span class="token keyword">import</span> reward_nets
+<span class="token keyword">from</span> imitation<span class="token punctuation">.</span>util <span class="token keyword">import</span> logger<span class="token punctuation">,</span> util
+
+<span class="token comment" spellcheck="true"># Load pickled test demonstrations.</span>
+<span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">"tests/testdata/expert_models/cartpole_0/rollouts/final.pkl"</span><span class="token punctuation">,</span> <span class="token string">"rb"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># This is a list of `imitation.data.types.Trajectory`, where</span>
+    <span class="token comment" spellcheck="true"># every instance contains observations and actions for a single expert</span>
+    <span class="token comment" spellcheck="true"># demonstration.</span>
+    trajectories <span class="token operator">=</span> pickle<span class="token punctuation">.</span>load<span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># Convert List[types.Trajectory] to an instance of `imitation.data.types.Transitions`.</span>
+<span class="token comment" spellcheck="true"># This is a more general dataclass containing unordered</span>
+<span class="token comment" spellcheck="true"># (observation, actions, next_observation) transitions.</span>
+transitions <span class="token operator">=</span> rollout<span class="token punctuation">.</span>flatten_trajectories<span class="token punctuation">(</span>trajectories<span class="token punctuation">)</span>
+
+venv <span class="token operator">=</span> util<span class="token punctuation">.</span>make_vec_env<span class="token punctuation">(</span><span class="token string">"seals/CartPole-v0"</span><span class="token punctuation">,</span> n_envs<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+
+tempdir <span class="token operator">=</span> tempfile<span class="token punctuation">.</span>TemporaryDirectory<span class="token punctuation">(</span>prefix<span class="token operator">=</span><span class="token string">"quickstart"</span><span class="token punctuation">)</span>
+tempdir_path <span class="token operator">=</span> pathlib<span class="token punctuation">.</span>Path<span class="token punctuation">(</span>tempdir<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"All Tensorboards and logging are being written inside {tempdir_path}/."</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># Train BC on expert data.</span>
+<span class="token comment" spellcheck="true"># BC also accepts as `demonstrations` any PyTorch-style DataLoader that iterates over</span>
+<span class="token comment" spellcheck="true"># dictionaries containing observations and actions.</span>
+bc_logger <span class="token operator">=</span> logger<span class="token punctuation">.</span>configure<span class="token punctuation">(</span>tempdir_path <span class="token operator">/</span> <span class="token string">"BC/"</span><span class="token punctuation">)</span>
+bc_trainer <span class="token operator">=</span> bc<span class="token punctuation">.</span>BC<span class="token punctuation">(</span>
+    observation_space<span class="token operator">=</span>venv<span class="token punctuation">.</span>observation_space<span class="token punctuation">,</span>
+    action_space<span class="token operator">=</span>venv<span class="token punctuation">.</span>action_space<span class="token punctuation">,</span>
+    demonstrations<span class="token operator">=</span>transitions<span class="token punctuation">,</span>
+    custom_logger<span class="token operator">=</span>bc_logger<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+bc_trainer<span class="token punctuation">.</span>train<span class="token punctuation">(</span>n_epochs<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># Train GAIL on expert data.</span>
+<span class="token comment" spellcheck="true"># GAIL, and AIRL also accept as `demonstrations` any Pytorch-style DataLoader that</span>
+<span class="token comment" spellcheck="true"># iterates over dictionaries containing observations, actions, and next_observations.</span>
+gail_logger <span class="token operator">=</span> logger<span class="token punctuation">.</span>configure<span class="token punctuation">(</span>tempdir_path <span class="token operator">/</span> <span class="token string">"GAIL/"</span><span class="token punctuation">)</span>
+gail_reward_net <span class="token operator">=</span> reward_nets<span class="token punctuation">.</span>BasicRewardNet<span class="token punctuation">(</span>
+    observation_space<span class="token operator">=</span>venv<span class="token punctuation">.</span>observation_space<span class="token punctuation">,</span>
+    action_space<span class="token operator">=</span>venv<span class="token punctuation">.</span>action_space<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+gail_trainer <span class="token operator">=</span> gail<span class="token punctuation">.</span>GAIL<span class="token punctuation">(</span>
+    venv<span class="token operator">=</span>venv<span class="token punctuation">,</span>
+    demonstrations<span class="token operator">=</span>transitions<span class="token punctuation">,</span>
+    demo_batch_size<span class="token operator">=</span><span class="token number">32</span><span class="token punctuation">,</span>
+    gen_algo<span class="token operator">=</span>sb3<span class="token punctuation">.</span>PPO<span class="token punctuation">(</span><span class="token string">"MlpPolicy"</span><span class="token punctuation">,</span> venv<span class="token punctuation">,</span> verbose<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> n_steps<span class="token operator">=</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    reward_net<span class="token operator">=</span>gail_reward_net<span class="token punctuation">,</span>
+    custom_logger<span class="token operator">=</span>gail_logger<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+gail_trainer<span class="token punctuation">.</span>train<span class="token punctuation">(</span>total_timesteps<span class="token operator">=</span><span class="token number">2048</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># Train AIRL on expert data.</span>
+airl_logger <span class="token operator">=</span> logger<span class="token punctuation">.</span>configure<span class="token punctuation">(</span>tempdir_path <span class="token operator">/</span> <span class="token string">"AIRL/"</span><span class="token punctuation">)</span>
+airl_reward_net <span class="token operator">=</span> reward_nets<span class="token punctuation">.</span>BasicShapedRewardNet<span class="token punctuation">(</span>
+    observation_space<span class="token operator">=</span>venv<span class="token punctuation">.</span>observation_space<span class="token punctuation">,</span>
+    action_space<span class="token operator">=</span>venv<span class="token punctuation">.</span>action_space<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+airl_trainer <span class="token operator">=</span> airl<span class="token punctuation">.</span>AIRL<span class="token punctuation">(</span>
+    venv<span class="token operator">=</span>venv<span class="token punctuation">,</span>
+    demonstrations<span class="token operator">=</span>transitions<span class="token punctuation">,</span>
+    demo_batch_size<span class="token operator">=</span><span class="token number">32</span><span class="token punctuation">,</span>
+    gen_algo<span class="token operator">=</span>sb3<span class="token punctuation">.</span>PPO<span class="token punctuation">(</span><span class="token string">"MlpPolicy"</span><span class="token punctuation">,</span> venv<span class="token punctuation">,</span> verbose<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> n_steps<span class="token operator">=</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    reward_net<span class="token operator">=</span>airl_reward_net<span class="token punctuation">,</span>
+    custom_logger<span class="token operator">=</span>airl_logger<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+airl_trainer<span class="token punctuation">.</span>train<span class="token punctuation">(</span>total_timesteps<span class="token operator">=</span><span class="token number">2048</span><span class="token punctuation">)</span></code></pre>
+<h2 id="以onnx的格式导出模型"><a href="#以onnx的格式导出模型" class="headerlink" title="以onnx的格式导出模型"></a>以onnx的格式导出模型</h2><p>onnx的模型可用于ml-agents的使用。</p>
+<p>以下示例适用于连续动作，如果是离散动作，需要进行处理。</p>
+<p>例子1</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> stable_baselines3 <span class="token keyword">import</span> PPO
+<span class="token keyword">import</span> torch
+
+<span class="token keyword">class</span> <span class="token class-name">OnnxablePolicy</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> extractor<span class="token punctuation">,</span> action_net<span class="token punctuation">,</span> value_net<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      super<span class="token punctuation">(</span>OnnxablePolicy<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+      self<span class="token punctuation">.</span>extractor <span class="token operator">=</span> extractor
+      self<span class="token punctuation">.</span>action_net <span class="token operator">=</span> action_net
+      self<span class="token punctuation">.</span>value_net <span class="token operator">=</span> value_net
+
+  <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> observation<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token comment" spellcheck="true"># NOTE: You may have to process (normalize) observation in the correct</span>
+      <span class="token comment" spellcheck="true">#       way before using this. See `common.preprocessing.preprocess_obs`</span>
+      action_hidden<span class="token punctuation">,</span> value_hidden <span class="token operator">=</span> self<span class="token punctuation">.</span>extractor<span class="token punctuation">(</span>observation<span class="token punctuation">)</span>
+      <span class="token keyword">return</span> self<span class="token punctuation">.</span>action_net<span class="token punctuation">(</span>action_hidden<span class="token punctuation">)</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>value_net<span class="token punctuation">(</span>value_hidden<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># Example: model = PPO("MlpPolicy", "Pendulum-v1")</span>
+model <span class="token operator">=</span> PPO<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">"PathToTrainedModel.zip"</span><span class="token punctuation">)</span>
+model<span class="token punctuation">.</span>policy<span class="token punctuation">.</span>to<span class="token punctuation">(</span><span class="token string">"cpu"</span><span class="token punctuation">)</span>
+onnxable_model <span class="token operator">=</span> OnnxablePolicy<span class="token punctuation">(</span>model<span class="token punctuation">.</span>policy<span class="token punctuation">.</span>mlp_extractor<span class="token punctuation">,</span> model<span class="token punctuation">.</span>policy<span class="token punctuation">.</span>action_net<span class="token punctuation">,</span> model<span class="token punctuation">.</span>policy<span class="token punctuation">.</span>value_net<span class="token punctuation">)</span>
+
+dummy_input <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> observation_size<span class="token punctuation">)</span>
+torch<span class="token punctuation">.</span>onnx<span class="token punctuation">.</span>export<span class="token punctuation">(</span>onnxable_model<span class="token punctuation">,</span> dummy_input<span class="token punctuation">,</span> <span class="token string">"my_ppo_model.onnx"</span><span class="token punctuation">,</span> opset_version<span class="token operator">=</span><span class="token number">9</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">##### Load and test with onnx</span>
+
+<span class="token keyword">import</span> onnx
+<span class="token keyword">import</span> onnxruntime <span class="token keyword">as</span> ort
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+
+onnx_model <span class="token operator">=</span> onnx<span class="token punctuation">.</span>load<span class="token punctuation">(</span>onnx_path<span class="token punctuation">)</span>
+onnx<span class="token punctuation">.</span>checker<span class="token punctuation">.</span>check_model<span class="token punctuation">(</span>onnx_model<span class="token punctuation">)</span>
+
+observation <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> observation_size<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span>np<span class="token punctuation">.</span>float32<span class="token punctuation">)</span>
+ort_sess <span class="token operator">=</span> ort<span class="token punctuation">.</span>InferenceSession<span class="token punctuation">(</span>onnx_path<span class="token punctuation">)</span>
+action<span class="token punctuation">,</span> value <span class="token operator">=</span> ort_sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>None<span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">'input.1'</span><span class="token punctuation">:</span> observation<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre>
+<p>例子2</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> stable_baselines3 <span class="token keyword">import</span> SAC
+<span class="token keyword">import</span> torch
+
+<span class="token keyword">class</span> <span class="token class-name">OnnxablePolicy</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>  actor<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      super<span class="token punctuation">(</span>OnnxablePolicy<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+      <span class="token comment" spellcheck="true"># Removing the flatten layer because it can't be onnxed</span>
+      self<span class="token punctuation">.</span>actor <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>actor<span class="token punctuation">.</span>latent_pi<span class="token punctuation">,</span> actor<span class="token punctuation">.</span>mu<span class="token punctuation">)</span>
+
+  <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> observation<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token comment" spellcheck="true"># NOTE: You may have to process (normalize) observation in the correct</span>
+      <span class="token comment" spellcheck="true">#       way before using this. See `common.preprocessing.preprocess_obs`</span>
+      <span class="token keyword">return</span> self<span class="token punctuation">.</span>actor<span class="token punctuation">(</span>observation<span class="token punctuation">)</span>
+
+model <span class="token operator">=</span> SAC<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">"PathToTrainedModel.zip"</span><span class="token punctuation">)</span>
+onnxable_model <span class="token operator">=</span> OnnxablePolicy<span class="token punctuation">(</span>model<span class="token punctuation">.</span>policy<span class="token punctuation">.</span>actor<span class="token punctuation">)</span>
+
+dummy_input <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> observation_size<span class="token punctuation">)</span>
+onnxable_model<span class="token punctuation">.</span>policy<span class="token punctuation">.</span>to<span class="token punctuation">(</span><span class="token string">"cpu"</span><span class="token punctuation">)</span>
+torch<span class="token punctuation">.</span>onnx<span class="token punctuation">.</span>export<span class="token punctuation">(</span>onnxable_model<span class="token punctuation">,</span> dummy_input<span class="token punctuation">,</span> <span class="token string">"my_sac_actor.onnx"</span><span class="token punctuation">,</span> opset_version<span class="token operator">=</span><span class="token number">9</span><span class="token punctuation">)</span></code></pre>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><ol>
+<li>类似的强化学习算法库有很多，例如 天授，rllib，ElegantRL，PARL，几种框架各有千秋，可自己选用最顺手的进行训练。</li>
+<li>各项函数的具体作用和全部参数，请查看文档，这里只描述了其普遍应用。</li>
+<li>对于新出的论文，sb3也没有相应的实现，需要我们在阅读源码的基础上，继承其中的一些base类，按照sb3的框架来尝试实现。</li>
+</ol>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">微笑紫瞳星</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://tianjuewudi.gitee.io/2022/02/19/qiang-hua-xue-xi-zhi-stable-baseline3-de-shi-yong/">https://tianjuewudi.gitee.io/2022/02/19/qiang-hua-xue-xi-zhi-stable-baseline3-de-shi-yong/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">微笑紫瞳星</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">强化学习</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">您的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'bpzS5Q9Q9zMl4doyyDGqIqqq-gzGzoHsz',
+        appKey: 'M0IfLJW2G1dCMyLTb90tFxT8',
+        notify: 'true' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '请畅所欲言'
+    });
+</script>
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/03/20/qiang-hua-xue-xi-ppo-dai-ma-jiang-jie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="强化学习PPO代码讲解">
+                        
+                        <span class="card-title">强化学习PPO代码讲解</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    强化学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">强化学习</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/02/17/ai-qiu-qiu-da-zuo-zhan-go-bigger-duo-zhi-neng-ti-jue-ce-zhi-neng-tiao-zhan-sai-sai-ti-fen-xi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="AI球球大作战：Go-Bigger多智能体决策智能挑战赛（赛题分析）">
+                        
+                        <span class="card-title">AI球球大作战：Go-Bigger多智能体决策智能挑战赛（赛题分析）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            我参加的第二场炼丹师之间的切磋较量
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%AF%94%E8%B5%9B/" class="post-category">
+                                    强化学习比赛
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">强化学习</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%AF%94%E8%B5%9B/">
+                        <span class="chip bg-color">强化学习比赛</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('50')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 微笑紫瞳星<br />'
+            + '文章作者: 微笑紫瞳星<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处，谢谢啦~';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="tencent"
+                   type="playlist"
+                   id="8075110837"
+                   fixed='true'
+                   autoplay='true'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.35'
+                   list-folded='false'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2023</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">微笑紫瞳星</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">347.3k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2021";
+                    var startMonth = "1";
+                    var startDate = "9";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "11";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:1121452406@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1121452406" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1121452406" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://blog.csdn.net/tianjuewudi" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://blog.csdn.net/tianjuewudi" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false});</script></body>
+
+</html>
