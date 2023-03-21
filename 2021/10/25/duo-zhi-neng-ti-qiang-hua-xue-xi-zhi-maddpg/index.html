@@ -517,7 +517,7 @@
                 <p> 论文原文：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1706.02275.pdf">Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments</a></p>
 <p>论文翻译：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qiusuoxiaozi/article/details/79066612">MADDPG翻译</a></p>
 <p>阅读本文需要强化学习基础，可以参考我前面的文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/120932729">多智能体强化学习入门</a></p>
-<p>关于MADDPG强化学习算法的基础DDPG的可以查看我的文章：<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-30">强化学习实践教学</a></p>
+<p>关于MADDPG强化学习算法的基础DDPG的可以查看我的文章：<a target="_blank" rel="noopener" href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-30">强化学习实践教学</a></p>
 <p>对于MADDPG推荐的博客有：<a target="_blank" rel="noopener" href="https://ask.hellobi.com/blog/wenwen/12283">探秘多智能体强化学习-MADDPG算法原理及简单实现</a>，里面包含代码实现。</p>
 <p>github代码（基于Tensorflow）：<a target="_blank" rel="noopener" href="https://github.com/princewen/tensorflow_practice/tree/master/RL/Basic-MADDPG-Demo">https://github.com/princewen/tensorflow_practice/tree/master/RL/Basic-MADDPG-Demo</a></p>
 <p>MADDPG算法是单智能体算法DDPG在多智能体环境下的改进。其中最核心的差别就是，每个Agent的Critic部分都能够获取所有Agent的动作信息，进行中心化训练和非中心化执行。即在训练的时候，引入可以观察全局的critic来指导actor训练，而测试的时候只使用有局部观测的actor采取行动。off-line采用中心化训练，on-line采用非中心化执行，on-line与off-line的共同点就是actor，即只需要利用观测到的局部信息。</p>
@@ -620,7 +620,7 @@ agent3_memory<span class="token punctuation">.</span>add<span class="token punct
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://tianjuewudi.gitee.io/2021/10/25/duo-zhi-neng-ti-qiang-hua-xue-xi-zhi-maddpg/">https://tianjuewudi.gitee.io/2021/10/25/duo-zhi-neng-ti-qiang-hua-xue-xi-zhi-maddpg/</a>
+                    <a href="https://tianjuehai.github.io/2021/10/25/duo-zhi-neng-ti-qiang-hua-xue-xi-zhi-maddpg/">https://tianjuehai.github.io/2021/10/25/duo-zhi-neng-ti-qiang-hua-xue-xi-zhi-maddpg/</a>
                 </span>
             </div>
             <div class="reprint__notice">

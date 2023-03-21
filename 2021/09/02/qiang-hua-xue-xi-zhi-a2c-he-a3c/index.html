@@ -514,7 +514,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p> 阅读本文可参考我以前的文章《强化学习实践教学》<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-29%EF%BC%8C%E5%85%B6%E4%B8%AD%E7%9A%84%E8%BF%9E%E7%BB%AD%E5%8A%A8%E4%BD%9C%E7%A9%BA%E9%97%B4%E4%B8%8A%E6%B1%82%E8%A7%A3RL%E7%AB%A0%E8%8A%82%E6%98%AF%E6%9C%AC%E6%96%87%E7%9A%84%E5%9F%BA%E7%A1%80%EF%BC%8C%E5%85%B6%E4%B8%AD%E7%9A%84DDPG%E5%92%8CActor-Critic%E9%99%A4%E4%BA%86Target%E7%BD%91%E7%BB%9C%E5%A4%96%E5%85%B6%E4%BD%99%E9%83%BD%E4%B8%80%E8%87%B4%E3%80%82">https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-29，其中的连续动作空间上求解RL章节是本文的基础，其中的DDPG和Actor-Critic除了Target网络外其余都一致。</a></p>
+                <p> 阅读本文可参考我以前的文章《强化学习实践教学》<a target="_blank" rel="noopener" href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-29%EF%BC%8C%E5%85%B6%E4%B8%AD%E7%9A%84%E8%BF%9E%E7%BB%AD%E5%8A%A8%E4%BD%9C%E7%A9%BA%E9%97%B4%E4%B8%8A%E6%B1%82%E8%A7%A3RL%E7%AB%A0%E8%8A%82%E6%98%AF%E6%9C%AC%E6%96%87%E7%9A%84%E5%9F%BA%E7%A1%80%EF%BC%8C%E5%85%B6%E4%B8%AD%E7%9A%84DDPG%E5%92%8CActor-Critic%E9%99%A4%E4%BA%86Target%E7%BD%91%E7%BB%9C%E5%A4%96%E5%85%B6%E4%BD%99%E9%83%BD%E4%B8%80%E8%87%B4%E3%80%82">https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-29，其中的连续动作空间上求解RL章节是本文的基础，其中的DDPG和Actor-Critic除了Target网络外其余都一致。</a></p>
 <p>首先，A2C的全称是Advantage Actor Critic，而A3C是Asynchronous Advantage Actor Critic，A2C源自A3C。</p>
 <h2 id="Actor-Critic"><a href="#Actor-Critic" class="headerlink" title="Actor Critic"></a>Actor Critic</h2><p>首先解释一下Actor Critic的概念，Q-learning是一种价值迭代法，而policy gradient是一种策略迭代法，Actor Critic同时使用了这两种方法。</p>
 <p>Actor直接负责输出每个Action的概率，有多少个Action就有多少个输出。Critic输出的是状态的价值V。这是两个神经网络。在Policy Gradient中，一个episode的累计Reward就像是一个Critic，决定了Actor的学习方向，使得Actor倾向于学习Critic累计Reward更高的逻辑。因此策略梯度可写作：<br>$$<br>g = E[\sum_{t=0}^{\infty}\psi_t \nabla_{\theta}log \pi_{\theta}(a_t|s_t)]<br>$$<br>其中这里的π就是actor，ψ就是critic，这是一个广义的框架。</p>
@@ -595,7 +595,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://tianjuewudi.gitee.io/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/">https://tianjuewudi.gitee.io/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/</a>
+                    <a href="https://tianjuehai.github.io/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/">https://tianjuehai.github.io/2021/09/02/qiang-hua-xue-xi-zhi-a2c-he-a3c/</a>
                 </span>
             </div>
             <div class="reprint__notice">

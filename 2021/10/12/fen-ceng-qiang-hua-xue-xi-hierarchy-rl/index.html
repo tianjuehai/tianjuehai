@@ -514,7 +514,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p> 阅读本文需要有深度强化学习基础，可以翻看我以前的文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/120698199">强化学习纲要（周博磊课程）</a>、<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/">强化学习实践教学</a></p>
+                <p> 阅读本文需要有深度强化学习基础，可以翻看我以前的文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjuewudi/article/details/120698199">强化学习纲要（周博磊课程）</a>、<a target="_blank" rel="noopener" href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/">强化学习实践教学</a></p>
 <p>参考原文：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/267524544">分层强化学习survey</a>  ，这篇文章讲的十分全面，重复内容不再赘述。</p>
 <p>分层主要解决的是稀疏reward的问题，实际的强化问题往往reward很稀疏，再加上庞大的状态空间和动作空间组合，导致直接硬训往往训不出来，遇到头铁的agent更是如此。我们人类在解决一个复杂问题时，往往会将其分解为若干个容易解决的子问题，分而治之，分层的思想正是来源于此。个人理解目前分层的解决手段大体分两种，一种是基于目标的(goal-reach)，主要做法是选取一定的goal，使agent向着这些goal训练，可以预见这种方法的难点就是如何选取合适的goal；另一种方式是多级控制(multi-level control)，做法是抽象出不同级别的控制层，上层控制下层，这些抽象层在不同的文章中可能叫法不同，如常见的option、skill、macro action等，这种方式换一种说法也可以叫做时序抽象(temporal abstraction)。</p>
 <h2 id="SMDP"><a href="#SMDP" class="headerlink" title="SMDP"></a>SMDP</h2><p>SMDP指的是半马尔科夫决策过程。和马尔科夫决策过程中一个状态经过一个action就能到达下一个状态不同，它需要一段时间过后或是多个action才能到达下个状态。它可以分为两种：一种是时间连续的，每经过连续的时间状态发生改变。一种是时间离散的，经过几个时间步之后状态发生改变。分层强化学习研究第二种，并按照离散时间进行建模。</p>
@@ -556,7 +556,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://tianjuewudi.gitee.io/2021/10/12/fen-ceng-qiang-hua-xue-xi-hierarchy-rl/">https://tianjuewudi.gitee.io/2021/10/12/fen-ceng-qiang-hua-xue-xi-hierarchy-rl/</a>
+                    <a href="https://tianjuehai.github.io/2021/10/12/fen-ceng-qiang-hua-xue-xi-hierarchy-rl/">https://tianjuehai.github.io/2021/10/12/fen-ceng-qiang-hua-xue-xi-hierarchy-rl/</a>
                 </span>
             </div>
             <div class="reprint__notice">

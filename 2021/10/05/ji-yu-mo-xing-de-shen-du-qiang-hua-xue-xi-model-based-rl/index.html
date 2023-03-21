@@ -515,7 +515,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p> 参考视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1hV411d7Sg?spm_id_from=333.999.0.0">周博磊强化学习纲要</a></p>
-<p> 阅读本文前需要对强化学习model-free领域有一定的了解，可以查看我之前的文章：《<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/">强化学习实践教学</a>》，《<a href="https://tianjuewudi.gitee.io/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/#toc-heading-39">强化学习纲要（周博磊课程）</a>》</p>
+<p> 阅读本文前需要对强化学习model-free领域有一定的了解，可以查看我之前的文章：《<a target="_blank" rel="noopener" href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/">强化学习实践教学</a>》，《<a target="_blank" rel="noopener" href="https://tianjuewudi.gitee.io/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/#toc-heading-39">强化学习纲要（周博磊课程）</a>》</p>
 <p> 之前介绍的算法例如DQN，DDPG，PPO都是<strong>model-free（无模型）</strong>的，这也是比较多人的研究领域，这些算法是智能体直接和环境互动获得数据，不需要拟合环境模型，智能体对环境的认知只能通过和环境不断大量的交互来实现。这样做的优点是通过无数次与环境的交互可以保证智能体得到最优解。往往在游戏这样的没有采样成本的环境中都可以用model-free。</p>
 <p>接下来我介绍强化学习的另一个领域<strong>model-based（基于模型）</strong>，在这个领域中，智能体通过与环境进行交互获得数据，根据这些数据对环境进行建模拟合出一个模型，然后智能体根据模型来生成样本并利用RL算法优化自身。一旦模型拟合出来，智能体就可以根据该模型来生成样本，因此智能体和环境直接的交互次数会急剧减少，缺点是拟合的模型往往存在偏差，因此model-based的算法通常不保证能收敛到最优解。但是在现实生活中是需要一定的采样成本的，因此采样效率至关重要，因此model-free是一个提升采样效率的重要方式。</p>
 <img src="/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/2.png" class>
@@ -629,7 +629,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://tianjuewudi.gitee.io/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/">https://tianjuewudi.gitee.io/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/</a>
+                    <a href="https://tianjuehai.github.io/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/">https://tianjuehai.github.io/2021/10/05/ji-yu-mo-xing-de-shen-du-qiang-hua-xue-xi-model-based-rl/</a>
                 </span>
             </div>
             <div class="reprint__notice">

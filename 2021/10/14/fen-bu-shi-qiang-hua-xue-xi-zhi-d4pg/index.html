@@ -515,7 +515,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p> D4PG全称Distributed Distributional Deterministic Policy Gradient，是总所周知的DDPG的分布式版本。因此学习D4PG之前，需要了解DDPG。</p>
-<p>首先DDPG是DQN在连续空间的版本，DQN只能处理离散动作空间的问题，对于连续动作空间是无法处理的，因此我们引入了DDPG。DDPG是actor-critic的结构，并且借鉴了DQN的技巧，也就是目标网络和经验回放。因此DDPG有四个网络，一个actor，一个Target-actor，一个critic，一个Target-critic。对于Critic的更新方法和DQN一样，而Actor的更新就是最大化Critic的输出，也就是得到最高的评价。DDPG和DQN具体细节可以参考我以前的文章：<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-30">强化学习实践教学</a></p>
+<p>首先DDPG是DQN在连续空间的版本，DQN只能处理离散动作空间的问题，对于连续动作空间是无法处理的，因此我们引入了DDPG。DDPG是actor-critic的结构，并且借鉴了DQN的技巧，也就是目标网络和经验回放。因此DDPG有四个网络，一个actor，一个Target-actor，一个critic，一个Target-critic。对于Critic的更新方法和DQN一样，而Actor的更新就是最大化Critic的输出，也就是得到最高的评价。DDPG和DQN具体细节可以参考我以前的文章：<a target="_blank" rel="noopener" href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-30">强化学习实践教学</a></p>
 <hr>
 <p>D4PG将经验收集的Actor和策略学习的Learner分开，使用多个并行的Actor收集数据，并分享一个大的经验数据缓存区，发送给learner进行学习，经验使用N步奖励的方法进行处理，也可以使用优先级经验复用，给每个经验加上一个初始优先级。</p>
 <p>critic的输出是一个分布，这也就是distributional的概念。</p>
@@ -550,7 +550,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://tianjuewudi.gitee.io/2021/10/14/fen-bu-shi-qiang-hua-xue-xi-zhi-d4pg/">https://tianjuewudi.gitee.io/2021/10/14/fen-bu-shi-qiang-hua-xue-xi-zhi-d4pg/</a>
+                    <a href="https://tianjuehai.github.io/2021/10/14/fen-bu-shi-qiang-hua-xue-xi-zhi-d4pg/">https://tianjuehai.github.io/2021/10/14/fen-bu-shi-qiang-hua-xue-xi-zhi-d4pg/</a>
                 </span>
             </div>
             <div class="reprint__notice">

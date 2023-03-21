@@ -514,7 +514,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p> 知识基础DQN参考我的博文：<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-19">https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-19</a></p>
+                <p> 知识基础DQN参考我的博文：<a target="_blank" rel="noopener" href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-19">https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-19</a></p>
 <h2 id="DQN复习"><a href="#DQN复习" class="headerlink" title="DQN复习"></a>DQN复习</h2><p>​       我们利用神经网络来代替表格法，我们可以输入S并输出多个Q，每个Q对应一个A。神经网络只需要储存有限的网络参数，我们的任务就是不断调整这些参数，使得输入输出符合我们的预期，而且状态可以泛化，相似的状态输出也差不多。<br>​        DQN有两大创新点，一个是经验回放，一个是固定Q目标。经验回放是指探索的数据特征形成一组组数据，并且可以随机打乱，使得神经网络可以重复多次地进行学习。这样可以打乱样本的关联性，而且能提高样本利用率。固定Q目标是指我们把Q值固定一段时间来训练参数，我们需要另外一个一样的网络（target Q网络），Q网络的作用是产生一个Q预测值，直接用来决策产生action。而target Q是产生一个Q目标值，我们通过这个目标值的$Q_{t+1}$计算Q网络$Q_{t}$，target Q往往固定一段时间来使Q网络得到充分训练。</p>
 <h2 id="DQN的缺陷"><a href="#DQN的缺陷" class="headerlink" title="DQN的缺陷"></a>DQN的缺陷</h2><p>使用了 max 操作，Q-learning、DQN算法都会过高估计(overestimate)Q值。</p>
 <h2 id="DDQN与DQN的异同"><a href="#DDQN与DQN的异同" class="headerlink" title="DDQN与DQN的异同"></a>DDQN与DQN的异同</h2><p>DDQN和DQN一样，也有一样的两个Q网络结构。下面是DQN的更新公式<br>$$<br>Q_m(S_{t},a_t) = Q_m(S_{t},a_t)+ \eta * (R_{t+1} + γ \max_a Q_t(S_ {t+1}    ,a) - Q_m(s_t,a_t))<br>$$<br>DDQN采用的是一种使更新公式更稳定的方法：<br>$$<br>a_m = arg \max_a Q_m(s_{t+1},a)<br>$$</p>
@@ -546,7 +546,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://tianjuewudi.gitee.io/2021/08/29/qiang-hua-xue-xi-zhi-ddqn/">https://tianjuewudi.gitee.io/2021/08/29/qiang-hua-xue-xi-zhi-ddqn/</a>
+                    <a href="https://tianjuehai.github.io/2021/08/29/qiang-hua-xue-xi-zhi-ddqn/">https://tianjuehai.github.io/2021/08/29/qiang-hua-xue-xi-zhi-ddqn/</a>
                 </span>
             </div>
             <div class="reprint__notice">

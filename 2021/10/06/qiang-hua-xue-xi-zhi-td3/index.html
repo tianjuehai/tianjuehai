@@ -517,7 +517,7 @@
                 <p> 参考视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1EK41157fD/?spm_id_from=333.788.recommend_more_video.-1">https://www.bilibili.com/video/BV1EK41157fD/?spm_id_from=333.788.recommend_more_video.-1</a> </p>
 <p>原论文：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1802.09477">https://arxiv.org/abs/1802.09477</a></p>
 <p>价值函数优化学习主线：Q-learning→DQN→DDPG→TD3→SAC</p>
-<p>Q-Learning，DQN和DDPG请可以参考我之前的文章：<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-20">强化学习实践教学</a></p>
+<p>Q-Learning，DQN和DDPG请可以参考我之前的文章：<a target="_blank" rel="noopener" href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-20">强化学习实践教学</a></p>
 <p>首先DDPG是对DQN的扩展，使得只能用于离散动作空间的DQN扩展到连续动作空间，在方法上同样运用了经验回放和Target网络，同时是一个Actor-Critic方法，因此存在四个网络。</p>
 <p>TD3也叫做Twin Delayed DDPG，全称Twin Delayed Deep Deterministic Policy Gradient。是基于DDPG的改进。同样DDPG也存在着跟DQN相同的缺陷，就是由于采用的是max最大动作价值的方式进行更新，使得动作价值远比实际要高（overestinmate），使得训练不稳定。因此TD3提出了三种改进。</p>
 <h2 id="Clipped-Double-Q-Learning"><a href="#Clipped-Double-Q-Learning" class="headerlink" title="Clipped Double_Q Learning"></a>Clipped Double_Q Learning</h2><p>TD3使用了两个Q网络进行学习，因此是“twin”。而且采用两个网络中动作价值Q较小的值进行更新。两个网络同时使用一个target网络，因此它们同时都会产生一个预测值，我们只用预测值中较小的来对网络进行更新。</p>
@@ -720,7 +720,7 @@ device <span class="token operator">=</span> torch<span class="token punctuation
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://tianjuewudi.gitee.io/2021/10/06/qiang-hua-xue-xi-zhi-td3/">https://tianjuewudi.gitee.io/2021/10/06/qiang-hua-xue-xi-zhi-td3/</a>
+                    <a href="https://tianjuehai.github.io/2021/10/06/qiang-hua-xue-xi-zhi-td3/">https://tianjuehai.github.io/2021/10/06/qiang-hua-xue-xi-zhi-td3/</a>
                 </span>
             </div>
             <div class="reprint__notice">

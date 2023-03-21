@@ -517,8 +517,8 @@
                 <p> 提示：阅读本文需要一定的深度学习基础。 </p>
 <p>课程链接：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LE411G7Xj">https://www.bilibili.com/video/BV1LE411G7Xj</a></p>
 <p>我以前的强化学习笔记，相同的内容在下面就不再赘述：</p>
-<p>1、<a href="https://tianjuewudi.gitee.io/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/">强化学习概述</a></p>
-<p>2、<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/">强化学习实践教学</a></p>
+<p>1、<a target="_blank" rel="noopener" href="https://tianjuewudi.gitee.io/2021/07/08/qiang-hua-xue-xi-gai-shu-reinforcement-learning/">强化学习概述</a></p>
+<p>2、<a target="_blank" rel="noopener" href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/">强化学习实践教学</a></p>
 <h1 id="Foundation"><a href="#Foundation" class="headerlink" title="Foundation"></a>Foundation</h1><h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>这部分内容可以参考我《强化学习概述》的序章。</p>
 <p>强化学习的特征可以概括为以下几点：</p>
 <ol>
@@ -738,10 +738,10 @@
             target_Q <span class="token operator">=</span> reward <span class="token operator">+</span> self<span class="token punctuation">.</span>gamma <span class="token operator">*</span> np<span class="token punctuation">.</span>max<span class="token punctuation">(</span>
                 self<span class="token punctuation">.</span>Q<span class="token punctuation">[</span>next_obs<span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># Q-learning</span>
         self<span class="token punctuation">.</span>Q<span class="token punctuation">[</span>obs<span class="token punctuation">,</span> action<span class="token punctuation">]</span> <span class="token operator">+=</span> self<span class="token punctuation">.</span>lr <span class="token operator">*</span> <span class="token punctuation">(</span>target_Q <span class="token operator">-</span> predict_Q<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 修正q</span></code></pre>
-<h2 id="Value-Function-Approximation"><a href="#Value-Function-Approximation" class="headerlink" title="Value Function Approximation"></a>Value Function Approximation</h2><p>这部分内容我以前有过记录：<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-19">强化学习实战</a>，请查看<strong>利用神经网络方法求解RL</strong>的章节。其中的DQN算法是一个经典算法。</p>
+<h2 id="Value-Function-Approximation"><a href="#Value-Function-Approximation" class="headerlink" title="Value Function Approximation"></a>Value Function Approximation</h2><p>这部分内容我以前有过记录：<a target="_blank" rel="noopener" href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-19">强化学习实战</a>，请查看<strong>利用神经网络方法求解RL</strong>的章节。其中的DQN算法是一个经典算法。</p>
 <h3 id="Deep-Q-Networks"><a href="#Deep-Q-Networks" class="headerlink" title="Deep Q Networks"></a>Deep Q Networks</h3><p>Code of DQN in PyTorch：<a target="_blank" rel="noopener" href="https://github.com/cuhkrlcourse/DeepRL-Tutorials/blob/master/01.DQN.ipynb">https://github.com/cuhkrlcourse/DeepRL-Tutorials/blob/master/01.DQN.ipynb</a></p>
 <p>Code of Flappy Bird：<a target="_blank" rel="noopener" href="https://github.com/xmfbit/DQN-FlappyBird">https://github.com/xmfbit/DQN-FlappyBird</a></p>
-<h2 id="Policy-Optimization-State-of-the-Art"><a href="#Policy-Optimization-State-of-the-Art" class="headerlink" title="Policy Optimization:State of the Art"></a>Policy Optimization:State of the Art</h2><p>之前讲解的算法都是基于value-based的算法，利用各种方法来调整动作价值的更新，依靠这个价值来进行决策。下面来讲解policy-based的算法，这种算法无需构建价值函数，输入状态就可以直接由网络输出得到下一步动作的概率分布。此部分内容可以参考<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-19">强化学习实战</a>的<strong>基于策略梯度求解RL</strong>。</p>
+<h2 id="Policy-Optimization-State-of-the-Art"><a href="#Policy-Optimization-State-of-the-Art" class="headerlink" title="Policy Optimization:State of the Art"></a>Policy Optimization:State of the Art</h2><p>之前讲解的算法都是基于value-based的算法，利用各种方法来调整动作价值的更新，依靠这个价值来进行决策。下面来讲解policy-based的算法，这种算法无需构建价值函数，输入状态就可以直接由网络输出得到下一步动作的概率分布。此部分内容可以参考<a target="_blank" rel="noopener" href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-19">强化学习实战</a>的<strong>基于策略梯度求解RL</strong>。</p>
 <p>如果客观函数是不可导的，我们没法计算导数，这时候我们可以使用Derivative-free的方法，这里简要介绍两种。</p>
 <h3 id="Cross-Entropy-Method（CEM）"><a href="#Cross-Entropy-Method（CEM）" class="headerlink" title="Cross Entropy Method（CEM）"></a>Cross Entropy Method（CEM）</h3><p>这种算法跟遗传算法类似，不断取前10%最优的参数对分布进行优化。</p>
 <img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/19.png" class>
@@ -751,7 +751,7 @@
 
 
 
-<h3 id="Actor-Critic"><a href="#Actor-Critic" class="headerlink" title="Actor-Critic"></a>Actor-Critic</h3><p>此部分内容可以参考<a href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-19">强化学习实战</a>的<strong>连续动作空间上求解RL</strong>。这里用了DDPG的算法。</p>
+<h3 id="Actor-Critic"><a href="#Actor-Critic" class="headerlink" title="Actor-Critic"></a>Actor-Critic</h3><p>此部分内容可以参考<a target="_blank" rel="noopener" href="https://tianjuewudi.gitee.io/2021/07/16/qiang-hua-xue-xi-shi-jian-jiao-xue/#toc-heading-19">强化学习实战</a>的<strong>连续动作空间上求解RL</strong>。这里用了DDPG的算法。</p>
 <p>这里Actor-Critic也可以运用到上面的Policy Gradient中，Policy网络的更新方式中的Reward加权更新改变为 Reward - Critic 加权更新，也就是说当Reward 比Critic预测的程度高，我们趋向于采纳这种行为，反之摒弃这种行为。</p>
 <h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><img src="/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/21.png" class>
 
@@ -795,7 +795,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://tianjuewudi.gitee.io/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/">https://tianjuewudi.gitee.io/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/</a>
+                    <a href="https://tianjuehai.github.io/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/">https://tianjuehai.github.io/2021/07/21/qiang-hua-xue-xi-gang-yao-zhou-bo-lei-ke-cheng/</a>
                 </span>
             </div>
             <div class="reprint__notice">
