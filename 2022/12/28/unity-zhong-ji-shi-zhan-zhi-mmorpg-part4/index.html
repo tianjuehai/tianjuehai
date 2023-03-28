@@ -475,21 +475,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-01-09
+                    2023-03-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4k
+                    4.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    16 分
+                    15 分
                 </div>
                 
 
@@ -522,36 +522,37 @@
 <li>兴趣范围需要分等级，例如距离最近的时候是Lv1，最远是lv3。lv3只关心这个人存不存在，lv2关注移动等，lv1才关注战斗等所有具体信息。但是如果有人和你发发生了战斗（关联），无论多远都需要在兴趣范围内。</li>
 </ol>
 <p>伪代码：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">OnEntityMove</span><span class="token punctuation">(</span>who<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">foreach</span><span class="token punctuation">(</span><span class="token keyword">var</span> entity <span class="token keyword">in</span> entities<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">OnEntityMove</span><span class="token punctuation">(</span>who<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">foreach</span><span class="token punctuation">(</span><span class="token keyword">var</span> entity <span class="token keyword">in</span> entities<span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">if</span><span class="token punctuation">(</span>who <span class="token operator">==</span> entity<span class="token punctuation">)</span> <span class="token keyword">continue</span><span class="token punctuation">;</span>
         <span class="token keyword">bool</span> nowInAOI <span class="token operator">=</span> who<span class="token punctuation">.</span><span class="token function">Distance</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span> <span class="token operator">&lt;</span> who<span class="token punctuation">.</span>AOIRange<span class="token punctuation">;</span>
         <span class="token keyword">bool</span> alreadyInAOI <span class="token operator">=</span> who<span class="token punctuation">.</span>AOI<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span>
 
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span>alreadyInAOI <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>nowInAOI<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span>alreadyInAOI <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>nowInAOI<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             who<span class="token punctuation">.</span><span class="token function">onLeaveAOI</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span><span class="token punctuation">;</span>
             entity<span class="token punctuation">.</span><span class="token function">onLeaveAOI</span><span class="token punctuation">(</span>who<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">!</span>alreadyInAOI <span class="token operator">&amp;&amp;</span> nowInAOI<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">!</span>alreadyInAOI <span class="token operator">&amp;&amp;</span> nowInAOI<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             who<span class="token punctuation">.</span><span class="token function">onEnterAOI</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span><span class="token punctuation">;</span>
             eneity<span class="token punctuation">.</span><span class="token function">OnEnterAOI</span><span class="token punctuation">(</span>who<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p><strong>缺点</strong>：计算成本较高，cpu压力大，每次移动都需要计算距离的次数为(1+N)<em>n/2，100人需要计算5050次。<br><strong>改善方案</strong></em>：多线程并行计算，根据移动速度减少每秒计算次数，分批计算每帧只计算固定的次数以分散压力。</p>
 <h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><p>方案：<br>对场景进行区域（格子）划分，只对区域内的人同步。注意的是区域划分合理</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">OnEntityMove</span><span class="token punctuation">(</span>who<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">OnEntityMove</span><span class="token punctuation">(</span>who<span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">int</span> new_x <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>who<span class="token punctuation">.</span>position<span class="token punctuation">.</span>x <span class="token operator">/</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 格子索引</span>
     <span class="token keyword">int</span> new_y <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>who<span class="token punctuation">.</span>position<span class="token punctuation">.</span>y <span class="token operator">/</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>new_x <span class="token operator">!=</span> who<span class="token punctuation">.</span>grid_x <span class="token operator">||</span> new_y <span class="token operator">!=</span> who<span class="token punctuation">.</span>grid_y<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        who<span class="token punctuation">.</span><span class="token function">LeaveGrid</span><span class="token punctuation">(</span>who<span class="token punctuation">.</span>grid_x<span class="token punctuation">,</span>who<span class="token punctuation">.</span>grid_y<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>new_x <span class="token operator">!=</span> who<span class="token punctuation">.</span>grid_x <span class="token operator">||</span> new_y <span class="token operator">!=</span> who<span class="token punctuation">.</span>grid_y<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        who<span class="token punctuation">.</span><span class="token function">LeaveGrid</span><span class="token punctuation">(</span>who<span class="token punctuation">.</span>grid_x<span class="token punctuation">,</span>who<span class="token punctuation">.</span>grid_y<span class="token punctuation">)</span><span class="token punctuation">{</span>
             who<span class="token punctuation">.</span><span class="token function">LeaveGrid</span><span class="token punctuation">(</span>who<span class="token punctuation">.</span>grid_x<span class="token punctuation">,</span>who<span class="token punctuation">.</span>grid_y<span class="token punctuation">)</span><span class="token punctuation">;</span>
             who<span class="token punctuation">.</span><span class="token function">EnterGrid</span><span class="token punctuation">(</span>new_x<span class="token punctuation">,</span>new_y<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token keyword">this</span><span class="token punctuation">.</span>grid_x <span class="token operator">=</span> new_x<span class="token punctuation">;</span>
             <span class="token keyword">this</span><span class="token punctuation">.</span>grid_y <span class="token operator">=</span> new_y<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>优点：相比于上面的计算距离，这里的运算量显著降低，计算速度快<br>缺点：需要额外的数据结构存储格子信息，实现复杂度高，且存在格子边界问题<br>改善方案：兴趣范围扩散到九宫格，区域大小可以用2的N次方表示，计算所在区域时可以用位运算。</p>
 <h3 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h3><p>目标：不惜一切代价优化到极致，是最难啃的任务。<br>方案：</p>
 <ol>
@@ -570,22 +571,22 @@
 <span class="token keyword">using</span> UnityEditor<span class="token punctuation">;</span>
 <span class="token keyword">using</span> System<span class="token punctuation">.</span>IO<span class="token punctuation">;</span>
 
-<span class="token keyword">namespace</span> PostProcessor<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UTexturePreprecessor</span><span class="token punctuation">:</span> AssetPostprocessor<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">namespace</span> PostProcessor<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UTexturePreprecessor</span><span class="token punctuation">:</span> AssetPostprocessor<span class="token punctuation">{</span>
         <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">bool</span> IsHD <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
 
-        <span class="token keyword">void</span> <span class="token function">OnPreprocessTexture</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">void</span> <span class="token function">OnPreprocessTexture</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             TextureImporter textureImporter <span class="token operator">=</span> <span class="token punctuation">(</span>TextureImporter0<span class="token punctuation">)</span>assetImporter<span class="token punctuation">;</span>
             texureImporter<span class="token punctuation">.</span>isReadable <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span>assetPath<span class="token punctuation">.</span><span class="token function">StartsWith</span><span class="token punctuation">(</span><span class="token string">"Assets/UI"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>assetPath<span class="token punctuation">.</span><span class="token function">StartsWith</span><span class="token punctuation">(</span><span class="token string">"Assets/UI"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
                 textureImporter<span class="token punctuation">.</span>mipmapEnabled <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
                 textureImporter<span class="token punctuation">.</span>textureType <span class="token operator">=</span> TextureImporterType<span class="token punctuation">.</span>Sprite<span class="token punctuation">;</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-            <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>assetPath<span class="token punctuation">.</span><span class="token function">StartWith</span><span class="token punctuation">(</span><span class="token string">"Assets/Units"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>assetPath<span class="token punctuation">.</span><span class="token function">StartWith</span><span class="token punctuation">(</span><span class="token string">"Assets/Units"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
                 textureImporter<span class="token punctuation">.</span>textureFormat <span class="token operator">=</span> TextureImporterFormat<span class="token punctuation">.</span>AutomaticCompressed<span class="token punctuation">;</span>
 
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-            <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>assetPath<span class="token punctuation">.</span><span class="token function">StartsWith</span><span class="token punctuation">(</span><span class="token string">"Assets/FX/Textures"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>assetPath<span class="token punctuation">.</span><span class="token function">StartsWith</span><span class="token punctuation">(</span><span class="token string">"Assets/FX/Textures"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
                 <span class="token keyword">if</span><span class="token punctuation">(</span>textureImporter<span class="token punctuation">.</span>textureFormat <span class="token operator">==</span> TextureImporterFormat<span class="token punctuation">.</span>AutomaticTruecolor
                 <span class="token operator">||</span> textureImporter<span class="token punctuation">.</span>textureFormat <span class="token operator">=</span> TextureImporterFormat<span class="token punctuation">.</span>Automatic16bit
                 <span class="token operator">||</span> textureImporter<span class="token punctuation">.</span>textureFormat <span class="token operator">=</span> TextureImporterFormat<span class="token punctuation">.</span>ARGB16
@@ -593,95 +594,95 @@
                 <span class="token operator">||</span> textureImporter<span class="token punctuation">.</span>textureFormat <span class="token operator">=</span> TextureImporterFormat<span class="token punctuation">.</span>RGBA32
                 <span class="token operator">||</span> textureImporter<span class="token punctuation">.</span>textureFormat <span class="token operator">=</span> TextureImporterFormat<span class="token punctuation">.</span>ARGB32
                 <span class="token operator">||</span> textureImporter<span class="token punctuation">.</span>textureFormat <span class="token operator">=</span> TextureImporterFormat<span class="token punctuation">.</span>RGB16
-                <span class="token operator">||</span> textureImporter<span class="token punctuation">.</span>textureFormat <span class="token operator">=</span> TextureImporterFormat<span class="token punctuation">.</span>RGBA16<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                <span class="token operator">||</span> textureImporter<span class="token punctuation">.</span>textureFormat <span class="token operator">=</span> TextureImporterFormat<span class="token punctuation">.</span>RGBA16<span class="token punctuation">)</span><span class="token punctuation">{</span>
                     textureImporter<span class="token punctuation">.</span>textureFormat <span class="token operator">=</span> TextureImporterFormat<span class="token punctuation">.</span>AutomaticCompressed<span class="token punctuation">;</span>
-                <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
 
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>只有这个脚本在项目中（例如Editor文件夹中），这样导入的时候，就会自动执行，不用手动改了。</p>
 <h2 id="CPU优化"><a href="#CPU优化" class="headerlink" title="CPU优化"></a>CPU优化</h2><h3 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h3><p>干扰：需要排除干扰，有可能是干扰问题，排除干扰后性能没有问题。<br>外部干扰：CPU、内存、IO<br>内部干扰：工具导致的消耗，例如Profiler（准确评估其消耗），Vertical Sync（分析时关掉），Log output（正式发布需要关日志）。<br>工具：Unity Profiler、Custom Profiler、Timer&amp;Log<br>代码分析</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">Update</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">Update</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token function">CustomProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token keyword">void</span> <span class="token function">CustomProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">CustomProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     UnityEngine<span class="token punctuation">.</span>Profileing<span class="token punctuation">.</span>Profiler<span class="token punctuation">.</span><span class="token function">BeginSample</span><span class="token punctuation">(</span><span class="token string">"CustomProfile"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i <span class="token operator">&lt;</span> <span class="token number">100</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i <span class="token operator">&lt;</span> <span class="token number">100</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token function">CustomFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     UnityEngine<span class="token punctuation">.</span>Profiling<span class="token punctuation">.</span>Profiler<span class="token punctuation">.</span><span class="token function">EndSample</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">void</span> <span class="token function">CustomFunciton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">CustomFunciton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     UnityEngine<span class="token punctuation">.</span>Profileing<span class="token punctuation">.</span>Profiler<span class="token punctuation">.</span><span class="token function">BeginSample</span><span class="token punctuation">(</span><span class="token string">"CustomFunction"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i <span class="token operator">&lt;</span> <span class="token number">100</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i <span class="token operator">&lt;</span> <span class="token number">100</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token function">CustomCalc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     UnityEngine<span class="token punctuation">.</span>Profiling<span class="token punctuation">.</span>Profiler<span class="token punctuation">.</span><span class="token function">EndSample</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">void</span> <span class="token function">CustomCalc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">CustomCalc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     UnityEngine<span class="token punctuation">.</span>Profileing<span class="token punctuation">.</span>Profiler<span class="token punctuation">.</span><span class="token function">BeginSample</span><span class="token punctuation">(</span><span class="token string">"CustomCale"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">float</span> t <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">,</span> f <span class="token operator">=</span> <span class="token number">0f</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i <span class="token operator">&lt;</span> <span class="token number">100</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i <span class="token operator">&lt;</span> <span class="token number">100</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         f <span class="token operator">+</span><span class="token operator">=</span> Mathf<span class="token punctuation">.</span><span class="token function">Pow</span><span class="token punctuation">(</span>Mathf<span class="token punctuation">.</span><span class="token function">Sin</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> t<span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     UnityEngine<span class="token punctuation">.</span>Profiling<span class="token punctuation">.</span>Profiler<span class="token punctuation">.</span><span class="token function">EndSample</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<span class="token punctuation">}</span></code></pre>
 <p>这种方式相比Unity Profile对性能没有影响</p>
 <p>对于打包之后的文件，需要用Timer&amp;Log</p>
 <pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> System<span class="token punctuation">;</span>
 <span class="token keyword">using</span> System<span class="token punctuation">.</span>Diagnostics<span class="token punctuation">;</span>
 
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ProTimer</span><span class="token punctuation">:</span> IDisposable<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ProTimer</span><span class="token punctuation">:</span> IDisposable<span class="token punctuation">{</span>
     <span class="token keyword">private</span> <span class="token keyword">string</span> name<span class="token punctuation">;</span>
     <span class="token keyword">private</span> <span class="token keyword">int</span> times<span class="token punctuation">;</span>
     <span class="token keyword">private</span> Stopwatch watch<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token function">ProTimer</span><span class="token punctuation">(</span><span class="token keyword">string</span> name<span class="token punctuation">,</span> <span class="token keyword">int</span> times<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token function">ProTimer</span><span class="token punctuation">(</span><span class="token keyword">string</span> name<span class="token punctuation">,</span> <span class="token keyword">int</span> times<span class="token punctuation">)</span><span class="token punctuation">{</span>
 
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    <span class="token keyword">public</span> <span class="token function">ProTimer</span><span class="token punctuation">(</span><span class="token keyword">string</span> name<span class="token punctuation">,</span><span class="token keyword">int</span> times<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token function">ProTimer</span><span class="token punctuation">(</span><span class="token keyword">string</span> name<span class="token punctuation">,</span><span class="token keyword">int</span> times<span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
         <span class="token keyword">this</span><span class="token punctuation">.</span>times <span class="token operator">=</span> times<span class="token punctuation">;</span>
         <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>times <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
             <span class="token keyword">this</span><span class="token punctuation">.</span>times <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
         watch <span class="token operator">=</span> Stopwatch<span class="token punctuation">.</span><span class="token function">StartNew</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         watch<span class="token punctuation">.</span><span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">float</span> ms <span class="token operator">=</span> watch<span class="token punctuation">.</span>ElapsedMillseconds<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 通过构造和析构来确定经过多少时间</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>times <span class="token operator">&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            UnityEngine<span class="token punctuation">.</span>Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token keyword">string</span><span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">"ProTimer : [&amp;#123;0&amp;#125;] finished:[&amp;#123;1:0.00&amp;#125;ms] total, [&amp;#123;2:0.000000&amp;#125;ms] per peroid for [&amp;#123;3&amp;#125;] times"</span><span class="token punctuation">,</span> name<span class="token punctuation">,</span> ms<span class="token punctuation">,</span> ms <span class="token operator">/</span> times<span class="token punctuation">,</span> times<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>times <span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            UnityEngine<span class="token punctuation">.</span>Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token keyword">string</span><span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">"ProTimer : [{0}] finished:[{1:0.00}ms] total, [{2:0.000000}ms] per peroid for [{3}] times"</span><span class="token punctuation">,</span> name<span class="token punctuation">,</span> ms<span class="token punctuation">,</span> ms <span class="token operator">/</span> times<span class="token punctuation">,</span> times<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
         <span class="token keyword">else</span>
-            UnityEngine<span class="token punctuation">.</span>Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token keyword">string</span><span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">"ProTimer : [&amp;#123;0&amp;#125;] finished:[&amp;#123;1:0.00&amp;#125;ms] total"</span><span class="token punctuation">,</span> name<span class="token punctuation">,</span> ms<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+            UnityEngine<span class="token punctuation">.</span>Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token keyword">string</span><span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">"ProTimer : [{0}] finished:[{1:0.00}ms] total"</span><span class="token punctuation">,</span> name<span class="token punctuation">,</span> ms<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>使用：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ProTest</span> <span class="token punctuation">:</span> MonoBehaviour<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">void</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ProTest</span> <span class="token punctuation">:</span> MonoBehaviour<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">10000000</span><span class="token punctuation">;</span>
-        <span class="token keyword">using</span><span class="token punctuation">(</span>ProTimer p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ProTimer</span><span class="token punctuation">(</span><span class="token string">"Function"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">using</span><span class="token punctuation">(</span>ProTimer p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ProTimer</span><span class="token punctuation">(</span><span class="token string">"Function"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token function">Function</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token keyword">using</span><span class="token punctuation">(</span>ProTimer p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ProTimer</span><span class="token punctuation">(</span><span class="token string">"Function"</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">using</span><span class="token punctuation">(</span>ProTimer p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ProTimer</span><span class="token punctuation">(</span><span class="token string">"Function"</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token function">Function</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    <span class="token keyword">void</span> <span class="token function">Function</span><span class="token punctuation">(</span><span class="token keyword">int</span> count<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">Function</span><span class="token punctuation">(</span><span class="token keyword">int</span> count<span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">int</span> t <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i <span class="token operator">&lt;</span> count<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token operator">&gt;</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i <span class="token operator">&lt;</span> count<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token operator">></span><span class="token punctuation">{</span>
             t<span class="token operator">++</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
 
 
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>这样就可以在日志中捕获信息了，通过日志分析耗时，但是当正式发布的时候要去掉这个功能。</p>
 <h3 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h3><p>该做法是不是Unity运行效率最高的最佳做法，需要：</p>
@@ -746,15 +747,15 @@
 <h2 id="游戏安全"><a href="#游戏安全" class="headerlink" title="游戏安全"></a>游戏安全</h2><p>常见威胁：外挂、破解、数据篡改。<br>外挂类型：加速挂（单机加速、网络加速），协议挂（功能丰富，支持脱机），内存挂（基于Hook和注入技术，功能强大，主流），脚本辅助（键盘鼠标模拟，不易检测）。<br>破解：直接影响收入，资源盗用，山寨。<br>数据篡改：内存数据，存档数据，通讯数据。<br>通用方案：尽可能使用第三方服务<br>手段：进程检测，窗口检测，HOOK检测，黑名单<br>防范三板斧：加密、混淆、加壳<br>数据保护：内存保护（单机必做）、存档保护（使用复杂数据结构，加密）<br>推荐书目：<br>《Intel汇编语言程序设计》<br>《Windows PE权威指南》<br>《加密与解密（第三版）》<br>《游戏安全————手游安全技术入门》<br>《游戏外挂攻防艺术》<br>协议分析工具：Wireshark<br>内存数据扫描更改工具：Cheat Engine</p>
 <h3 id="一种简单的防内存扫描方法"><a href="#一种简单的防内存扫描方法" class="headerlink" title="一种简单的防内存扫描方法"></a>一种简单的防内存扫描方法</h3><pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">int</span> magic <span class="token operator">=</span> <span class="token number">0x23432455</span><span class="token punctuation">;</span>
 <span class="token keyword">public</span> <span class="token keyword">int</span> hp<span class="token punctuation">;</span>
-<span class="token keyword">public</span> <span class="token keyword">int</span> HP<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">get</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token keyword">return</span> hp <span class="token operator">^</span> magic<span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token keyword">set</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> hp <span class="token operator">=</span> <span class="token keyword">value</span> <span class="token operator">^</span> magic<span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">int</span> HP<span class="token punctuation">{</span>
+    <span class="token keyword">get</span><span class="token punctuation">{</span><span class="token keyword">return</span> hp <span class="token operator">^</span> magic<span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token keyword">set</span><span class="token punctuation">{</span> hp <span class="token operator">=</span> <span class="token keyword">value</span> <span class="token operator">^</span> magic<span class="token punctuation">;</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span class="token keyword">public</span> <span class="token keyword">long</span> mp<span class="token punctuation">;</span>
-<span class="token keyword">public</span> <span class="token keyword">float</span> MP<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">get</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token keyword">return</span> System<span class="token punctuation">.</span>BitConverter<span class="token punctuation">.</span><span class="token function">Int64BitsToDouble</span><span class="token punctuation">(</span>mp <span class="token operator">^</span> magic<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token keyword">set</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>mp <span class="token operator">=</span> System<span class="token punctuation">.</span>BitConverter<span class="token punctuation">.</span><span class="token function">DoubleToInt64Bits</span><span class="token punctuation">(</span><span class="token keyword">value</span><span class="token punctuation">)</span> <span class="token operator">^</span> magic<span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<span class="token keyword">public</span> <span class="token keyword">float</span> MP<span class="token punctuation">{</span>
+    <span class="token keyword">get</span><span class="token punctuation">{</span><span class="token keyword">return</span> System<span class="token punctuation">.</span>BitConverter<span class="token punctuation">.</span><span class="token function">Int64BitsToDouble</span><span class="token punctuation">(</span>mp <span class="token operator">^</span> magic<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token keyword">set</span><span class="token punctuation">{</span>mp <span class="token operator">=</span> System<span class="token punctuation">.</span>BitConverter<span class="token punctuation">.</span><span class="token function">DoubleToInt64Bits</span><span class="token punctuation">(</span><span class="token keyword">value</span><span class="token punctuation">)</span> <span class="token operator">^</span> magic<span class="token punctuation">;</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <h1 id="发布准备"><a href="#发布准备" class="headerlink" title="发布准备"></a>发布准备</h1><h2 id="AssetBundle"><a href="#AssetBundle" class="headerlink" title="AssetBundle"></a>AssetBundle</h2><p>AssetBundle可以把Prefabs，Models，Materials，Textures，Fonts，Shaders，Audio Clips，Scenes打包到一个文件中，可以作为DLC（Downloadable Content），减少初始包大小，可以进行版本更新，可以加载为用户平台优化的资源，减少运行时的内存压力。<br>打包：直接在点击资源，在Inspector的小预览窗口就能选择是否以AsetBundle打包，new一个就是一个新的包，然后直接build即可。<br>加载代码：</p>
 <pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> System<span class="token punctuation">;</span>
 <span class="token keyword">using</span> System<span class="token punctuation">.</span>Collections<span class="token punctuation">;</span>
@@ -762,21 +763,21 @@
 <span class="token keyword">using</span> UnityEngine<span class="token punctuation">.</span>Networking<span class="token punctuation">;</span>
 
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BundleTest</span> <span class="token punctuation">:</span> MonoBehaviour
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token keyword">void</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token function">StartCoroutine</span><span class="token punctuation">(</span><span class="token function">LoadCharacter</span><span class="token punctuation">(</span><span class="token string">"Warrior"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
     IEnumerator <span class="token function">LoadCharacter</span><span class="token punctuation">(</span><span class="token keyword">string</span> assetBundleName<span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token keyword">string</span> uri <span class="token operator">=</span> <span class="token string">@"F:\UnityCourse\mmowork\Src\Client\Assets\AssetBundles\character"</span> <span class="token operator">+</span> assetBundleName<span class="token punctuation">.</span><span class="token function">ToLower</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">".asset"</span><span class="token punctuation">;</span>
         AssetBundleCreateRequest request <span class="token operator">=</span> AssetBundle<span class="token punctuation">.</span><span class="token function">LoadFromFileAsync</span><span class="token punctuation">(</span>uri<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">yield</span> <span class="token keyword">return</span> request<span class="token punctuation">;</span>
-        GameObject gameObject <span class="token operator">=</span> request<span class="token punctuation">.</span>assetBundle<span class="token punctuation">.</span><span class="token generic-method function">LoadAsset<span class="token punctuation">&lt;</span>GameObject<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span>assetBundleName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        GameObject gameObject <span class="token operator">=</span> request<span class="token punctuation">.</span>assetBundle<span class="token punctuation">.</span><span class="token generic-method function">LoadAsset<span class="token punctuation">&lt;</span>GameObject<span class="token punctuation">></span></span><span class="token punctuation">(</span>assetBundleName<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">Instantiate</span><span class="token punctuation">(</span>gameObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>我们需要理解AssetBundle依赖关系以及分配策略。<br>依赖关系：打包依赖、加载依赖</p>
 <ul>
@@ -786,22 +787,22 @@
 </li>
 <li><p>当材质纹理打包成另外一个bundle时，加载模型时必须保证先加载材质纹理。</p>
 <pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BundleTest</span> <span class="token punctuation">:</span> MonoBehaviour
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
   <span class="token keyword">void</span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">{</span>
       <span class="token function">StartCoroutine</span><span class="token punctuation">(</span><span class="token function">LoadCharacter</span><span class="token punctuation">(</span><span class="token string">"Warrior"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
   IEnumerator <span class="token function">LoadCharacter</span><span class="token punctuation">(</span><span class="token keyword">string</span> assetBundleName<span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">{</span>
       <span class="token keyword">string</span> uri <span class="token operator">=</span> <span class="token string">@"F:\UnityCourse\mmowork\Src\Client\Assets\AssetBundles\character"</span> <span class="token operator">+</span> assetBundleName<span class="token punctuation">.</span><span class="token function">ToLower</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">".asset"</span><span class="token punctuation">;</span>
       AssetBundleCreateRequest request <span class="token operator">=</span> AssetBundle<span class="token punctuation">.</span><span class="token function">LoadFromFileAsync</span><span class="token punctuation">(</span>uri<span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token keyword">yield</span> <span class="token keyword">return</span> request<span class="token punctuation">;</span>
       <span class="token comment" spellcheck="true">// 这里需要加上材质bundle的加载，需要保证LoadAsset之前材质都在内存中</span>
-      GameObject gameObject <span class="token operator">=</span> request<span class="token punctuation">.</span>assetBundle<span class="token punctuation">.</span><span class="token generic-method function">LoadAsset<span class="token punctuation">&lt;</span>GameObject<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span>assetBundleName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      GameObject gameObject <span class="token operator">=</span> request<span class="token punctuation">.</span>assetBundle<span class="token punctuation">.</span><span class="token generic-method function">LoadAsset<span class="token punctuation">&lt;</span>GameObject<span class="token punctuation">></span></span><span class="token punctuation">(</span>assetBundleName<span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token function">Instantiate</span><span class="token punctuation">(</span>gameObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 </li>
 </ul>
@@ -827,6 +828,16 @@ bundle分配策略：
 var textFile = Resources.Load&lt;TextAsset&gt;("Text/textFile01");
 var sprite = Resources.Load&lt;Sprite&gt;("Sprite/sprite01");
 var audioClip = Resources.Load&lt;AudioClip&gt;("Audio/audioClip01");</code></pre>
+<h3 id="AssetBundle-1"><a href="#AssetBundle-1" class="headerlink" title="AssetBundle"></a>AssetBundle</h3><pre class=" language-csharp"><code class="language-csharp">AssetBundle<span class="token punctuation">.</span>LoadFromMemory
+AssetBundle<span class="token punctuation">.</span>LoadFromMemoryAsync
+AssetBundle<span class="token punctuation">.</span>LoadFromFile
+AssetBundle<span class="token punctuation">.</span>LoadFromFileAsync
+AssetBundle<span class="token punctuation">.</span>LoadFromStream
+AssetBundle<span class="token punctuation">.</span>LoadFromStreamAsync</code></pre>
+<h3 id="资源加载需求分析"><a href="#资源加载需求分析" class="headerlink" title="资源加载需求分析"></a>资源加载需求分析</h3><p>发布平台、动态更新\流式加载、压缩加密、自定义数据包<br>资源路径：Application.dataPath、Application.streamingAssetsPath（包内）、Application.persistentDataPath（补丁（默认））、Application.temporaryCachePath（下载缓存、补丁（IOS））<br>流程设计：</p>
+<img src="/tianjuehai/2022/12/28/unity-zhong-ji-shi-zhan-zhi-mmorpg-part4/1.png" class="">
+
+<h2 id="自动更新（建议只在必要的大型项目中做）"><a href="#自动更新（建议只在必要的大型项目中做）" class="headerlink" title="自动更新（建议只在必要的大型项目中做）"></a>自动更新（建议只在必要的大型项目中做）</h2><p><strong>版本信息管理：</strong><br>版本号、版本记录、版本清单、版本内容<br><strong>更新策略：</strong><br>发布途径：应用商店更新、自主更新<br>更新内容：二进制更新、资源更新、热更新<br><strong>环境：</strong><br>持续集成CI（Jenkins、Bamboo、Gitlab CI）、DevOps、更新服务器（IIS、Apache、Nginx）<br><strong>更新系统组成：</strong><br>版本构建系统、版本生成工具（DIY）、更新服务器（Version.txt,UpdateList.txt,Updates）、更新逻辑<br><strong>更新方案：</strong><br>服务器为主：动态生成实际需要的版本清单、一次更新多个版本、动态更新策略（渠道、区域、比例）、开发成本和运行成本高<br>客户端为主：服务器压力小，无服务器逻辑的开发成本，难以支持动态策略，一次更新到最新成本高</p>
 
                 
             </div>
@@ -1651,7 +1662,7 @@ var audioClip = Resources.Load&lt;AudioClip&gt;("Audio/audioClip01");</code></pr
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">347.3k</span>&nbsp;字
+                class="white-color">346.7k</span>&nbsp;字
             
             
             
