@@ -475,21 +475,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-28
+                    2023-04-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    861
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    3 分
                 </div>
                 
 
@@ -514,7 +514,57 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>首先，需要拥有一个ChatGPT账号，如果没有的话需要先到官网注册，此处需要梯子，这里给出相关工具链接：<a target="_blank" rel="noopener" href="https://github.com/bannedbook/fanqiang">https://github.com/bannedbook/fanqiang</a><br>我们还需要一个国外的手机号，这个去<a target="_blank" rel="noopener" href="https://sms-activate.org/cn/">SMS</a>，花几块钱即可买到一个国外的手机号。<br>用这个手机号再加上Google或微软账号即可注册OpenAI。然后直接登录 <a target="_blank" rel="noopener" href="https://platform.openai.com/account/api-keys">https://platform.openai.com/account/api-keys</a> 即可获取api key。</p>
+<p>另外，你需要一个云服务器，负责转发消息。以下操作都在你拥有云服务器的基础上完成。</p>
+<h2 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h2><p>本方法基于github项目 <a target="_blank" rel="noopener" href="https://github.com/zhayujie/bot-on-anything">https://github.com/zhayujie/bot-on-anything</a></p>
+<ol>
+<li><p>我们在服务器上重新配置一个python环境，必要安装：</p>
+<pre class=" language-shell"><code class="language-shell">pip3 install werobot
+pip3 install --upgrade openai</code></pre>
+</li>
+<li><p>把上面的仓库克隆下来，复制一份配置文件</p>
+<pre class=" language-shell"><code class="language-shell">git clone https://github.com/zhayujie/bot-on-anything
+cd bot-on-anything/
+cp config-template.json config.json</code></pre>
+</li>
+<li><p>把里面不需要的配置统统删掉，只保留wechat_mp相关，如果服务器网络无法正常访问ChatGPT，则需要配置VPN。这个VPN可以是自己搭的梯子，也可以直接用你买的梯子。</p>
+<pre class=" language-config"><code class="language-config">{
+"model": {
+ "type" : "chatgpt",
+
+ "openai": {
+   "api_key": "YOUR API KEY",
+   "model": "gpt-3.5-turbo",                         # 模型名称
+   "proxy": "http://127.0.0.1:7890",                 # 代理地址
+   "character_desc": "你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。当问起你是谁的时候，要附加告诉提问人，输入 #清除记忆 可以开始新的话题探索。输入 画xx 可以为你画一张图片。",
+   "conversation_max_tokens": 1000,                  # 回复最大的字符数，为输入和输出的总数
+   "temperature":0.75,     # 熵值，在[0,1]之间，越大表示选取的候选词越随机，回复越具有不确定性，建议和top_p参数二选一使用，创意性任务越大越好，精确性任务越小越好
+   "top_p":0.7,            #候选词列表。0.7 意味着只考虑前70%候选词的标记，建议和temperature参数二选一使用
+   "frequency_penalty":0.0,            # [-2,2]之间，该值越大则越降低模型一行中的重复用词，更倾向于产生不同的内容
+   "presence_penalty":1.0,             # [-2,2]之间，该值越大则越不受输入限制，将鼓励模型生成输入中不存在的新词，更倾向于产生不同的内容
+ }
+}</code></pre>
+</li>
+</ol>
+<pre class=" language-config"><code class="language-config">"channel": {
+    "type": "wechat_mp",
+
+    "wechat_mp": {
+      "token": "YOUR TOKEN",           # token值
+      "port": "80"                   # 程序启动监听的端口
+    }
+}</code></pre>
+<ol start="4">
+<li><p>配置完成后，用对应的python环境运行</p>
+<pre class=" language-shell"><code class="language-shell">python3 app.py</code></pre>
+<p>如果想通过log记录运行的过程，查看信息等，可以创建一个nohup.out文件，然后执行命令：</p>
+<pre class=" language-shell"><code class="language-shell">nohup python3 app.py</code></pre>
+<p>此时，打开你访问你云服务器地址的80端口，你将能看到响应画面，有“这是一个WeRoBot应用”的字样。</p>
+</li>
+<li><p>打开微信公众平台，在设置与开发中点击基本配置，启用服务器配置。把服务器地址填上，并且设置Token和上面配置文件中的token一致（这个是自己定的），然后随机生成一个秘钥即可。启动之后，就能在对应的微信公众号使用ChatGPT啦，需要注意的是，微信公众号最多回复为500字，所以要注意提问方式，否则回复超过字数就会无法显示。</p>
+</li>
+</ol>
+
                 
             </div>
             <hr/>
@@ -1016,13 +1066,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/tianjuehai/2023/03/28/yong-bai-piao-fu-wu-qi-da-yi-ge-mc-fu-wu-qi/">
+                <a href="/tianjuehai/2023/04/13/python-yu-ml-agents-de-tong-xin-ji-qi-api-de-shi-yong/">
                     <div class="card-image">
                         
                         
-                        <img src="/tianjuehai/medias/featureimages/2.jpg" class="responsive-img" alt="用白嫖服务器搭一个MC服务器">
+                        <img src="/tianjuehai/medias/featureimages/0.jpg" class="responsive-img" alt="Python与ML-Agents的通信及其API的使用">
                         
-                        <span class="card-title">用白嫖服务器搭一个MC服务器</span>
+                        <span class="card-title">Python与ML-Agents的通信及其API的使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1033,27 +1083,15 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-28
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-13
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/tianjuehai/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1/" class="post-category">
-                                    云服务
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            微笑紫瞳星
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tianjuehai/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1/">
-                        <span class="chip bg-color">云服务</span>
-                    </a>
-                    
                 </div>
                 
             </div>
@@ -1269,13 +1307,6 @@
 </main>
 
 
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
-    });
-</script>
-
 
 
     <footer class="page-footer bg-color">
@@ -1338,7 +1369,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">346.7k</span>&nbsp;字
+                class="white-color">347.5k</span>&nbsp;字
             
             
             
