@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tianjuehai.github.io/tianjuehai/2023/04/13/python-yu-ml-agents-de-tong-xin-ji-qi-api-de-shi-yong/</loc>
-    <lastmod>2023-04-17</lastmod>
+    <loc>https://tianjuehai.github.io/tianjuehai/2023/04/29/chong-ji-qiu-zhao/</loc>
+    <lastmod>2023-05-17</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuehai.github.io/tianjuehai/2022/09/30/unity-you-xi-kai-fa-zhong-ji-shi-zhan-zhi-mmorpg/</loc>
+    <lastmod>2023-05-17</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuehai.github.io/tianjuehai/2022/10/30/unity-you-xi-kai-fa-zhong-ji-shi-zhan-zhi-mmorpg-part2/</loc>
+    <lastmod>2023-05-17</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuehai.github.io/tianjuehai/2023/01/09/unity-suan-fa-ke/</loc>
+    <lastmod>2023-05-17</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuehai.github.io/tianjuehai/2022/09/21/unity-you-xi-kai-fa-ji-chu-zhi-shi/</loc>
+    <lastmod>2023-05-15</lastmod>
   </url>
   <url>
     <loc>https://tianjuehai.github.io/tianjuehai/2023/01/27/xlua-re-geng-xin-kuang-jia/</loc>
-    <lastmod>2023-04-15</lastmod>
+    <lastmod>2023-05-08</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuehai.github.io/tianjuehai/2023/04/18/ml-agents-yu-zi-ji-de-qiang-hua-xue-xi-suan-fa-tong-xun-ppo-pian/</loc>
+    <lastmod>2023-04-18</lastmod>
+  </url>
+  <url>
+    <loc>https://tianjuehai.github.io/tianjuehai/2023/04/13/python-yu-ml-agents-de-tong-xin-ji-qi-api-de-shi-yong/</loc>
+    <lastmod>2023-04-17</lastmod>
   </url>
   <url>
     <loc>https://tianjuehai.github.io/tianjuehai/2023/03/28/gei-zi-ji-de-wei-xin-gong-zhong-hao-jie-shang-chatgpt/</loc>
@@ -25,20 +49,8 @@
     <lastmod>2023-03-21</lastmod>
   </url>
   <url>
-    <loc>https://tianjuehai.github.io/tianjuehai/2023/01/09/unity-suan-fa-ke/</loc>
-    <lastmod>2023-03-21</lastmod>
-  </url>
-  <url>
     <loc>https://tianjuehai.github.io/tianjuehai/2023/02/02/zheng-tong-bu-shi-zhan/</loc>
     <lastmod>2023-02-17</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuehai.github.io/tianjuehai/2022/10/30/unity-you-xi-kai-fa-zhong-ji-shi-zhan-zhi-mmorpg-part2/</loc>
-    <lastmod>2022-11-15</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuehai.github.io/tianjuehai/2022/09/30/unity-you-xi-kai-fa-zhong-ji-shi-zhan-zhi-mmorpg/</loc>
-    <lastmod>2022-10-30</lastmod>
   </url>
   <url>
     <loc>https://tianjuehai.github.io/tianjuehai/2022/10/25/untiy-qiang-hua-xue-xi-zhi-arena/</loc>
@@ -47,10 +59,6 @@
   <url>
     <loc>https://tianjuehai.github.io/tianjuehai/2022/09/26/unity-you-xi-kai-fa-ji-chu-zhi-shi-zhi-unity-bu-fen/</loc>
     <lastmod>2022-09-30</lastmod>
-  </url>
-  <url>
-    <loc>https://tianjuehai.github.io/tianjuehai/2022/09/21/unity-you-xi-kai-fa-ji-chu-zhi-shi/</loc>
-    <lastmod>2022-09-26</lastmod>
   </url>
   <url>
     <loc>https://tianjuehai.github.io/tianjuehai/2022/08/18/qiang-hua-xue-xi-de-tan-suo-xing-lun-wen-zhun-bei/</loc>

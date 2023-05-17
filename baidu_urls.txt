@@ -1,3 +1,5 @@
+https://tianjuehai.github.io/2023/04/29/chong-ji-qiu-zhao/
+https://tianjuehai.github.io/2023/04/18/ml-agents-yu-zi-ji-de-qiang-hua-xue-xi-suan-fa-tong-xun-ppo-pian/
 https://tianjuehai.github.io/2023/04/13/python-yu-ml-agents-de-tong-xin-ji-qi-api-de-shi-yong/
 https://tianjuehai.github.io/2023/03/28/gei-zi-ji-de-wei-xin-gong-zhong-hao-jie-shang-chatgpt/
 https://tianjuehai.github.io/2023/03/25/yun-fu-wu-qi-de-shi-yong-yi-ji-qing-long-mian-ban-de-da-jian/
@@ -96,5 +98,3 @@ https://tianjuehai.github.io/2021/04/07/te-zheng-zhi-he-te-zheng-xiang-liang/
 https://tianjuehai.github.io/2021/04/04/ji-qi-xue-xi-zhi-jue-ce-shu/
 https://tianjuehai.github.io/2021/03/04/zi-dong-kong-zhi-yuan-li-lian-xi-ti/
 https://tianjuehai.github.io/2021/03/04/mei-sen-mason-gong-shi/
-https://tianjuehai.github.io/2021/02/19/zi-dong-kong-zhi-yuan-li-jing-jiang/
-https://tianjuehai.github.io/2021/02/15/la-pu-la-si-bian-huan/

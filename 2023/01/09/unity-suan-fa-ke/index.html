@@ -475,21 +475,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-21
+                    2023-05-17
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    2.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    12 分
                 </div>
                 
 
@@ -514,7 +514,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="时间复杂度和空间复杂度"><a href="#时间复杂度和空间复杂度" class="headerlink" title="时间复杂度和空间复杂度"></a>时间复杂度和空间复杂度</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$O(1)$</p>
+                <h1 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h1><h2 id="时间复杂度和空间复杂度"><a href="#时间复杂度和空间复杂度" class="headerlink" title="时间复杂度和空间复杂度"></a>时间复杂度和空间复杂度</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$O(1)$</p>
 <pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">func1</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
     count<span class="token operator">++</span><span class="token punctuation">;</span>
@@ -636,6 +636,30 @@
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><pre class=" language-c"><code class="language-c">
+<span class="token keyword">void</span> <span class="token function">arr_sort</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span>p<span class="token punctuation">,</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">,</span>j<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> min <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i <span class="token operator">&lt;</span> n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//排序次数</span>
+    <span class="token punctuation">{</span>
+        min <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>j <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>j <span class="token operator">&lt;</span> n<span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&lt;</span> p<span class="token punctuation">[</span>min<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                min <span class="token operator">=</span> j<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//记录交换的元素下标值</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>i <span class="token operator">!=</span> min<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> temp <span class="token operator">=</span> p<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            p<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span>min<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            p<span class="token punctuation">[</span>min<span class="token punctuation">]</span> <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>  
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">int</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> array <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span>
 <span class="token keyword">void</span> <span class="token function">printArray</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr<span class="token punctuation">)</span><span class="token punctuation">{</span>
     ls <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
@@ -755,8 +779,196 @@
 </li>
 </ol>
 <p>public static void BinaryTreeSort(int[] array){<br>    var binarySortTreeNode = new BinarySortTreeNode(array[0]);<br>    for(int i = 1; i &lt; array.Length; i++){<br>        binarySortTreeNode.Insert(array[i]);<br>    }<br>    binarySortTreeNode.InorderTraversal();<br>}</p>
-<p>```<br>时间复杂度$O(n\log n)$，空间复杂度$O(n)$，稳定性是不稳定的</p>
-<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><h2 id="遍历二叉树、反转二叉树、排序二叉树找第k大节点、拓扑排序、跳表、红黑树"><a href="#遍历二叉树、反转二叉树、排序二叉树找第k大节点、拓扑排序、跳表、红黑树" class="headerlink" title="遍历二叉树、反转二叉树、排序二叉树找第k大节点、拓扑排序、跳表、红黑树"></a>遍历二叉树、反转二叉树、排序二叉树找第k大节点、拓扑排序、跳表、红黑树</h2>
+<pre><code>时间复杂度$O(n\log n)$，空间复杂度$O(n)$，稳定性是不稳定的
+
+## 快速排序
+参考：https://blog.csdn.net/qq_40941722/article/details/94396010
+```c
+void Quick_Sort(int *arr, int begin, int end){
+    if(begin &gt; end)
+        return;
+    int tmp = arr[begin];
+    int i = begin;
+    int j = end;
+    while(i != j){
+        while(arr[j] &gt;= tmp &amp;&amp; j &gt; i)
+            j--;
+        while(arr[i] &lt;= tmp &amp;&amp; j &gt; i)
+            i++;
+        if(j &gt; i){
+            int t = arr[i];
+            arr[i] = arr[j];
+            arr[j] = t;
+        }
+    }
+    arr[begin] = arr[i];
+    arr[i] = tmp;
+    Quick_Sort(arr, begin, i-1);
+    Quick_Sort(arr, i+1, end);
+}
+</code></pre>
+<p>快速排序最优时间复杂度为O(nlogn)，不稳定</p>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p>参考：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Pt4y197VZ/">https://www.bilibili.com/video/BV1Pt4y197VZ/</a></p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">sort</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> startIndex <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> endIndex <span class="token operator">=</span> arr<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 递归结束条件：startIndex大于等于endIndex的时候</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>startIndex <span class="token operator">>=</span> endIndex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// 折半递归</span>
+    <span class="token keyword">let</span> midIndex <span class="token operator">=</span> <span class="token function">parseInt</span><span class="token punctuation">(</span><span class="token punctuation">(</span>startIndex <span class="token operator">+</span> endIndex<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">sort</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> startIndex<span class="token punctuation">,</span> midIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">sort</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> midIndex <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> endIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 将两个有序的小数组，合并成一个大数组</span>
+    <span class="token function">merge</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> startIndex<span class="token punctuation">,</span> midIndex<span class="token punctuation">,</span> endIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">merge</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> startIndex<span class="token punctuation">,</span> midIndex<span class="token punctuation">,</span> endIndex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 新建一个大数组</span>
+    <span class="token keyword">let</span> tempArr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> p1 <span class="token operator">=</span> startIndex<span class="token punctuation">;</span>
+    <span class="token keyword">let</span> p2 <span class="token operator">=</span> midIndex <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> p <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 比较两个有序小数组的元素，依次放入大数组中</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>p1 <span class="token operator">&lt;=</span> midIndex <span class="token operator">&amp;&amp;</span> p2 <span class="token operator">&lt;=</span> endIndex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>arr<span class="token punctuation">[</span>p1<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> arr<span class="token punctuation">[</span>p2<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            tempArr<span class="token punctuation">[</span>p<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> arr<span class="token punctuation">[</span>p1<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            tempArr<span class="token punctuation">[</span>p<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> arr<span class="token punctuation">[</span>p2<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// 右侧小数组已排序完毕，左侧小数组还有剩余，将左侧小数组元素依次放入大数组尾部</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>p1 <span class="token operator">&lt;=</span> midIndex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        tempArr<span class="token punctuation">[</span>p<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> arr<span class="token punctuation">[</span>p1<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 左侧小数组已排序完毕，右侧小数组还有剩余，将右侧小数组元素依次放入大数组尾部</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>p2 <span class="token operator">&lt;=</span> endIndex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        tempArr<span class="token punctuation">[</span>p<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> arr<span class="token punctuation">[</span>p2<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> tempArr<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        arr<span class="token punctuation">[</span>i <span class="token operator">+</span> startIndex<span class="token punctuation">]</span> <span class="token operator">=</span> tempArr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token function">sort</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>时间复杂度是O(nlogn)，稳定</p>
+<h2 id="排序算法的使用场景"><a href="#排序算法的使用场景" class="headerlink" title="排序算法的使用场景"></a>排序算法的使用场景</h2><ol>
+<li>游戏中得分排行榜</li>
+<li>英雄战力榜列表等</li>
+</ol>
+<h2 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h2><p>拓扑排序（Topological Sorting）是一种对有向无环图（Directed Acyclic Graph, DAG）进行排序的算法。在拓扑排序中，节点表示图中的任务或事件，有向边表示任务间的依赖关系。<br>拓扑排序的目标是将图中的节点按照一定的顺序线性排列，使得所有的依赖关系都得到满足。也就是说，在排序结果中，若存在一条从节点 A 到节点 B 的有向边，那么节点 A 在排序中必须出现在节点 B 之前。<br><strong>通俗讲解</strong>：当同时存在很多件事情需要完成，但是有些事情的完成依赖于另外若干件事情的完成，拓扑排序需要我们排列出事情完成的顺序，这个顺序往往不止一种。</p>
+<p>拓扑排序的算法通常使用深度优先搜索（DFS）或广度优先搜索（BFS）来实现。在实际应用中，如果图中存在环路（即有向图中存在回路），则无法进行拓扑排序，因为无法满足所有的依赖关系。因此，拓扑排序算法通常要求应用于有向无环图。</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>构建图：根据给定的有向图的边关系，构建表示图的数据结构。通常使用邻接表或邻接矩阵表示图。</li>
+<li>统计节点入度：对于每个节点，统计它的入度（即指向该节点的边的数量）。可以通过遍历图的边关系，记录每个节点的入度。</li>
+<li>初始化队列：创建一个队列（可以使用队列数据结构），用于存储入度为0的节点。</li>
+<li>入度为0的节点入队：遍历所有节点，将入度为0的节点加入队列。</li>
+<li>拓扑排序：从队列中取出一个节点，输出该节点（或保存到结果序列中），并将其相邻节点的入度减1。若某个节点的入度减为0，则将其加入队列。</li>
+<li>重复步骤5，直到队列为空。如果输出的节点数量与图中的节点数量相同，则拓扑排序成功；否则，图中存在环路，无法进行拓扑排序。</li>
+<li>输出结果：按照拓扑排序的顺序输出节点，即为拓扑排序的结果。</li>
+</ol>
+<pre class=" language-c++"><code class="language-c++">int topological_sort(LGraph G)
+{
+    int i,j;
+    int index = 0;
+    int head = 0;           // 辅助队列的头
+    int rear = 0;           // 辅助队列的尾
+    int *queue;             // 辅组队列
+    int *ins;               // 入度数组
+    char *tops;             // 拓扑排序结果数组，记录每个节点的排序后的序号。
+    int num = G.vexnum;
+    ENode *node;
+
+    ins  = (int *)malloc(num*sizeof(int));  // 入度数组
+    tops = (char *)malloc(num*sizeof(char));// 拓扑排序结果数组
+    queue = (int *)malloc(num*sizeof(int)); // 辅助队列
+    assert(ins!=NULL && tops!=NULL && queue!=NULL);
+    memset(ins, 0, num*sizeof(int));
+    memset(tops, 0, num*sizeof(char));
+    memset(queue, 0, num*sizeof(int));
+
+    // 统计每个顶点的入度数
+    for(i = 0; i < num; i++)
+    {
+        node = G.vexs[i].first_edge;
+        while (node != NULL)
+        {
+            ins[node->ivex]++;
+            node = node->next_edge;
+        }
+    }
+
+    // 将所有入度为0的顶点入队列
+    for(i = 0; i < num; i ++)
+        if(ins[i] == 0)
+            queue[rear++] = i;          // 入队列
+
+    while (head != rear)                // 队列非空
+    {
+        j = queue[head++];              // 出队列。j是顶点的序号
+        tops[index++] = G.vexs[j].data; // 将该顶点添加到tops中，tops是排序结果
+        node = G.vexs[j].first_edge;    // 获取以该顶点为起点的出边队列
+
+        // 将与"node"关联的节点的入度减1；
+        // 若减1之后，该节点的入度为0；则将该节点添加到队列中。
+        while(node != NULL)
+        {
+            // 将节点(序号为node->ivex)的入度减1。
+            ins[node->ivex]--;
+            // 若节点的入度为0，则将其"入队列"
+            if( ins[node->ivex] == 0)
+                queue[rear++] = node->ivex;  // 入队列
+
+            node = node->next_edge;
+        }
+    }
+
+    if(index != G.vexnum)
+    {
+        printf("Graph has a cycle\n");
+        free(queue);
+        free(ins);
+        free(tops);
+        return 1;
+    }
+
+    // 打印拓扑排序结果
+    printf("== TopSort: ");
+    for(i = 0; i < num; i ++)
+        printf("%c ", tops[i]);
+    printf("\n");
+
+    free(queue);
+    free(ins);
+    free(tops);
+    return 0;
+}</code></pre>
+<p>其中G是有向图，结构可能如下：</p>
+<pre class=" language-c++"><code class="language-c++">struct ENode
+{
+    int ivex;                   // 该边所指向的顶点的位置
+    struct ENode *next_edge;    // 指向下一条弧的指针
+} ;
+
+struct VNode
+{
+    char data;                  // 顶点的数据
+    ENode *first_edge;          // 指向第一条依附该顶点的边的指针
+} ;
+
+struct struct
+{
+    VNode vexs[MAX_VERTEX_NUM]; // 顶点数组
+    int vexnum;                 // 顶点数量
+    int edgenum;                // 边数量
+} ;</code></pre>
+
                 
             </div>
             <hr/>
@@ -1580,7 +1792,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">349.2k</span>&nbsp;字
+                class="white-color">400.5k</span>&nbsp;字
             
             
             
