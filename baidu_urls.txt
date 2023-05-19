@@ -1,3 +1,4 @@
+https://tianjuehai.github.io/2023/05/20/kua-yin-qing-ta-shader/
 https://tianjuehai.github.io/2023/04/29/chong-ji-qiu-zhao/
 https://tianjuehai.github.io/2023/04/18/ml-agents-yu-zi-ji-de-qiang-hua-xue-xi-suan-fa-tong-xun-ppo-pian/
 https://tianjuehai.github.io/2023/04/13/python-yu-ml-agents-de-tong-xin-ji-qi-api-de-shi-yong/
@@ -97,4 +98,3 @@ https://tianjuehai.github.io/2021/04/08/xian-xing-hua-ji-tai-le-gong-shi/
 https://tianjuehai.github.io/2021/04/07/te-zheng-zhi-he-te-zheng-xiang-liang/
 https://tianjuehai.github.io/2021/04/04/ji-qi-xue-xi-zhi-jue-ce-shu/
 https://tianjuehai.github.io/2021/03/04/zi-dong-kong-zhi-yuan-li-lian-xi-ti/
-https://tianjuehai.github.io/2021/03/04/mei-sen-mason-gong-shi/

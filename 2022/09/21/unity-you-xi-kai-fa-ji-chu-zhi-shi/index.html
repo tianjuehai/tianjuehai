@@ -475,7 +475,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-05-15
+                    2023-05-18
                 </div>
                 
 
@@ -592,7 +592,7 @@ MySingleton<span class="token punctuation">.</span>instance<span class="token pu
 <span class="token punctuation">}</span></code></pre>
 <h3 id="简单工厂-工厂-抽象工厂"><a href="#简单工厂-工厂-抽象工厂" class="headerlink" title="简单工厂/工厂/抽象工厂"></a>简单工厂/工厂/抽象工厂</h3><p>简单工厂模式：又叫静态工厂方法模式，由一个工厂对象决定创建出哪一种产品类的实例。只生产一个品类的产品，在工厂中动态创建。<br>工厂模式：避免简单工厂模式中，新增产品品牌（类型）时，直接修改工厂类。通过多个工厂创建不同的产品。<br>抽象工厂模式：解决系列产品问题，生产多种产品。</p>
 <p>简单工厂模式：</p>
-<img src="/tianjuehai/2022/09/21/unity-you-xi-kai-fa-ji-chu-zhi-shi/1.png" class>
+<img src="/tianjuehai/2022/09/21/unity-you-xi-kai-fa-ji-chu-zhi-shi/1.png" class="">
 <pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">namespace</span> Factor<span class="token punctuation">{</span>
   <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">AbstractMouse</span><span class="token punctuation">{</span>
     <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">Print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -664,7 +664,7 @@ MySingleton<span class="token punctuation">.</span>instance<span class="token pu
 <span class="token punctuation">}</span>
 </code></pre>
 <p>工厂模式：</p>
-<img src="/tianjuehai/2022/09/21/unity-you-xi-kai-fa-ji-chu-zhi-shi/2.png" class>
+<img src="/tianjuehai/2022/09/21/unity-you-xi-kai-fa-ji-chu-zhi-shi/2.png" class="">
 
 <pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">namespace</span> Factor<span class="token punctuation">{</span>
   <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">FactorBase</span><span class="token punctuation">{</span>
@@ -701,7 +701,7 @@ MySingleton<span class="token punctuation">.</span>instance<span class="token pu
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <p>工厂模式的好处在于当新增一个类的时候我们不会对原来的代码进行修改，只新增类本身及其工厂。<br><strong>抽象工厂模式：</strong> 可以生产多个类别产品。</p>
-<img src="/tianjuehai/2022/09/21/unity-you-xi-kai-fa-ji-chu-zhi-shi/3.png" class>
+<img src="/tianjuehai/2022/09/21/unity-you-xi-kai-fa-ji-chu-zhi-shi/3.png" class="">
 <pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">namespace</span> Factor<span class="token punctuation">{</span>
   <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">AbstractKeyBoard</span><span class="token punctuation">{</span>
     <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">Print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -768,7 +768,7 @@ MySingleton<span class="token punctuation">.</span>instance<span class="token pu
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <h3 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h3><p>概念：可以用同一种方式调用不同平台上的同一个功能。</p>
-<img src="/tianjuehai/2022/09/21/unity-you-xi-kai-fa-ji-chu-zhi-shi/4.png" class>
+<img src="/tianjuehai/2022/09/21/unity-you-xi-kai-fa-ji-chu-zhi-shi/4.png" class="">
 
 <pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">namespace</span> Adaptor<span class="token punctuation">{</span>
   <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AndroidLine</span><span class="token punctuation">{</span>
@@ -846,7 +846,7 @@ MySingleton<span class="token punctuation">.</span>instance<span class="token pu
     Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span>sb<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<img src="/tianjuehai/2022/09/21/unity-you-xi-kai-fa-ji-chu-zhi-shi/5.png" class>
+<img src="/tianjuehai/2022/09/21/unity-you-xi-kai-fa-ji-chu-zhi-shi/5.png" class="">
 
 <h3 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h3><p>参考链接：<a target="_blank" rel="noopener" href="http://c.biancheng.net/csharp/file-io.html">http://c.biancheng.net/csharp/file-io.html</a></p>
 <pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> UnityEngine<span class="token punctuation">;</span>
@@ -937,19 +937,19 @@ arraylist1<span class="token punctuation">.</span><span class="token function">S
 list1<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// 和arraylist函数类似</span></code></pre>
 <h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><p>哈希表代表了键值对集合，使用键访问集合中的元素。用法比较简单。</p>
-<pre class=" language-C#"><code class="language-C#">Hashtable ht1 = new Hshtable();
-ht1.Add("1",99);
-ht1.Clear();
-if(ht1.ContainsKey("1")){
-  Debug.Log("包含键为“1”的数据");
-}
-ht1.Remove("1");
-Debug.Log(ht1["1"]);   //读取
-ht1["1"]=99;           //修改
-ICollection key = ht1.Keys;
-foreach(var k in key){      //遍历
-  Debug.Log(ht1[k]);
-}</code></pre>
+<pre class=" language-csharp"><code class="language-csharp">Hashtable ht1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Hshtable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ht1<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">"1"</span><span class="token punctuation">,</span><span class="token number">99</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ht1<span class="token punctuation">.</span><span class="token function">Clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>ht1<span class="token punctuation">.</span><span class="token function">ContainsKey</span><span class="token punctuation">(</span><span class="token string">"1"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"包含键为“1”的数据"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+ht1<span class="token punctuation">.</span><span class="token function">Remove</span><span class="token punctuation">(</span><span class="token string">"1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span>ht1<span class="token punctuation">[</span><span class="token string">"1"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//读取</span>
+ht1<span class="token punctuation">[</span><span class="token string">"1"</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">99</span><span class="token punctuation">;</span>           <span class="token comment" spellcheck="true">//修改</span>
+ICollection key <span class="token operator">=</span> ht1<span class="token punctuation">.</span>Keys<span class="token punctuation">;</span>
+<span class="token keyword">foreach</span><span class="token punctuation">(</span><span class="token keyword">var</span> k <span class="token keyword">in</span> key<span class="token punctuation">)</span><span class="token punctuation">{</span>      <span class="token comment" spellcheck="true">//遍历</span>
+  Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span>ht1<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>和字典的不同在于可以存储任何类型的变量，不需要提前定义，但需要拆箱装箱。<br>哈希表本质上是通过数组储存的，一般把Key输入哈希函数中，计算出哈希值，把用这个哈希值作为数组的索引来读取和修改Value。<br>如果不同的Key计算出了同一个哈希值，称为发生了哈希冲突（哈希碰撞），因此设计合适的哈希函数很重要（直接定址法，数字分析法，折叠法，随机数法和除留余数法等等）<br>解决哈希冲突的方法有开放寻址法（一个位置被占了就一直找下一个位置），拉链法：通过在数组的位置上额外存放一个指针指向另外的一个位置（相当于链表），然后去下一个位置看是否有冲突，有冲突就继续走向这个位置指针的下一个位置，以此类推。<br>当哈希表被占领的位置过多（例如超过70%），就会触发扩容机制，创建一个新的数组，长度为原来的两倍，并且重新利用哈希函数计算位置。</p>
 <h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><p>字典也存储键值对，但字典也是和泛型一起用的，提前指导好键值的数据类型。字典是通过哈希表实现的。</p>
 <pre class=" language-csharp"><code class="language-csharp">Dictionary<span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span><span class="token keyword">string</span><span class="token operator">></span> dict1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Dictionary</span><span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span><span class="token keyword">string</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -978,7 +978,7 @@ hs1<span class="token punctuation">.</span><span class="token function">Intersec
 hs1<span class="token punctuation">.</span><span class="token function">UnionWith</span><span class="token punctuation">(</span>hs2<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// h1取并集</span>
 hs1<span class="token punctuation">.</span><span class="token function">ExceptWith</span><span class="token punctuation">(</span>hs2<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//h1取差集</span>
 hs1<span class="token punctuation">.</span><span class="token function">SymmetricExceptWith</span><span class="token punctuation">(</span>hs2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//对称差集，即并集中去掉交集的部分</span></code></pre>
-<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p>C#中是有前驱和后驱的双向链表。链表在内存中是离散的，不连续。通过两个指针指向上一个存储位置和上一个存储位置。<br>链表在删除和插入的时候效率比列表和数组快，但查找的时候只能靠遍历，比较慢。</p>
+<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p>C#中是有前驱和后驱的双向链表。链表在内存中是离散的，不连续。通过两个指针指向上一个存储位置和下一个存储位置。<br>链表在删除和插入的时候效率比列表和数组快，但查找的时候只能靠遍历，比较慢。</p>
 <p>链表可以分为单向和双向。</p>
 <pre class=" language-csharp"><code class="language-csharp">LinkedList<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> linList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedList</span><span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 LinkedListNode<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> node<span class="token punctuation">;</span>  
@@ -1298,7 +1298,7 @@ public:
         }
         return -1;
     }
-};</TreeNode*></code></pre>
+};</code></pre>
 <p>在这段代码中，使用右根左的遍历顺序是为了实现降序遍历二叉搜索树（Binary Search Tree）。降序遍历意味着按照节点值的降序来访问节点。<br>对于二叉搜索树而言，中序遍历可以实现升序遍历，即从小到大访问节点。而右根左的遍历顺序是中序遍历的逆序，所以可以实现从大到小访问节点，即降序遍历。<br>在这个特定的问题中，要找到二叉搜索树中第 k 大的元素。通过降序遍历，我们可以依次访问每个节点的值，并在第 k 个节点时返回对应的值，即为第 k 大的元素。<br>使用栈来辅助遍历的过程，可以实现迭代方式的降序遍历。从根节点开始，先将右子树的节点依次入栈，然后弹出栈顶元素，进行相应的处理（比如减小 k 的值，判断是否为第 k 大的元素），然后将左子节点作为下一个要处理的节点。<br>因此，使用右根左的遍历顺序是为了满足降序遍历的需求，并能够有效地找到第 k 大的元素。</p>
 <h4 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h4><p>二叉树能提高查询的效率 O(logn)，但是当你插入{1,2,3,4,5,6} 这种数据的时候，你的二叉树就像一个链表一样，搜索效率变为 O(n)</p>
 <p>所以一般的二叉搜索树在进行数据的存储时可能会使工作的时间复杂度并未降低太多，这时便需要我们将二叉树的高度尽可能的降低，使二叉树的高度降低为log(n)，这样我们就得到了一个高度平衡的二叉搜索树，使对于数据的一系列操作的时间复杂度稳定在 O(logn)。<br>红黑树就是一颗自平衡的二叉树。</p>
@@ -2166,7 +2166,7 @@ private Node findNext(E e, Node current, int level) {
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">400.5k</span>&nbsp;字
+                class="white-color">414.6k</span>&nbsp;字
             
             
             
